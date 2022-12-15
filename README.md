@@ -6,6 +6,6 @@ qemoo_rpm: [qemoo-0.7-5-rosa2021.1.noarch.rpm](https://mirror.yandex.ru/rosa/ros
 
 **Dependencies:** qemoo qemu  
   
-After installation, you need to add the user to group `disk` and reboot: `usermod -aG disk $(logname); reboot`
+Note: You need to add the user to group `disk` and reboot: `usermod -aG disk $(logname); reboot`
   
 ![](https://github.com/AKotov-dev/gqemoo/blob/main/ScreenShot1.png)
