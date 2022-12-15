@@ -1,0 +1,189 @@
+object MainForm: TMainForm
+  Left = 294
+  Height = 592
+  Top = 124
+  Width = 849
+  Caption = 'MainForm'
+  ClientHeight = 592
+  ClientWidth = 849
+  OnCreate = FormCreate
+  OnShow = FormShow
+  SessionProperties = 'Left;Top;Width;Height'
+  LCLVersion = '2.2.0.4'
+  object FileNameEdit1: TFileNameEdit
+    AnchorSideLeft.Control = ReloadBtn
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = DevBox
+    AnchorSideRight.Control = StartBtn
+    AnchorSideBottom.Control = DevBox
+    AnchorSideBottom.Side = asrBottom
+    Left = 213
+    Height = 37
+    Top = 26
+    Width = 530
+    OnAcceptFileName = FileNameEdit1AcceptFileName
+    Filter = 'Image files (*.iso, *.qcow2)|*.iso;*.qcow2'
+    FilterIndex = 0
+    HideDirectories = False
+    ButtonHint = 'Choose an image'
+    ButtonWidth = 23
+    NumGlyphs = 1
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    BorderSpacing.Left = 10
+    BorderSpacing.Right = 10
+    MaxLength = 0
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 1
+  end
+  object ListBox1: TListBox
+    AnchorSideLeft.Control = Owner
+    AnchorSideRight.Control = AllDevBox
+    AnchorSideBottom.Control = LogMemo
+    Left = 5
+    Height = 253
+    Top = 96
+    Width = 286
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    BorderSpacing.Left = 5
+    BorderSpacing.Right = 5
+    BorderSpacing.Bottom = 5
+    ItemHeight = 0
+    TabOrder = 3
+    TopIndex = -1
+  end
+  object Label1: TLabel
+    Left = 5
+    Height = 17
+    Top = 75
+    Width = 87
+    Caption = 'Loading mode'
+  end
+  object Label2: TLabel
+    AnchorSideLeft.Control = AllDevBox
+    Left = 296
+    Height = 17
+    Top = 75
+    Width = 135
+    Caption = 'Connect devices to VM'
+  end
+  object StartBtn: TBitBtn
+    AnchorSideTop.Control = FileNameEdit1
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = FileNameEdit1
+    AnchorSideBottom.Side = asrBottom
+    Left = 753
+    Height = 37
+    Top = 26
+    Width = 91
+    Anchors = [akTop, akRight, akBottom]
+    BorderSpacing.Right = 5
+    Caption = 'Start'
+    OnClick = StartBtnClick
+    TabOrder = 2
+  end
+  object AllDevBox: TCheckListBox
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = LogMemo
+    Left = 296
+    Height = 253
+    Top = 96
+    Width = 548
+    Anchors = [akTop, akRight, akBottom]
+    BorderSpacing.Right = 5
+    BorderSpacing.Bottom = 5
+    Font.Height = -13
+    Font.Name = 'Monospace'
+    ItemHeight = 0
+    ParentFont = False
+    TabOrder = 4
+    TopIndex = -1
+  end
+  object DevBox: TComboBox
+    AnchorSideLeft.Control = Owner
+    Left = 5
+    Height = 37
+    Top = 26
+    Width = 163
+    BorderSpacing.Left = 5
+    ItemHeight = 0
+    Items.Strings = (
+      '/dev/sda'
+      '/dev/sdb'
+      '/dev/sdc'
+      '/dev/sdd'
+    )
+    OnChange = DevBoxChange
+    ReadOnly = True
+    TabOrder = 0
+  end
+  object Label3: TLabel
+    Left = 5
+    Height = 17
+    Top = 6
+    Width = 154
+    Caption = 'Load VM from Flash Drive'
+  end
+  object ReloadBtn: TSpeedButton
+    AnchorSideLeft.Control = DevBox
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = DevBox
+    AnchorSideBottom.Control = DevBox
+    AnchorSideBottom.Side = asrBottom
+    Left = 168
+    Height = 37
+    Hint = 'Update'
+    Top = 26
+    Width = 35
+    Anchors = [akTop, akLeft, akBottom]
+    Caption = 'U'
+    OnClick = ReloadBtnClick
+    ShowHint = True
+    ParentShowHint = False
+  end
+  object Label4: TLabel
+    AnchorSideLeft.Control = FileNameEdit1
+    Left = 213
+    Height = 17
+    Top = 6
+    Width = 148
+    Caption = '...or from {*.iso, *.qcow2}'
+  end
+  object StaticText2: TStaticText
+    Left = 0
+    Height = 17
+    Top = 575
+    Width = 849
+    Align = alBottom
+    Caption = 'License: GPLv3   Author: alex_q_2000 (C) 2022   URL: https://linuxforum.ru'
+    Color = clDefault
+    Font.Color = clGray
+    Font.Height = -11
+    Font.Name = 'Sans'
+    ParentFont = False
+    ParentColor = False
+    TabOrder = 6
+  end
+  object LogMemo: TMemo
+    AnchorSideLeft.Control = Owner
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = StaticText2
+    Left = 0
+    Height = 221
+    Top = 354
+    Width = 849
+    Anchors = [akLeft, akRight, akBottom]
+    ReadOnly = True
+    ScrollBars = ssVertical
+    TabOrder = 5
+    WantReturns = False
+  end
+  object IniPropStorage1: TIniPropStorage
+    StoredValues = <>
+    Left = 644
+    Top = 142
+  end
+end

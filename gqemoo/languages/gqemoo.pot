@@ -1,0 +1,63 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+#: tmainform.caption
+msgid "MainForm"
+msgstr ""
+
+#: tmainform.filenameedit1.buttonhint
+msgid "Choose an image"
+msgstr ""
+
+#: tmainform.label1.caption
+msgid "Loading mode"
+msgstr ""
+
+#: tmainform.label2.caption
+msgid "Connect devices to VM"
+msgstr ""
+
+#: tmainform.label3.caption
+msgid "Load VM from Flash Drive"
+msgstr ""
+
+#: tmainform.label4.caption
+msgid "...or from {*.iso, *.qcow2}"
+msgstr ""
+
+#: tmainform.reloadbtn.caption
+msgid "U"
+msgstr ""
+
+#: tmainform.reloadbtn.hint
+msgid "Update"
+msgstr ""
+
+#: tmainform.startbtn.caption
+msgid "Start"
+msgstr ""
+
+#: tmainform.statictext2.caption
+msgid "License: GPLv3   Author: alex_q_2000 (C) 2022   URL: https://linuxforum.ru"
+msgstr ""
+
+#: unit1.sinstallation
+msgid "Installation"
+msgstr ""
+
+#: unit1.sinstallationefi
+msgid "Installation (EFI)"
+msgstr ""
+
+#: unit1.sloading
+msgid "Loading"
+msgstr ""
+
+#: unit1.sloadingefi
+msgid "Loading (EFI)"
+msgstr ""
+
+#: unit1.snotused
+msgid "not used"
+msgstr ""
+

@@ -1,0 +1,73 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"X-Generator: Poedit 3.2.2\n"
+
+#: tmainform.caption
+msgid "MainForm"
+msgstr ""
+
+#: tmainform.filenameedit1.buttonhint
+msgid "Choose an image"
+msgstr "Выбрать образ"
+
+#: tmainform.label1.caption
+msgid "Loading mode"
+msgstr "Режим загрузки"
+
+#: tmainform.label2.caption
+msgid "Connect devices to VM"
+msgstr "Подключить устройства к VM"
+
+#: tmainform.label3.caption
+msgid "Load VM from Flash Drive"
+msgstr "Загрузить VM с флешки"
+
+#: tmainform.label4.caption
+msgid "...or from {*.iso, *.qcow2}"
+msgstr "...или из {*.iso, *.qcow2}"
+
+#: tmainform.reloadbtn.caption
+msgid "U"
+msgstr ""
+
+#: tmainform.reloadbtn.hint
+msgid "Update"
+msgstr "Обновить"
+
+#: tmainform.startbtn.caption
+msgid "Start"
+msgstr "Старт"
+
+#: tmainform.statictext2.caption
+msgid "License: GPLv3   Author: alex_q_2000 (C) 2022   URL: https://linuxforum.ru"
+msgstr "Лицензия: GPLv3   Автор: alex_q_2000 (C) 2022   URL: https://linuxforum.ru"
+
+#: unit1.sinstallation
+msgid "Installation"
+msgstr "Установка"
+
+#: unit1.sinstallationefi
+msgid "Installation (EFI)"
+msgstr "Установка (EFI)"
+
+#: unit1.sloading
+msgid "Loading"
+msgstr "Загрузка"
+
+#: unit1.sloadingefi
+msgid "Loading (EFI)"
+msgstr "Загрузка (EFI)"
+
+#: unit1.snotused
+msgid "not used"
+msgstr "нет"

@@ -1,0 +1,72 @@
+[NAME]
+name=gqemoo
+
+[VERSION]
+version=0.1
+
+[RELEASE]
+release=1.mrx9
+
+[GROUP]
+group=Accessibility
+
+[DESCRIPTION]
+0=GUI for the VM qemu startup script from images and flash drives
+1=---
+2=More information: /usr/share/doc/package_name/repack.txt
+
+[MAINTAINER]
+maintainer=Alex Kotov
+
+[VENDOR]
+vendor=alex_q_2000 (C) 2022
+
+[SUMMARY]
+summary=GUI for qemoo
+
+[URLCOPY]
+urlcopy=111
+
+[LICENSE]
+license=GPLv3
+
+[DEPS]
+deps=qemoo
+
+[META]
+meta=0
+
+[NOARCH]
+noarch=0
+
+[SIGN]
+sign=0
+
+[DEB]
+deb=0
+
+[FILES]
+0=/usr/bin/gqemoo
+1=/usr/share/gqemoo/
+2=/usr/share/icons/gqemoo.png
+3=/usr/share/applications/gqemoo.desktop
+4=/usr/share/doc/gqemoo/
+
+[URL32]
+url32=11
+
+[URL64]
+url64=
+
+[PROGRAMNAME]
+programname=GQemoo
+
+[DEVTOOL]
+devtool=Lazarus
+
+[TOOLVERSION]
+toolversion=2.2.0
+
+[INFO]
+0=v0.1
+1=- Initial release
