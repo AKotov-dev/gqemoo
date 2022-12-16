@@ -2,7 +2,7 @@
 name=gqemoo
 
 [VERSION]
-version=0.1
+version=0.2
 
 [RELEASE]
 release=1.mrx9
@@ -31,7 +31,7 @@ urlcopy=https://github.com/AKotov-dev/gqemoo
 license=GPLv3
 
 [DEPS]
-deps=qemoo
+deps=qemoo gtk2
 
 [META]
 meta=0
@@ -70,5 +70,10 @@ toolversion=2.2.0
 [INFO]
 0=qemoo: https://abf.io/betcher_/qemoo
 1=
-2=v0.1
-3=- Initial release
+2=v0.2
+3=+ Forced unmounting of the selected flash drive
+4=+ Font of the log output window - Monospace 10
+5=+ RPM Packages for Mageia-8 (ROSA-2021.1) and Mageia-9
+6=
+7=v0.1
+8=- Initial release

@@ -5,7 +5,7 @@ unit start_trd;
 interface
 
 uses
-  Classes, Process, SysUtils, ComCtrls, Forms;
+  Classes, Process, SysUtils, ComCtrls, Forms, Dialogs;
 
 type
   StartVM = class(TThread)
@@ -19,8 +19,8 @@ type
     procedure Execute; override;
 
     procedure ShowLog;
-    procedure StartProgress;
-    procedure StopProgress;
+    procedure StartProcess;
+    procedure StopProcess;
 
   end;
 
@@ -35,7 +35,7 @@ var
   ExProcess: TProcess;
 begin
   try //Вывод лога и прогресса
-    Synchronize(@StartProgress);
+    Synchronize(@StartProcess);
 
     FreeOnTerminate := True; //Уничтожить по завершении
     Result := TStringList.Create;
@@ -43,10 +43,9 @@ begin
     //Рабочий процесс
     ExProcess := TProcess.Create(nil);
 
-    //Создаём раздел ${usb}1
     ExProcess.Executable := 'bash';
     ExProcess.Parameters.Add('-c');
-    //Группа команд (parted)
+
     ExProcess.Parameters.Add(command);
 
     ExProcess.Options := [poUsePipes, poStderrToOutPut];
@@ -59,13 +58,12 @@ begin
     begin
       Result.LoadFromStream(ExProcess.Output);
 
-      //Выводим лог
       if Result.Count <> 0 then
         Synchronize(@ShowLog);
     end;
 
   finally
-    Synchronize(@StopProgress);
+    Synchronize(@StopProcess);
     Result.Free;
     ExProcess.Free;
     Terminate;
@@ -74,31 +72,39 @@ end;
 
 { БЛОК ОТОБРАЖЕНИЯ ЛОГА }
 
-//Старт индикатора
-procedure StartVM.StartProgress;
+//Запуск VM
+procedure StartVM.StartProcess;
+var
+  usb: string;
+  s: ansistring;
 begin
   with MainForm do
   begin
     LogMemo.Clear;
-    Application.ProcessMessages;
-    DevBox.Enabled := False;
-    ReloadBtn.Enabled := False;
-    FileNameEdit1.Enabled := False;
-    StartBtn.Enabled := False;
+
+    //Если запуск с флешки - размонтировать
+    if DevBox.ItemIndex <> DevBox.Items.Count - 1 then
+    begin
+      usb := Copy(DevBox.Text, 1, Pos(' ', DevBox.Text) - 1);
+      RunCommand('/bin/bash', ['-c', 'umount -l ' + usb + '1 ' + usb +
+        '2 ' + usb + '3 ' + usb + '4'], s);
+    showmessage('umount -l ' + usb + '1 ' + usb +
+        '2 ' + usb + '3 ' + usb + '4');
+    end;
   end;
 end;
 
-//Стоп индикатора
-procedure StartVM.StopProgress;
+//Запуск VM завершен
+procedure StartVM.StopProcess;
 begin
-  with MainForm do
+ { with MainForm do
   begin
     Application.ProcessMessages;
     DevBox.Enabled := True;
     ReloadBtn.Enabled := True;
     FileNameEdit1.Enabled := True;
     StartBtn.Enabled := True;
-  end;
+  end;}
 end;
 
 //Вывод лога
@@ -113,9 +119,6 @@ begin
   //Промотать список вниз
   MainForm.LogMemo.SelStart := Length(MainForm.LogMemo.Text);
   MainForm.LogMemo.SelLength := 0;
-
-  //Вывод пачками
-  //MainForm.LogMemo.Lines.Assign(Result);
 end;
 
 end.

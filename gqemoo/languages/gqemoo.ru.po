@@ -71,3 +71,7 @@ msgstr "Загрузка (EFI)"
 #: unit1.snotused
 msgid "not used"
 msgstr "нет"
+
+#: unit1.sselectimagedialog
+msgid "Image selection"
+msgstr "Выбор образа"
