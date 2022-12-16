@@ -105,7 +105,9 @@ begin
     ExProcess.Parameters.Add('-c');
 
     ExProcess.Parameters.Add(
-      '> ~/.gqemoo/devlist; echo "$(lsblk -ldnp -I 8 | awk ' + '''' + '$3 == "1" && $4 != "0B" {print $1, $4}'; echo "' + SNotUsed + '")" > ~/.gqemoo/devlist');
+      '> ~/.gqemoo/devlist; echo "$(lsblk -ldnp -I 8 | awk ' + '''' +
+      '$3 == "1" && $4 != "0B" {print $1, $4}' + '''' + '; echo "' +
+      SNotUsed + '")" > ~/.gqemoo/devlist');
 
     ExProcess.Options := ExProcess.Options + [poWaitOnExit];
     ExProcess.Execute;

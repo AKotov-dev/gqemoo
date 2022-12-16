@@ -180,7 +180,7 @@ begin
     //Пробрасываем блочные устройства (если выбраны)
     for i := 0 to AllDevBox.Items.Count - 1 do
       if AllDevBox.Checked[i] then
-        command := command + '/dev/' + Copy(AllDevBox.Items[i], 1,
+        command := command + Copy(AllDevBox.Items[i], 1,
           Pos(' ', AllDevBox.Items[i]) - 1) + ',';
 
     //Удаляем последнюю запятую
