@@ -46,8 +46,6 @@ var
   command: string;
 
 resourcestring
-  SSelectImageDialog = 'Image selection';
-
   SLoading = 'Loading';
   SInstallation = 'Installation';
   SLoadingEFI = 'Loading (EFI)';
@@ -220,7 +218,7 @@ begin
   ListBox1.ItemIndex := 0;
 
   //Читаем заголовок диалога выбора образа
-  FileNameEdit1.DialogTitle := SSelectImageDialog;
+  FileNameEdit1.DialogTitle := FileNameEdit1.ButtonHint;
 
   ReloadUSBDevices;
   ReloadAllDevices;

@@ -72,6 +72,3 @@ msgstr "Загрузка (EFI)"
 msgid "not used"
 msgstr "нет"
 
-#: unit1.sselectimagedialog
-msgid "Image selection"
-msgstr "Выбор образа"

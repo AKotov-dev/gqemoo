@@ -1,5 +1,4 @@
 {"version":1,"strings":[
-{"hash":91064270,"name":"unit1.sselectimagedialog","sourcebytes":[73,109,97,103,101,32,115,101,108,101,99,116,105,111,110],"value":"Image selection"},
 {"hash":56078359,"name":"unit1.sloading","sourcebytes":[76,111,97,100,105,110,103],"value":"Loading"},
 {"hash":137168606,"name":"unit1.sinstallation","sourcebytes":[73,110,115,116,97,108,108,97,116,105,111,110],"value":"Installation"},
 {"hash":175844009,"name":"unit1.sloadingefi","sourcebytes":[76,111,97,100,105,110,103,32,40,69,70,73,41],"value":"Loading (EFI)"},

@@ -61,7 +61,3 @@ msgstr ""
 msgid "not used"
 msgstr ""
 
-#: unit1.sselectimagedialog
-msgid "Image selection"
-msgstr ""
-

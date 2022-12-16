@@ -46,8 +46,6 @@ var
   command: string;
 
 resourcestring
-  SSelectImageDialog = 'Image selection';
-
   SLoading = 'Loading';
   SInstallation = 'Installation';
   SLoadingEFI = 'Loading (EFI)';
