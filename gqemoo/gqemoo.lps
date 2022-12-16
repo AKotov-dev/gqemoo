@@ -39,7 +39,7 @@
         <Filename Value="gqemoo.lpr"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
-        <CursorPos X="38" Y="5"/>
+        <CursorPos X="31" Y="3"/>
         <UsageCount Value="28"/>
       </Unit>
       <Unit>
@@ -49,9 +49,7 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="Unit1"/>
-        <IsVisibleTab Value="True"/>
-        <TopLine Value="207"/>
-        <CursorPos X="36" Y="211"/>
+        <CursorPos X="28" Y="4"/>
         <UsageCount Value="28"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -59,8 +57,10 @@
       <Unit>
         <Filename Value="start_trd.pas"/>
         <IsPartOfProject Value="True"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <CursorPos X="29" Y="5"/>
+        <TopLine Value="77"/>
+        <CursorPos X="55" Y="95"/>
         <UsageCount Value="24"/>
         <Loaded Value="True"/>
       </Unit>

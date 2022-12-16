@@ -80,15 +80,24 @@ var
 begin
   with MainForm do
   begin
+    //Очищаем лог
     LogMemo.Clear;
 
-    //Если запуск с флешки - размонтировать /dev/xxx{1..4}
+    //Если запуск с флешки - попытка размонтировать /dev/xxx{1..4}
     if DevBox.ItemIndex <> DevBox.Items.Count - 1 then
     begin
       usb := Copy(DevBox.Text, 1, Pos(' ', DevBox.Text) - 1);
       RunCommand('/bin/bash', ['-c', 'umount -l ' + usb + '1 ' + usb +
         '2 ' + usb + '3 ' + usb + '4'], s);
     end;
+
+    //Пользователь в группе disk? Нет - команда на выход
+    RunCommand('/bin/bash', ['-c', 'groups | grep disk'], s);
+    if Trim(s) = '' then command :=
+        'echo "The user is not in group disk! Run: usermod -aG disk ' +
+        GetEnvironmentVariable('USER') + '; reboot"; exit 1';
+
+    LogMemo.Update;
   end;
 end;
 
