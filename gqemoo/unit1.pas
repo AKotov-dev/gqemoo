@@ -74,12 +74,12 @@ begin
 
     if DevBox.ItemIndex = DevBox.Items.Count - 1 then
       ExProcess.Parameters.Add(
-        '> ~/.gqemoo/devlist_all; lsblk -ldn > ~/.gqemoo/devlist_all')
+        '> ~/.gqemoo/devlist_all; lsblk -ldnp -I 8,11,65,66 > ~/.gqemoo/devlist_all')
     else
       ExProcess.Parameters.Add(
-        '> ~/.gqemoo/devlist_all; lsblk -ldn | grep -v $(echo ' +
+        '> ~/.gqemoo/devlist_all; lsblk -ldnp -I 8,11,65,66 | grep -v $(echo ' +
         Copy(DevBox.Text, 1, Pos(' ', DevBox.Text) - 1) +
-        ' | cut -f3 -d"/" | cut -f1 -d" ") > ~/.gqemoo/devlist_all');
+        ' | cut -f1 -d" ") > ~/.gqemoo/devlist_all');
 
     ExProcess.Options := ExProcess.Options + [poWaitOnExit];
     ExProcess.Execute;
@@ -105,11 +105,9 @@ begin
     ExProcess.Parameters.Add('-c');
 
     ExProcess.Parameters.Add(
-      '> ~/.gqemoo/devlist; dev=$(lsblk -ldn | cut -f1 -d" ");' +
-      'for i in $dev; do if [[ $(cat /sys/block/$i/removable) -eq 1 ]]; then ' +
-      'echo "/dev/$(lsblk -ld | grep $i | awk ' + '''' + '{print $1,$4}' +
-      '''' + ')" | grep -Ev "\/dev\/sr|0B" >> ~/.gqemoo/devlist; fi; done; echo "' +
-      SNotUsed + '" >> ~/.gqemoo/devlist');
+      '> ~/.gqemoo/devlist; echo "$(lsblk -ldnp -I 8 | awk ' + '''' +
+      '$3 == "1" && $4 != "0B" {print $1, $4}' + '''' + '; echo "' +
+      SNotUsed + '")" > ~/.gqemoo/devlist');
 
     ExProcess.Options := ExProcess.Options + [poWaitOnExit];
     ExProcess.Execute;
