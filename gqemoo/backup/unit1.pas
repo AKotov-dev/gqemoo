@@ -16,6 +16,7 @@ type
     FileNameEdit2: TFileNameEdit;
     IniPropStorage1: TIniPropStorage;
     LogMemo: TMemo;
+    ClearBtn: TSpeedButton;
     StartBtn: TBitBtn;
     AllDevBox: TCheckListBox;
     DevBox: TComboBox;
@@ -27,7 +28,10 @@ type
     ListBox1: TListBox;
     ReloadBtn: TSpeedButton;
     StaticText2: TStaticText;
+    procedure ClearBtnClick(Sender: TObject);
     procedure FileNameEdit1AcceptFileName(Sender: TObject; var Value: string);
+    procedure FileNameEdit1Change(Sender: TObject);
+    procedure FileNameEdit2Change(Sender: TObject);
     procedure FormKeyUp(Sender: TObject; var Key: word; Shift: TShiftState);
     procedure StartBtnClick(Sender: TObject);
     procedure DevBoxChange(Sender: TObject);
@@ -53,7 +57,7 @@ resourcestring
   SLoadingEFI = 'Loading (EFI)';
   SInstallationEFI = 'Installation (EFI)';
   SNotUsed = 'not used';
-  SUserNotInGroup = 'The user is not in group disk! Run:';
+  SUserNotInGroup = 'User outside Group disk! Run:';
 
 implementation
 
@@ -142,6 +146,7 @@ begin
   ReloadBtn.Width := DevBox.Height;
   FileNameEdit1.ButtonWidth := FileNameEdit1.Height;
   FileNameEdit2.ButtonWidth := FileNameEdit2.Height;
+  ClearBtn.Width := FileNameEdit2.Height;
 end;
 
 procedure TMainForm.DevBoxChange(Sender: TObject);
@@ -208,6 +213,25 @@ begin
     DevBox.ItemIndex := DevBox.Items.Count - 1;
     ReloadAllDevices;
   end;
+end;
+
+procedure TMainForm.FileNameEdit1Change(Sender: TObject);
+begin
+  //Если образ = образу для подключения = очистить образ для подключения
+  if FileNameEdit1.FileName = FileNameEdit2.FileName then FileNameEdit2.Clear;
+end;
+
+
+procedure TMainForm.FileNameEdit2Change(Sender: TObject);
+begin
+  //Если образ = образу для подключения = очистить образ для подключения
+  if FileNameEdit2.FileName = FileNameEdit1.FileName then FileNameEdit1.Clear;
+end;
+
+//Очистка пути к образу для подключения
+procedure TMainForm.ClearBtnClick(Sender: TObject);
+begin
+  FileNameEdit2.Clear;
 end;
 
 //F12 - обновить список устройств

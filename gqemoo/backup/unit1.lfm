@@ -1,11 +1,11 @@
 object MainForm: TMainForm
-  Left = 294
-  Height = 609
-  Top = 124
-  Width = 827
+  Left = 296
+  Height = 614
+  Top = 123
+  Width = 842
   Caption = 'MainForm'
-  ClientHeight = 609
-  ClientWidth = 827
+  ClientHeight = 614
+  ClientWidth = 842
   KeyPreview = True
   OnCreate = FormCreate
   OnKeyUp = FormKeyUp
@@ -22,7 +22,7 @@ object MainForm: TMainForm
     Left = 213
     Height = 37
     Top = 26
-    Width = 508
+    Width = 523
     OnAcceptFileName = FileNameEdit1AcceptFileName
     DialogTitle = 'Image selection'
     Filter = 'Image files (*.iso, *.qcow2)|*.iso;*.qcow2'
@@ -38,16 +38,16 @@ object MainForm: TMainForm
     ParentShowHint = False
     ShowHint = True
     TabOrder = 1
+    OnChange = FileNameEdit1Change
   end
   object ListBox1: TListBox
     AnchorSideLeft.Control = Owner
-    AnchorSideRight.Control = AllDevBox
     AnchorSideBottom.Control = LogMemo
     Left = 5
-    Height = 294
+    Height = 279
     Top = 96
-    Width = 264
-    Anchors = [akTop, akLeft, akRight, akBottom]
+    Width = 235
+    Anchors = [akTop, akLeft, akBottom]
     BorderSpacing.Left = 5
     BorderSpacing.Right = 5
     BorderSpacing.Bottom = 5
@@ -64,7 +64,7 @@ object MainForm: TMainForm
   end
   object Label2: TLabel
     AnchorSideLeft.Control = AllDevBox
-    Left = 274
+    Left = 245
     Height = 17
     Top = 75
     Width = 217
@@ -76,7 +76,7 @@ object MainForm: TMainForm
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = FileNameEdit1
     AnchorSideBottom.Side = asrBottom
-    Left = 731
+    Left = 746
     Height = 37
     Top = 26
     Width = 91
@@ -87,15 +87,18 @@ object MainForm: TMainForm
     TabOrder = 2
   end
   object AllDevBox: TCheckListBox
+    AnchorSideLeft.Control = ListBox1
+    AnchorSideLeft.Side = asrBottom
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = FileNameEdit2
-    Left = 274
-    Height = 252
+    Left = 245
+    Height = 237
     Hint = 'F12 - Update the list'
     Top = 96
-    Width = 548
-    Anchors = [akTop, akRight, akBottom]
+    Width = 592
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    BorderSpacing.Left = 5
     BorderSpacing.Right = 5
     BorderSpacing.Bottom = 5
     Font.Height = -13
@@ -160,8 +163,8 @@ object MainForm: TMainForm
   object StaticText2: TStaticText
     Left = 0
     Height = 17
-    Top = 592
-    Width = 827
+    Top = 597
+    Width = 842
     Align = alBottom
     Caption = 'License: GPLv3   Author: alex_q_2000 (C) 2022   URL: https://linuxforum.ru'
     Color = clDefault
@@ -178,9 +181,9 @@ object MainForm: TMainForm
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = StaticText2
     Left = 0
-    Height = 197
-    Top = 395
-    Width = 827
+    Height = 217
+    Top = 380
+    Width = 842
     Anchors = [akLeft, akRight, akBottom]
     Font.Height = -13
     Font.Name = 'Monospace'
@@ -194,13 +197,12 @@ object MainForm: TMainForm
     AnchorSideLeft.Control = AllDevBox
     AnchorSideTop.Control = AllDevBox
     AnchorSideTop.Side = asrBottom
-    AnchorSideRight.Control = Owner
-    AnchorSideRight.Side = asrBottom
+    AnchorSideRight.Control = ClearBtn
     AnchorSideBottom.Control = LogMemo
-    Left = 274
+    Left = 245
     Height = 37
-    Top = 353
-    Width = 548
+    Top = 338
+    Width = 553
     Filter = 'Image files (*.iso, *.img)|*.iso;*.img'
     FilterIndex = 0
     HideDirectories = False
@@ -209,12 +211,62 @@ object MainForm: TMainForm
     NumGlyphs = 1
     Anchors = [akLeft, akRight, akBottom]
     BorderSpacing.Top = 5
-    BorderSpacing.Right = 5
     BorderSpacing.Bottom = 5
     MaxLength = 0
     ParentShowHint = False
     ShowHint = True
     TabOrder = 7
+    OnChange = FileNameEdit2Change
+  end
+  object ClearBtn: TSpeedButton
+    AnchorSideTop.Control = FileNameEdit2
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = FileNameEdit2
+    AnchorSideBottom.Side = asrBottom
+    Left = 798
+    Height = 37
+    Top = 338
+    Width = 39
+    Anchors = [akTop, akRight, akBottom]
+    BorderSpacing.Right = 5
+    Glyph.Data = {
+      36040000424D3604000000000000360000002800000010000000100000000100
+      2000000000000004000064000000640000000000000000000000536DE862546E
+      E7EE546DE7C65870E72000000000000000000000000000000000000000000000
+      000000000000000000005870E720556EE7C7546EE7EE536DE862546EE8EF546E
+      E7FF546EE7FF536EE7DF5870E720000000000000000000000000000000000000
+      0000000000005870E720536EE7DF546EE7FF546EE7FF546EE7EE546EE7C8546E
+      E7FF546EE7FF546EE7FF536EE7DF5870E7200000000000000000000000000000
+      00005870E720536EE7DF546EE7FF546EE7FF546EE7FF556EE7C7556FE61E546E
+      E7DD546EE7FF546EE7FF546EE7FF546EE7E15371E9220000000000000000556F
+      E61E546EE7DD546EE7FF546EE7FF546EE7FF546EE7E15371E92200000000556F
+      E61E546EE7DD546EE7FF546EE7FF546EE7FF546EE7E15371E922556FE61E546E
+      E7DD546EE7FF546EE7FF546EE7FF546EE7E15371E92200000000000000000000
+      00005870E720536EE7DF546EE7FF546EE7FF546EE7FF536EE7DF536EE7DF546E
+      E7FF546EE7FF546EE7FF536EE7DF5870E7200000000000000000000000000000
+      000000000000556FE61E546EE7DD546EE7FF546EE7FF546EE7FF546EE7FF546E
+      E7FF546EE7FF546EE7E15371E922000000000000000000000000000000000000
+      00000000000000000000556FE61E546EE7DD546EE7FF546EE7FF546EE7FF546E
+      E7FF546EE7E15371E92200000000000000000000000000000000000000000000
+      00000000000000000000556FE61E546EE7DD546EE7FF546EE7FF546EE7FF546E
+      E7FF546EE7E15371E92200000000000000000000000000000000000000000000
+      000000000000556FE61E546EE7DD546EE7FF546EE7FF546EE7FF546EE7FF546E
+      E7FF546EE7FF546EE7E15371E922000000000000000000000000000000000000
+      00005870E720536EE7DF546EE7FF546EE7FF546EE7FF536EE7DF536EE7DF546E
+      E7FF546EE7FF546EE7FF536EE7DF5870E720000000000000000000000000556F
+      E61E546EE7DD546EE7FF546EE7FF546EE7FF546EE7E15371E922556FE61E546E
+      E7DD546EE7FF546EE7FF546EE7FF546EE7E15371E92200000000556FE61E546E
+      E7DD546EE7FF546EE7FF546EE7FF546EE7E15371E9220000000000000000556F
+      E61E546EE7DD546EE7FF546EE7FF546EE7FF546EE7E15371E922556EE7C7546E
+      E7FF546EE7FF546EE7FF536EE7DF5870E7200000000000000000000000000000
+      00005870E720536EE7DF546EE7FF546EE7FF546EE7FF546DE7C6546EE8EF546E
+      E7FF546EE7FF536EE7DF5870E720000000000000000000000000000000000000
+      0000000000005870E720536EE7DF546EE7FF546EE7FF546EE7EE556FE863546E
+      E8EF556EE7C75870E72000000000000000000000000000000000000000000000
+      000000000000000000005870E720546EE7C8546EE8EF536DE862
+    }
+    OnClick = ClearBtnClick
   end
   object IniPropStorage1: TIniPropStorage
     StoredValues = <>
