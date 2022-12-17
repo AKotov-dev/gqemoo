@@ -191,12 +191,17 @@ begin
   end;
 
   //Подключаем образ к VM (если указан)
+  if (FileNameEdit2.Text <> '') and (b <> 0) then
+    command := command + '"' + FileNameEdit2.Text + '",'
+  else
   if FileNameEdit2.Text <> '' then
-    command := command + '"' + FileNameEdit2.Text + '",';
+    command := command + ' -a "' + FileNameEdit2.Text + '",';
 
   //Удаляем последнюю запятую
   if command[Length(command)] = ',' then
     Delete(command, Length(command), 1);
+
+  ShowMessage(command);
 
   FStartVM := StartVM.Create(False);
   FStartVM.Priority := tpHighest;
