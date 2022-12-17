@@ -266,6 +266,7 @@ begin
   ReloadAllDevices;
 end;
 
+//Обновление списка флешек и всех устройств
 procedure TMainForm.ReloadBtnClick(Sender: TObject);
 begin
   ReloadUSBDevices;

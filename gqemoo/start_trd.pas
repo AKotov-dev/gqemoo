@@ -104,14 +104,11 @@ end;
 //Запуск VM завершен
 procedure StartVM.StopProcess;
 begin
- { with MainForm do
+  with MainForm do
   begin
     Application.ProcessMessages;
-    DevBox.Enabled := True;
-    ReloadBtn.Enabled := True;
-    FileNameEdit1.Enabled := True;
-    StartBtn.Enabled := True;
-  end;}
+    LogMemo.Repaint;
+  end;
 end;
 
 //Вывод лога
