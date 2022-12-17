@@ -201,8 +201,6 @@ begin
   if command[Length(command)] = ',' then
     Delete(command, Length(command), 1);
 
-  ShowMessage(command);
-
   FStartVM := StartVM.Create(False);
   FStartVM.Priority := tpHighest;
 end;

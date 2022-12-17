@@ -203,7 +203,7 @@ object MainForm: TMainForm
     Height = 37
     Top = 338
     Width = 553
-    Filter = 'Image files (*.iso, *.img)|*.iso;*.img;*.vdi'
+    Filter = 'Image files (*.iso, *.img)|*.iso;*.img'
     FilterIndex = 0
     HideDirectories = False
     ButtonHint = 'Сonnect an image'
