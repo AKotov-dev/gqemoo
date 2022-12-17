@@ -29,12 +29,12 @@ type
     ReloadBtn: TSpeedButton;
     StaticText2: TStaticText;
     procedure ClearBtnClick(Sender: TObject);
+    procedure DevBoxChange(Sender: TObject);
     procedure FileNameEdit1AcceptFileName(Sender: TObject; var Value: string);
     procedure FileNameEdit1Change(Sender: TObject);
     procedure FileNameEdit2Change(Sender: TObject);
     procedure FormKeyUp(Sender: TObject; var Key: word; Shift: TShiftState);
     procedure StartBtnClick(Sender: TObject);
-    procedure DevBoxChange(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure ReloadBtnClick(Sender: TObject);
@@ -106,6 +106,7 @@ var
   ExProcess: TProcess;
 begin
   Application.ProcessMessages;
+
   ExProcess := TProcess.Create(nil);
   try
     ExProcess.Executable := 'bash';
@@ -142,24 +143,19 @@ begin
   //Рабочая директория
   SetCurrentDir(GetUserDir + 'qemoo_tmp');
 
-
+  //Размеры для разных тем
   ReloadBtn.Width := DevBox.Height;
   FileNameEdit1.ButtonWidth := FileNameEdit1.Height;
   FileNameEdit2.ButtonWidth := FileNameEdit2.Height;
   ClearBtn.Width := FileNameEdit2.Height;
 end;
 
-procedure TMainForm.DevBoxChange(Sender: TObject);
-begin
-  FileNameEdit1.Clear;
-  ReloadAllDevices;
-end;
-
+//Запуск VM
 procedure TMainForm.StartBtnClick(Sender: TObject);
 var
-  FStartVM: TThread;
-  i, b: integer;
   dev: string;
+  i, b: integer;
+  FStartVM: TThread;
 begin
   //Определяем источник загрузки
   if FileNameEdit1.Text = '' then
@@ -206,6 +202,7 @@ begin
   FStartVM.Priority := tpHighest;
 end;
 
+//Если путь к образу получен - убрать из загрузки флешку
 procedure TMainForm.FileNameEdit1AcceptFileName(Sender: TObject; var Value: string);
 begin
   if DevBox.ItemIndex <> DevBox.Items.Count - 1 then
@@ -215,16 +212,15 @@ begin
   end;
 end;
 
+//Если загрузочный образ = образу для подключения = очистить образ для подключения
 procedure TMainForm.FileNameEdit1Change(Sender: TObject);
 begin
-  //Если образ = образу для подключения = очистить образ для подключения
   if FileNameEdit1.FileName = FileNameEdit2.FileName then FileNameEdit2.Clear;
 end;
 
-
+//Если образ для полключения = загрузочному образу = очистить загрузочный образ
 procedure TMainForm.FileNameEdit2Change(Sender: TObject);
 begin
-  //Если образ = образу для подключения = очистить образ для подключения
   if FileNameEdit2.FileName = FileNameEdit1.FileName then FileNameEdit1.Clear;
 end;
 
@@ -232,6 +228,13 @@ end;
 procedure TMainForm.ClearBtnClick(Sender: TObject);
 begin
   FileNameEdit2.Clear;
+end;
+
+//Выбор флешки
+procedure TMainForm.DevBoxChange(Sender: TObject);
+begin
+  FileNameEdit1.Clear;
+  ReloadAllDevices;
 end;
 
 //F12 - обновить список устройств
