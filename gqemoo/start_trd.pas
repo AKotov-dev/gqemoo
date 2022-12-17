@@ -94,7 +94,7 @@ begin
     //Пользователь в группе disk? Нет - команда на выход
     RunCommand('/bin/bash', ['-c', 'groups | grep disk'], s);
     if Trim(s) = '' then command :=
-        'echo "The user is not in group disk! Run: usermod -aG disk ' +
+        'echo "' + SUserNotInGroup + ' usermod -aG disk ' +
         GetEnvironmentVariable('USER') + '; reboot"; exit 1';
 
     LogMemo.Repaint;

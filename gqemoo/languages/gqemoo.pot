@@ -1,6 +1,10 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=UTF-8"
 
+#: tmainform.alldevbox.hint
+msgid "F12 - Update the list"
+msgstr ""
+
 #: tmainform.caption
 msgid "MainForm"
 msgstr ""
@@ -9,12 +13,16 @@ msgstr ""
 msgid "Choose an image"
 msgstr ""
 
+#: tmainform.filenameedit2.buttonhint
+msgid "Сonnect an image"
+msgstr ""
+
 #: tmainform.label1.caption
 msgid "Loading mode"
 msgstr ""
 
 #: tmainform.label2.caption
-msgid "Connect devices to VM"
+msgid "Connect devices and images to a VM"
 msgstr ""
 
 #: tmainform.label3.caption
@@ -59,5 +67,9 @@ msgstr ""
 
 #: unit1.snotused
 msgid "not used"
+msgstr ""
+
+#: unit1.susernotingroup
+msgid "User outside Group disk! Run:"
 msgstr ""
 

@@ -13,6 +13,7 @@ type
   { TMainForm }
 
   TMainForm = class(TForm)
+    FileNameEdit2: TFileNameEdit;
     IniPropStorage1: TIniPropStorage;
     LogMemo: TMemo;
     StartBtn: TBitBtn;
@@ -27,6 +28,7 @@ type
     ReloadBtn: TSpeedButton;
     StaticText2: TStaticText;
     procedure FileNameEdit1AcceptFileName(Sender: TObject; var Value: string);
+    procedure FormKeyUp(Sender: TObject; var Key: word; Shift: TShiftState);
     procedure StartBtnClick(Sender: TObject);
     procedure DevBoxChange(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -51,6 +53,7 @@ resourcestring
   SLoadingEFI = 'Loading (EFI)';
   SInstallationEFI = 'Installation (EFI)';
   SNotUsed = 'not used';
+  SUserNotInGroup = 'User outside Group disk! Run:';
 
 implementation
 
@@ -125,18 +128,20 @@ end;
 
 procedure TMainForm.FormCreate(Sender: TObject);
 begin
+  MainForm.Caption := Application.Title;
+
   if not DirectoryExists(GetUserDir + '.gqemoo') then mkDir(GetUserDir + '.gqemoo');
   if not DirectoryExists(GetUserDir + 'qemoo_tmp') then mkDir(GetUserDir + 'qemoo_tmp');
 
   IniPropStorage1.IniFileName := GetUserDir + '.gqemoo/gqemoo.ini';
 
-
   //Рабочая директория
   SetCurrentDir(GetUserDir + 'qemoo_tmp');
 
-  MainForm.Caption := Application.Title;
+
   ReloadBtn.Width := DevBox.Height;
   FileNameEdit1.ButtonWidth := FileNameEdit1.Height;
+  FileNameEdit2.ButtonWidth := FileNameEdit2.Height;
 end;
 
 procedure TMainForm.DevBoxChange(Sender: TObject);
@@ -158,7 +163,7 @@ begin
     else
       exit
   else
-    dev := FileNameEdit1.Text;
+    dev := '"' + FileNameEdit1.Text + '"';
 
   case ListBox1.ItemIndex of
     0: command := 'qemoo ' + dev;
@@ -173,19 +178,24 @@ begin
   for i := 0 to AllDevBox.Items.Count - 1 do
     if AllDevBox.Checked[i] then Inc(b);
 
+  //Подключаем блочные устройства (если выбраны)
   if b <> 0 then
   begin
     command := command + ' -a ';
 
-    //Пробрасываем блочные устройства (если выбраны)
     for i := 0 to AllDevBox.Items.Count - 1 do
       if AllDevBox.Checked[i] then
         command := command + Copy(AllDevBox.Items[i], 1,
           Pos(' ', AllDevBox.Items[i]) - 1) + ',';
-
-    //Удаляем последнюю запятую
-    Delete(command, Length(command), 1);
   end;
+
+  //Подключаем образ к VM (если указан)
+  if FileNameEdit2.Text <> '' then
+    command := command + '"' + FileNameEdit2.Text + '",';
+
+  //Удаляем последнюю запятую
+  if command[Length(command)] = ',' then
+    Delete(command, Length(command), 1);
 
   FStartVM := StartVM.Create(False);
   FStartVM.Priority := tpHighest;
@@ -198,6 +208,12 @@ begin
     DevBox.ItemIndex := DevBox.Items.Count - 1;
     ReloadAllDevices;
   end;
+end;
+
+//F12 - обновить список устройств
+procedure TMainForm.FormKeyUp(Sender: TObject; var Key: word; Shift: TShiftState);
+begin
+  if Key = $7B then ReloadAllDevices;
 end;
 
 procedure TMainForm.FormShow(Sender: TObject);
@@ -217,6 +233,7 @@ begin
 
   //Читаем заголовок диалога выбора образа
   FileNameEdit1.DialogTitle := FileNameEdit1.ButtonHint;
+  FileNameEdit2.DialogTitle := FileNameEdit2.ButtonHint;
 
   ReloadUSBDevices;
   ReloadAllDevices;

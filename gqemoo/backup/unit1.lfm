@@ -1,12 +1,14 @@
 object MainForm: TMainForm
   Left = 294
-  Height = 592
+  Height = 609
   Top = 124
-  Width = 849
+  Width = 827
   Caption = 'MainForm'
-  ClientHeight = 592
-  ClientWidth = 849
+  ClientHeight = 609
+  ClientWidth = 827
+  KeyPreview = True
   OnCreate = FormCreate
+  OnKeyUp = FormKeyUp
   OnShow = FormShow
   SessionProperties = 'Left;Top;Width;Height'
   LCLVersion = '2.2.0.4'
@@ -20,7 +22,7 @@ object MainForm: TMainForm
     Left = 213
     Height = 37
     Top = 26
-    Width = 530
+    Width = 508
     OnAcceptFileName = FileNameEdit1AcceptFileName
     DialogTitle = 'Image selection'
     Filter = 'Image files (*.iso, *.qcow2)|*.iso;*.qcow2'
@@ -42,9 +44,9 @@ object MainForm: TMainForm
     AnchorSideRight.Control = AllDevBox
     AnchorSideBottom.Control = LogMemo
     Left = 5
-    Height = 253
+    Height = 294
     Top = 96
-    Width = 286
+    Width = 264
     Anchors = [akTop, akLeft, akRight, akBottom]
     BorderSpacing.Left = 5
     BorderSpacing.Right = 5
@@ -62,11 +64,11 @@ object MainForm: TMainForm
   end
   object Label2: TLabel
     AnchorSideLeft.Control = AllDevBox
-    Left = 296
+    Left = 274
     Height = 17
     Top = 75
-    Width = 135
-    Caption = 'Connect devices to VM'
+    Width = 217
+    Caption = 'Connect devices and images to a VM'
   end
   object StartBtn: TBitBtn
     AnchorSideTop.Control = FileNameEdit1
@@ -74,7 +76,7 @@ object MainForm: TMainForm
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = FileNameEdit1
     AnchorSideBottom.Side = asrBottom
-    Left = 753
+    Left = 731
     Height = 37
     Top = 26
     Width = 91
@@ -87,9 +89,10 @@ object MainForm: TMainForm
   object AllDevBox: TCheckListBox
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
-    AnchorSideBottom.Control = LogMemo
-    Left = 296
-    Height = 253
+    AnchorSideBottom.Control = FileNameEdit2
+    Left = 274
+    Height = 252
+    Hint = 'F12 - Update the list'
     Top = 96
     Width = 548
     Anchors = [akTop, akRight, akBottom]
@@ -99,6 +102,8 @@ object MainForm: TMainForm
     Font.Name = 'Monospace'
     ItemHeight = 0
     ParentFont = False
+    ParentShowHint = False
+    ShowHint = True
     TabOrder = 4
     TopIndex = -1
   end
@@ -155,8 +160,8 @@ object MainForm: TMainForm
   object StaticText2: TStaticText
     Left = 0
     Height = 17
-    Top = 575
-    Width = 849
+    Top = 592
+    Width = 827
     Align = alBottom
     Caption = 'License: GPLv3   Author: alex_q_2000 (C) 2022   URL: https://linuxforum.ru'
     Color = clDefault
@@ -173,9 +178,9 @@ object MainForm: TMainForm
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = StaticText2
     Left = 0
-    Height = 221
-    Top = 354
-    Width = 849
+    Height = 197
+    Top = 395
+    Width = 827
     Anchors = [akLeft, akRight, akBottom]
     Font.Height = -13
     Font.Name = 'Monospace'
@@ -184,6 +189,32 @@ object MainForm: TMainForm
     ScrollBars = ssVertical
     TabOrder = 5
     WantReturns = False
+  end
+  object FileNameEdit2: TFileNameEdit
+    AnchorSideLeft.Control = AllDevBox
+    AnchorSideTop.Control = AllDevBox
+    AnchorSideTop.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    AnchorSideBottom.Control = LogMemo
+    Left = 274
+    Height = 37
+    Top = 353
+    Width = 548
+    Filter = 'Image files (*.iso, *.img)|*.iso;*.img'
+    FilterIndex = 0
+    HideDirectories = False
+    ButtonHint = 'Сonnect an image'
+    ButtonWidth = 23
+    NumGlyphs = 1
+    Anchors = [akLeft, akRight, akBottom]
+    BorderSpacing.Top = 5
+    BorderSpacing.Right = 5
+    BorderSpacing.Bottom = 5
+    MaxLength = 0
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 7
   end
   object IniPropStorage1: TIniPropStorage
     StoredValues = <>

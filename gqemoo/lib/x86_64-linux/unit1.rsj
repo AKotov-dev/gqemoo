@@ -3,5 +3,6 @@
 {"hash":137168606,"name":"unit1.sinstallation","sourcebytes":[73,110,115,116,97,108,108,97,116,105,111,110],"value":"Installation"},
 {"hash":175844009,"name":"unit1.sloadingefi","sourcebytes":[76,111,97,100,105,110,103,32,40,69,70,73,41],"value":"Loading (EFI)"},
 {"hash":134323289,"name":"unit1.sinstallationefi","sourcebytes":[73,110,115,116,97,108,108,97,116,105,111,110,32,40,69,70,73,41],"value":"Installation (EFI)"},
-{"hash":107466468,"name":"unit1.snotused","sourcebytes":[110,111,116,32,117,115,101,100],"value":"not used"}
+{"hash":107466468,"name":"unit1.snotused","sourcebytes":[110,111,116,32,117,115,101,100],"value":"not used"},
+{"hash":207087194,"name":"unit1.susernotingroup","sourcebytes":[85,115,101,114,32,111,117,116,115,105,100,101,32,71,114,111,117,112,32,100,105,115,107,33,32,82,117,110,58],"value":"User outside Group disk! Run:"}
 ]}

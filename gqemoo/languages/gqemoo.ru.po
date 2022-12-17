@@ -12,6 +12,10 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
 "X-Generator: Poedit 3.2.2\n"
 
+#: tmainform.alldevbox.hint
+msgid "F12 - Update the list"
+msgstr "F12 - Обновить список"
+
 #: tmainform.caption
 msgid "MainForm"
 msgstr ""
@@ -20,13 +24,17 @@ msgstr ""
 msgid "Choose an image"
 msgstr "Выбрать образ"
 
+#: tmainform.filenameedit2.buttonhint
+msgid "Сonnect an image"
+msgstr "Подключить образ"
+
 #: tmainform.label1.caption
 msgid "Loading mode"
 msgstr "Режим загрузки"
 
 #: tmainform.label2.caption
-msgid "Connect devices to VM"
-msgstr "Подключить устройства к VM"
+msgid "Connect devices and images to a VM"
+msgstr "Подключить устройства и образы к VM"
 
 #: tmainform.label3.caption
 msgid "Load VM from Flash Drive"
@@ -72,3 +80,6 @@ msgstr "Загрузка (EFI)"
 msgid "not used"
 msgstr "нет"
 
+#: unit1.susernotingroup
+msgid "User outside Group disk! Run:"
+msgstr "Пользователь вне группы disk! Выполните:"
