@@ -1,5 +1,5 @@
 # gqemoo
-GUI for qemoo - wrapper script for qemu to start and install guest systems.  
+GUI for `qemoo` - wrapper script for qemu to start and install guest systems.  
   
 project git: https://abf.io/import/qemoo  
 qemoo_rpm: [qemoo-x.x-x-rosa2021.1.noarch.rpm](https://mirror.yandex.ru/rosa/rosa2021.1/repository/x86_64/contrib/release)  
