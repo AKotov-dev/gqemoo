@@ -11,13 +11,13 @@ uses
   Interfaces, // this includes the LCL widgetset
   Forms,
   Unit1,
-  start_trd { you can add units after this };
+  start_trd;
 
 {$R *.res}
 
 begin
   RequireDerivedFormResource := True;
-  Application.Title:='gqemoo v0.4';
+  Application.Title:='gqemoo v0.5';
   Application.Scaled:=True;
   Application.Initialize;
   Application.CreateForm(TMainForm, MainForm);

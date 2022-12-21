@@ -1,0 +1,111 @@
+object SetForm: TSetForm
+  Left = 297
+  Height = 162
+  Top = 123
+  Width = 389
+  Caption = 'VM Settings'
+  ClientHeight = 162
+  ClientWidth = 389
+  Position = poMainFormCenter
+  LCLVersion = '2.2.0.4'
+  object Label1: TLabel
+    Left = 8
+    Height = 17
+    Top = 24
+    Width = 46
+    Caption = 'Display:'
+  end
+  object ComboBox1: TComboBox
+    AnchorSideLeft.Control = Label1
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Label1
+    AnchorSideTop.Side = asrCenter
+    Left = 56
+    Height = 37
+    Top = 14
+    Width = 104
+    BorderSpacing.Left = 2
+    ItemHeight = 0
+    ItemIndex = 0
+    Items.Strings = (
+      'std'
+      'qxl'
+    )
+    ReadOnly = True
+    TabOrder = 0
+    Text = 'std'
+  end
+  object Label5: TLabel
+    Left = 224
+    Height = 17
+    Top = 24
+    Width = 29
+    Caption = 'CPU:'
+  end
+  object SpinEdit1: TSpinEdit
+    AnchorSideLeft.Control = Label5
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Label5
+    AnchorSideTop.Side = asrCenter
+    AnchorSideRight.Control = SpinEdit3
+    AnchorSideRight.Side = asrBottom
+    Left = 255
+    Height = 37
+    Top = 14
+    Width = 113
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Left = 2
+    MaxValue = 8
+    MinValue = 2
+    TabOrder = 1
+    Value = 2
+  end
+  object Label6: TLabel
+    Left = 8
+    Height = 17
+    Top = 74
+    Width = 59
+    Caption = 'RAM (GB):'
+  end
+  object SpinEdit2: TSpinEdit
+    AnchorSideLeft.Control = Label6
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Label6
+    AnchorSideTop.Side = asrCenter
+    AnchorSideRight.Control = ComboBox1
+    AnchorSideRight.Side = asrBottom
+    Left = 69
+    Height = 37
+    Top = 64
+    Width = 91
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Left = 2
+    MaxValue = 8
+    MinValue = 1
+    TabOrder = 2
+    Value = 1
+  end
+  object Label7: TLabel
+    Left = 224
+    Height = 17
+    Top = 74
+    Width = 60
+    Caption = 'HDD (GB):'
+  end
+  object SpinEdit3: TSpinEdit
+    AnchorSideLeft.Control = Label7
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Label7
+    AnchorSideTop.Side = asrCenter
+    AnchorSideRight.Side = asrBottom
+    Left = 286
+    Height = 37
+    Top = 64
+    Width = 82
+    BorderSpacing.Left = 2
+    MaxValue = 25
+    MinValue = 10
+    TabOrder = 3
+    Value = 10
+  end
+end

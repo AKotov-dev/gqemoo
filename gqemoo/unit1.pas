@@ -17,7 +17,7 @@ type
     IniPropStorage1: TIniPropStorage;
     LogMemo: TMemo;
     ClearBtn: TSpeedButton;
-    StartBtn: TBitBtn;
+    VGABtn: TSpeedButton;
     AllDevBox: TCheckListBox;
     DevBox: TComboBox;
     FileNameEdit1: TFileNameEdit;
@@ -27,6 +27,7 @@ type
     Label4: TLabel;
     ListBox1: TListBox;
     ReloadBtn: TSpeedButton;
+    StartBtn: TSpeedButton;
     StaticText2: TStaticText;
     procedure ClearBtnClick(Sender: TObject);
     procedure DevBoxChange(Sender: TObject);
@@ -40,7 +41,6 @@ type
     procedure ReloadBtnClick(Sender: TObject);
     procedure ReloadUSBDevices;
     procedure ReloadAllDevices;
-
   private
 
   public
@@ -201,9 +201,10 @@ begin
   if command[Length(command)] = ',' then
     Delete(command, Length(command), 1);
 
-  //Дисплей для VM + EFI
-  if (ListBox1.ItemIndex = 2) or (ListBox1.ItemIndex = 3) then
-    command := command + ' -- -vga qxl';
+  //Дисплей VM = std/qxl
+  if VGABtn.Down then command := command + ' -- -vga qxl'
+  else
+    command := command + ' -- -vga std';
 
   //Запуск VM
   FStartVM := StartVM.Create(False);

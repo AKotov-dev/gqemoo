@@ -60,6 +60,11 @@ msgstr "Старт"
 msgid "License: GPLv3   Author: alex_q_2000 (C) 2022   URL: https://linuxforum.ru"
 msgstr "Лицензия: GPLv3   Автор: alex_q_2000 (C) 2022   URL: https://linuxforum.ru"
 
+#: tmainform.vgabtn.hint
+msgctxt "tmainform.vgabtn.hint"
+msgid "Display: std/qxl"
+msgstr "Дисплей: std/qxl"
+
 #: unit1.sinstallation
 msgid "Installation"
 msgstr "Установка"

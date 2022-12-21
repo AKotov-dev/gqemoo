@@ -49,6 +49,11 @@ msgstr ""
 msgid "License: GPLv3   Author: alex_q_2000 (C) 2022   URL: https://linuxforum.ru"
 msgstr ""
 
+#: tmainform.vgabtn.hint
+msgctxt "tmainform.vgabtn.hint"
+msgid "Display: std/qxl"
+msgstr ""
+
 #: unit1.sinstallation
 msgid "Installation"
 msgstr ""
