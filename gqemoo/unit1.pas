@@ -81,10 +81,11 @@ begin
 
     if DevBox.ItemIndex = DevBox.Items.Count - 1 then
       ExProcess.Parameters.Add(
-        '> ~/.gqemoo/devlist_all; lsblk -ldnp -I 8,11,65,66 > ~/.gqemoo/devlist_all')
+        '> ~/.gqemoo/devlist_all; lsblk -ldnp -I 8,11,65,66,259 -o NAME,MAJ:MIN,RM,SIZE,TYPE,MODEL > ~/.gqemoo/devlist_all')
     else
       ExProcess.Parameters.Add(
-        '> ~/.gqemoo/devlist_all; lsblk -ldnp -I 8,11,65,66 | grep -v $(echo ' +
+        '> ~/.gqemoo/devlist_all; lsblk -ldnp -I 8,11,65,66,259 -o NAME,MAJ:MIN,RM,SIZE,TYPE,MODEL | grep -v $(echo '
+        +
         Copy(DevBox.Text, 1, Pos(' ', DevBox.Text) - 1) +
         ' | cut -f1 -d" ") > ~/.gqemoo/devlist_all');
 
