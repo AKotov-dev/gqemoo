@@ -85,8 +85,7 @@ begin
     else
       ExProcess.Parameters.Add(
         '> ~/.gqemoo/devlist_all; lsblk -ldnp -I 8,11,65,66,259 -o NAME,MAJ:MIN,RM,SIZE,TYPE,MODEL | grep -v $(echo '
-        +
-        Copy(DevBox.Text, 1, Pos(' ', DevBox.Text) - 1) +
+        + Copy(DevBox.Text, 1, Pos(' ', DevBox.Text) - 1) +
         ' | cut -f1 -d" ") > ~/.gqemoo/devlist_all');
 
     ExProcess.Options := ExProcess.Options + [poWaitOnExit];
@@ -202,6 +201,11 @@ begin
   if command[Length(command)] = ',' then
     Delete(command, Length(command), 1);
 
+  //Дисплей для VM + EFI
+  if (ListBox1.ItemIndex = 2) or (ListBox1.ItemIndex = 3) then
+    command := command + ' -- -vga qxl';
+
+  //Запуск VM
   FStartVM := StartVM.Create(False);
   FStartVM.Priority := tpHighest;
 end;
