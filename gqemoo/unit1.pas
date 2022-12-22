@@ -41,7 +41,6 @@ type
     procedure ReloadBtnClick(Sender: TObject);
     procedure ReloadUSBDevices;
     procedure ReloadAllDevices;
-    procedure VGABtnClick(Sender: TObject);
   private
 
   public
@@ -62,7 +61,7 @@ resourcestring
 
 implementation
 
-uses start_trd, settings_unit;
+uses start_trd;
 
 {$R *.lfm}
 
@@ -99,12 +98,6 @@ begin
   finally
     ExProcess.Free;
   end;
-end;
-
-//Показать настройки VM
-procedure TMainForm.VGABtnClick(Sender: TObject);
-begin
-  SettingsForm.ShowModal;
 end;
 
 //Начитываем removable devices (флешки)
@@ -209,9 +202,9 @@ begin
     Delete(command, Length(command), 1);
 
   //Дисплей VM = std/qxl
-  { if VGABtn.Down then command := command + ' -- -vga qxl'
+  if VGABtn.Down then command := command + ' -- -vga qxl'
   else
-    command := command + ' -- -vga std'; }
+    command := command + ' -- -vga std';
 
   //Запуск VM
   FStartVM := StartVM.Create(False);
