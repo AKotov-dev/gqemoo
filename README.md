@@ -6,6 +6,7 @@ qemoo rpm: [qemoo-x.x-x-rosa2021.1.noarch.rpm](https://mirror.yandex.ru/rosa/ros
 qemoo config: /etc/qemoo.cfg  
   
 VM loading from flash drives and images is supported `*.qcow2` and `*.iso`. Before loading the VM, you can connect flash drives, `*.iso`, `*.img` images and block devices. If necessary, you can select the `std/qxl` display.
+  
 **Dependencies:** qemoo qemu gtk2  
   
 Working directory: `~/qemoo_tmp`; The images for loading and connecting are here.  
