@@ -33,10 +33,6 @@ msgstr ""
 msgid "...or from {*.iso, *.qcow2}"
 msgstr ""
 
-#: tmainform.reloadbtn.caption
-msgid "U"
-msgstr ""
-
 #: tmainform.reloadbtn.hint
 msgid "Update"
 msgstr ""

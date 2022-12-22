@@ -1,11 +1,11 @@
 object MainForm: TMainForm
   Left = 298
-  Height = 642
+  Height = 633
   Top = 125
-  Width = 887
+  Width = 875
   Caption = 'MainForm'
-  ClientHeight = 642
-  ClientWidth = 887
+  ClientHeight = 633
+  ClientWidth = 875
   KeyPreview = True
   OnCreate = FormCreate
   OnKeyUp = FormKeyUp
@@ -22,7 +22,7 @@ object MainForm: TMainForm
     Left = 208
     Height = 37
     Top = 26
-    Width = 532
+    Width = 520
     OnAcceptFileName = FileNameEdit1AcceptFileName
     DialogTitle = 'Image selection'
     Filter = 'Image files (*.iso, *.qcow2)|*.iso;*.qcow2'
@@ -44,7 +44,7 @@ object MainForm: TMainForm
     AnchorSideLeft.Control = Owner
     AnchorSideBottom.Control = LogMemo
     Left = 5
-    Height = 307
+    Height = 298
     Top = 96
     Width = 235
     Anchors = [akTop, akLeft, akBottom]
@@ -77,10 +77,10 @@ object MainForm: TMainForm
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = FileNameEdit2
     Left = 245
-    Height = 265
+    Height = 256
     Hint = 'F12 - Update the list'
     Top = 96
-    Width = 637
+    Width = 625
     Anchors = [akTop, akLeft, akRight, akBottom]
     BorderSpacing.Left = 5
     BorderSpacing.Right = 5
@@ -222,8 +222,8 @@ object MainForm: TMainForm
   object StaticText2: TStaticText
     Left = 0
     Height = 17
-    Top = 625
-    Width = 887
+    Top = 616
+    Width = 875
     Align = alBottom
     Caption = 'License: GPLv3   Author: alex_q_2000 (C) 2022   URL: https://linuxforum.ru'
     Color = clDefault
@@ -241,8 +241,8 @@ object MainForm: TMainForm
     AnchorSideBottom.Control = StaticText2
     Left = 0
     Height = 217
-    Top = 408
-    Width = 887
+    Top = 399
+    Width = 875
     Anchors = [akLeft, akRight, akBottom]
     Font.Height = -13
     Font.Name = 'Monospace'
@@ -260,8 +260,8 @@ object MainForm: TMainForm
     AnchorSideBottom.Control = LogMemo
     Left = 245
     Height = 37
-    Top = 366
-    Width = 598
+    Top = 357
+    Width = 586
     Filter = 'Image files (*.iso, *.img)|*.iso;*.img'
     FilterIndex = 0
     HideDirectories = False
@@ -283,9 +283,9 @@ object MainForm: TMainForm
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = FileNameEdit2
     AnchorSideBottom.Side = asrBottom
-    Left = 843
+    Left = 831
     Height = 37
-    Top = 366
+    Top = 357
     Width = 39
     Anchors = [akTop, akRight, akBottom]
     BorderSpacing.Right = 5
@@ -332,7 +332,7 @@ object MainForm: TMainForm
     AnchorSideRight.Control = StartBtn
     AnchorSideBottom.Control = FileNameEdit1
     AnchorSideBottom.Side = asrBottom
-    Left = 750
+    Left = 738
     Height = 37
     Hint = 'Display: std/qxl'
     Top = 26
@@ -425,7 +425,7 @@ object MainForm: TMainForm
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = FileNameEdit1
     AnchorSideBottom.Side = asrBottom
-    Left = 787
+    Left = 775
     Height = 37
     Top = 26
     Width = 95

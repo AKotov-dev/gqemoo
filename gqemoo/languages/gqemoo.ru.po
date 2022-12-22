@@ -44,10 +44,6 @@ msgstr "Загрузить VM с флешки"
 msgid "...or from {*.iso, *.qcow2}"
 msgstr "...или из {*.iso, *.qcow2}"
 
-#: tmainform.reloadbtn.caption
-msgid "U"
-msgstr ""
-
 #: tmainform.reloadbtn.hint
 msgid "Update"
 msgstr "Обновить"
@@ -88,3 +84,4 @@ msgstr "нет"
 #: unit1.susernotingroup
 msgid "User outside Group disk! Run:"
 msgstr "Пользователь вне группы disk! Выполните:"
+
