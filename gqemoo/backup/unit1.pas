@@ -41,6 +41,7 @@ type
     procedure ReloadBtnClick(Sender: TObject);
     procedure ReloadUSBDevices;
     procedure ReloadAllDevices;
+    procedure VGABtnClick(Sender: TObject);
   private
 
   public
@@ -61,7 +62,7 @@ resourcestring
 
 implementation
 
-uses start_trd;
+uses start_trd, settings_unit;
 
 {$R *.lfm}
 
@@ -98,6 +99,12 @@ begin
   finally
     ExProcess.Free;
   end;
+end;
+
+//Показать настройки VM
+procedure TMainForm.VGABtnClick(Sender: TObject);
+begin
+  SettingsForm.ShowModal;
 end;
 
 //Начитываем removable devices (флешки)

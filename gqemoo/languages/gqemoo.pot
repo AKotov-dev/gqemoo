@@ -50,6 +50,72 @@ msgctxt "tmainform.vgabtn.hint"
 msgid "Display: std/qxl"
 msgstr ""
 
+#: tsettingsform.applybtn.caption
+msgctxt "tsettingsform.applybtn.caption"
+msgid "Apply"
+msgstr ""
+
+#: tsettingsform.caption
+msgid "VM Settings"
+msgstr ""
+
+#: tsettingsform.closebtn.caption
+msgctxt "tsettingsform.closebtn.caption"
+msgid "Close"
+msgstr ""
+
+#: tsettingsform.combobox1.text
+msgctxt "tsettingsform.combobox1.text"
+msgid "auto"
+msgstr ""
+
+#: tsettingsform.combobox2.text
+msgctxt "tsettingsform.combobox2.text"
+msgid "auto"
+msgstr ""
+
+#: tsettingsform.combobox3.text
+msgctxt "tsettingsform.combobox3.text"
+msgid "auto"
+msgstr ""
+
+#: tsettingsform.combobox5.text
+msgctxt "tsettingsform.combobox5.text"
+msgid "auto"
+msgstr ""
+
+#: tsettingsform.directoryedit1.text
+msgid "/home"
+msgstr ""
+
+#: tsettingsform.filenameedit1.text
+msgid "/usr/share/OVMF/OVMF_CODE.fd"
+msgstr ""
+
+#: tsettingsform.label1.caption
+msgid "QEMUADD="
+msgstr ""
+
+#: tsettingsform.label3.caption
+msgid "HDD="
+msgstr ""
+
+#: tsettingsform.label4.caption
+msgid "RAM="
+msgstr ""
+
+#: tsettingsform.label5.caption
+msgid "EFI_FIRMWARE="
+msgstr ""
+
+#: tsettingsform.label6.caption
+msgid "SHARE="
+msgstr ""
+
+#: tsettingsform.label7.caption
+msgid "QCOW2="
+msgstr ""
+
 #: unit1.sinstallation
 msgid "Installation"
 msgstr ""

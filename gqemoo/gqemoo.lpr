@@ -11,7 +11,7 @@ uses
   Interfaces, // this includes the LCL widgetset
   Forms,
   Unit1,
-  start_trd;
+  start_trd, settings_unit;
 
 {$R *.res}
 
@@ -21,5 +21,6 @@ begin
   Application.Scaled:=True;
   Application.Initialize;
   Application.CreateForm(TMainForm, MainForm);
+  Application.CreateForm(TSettingsForm, SettingsForm);
   Application.Run;
 end.
