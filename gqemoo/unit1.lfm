@@ -1,7 +1,7 @@
 object MainForm: TMainForm
-  Left = 298
+  Left = 293
   Height = 642
-  Top = 125
+  Top = 123
   Width = 887
   Caption = 'MainForm'
   ClientHeight = 642
@@ -10,7 +10,7 @@ object MainForm: TMainForm
   OnCreate = FormCreate
   OnKeyUp = FormKeyUp
   OnShow = FormShow
-  SessionProperties = 'Height;Left;Top;Width'
+  SessionProperties = 'Height;Left;Top;Width;VGABtn.Down'
   LCLVersion = '2.2.0.4'
   object FileNameEdit1: TFileNameEdit
     AnchorSideLeft.Control = ReloadBtn
@@ -334,10 +334,9 @@ object MainForm: TMainForm
     AnchorSideBottom.Side = asrBottom
     Left = 750
     Height = 37
-    Hint = 'Display: std/qxl'
+    Hint = 'Display selection'
     Top = 26
     Width = 37
-    AllowAllUp = True
     Anchors = [akTop, akRight, akBottom]
     Glyph.Data = {
       36090000424D3609000000000000360000002800000018000000180000000100
@@ -415,9 +414,10 @@ object MainForm: TMainForm
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000
     }
-    GroupIndex = 1
+    OnMouseDown = VGABtnMouseDown
     ShowHint = True
     ParentShowHint = False
+    PopupMenu = PopupMenu1
   end
   object StartBtn: TSpeedButton
     AnchorSideTop.Control = FileNameEdit1
@@ -511,8 +511,33 @@ object MainForm: TMainForm
     OnClick = StartBtnClick
   end
   object IniPropStorage1: TIniPropStorage
-    StoredValues = <>
+    StoredValues = <    
+      item
+        Name = 'vga'
+        Value = '0'
+      end>
     Left = 644
     Top = 142
+  end
+  object PopupMenu1: TPopupMenu
+    AutoPopup = False
+    Left = 472
+    Top = 152
+    object MenuItem1: TMenuItem
+      Caption = '/etc/qemoo.cfg'
+      OnClick = MenuItem1Click
+    end
+    object MenuItem4: TMenuItem
+      Caption = '-- -vga std -display sdl'
+      OnClick = MenuItem1Click
+    end
+    object MenuItem3: TMenuItem
+      Caption = '-- -vga qxl -display sdl'
+      OnClick = MenuItem1Click
+    end
+    object MenuItem2: TMenuItem
+      Caption = '-- -vga virtio -display sdl'
+      OnClick = MenuItem1Click
+    end
   end
 end

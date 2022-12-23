@@ -44,6 +44,22 @@ msgstr "Загрузить VM с флешки"
 msgid "...or from {*.iso, *.qcow2}"
 msgstr "...или из {*.iso, *.qcow2}"
 
+#: tmainform.menuitem1.caption
+msgid "/etc/qemoo.cfg"
+msgstr ""
+
+#: tmainform.menuitem2.caption
+msgid "-- -vga virtio -display sdl"
+msgstr ""
+
+#: tmainform.menuitem3.caption
+msgid "-- -vga qxl -display sdl"
+msgstr ""
+
+#: tmainform.menuitem4.caption
+msgid "-- -vga std -display sdl"
+msgstr ""
+
 #: tmainform.reloadbtn.hint
 msgid "Update"
 msgstr "Обновить"
@@ -57,9 +73,11 @@ msgid "License: GPLv3   Author: alex_q_2000 (C) 2022   URL: https://linuxforum.r
 msgstr "Лицензия: GPLv3   Автор: alex_q_2000 (C) 2022   URL: https://linuxforum.ru"
 
 #: tmainform.vgabtn.hint
+#, fuzzy
+#| msgid "Display: virtio/std"
 msgctxt "tmainform.vgabtn.hint"
-msgid "Display: std/qxl"
-msgstr "Дисплей: std/qxl"
+msgid "Display selection"
+msgstr "Дисплей: virtio/std"
 
 #: unit1.sinstallation
 msgid "Installation"

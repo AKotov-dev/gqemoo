@@ -33,6 +33,22 @@ msgstr ""
 msgid "...or from {*.iso, *.qcow2}"
 msgstr ""
 
+#: tmainform.menuitem1.caption
+msgid "/etc/qemoo.cfg"
+msgstr ""
+
+#: tmainform.menuitem2.caption
+msgid "-- -vga virtio -display sdl"
+msgstr ""
+
+#: tmainform.menuitem3.caption
+msgid "-- -vga qxl -display sdl"
+msgstr ""
+
+#: tmainform.menuitem4.caption
+msgid "-- -vga std -display sdl"
+msgstr ""
+
 #: tmainform.reloadbtn.hint
 msgid "Update"
 msgstr ""
@@ -47,7 +63,7 @@ msgstr ""
 
 #: tmainform.vgabtn.hint
 msgctxt "tmainform.vgabtn.hint"
-msgid "Display: std/qxl"
+msgid "Display selection"
 msgstr ""
 
 #: unit1.sinstallation

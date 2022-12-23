@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, EditBtn, StdCtrls,
-  Buttons, CheckLst, IniPropStorage, Process, DefaultTranslator;
+  Buttons, CheckLst, IniPropStorage, Process, DefaultTranslator, Menus;
 
 type
 
@@ -17,6 +17,11 @@ type
     IniPropStorage1: TIniPropStorage;
     LogMemo: TMemo;
     ClearBtn: TSpeedButton;
+    MenuItem1: TMenuItem;
+    MenuItem2: TMenuItem;
+    MenuItem3: TMenuItem;
+    MenuItem4: TMenuItem;
+    PopupMenu1: TPopupMenu;
     VGABtn: TSpeedButton;
     AllDevBox: TCheckListBox;
     DevBox: TComboBox;
@@ -35,12 +40,15 @@ type
     procedure FileNameEdit1Change(Sender: TObject);
     procedure FileNameEdit2Change(Sender: TObject);
     procedure FormKeyUp(Sender: TObject; var Key: word; Shift: TShiftState);
+    procedure MenuItem1Click(Sender: TObject);
     procedure StartBtnClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure ReloadBtnClick(Sender: TObject);
     procedure ReloadUSBDevices;
     procedure ReloadAllDevices;
+    procedure VGABtnMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: integer);
   private
 
   public
@@ -97,6 +105,19 @@ begin
 
   finally
     ExProcess.Free;
+  end;
+end;
+
+//Список режимов vga
+procedure TMainForm.VGABtnMouseDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: integer);
+var
+  p: TPoint;
+begin
+  if Button = mbLeft then
+  begin
+    p := VGABtn.ClientToScreen(Point(X, Y));
+    PopupMenu1.Popup(p.x, p.Y);
   end;
 end;
 
@@ -201,10 +222,17 @@ begin
   if command[Length(command)] = ',' then
     Delete(command, Length(command), 1);
 
-  //Дисплей VM = std/qxl
-  if VGABtn.Down then command := command + ' -- -vga qxl'
-  else
-    command := command + ' -- -vga std';
+  //Выбор дисплея; i:=0 - не добавлять команду, начинать с индекса i:=1
+  for i := 1 to Pred(PopUpMenu1.Items.Count) do
+  begin
+    if PopUpMenu1.Items[i].Checked then
+    begin
+      command := command + ' ' + PopUpMenu1.Items[i].Caption;
+      break;
+    end;
+  end;
+
+  showmessage(command);
 
   //Запуск VM
   FStartVM := StartVM.Create(False);
@@ -252,9 +280,30 @@ begin
   if Key = $7B then ReloadAllDevices;
 end;
 
+//Установка и запись чекера PopUpMenu; параметр vga
+procedure TMainForm.MenuItem1Click(Sender: TObject);
+var
+  i: integer;
+begin
+  with (Sender as TMenuItem) do
+  begin
+    //go through the list and make sure *only* the clicked item is checked
+    for i := 0 to (GetParentComponent as TPopupMenu).Items.Count - 1 do
+    begin
+      (GetParentComponent as TPopupMenu).Items[i].Checked := (i = MenuIndex);
+      //Сохраняем индекс vga
+      if (GetParentComponent as TPopupMenu).Items[i].Checked then
+        INIPropStorage1.StoredValue['vga'] := IntToStr(i);
+    end;  //for each item in the popup
+  end;  //with
+end;
+
 procedure TMainForm.FormShow(Sender: TObject);
 begin
   IniPropStorage1.Restore;
+
+  //Читаем vga - индекс PopUpMenu - выбор дисплея
+  PopUPMenu1.Items[StrToInt(IniPropStorage1.StoredValue['vga'])].Checked := True;
 
   //Наполняем список режимов
   with ListBox1.Items do
