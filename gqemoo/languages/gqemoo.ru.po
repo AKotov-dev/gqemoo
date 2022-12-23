@@ -74,8 +74,8 @@ msgstr "Лицензия: GPLv3   Автор: alex_q_2000 (C) 2022   URL: https:
 
 #: tmainform.vgabtn.hint
 msgctxt "tmainform.vgabtn.hint"
-msgid "Display selection"
-msgstr "Выбор дисплея"
+msgid "Choose an display"
+msgstr "Выбрать дисплей"
 
 #: unit1.sinstallation
 msgid "Installation"

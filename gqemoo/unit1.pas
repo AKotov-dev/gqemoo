@@ -290,8 +290,10 @@ begin
     begin
       (GetParentComponent as TPopupMenu).Items[i].Checked := (i = MenuIndex);
       //Сохраняем индекс vga
+
       if (GetParentComponent as TPopupMenu).Items[i].Checked then
         INIPropStorage1.StoredValue['vga'] := IntToStr(i);
+
     end;  //for each item in the popup
   end;  //with
 end;

@@ -63,7 +63,7 @@ msgstr ""
 
 #: tmainform.vgabtn.hint
 msgctxt "tmainform.vgabtn.hint"
-msgid "Display selection"
+msgid "Choose an display"
 msgstr ""
 
 #: unit1.sinstallation

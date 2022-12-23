@@ -334,7 +334,7 @@ object MainForm: TMainForm
     AnchorSideBottom.Side = asrBottom
     Left = 750
     Height = 37
-    Hint = 'Display selection'
+    Hint = 'Choose an display'
     Top = 26
     Width = 37
     Anchors = [akTop, akRight, akBottom]
