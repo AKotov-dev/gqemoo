@@ -73,11 +73,9 @@ msgid "License: GPLv3   Author: alex_q_2000 (C) 2022   URL: https://linuxforum.r
 msgstr "Лицензия: GPLv3   Автор: alex_q_2000 (C) 2022   URL: https://linuxforum.ru"
 
 #: tmainform.vgabtn.hint
-#, fuzzy
-#| msgid "Display: virtio/std"
 msgctxt "tmainform.vgabtn.hint"
 msgid "Display selection"
-msgstr "Дисплей: virtio/std"
+msgstr "Выбор дисплея"
 
 #: unit1.sinstallation
 msgid "Installation"
@@ -102,4 +100,3 @@ msgstr "нет"
 #: unit1.susernotingroup
 msgid "User outside Group disk! Run:"
 msgstr "Пользователь вне группы disk! Выполните:"
-
