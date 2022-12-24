@@ -5,7 +5,7 @@ qemoo project: https://abf.io/import/qemoo
 qemoo rpm: [qemoo-x.x-x-rosa2021.1.noarch.rpm](https://mirror.yandex.ru/rosa/rosa2021.1/repository/x86_64/contrib/release) (Ctrl+F)  
 qemoo config: /etc/qemoo.cfg  
   
-VM loading from flash drives and images is supported `*.qcow2` and `*.iso`. Before loading the VM, you can connect flash drives, `*.iso`, `*.img` images and block devices. If necessary, you can select the `std/qxl` display (Up/Down button with locking). Returning the mouse pointer from the guest OS - `Ctrl+Alt+g`.
+VM loading from flash drives and images is supported `*.qcow2` and `*.iso`. Before loading the VM, you can connect flash drives, `*.iso`, `*.img` images and block devices. If necessary, you can select the display from the list: `default`, `STD`, `QXL` and `VIRTIO` (virtio is preferred for Mageia Linux). Returning the mouse pointer from the guest OS - `Ctrl+Alt+g`.
   
 **Dependencies:** qemoo qemu gtk2  
   
