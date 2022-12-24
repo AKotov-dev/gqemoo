@@ -238,8 +238,6 @@ begin
     '3': command := command + ' ' + '-- -vga virtio -display sdl';
   end;
 
-  showmessage(command);
-
   //Запуск VM
   FStartVM := StartVM.Create(False);
   FStartVM.Priority := tpHighest;
