@@ -67,8 +67,8 @@ object MainForm: TMainForm
     Left = 245
     Height = 17
     Top = 75
-    Width = 217
-    Caption = 'Connect devices and images to a VM'
+    Width = 349
+    Caption = 'Connect devices and images to a VM [F12 - update the list]'
   end
   object AllDevBox: TCheckListBox
     AnchorSideLeft.Control = ListBox1
@@ -90,7 +90,6 @@ object MainForm: TMainForm
     ItemHeight = 0
     ParentFont = False
     ParentShowHint = False
-    ShowHint = True
     TabOrder = 3
     TopIndex = -1
   end

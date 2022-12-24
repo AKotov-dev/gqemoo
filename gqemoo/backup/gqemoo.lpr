@@ -5,9 +5,9 @@ program gqemoo;
 uses
  {$IFDEF UNIX}
   cthreads,
-     {$ENDIF} {$IFDEF HASAMIGA}
+    {$ENDIF} {$IFDEF HASAMIGA}
   athreads,
-     {$ENDIF}
+    {$ENDIF}
   Interfaces, // this includes the LCL widgetset
   Forms,
   Unit1,
@@ -17,10 +17,10 @@ uses
 
 begin
   RequireDerivedFormResource := True;
-  {Application.HintPause := 500;
-  Application.HintHidePause := 1000;}
-  Application.Title := 'gqemoo v0.6';
-  Application.Scaled := True;
+  Application.HintPause := 500;
+  Application.HintHidePause := 1000;
+  Application.Title:='gqemoo v0.6';
+  Application.Scaled:=True;
   Application.Initialize;
   Application.CreateForm(TMainForm, MainForm);
   Application.Run;

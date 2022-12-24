@@ -1,10 +1,6 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=UTF-8"
 
-#: tmainform.alldevbox.hint
-msgid "F12 - Update the list"
-msgstr ""
-
 #: tmainform.caption
 msgid "MainForm"
 msgstr ""
@@ -22,7 +18,7 @@ msgid "Loading mode"
 msgstr ""
 
 #: tmainform.label2.caption
-msgid "Connect devices and images to a VM"
+msgid "Connect devices and images to a VM [F12 - update the list]"
 msgstr ""
 
 #: tmainform.label3.caption

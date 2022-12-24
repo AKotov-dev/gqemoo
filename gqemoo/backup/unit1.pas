@@ -223,15 +223,6 @@ begin
     Delete(command, Length(command), 1);
 
   //Выбор дисплея; i:=0 - не добавлять команду, начинать с индекса i:=1
-  {for i := 1 to Pred(PopUpMenu1.Items.Count) do
-  begin
-    if PopUpMenu1.Items[i].Checked then
-    begin
-      command := command + ' ' + PopUpMenu1.Items[i].Caption;
-      break;
-    end;
-  end;}
-
   case IniPropStorage1.StoredValue['vga'] of
     '1': command := command + ' ' + '-- -vga std -display sdl';
     '2': command := command + ' ' + '-- -vga qxl -display sdl';
