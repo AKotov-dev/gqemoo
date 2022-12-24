@@ -45,19 +45,19 @@ msgid "...or from {*.iso, *.qcow2}"
 msgstr "...или из {*.iso, *.qcow2}"
 
 #: tmainform.menuitem1.caption
-msgid "/etc/qemoo.cfg"
+msgid "default"
 msgstr ""
 
 #: tmainform.menuitem2.caption
-msgid "-- -vga virtio -display sdl"
+msgid "VIRTIO"
 msgstr ""
 
 #: tmainform.menuitem3.caption
-msgid "-- -vga qxl -display sdl"
+msgid "QXL"
 msgstr ""
 
 #: tmainform.menuitem4.caption
-msgid "-- -vga std -display sdl"
+msgid "STD"
 msgstr ""
 
 #: tmainform.reloadbtn.hint
@@ -100,3 +100,4 @@ msgstr "нет"
 #: unit1.susernotingroup
 msgid "User outside Group disk! Run:"
 msgstr "Пользователь вне группы disk! Выполните:"
+

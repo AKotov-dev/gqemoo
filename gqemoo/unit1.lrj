@@ -11,8 +11,8 @@
 {"hash":68212709,"name":"tmainform.filenameedit2.buttonhint","sourcebytes":[208,161,111,110,110,101,99,116,32,97,110,32,105,109,97,103,101],"value":"\u0421onnect an image"},
 {"hash":70648969,"name":"tmainform.vgabtn.hint","sourcebytes":[67,104,111,111,115,101,32,97,110,32,100,105,115,112,108,97,121],"value":"Choose an display"},
 {"hash":5941396,"name":"tmainform.startbtn.caption","sourcebytes":[83,116,97,114,116],"value":"Start"},
-{"hash":17312967,"name":"tmainform.menuitem1.caption","sourcebytes":[47,101,116,99,47,113,101,109,111,111,46,99,102,103],"value":"/etc/qemoo.cfg"},
-{"hash":209251708,"name":"tmainform.menuitem4.caption","sourcebytes":[45,45,32,45,118,103,97,32,115,116,100,32,45,100,105,115,112,108,97,121,32,115,100,108],"value":"-- -vga std -display sdl"},
-{"hash":209242620,"name":"tmainform.menuitem3.caption","sourcebytes":[45,45,32,45,118,103,97,32,113,120,108,32,45,100,105,115,112,108,97,121,32,115,100,108],"value":"-- -vga qxl -display sdl"},
-{"hash":17508188,"name":"tmainform.menuitem2.caption","sourcebytes":[45,45,32,45,118,103,97,32,118,105,114,116,105,111,32,45,100,105,115,112,108,97,121,32,115,100,108],"value":"-- -vga virtio -display sdl"}
+{"hash":180128852,"name":"tmainform.menuitem1.caption","sourcebytes":[100,101,102,97,117,108,116],"value":"default"},
+{"hash":22660,"name":"tmainform.menuitem4.caption","sourcebytes":[83,84,68],"value":"STD"},
+{"hash":22220,"name":"tmainform.menuitem3.caption","sourcebytes":[81,88,76],"value":"QXL"},
+{"hash":95320287,"name":"tmainform.menuitem2.caption","sourcebytes":[86,73,82,84,73,79],"value":"VIRTIO"}
 ]}

@@ -334,7 +334,7 @@ object MainForm: TMainForm
     AnchorSideBottom.Side = asrBottom
     Left = 750
     Height = 37
-    Hint = 'Display selection'
+    Hint = 'Choose an display'
     Top = 26
     Width = 37
     Anchors = [akTop, akRight, akBottom]
@@ -524,19 +524,19 @@ object MainForm: TMainForm
     Left = 472
     Top = 152
     object MenuItem1: TMenuItem
-      Caption = '/etc/qemoo.cfg'
+      Caption = 'default'
       OnClick = MenuItem1Click
     end
     object MenuItem4: TMenuItem
-      Caption = '-- -vga std -display sdl'
+      Caption = 'STD'
       OnClick = MenuItem1Click
     end
     object MenuItem3: TMenuItem
-      Caption = '-- -vga qxl -display sdl'
+      Caption = 'QSL'
       OnClick = MenuItem1Click
     end
     object MenuItem2: TMenuItem
-      Caption = '-- -vga virtio -display sdl'
+      Caption = 'VIRTIO'
       OnClick = MenuItem1Click
     end
   end

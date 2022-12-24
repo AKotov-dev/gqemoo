@@ -223,13 +223,20 @@ begin
     Delete(command, Length(command), 1);
 
   //Выбор дисплея; i:=0 - не добавлять команду, начинать с индекса i:=1
-  for i := 1 to Pred(PopUpMenu1.Items.Count) do
+  {for i := 1 to Pred(PopUpMenu1.Items.Count) do
   begin
     if PopUpMenu1.Items[i].Checked then
     begin
       command := command + ' ' + PopUpMenu1.Items[i].Caption;
       break;
     end;
+  end;}
+
+  i := StrToInt(IniPropStorage1.StoredValue['vga']);
+  case i of
+    1: command := command + ' ' + '-- -vga std -display sdl';
+    2: command := command + ' ' + '-- -vga qxl -display sdl';
+    3: command := command + ' ' + '-- -vga virtio -display sdl';
   end;
 
   //Запуск VM
