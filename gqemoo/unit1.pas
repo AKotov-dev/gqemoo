@@ -222,7 +222,7 @@ begin
   if command[Length(command)] = ',' then
     Delete(command, Length(command), 1);
 
-  //Выбор дисплея; i:=0 - не добавлять команду, начинать с индекса i:=1
+  //Выбор дисплея; 0 - не добавлять команду (default), начинать с индекса 1
   case IniPropStorage1.StoredValue['vga'] of
     '1': command := command + ' ' + '-- -vga std -display sdl';
     '2': command := command + ' ' + '-- -vga qxl -display sdl';

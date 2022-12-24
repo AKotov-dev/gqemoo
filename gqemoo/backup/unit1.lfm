@@ -78,7 +78,6 @@ object MainForm: TMainForm
     AnchorSideBottom.Control = FileNameEdit2
     Left = 245
     Height = 265
-    Hint = 'F12 - Update the list'
     Top = 96
     Width = 637
     Anchors = [akTop, akLeft, akRight, akBottom]
@@ -515,8 +514,8 @@ object MainForm: TMainForm
         Name = 'vga'
         Value = '0'
       end>
-    Left = 644
-    Top = 142
+    Left = 568
+    Top = 152
   end
   object PopupMenu1: TPopupMenu
     AutoPopup = False
