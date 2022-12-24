@@ -232,11 +232,10 @@ begin
     end;
   end;}
 
-  i := StrToInt(IniPropStorage1.StoredValue['vga']);
-  case i of
-    1: command := command + ' ' + '-- -vga std -display sdl';
-    2: command := command + ' ' + '-- -vga qxl -display sdl';
-    3: command := command + ' ' + '-- -vga virtio -display sdl';
+  case IniPropStorage1.StoredValue['vga'] of
+    '1': command := command + ' ' + '-- -vga std -display sdl';
+    '2': command := command + ' ' + '-- -vga qxl -display sdl';
+    '3': command := command + ' ' + '-- -vga virtio -display sdl';
   end;
 
   showmessage(command);

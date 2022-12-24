@@ -532,7 +532,7 @@ object MainForm: TMainForm
       OnClick = MenuItem1Click
     end
     object MenuItem3: TMenuItem
-      Caption = 'QSL'
+      Caption = 'QXL'
       OnClick = MenuItem1Click
     end
     object MenuItem2: TMenuItem
