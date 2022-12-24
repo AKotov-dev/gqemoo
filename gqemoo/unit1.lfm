@@ -1,5 +1,5 @@
 object MainForm: TMainForm
-  Left = 293
+  Left = 297
   Height = 642
   Top = 123
   Width = 887
@@ -25,7 +25,7 @@ object MainForm: TMainForm
     Width = 532
     OnAcceptFileName = FileNameEdit1AcceptFileName
     DialogTitle = 'Image selection'
-    Filter = 'Image files (*.iso, *.qcow2)|*.iso;*.qcow2'
+    Filter = 'Image files (*.img, *.iso, *.qcow2, *.raw, *.vdi, *.vmdk, *.vpc)|*.img;*.iso;*.qcow2;*.raw;*.vdi;*.vmdk;*.vpc|All files (*)|*'
     FilterIndex = 0
     HideDirectories = False
     ButtonHint = 'Choose an image'
@@ -214,8 +214,8 @@ object MainForm: TMainForm
     Left = 208
     Height = 17
     Top = 6
-    Width = 148
-    Caption = '...or from {*.iso, *.qcow2}'
+    Width = 118
+    Caption = '...or from the image'
   end
   object StaticText2: TStaticText
     Left = 0
@@ -260,7 +260,7 @@ object MainForm: TMainForm
     Height = 37
     Top = 366
     Width = 598
-    Filter = 'Image files (*.iso, *.img)|*.iso;*.img'
+    Filter = 'Image files (*.img, *.iso, *.qcow2, *.raw, *.vdi, *.vmdk, *.vpc)|*.img;*.iso;*.qcow2;*.raw;*.vdi;*.vmdk;*.vpc|All files (*)|*'
     FilterIndex = 0
     HideDirectories = False
     ButtonHint = 'Сonnect an image'

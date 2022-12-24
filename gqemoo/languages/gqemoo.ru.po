@@ -37,8 +37,8 @@ msgid "Load VM from Flash Drive"
 msgstr "Загрузить VM с флешки"
 
 #: tmainform.label4.caption
-msgid "...or from {*.iso, *.qcow2}"
-msgstr "...или из {*.iso, *.qcow2}"
+msgid "...or from the image"
+msgstr "...или из образа"
 
 #: tmainform.menuitem1.caption
 msgid "default"
@@ -96,4 +96,3 @@ msgstr "нет"
 #: unit1.susernotingroup
 msgid "User outside Group disk! Run:"
 msgstr "Пользователь вне группы disk! Выполните:"
-
