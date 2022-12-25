@@ -5,7 +5,7 @@ unit Unit1;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, EditBtn, StdCtrls,
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls,
   Buttons, CheckLst, IniPropStorage, Process, DefaultTranslator, Menus;
 
 type
@@ -16,6 +16,7 @@ type
     EFICheckBox: TCheckBox;
     Edit1: TEdit;
     Edit2: TEdit;
+    ImageList1: TImageList;
     IniPropStorage1: TIniPropStorage;
     LogMemo: TMemo;
     ClearBtn: TSpeedButton;
@@ -41,6 +42,8 @@ type
     procedure ClearBtnClick(Sender: TObject);
     procedure DevBoxChange(Sender: TObject);
     procedure FormKeyUp(Sender: TObject; var Key: word; Shift: TShiftState);
+    procedure ListBox1DrawItem(Control: TWinControl; Index: integer;
+      ARect: TRect; State: TOwnerDrawState);
     procedure MenuItem1Click(Sender: TObject);
     procedure OpenBtn1Click(Sender: TObject);
     procedure OpenBtn2Click(Sender: TObject);
@@ -261,6 +264,35 @@ end;
 procedure TMainForm.FormKeyUp(Sender: TObject; var Key: word; Shift: TShiftState);
 begin
   if Key = $7B then ReloadAllDevices;
+end;
+
+//Вставка иконок в ListBox
+procedure TMainForm.ListBox1DrawItem(Control: TWinControl; Index: integer;
+  ARect: TRect; State: TOwnerDrawState);
+var
+  BitMap: TBitMap;
+begin
+  try
+    BitMap := TBitMap.Create;
+    with ListBox1 do
+    begin
+      Canvas.FillRect(aRect);
+
+      //Название (текст по центру-вертикали)
+      Canvas.TextOut(aRect.Left + 40, aRect.Top + ItemHeight div 2 -
+        Canvas.TextHeight('A') div 2 + 1, Items[Index]);
+
+      //Иконка
+      if (Index mod 2) = 0 then
+        ImageList1.GetBitMap(0, BitMap)
+      else
+        ImageList1.GetBitMap(1, BitMap);
+
+      Canvas.Draw(aRect.Left + 2, aRect.Top + (ItemHeight - 32) div 2 + 1, BitMap);
+    end;
+  finally
+    BitMap.Free;
+  end;
 end;
 
 //Установка и запись чекера PopUpMenu; параметр vga
