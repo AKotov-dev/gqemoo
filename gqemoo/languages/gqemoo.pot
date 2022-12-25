@@ -5,16 +5,8 @@ msgstr "Content-Type: text/plain; charset=UTF-8"
 msgid "MainForm"
 msgstr ""
 
-#: tmainform.filenameedit1.buttonhint
-msgid "Choose an image"
-msgstr ""
-
-#: tmainform.filenameedit2.buttonhint
-msgid "Сonnect an image"
-msgstr ""
-
-#: tmainform.label1.caption
-msgid "Loading mode"
+#: tmainform.eficheckbox.caption
+msgid "EFI Mode"
 msgstr ""
 
 #: tmainform.label2.caption
@@ -45,6 +37,26 @@ msgstr ""
 msgid "STD"
 msgstr ""
 
+#: tmainform.openbtn1.caption
+msgctxt "tmainform.openbtn1.caption"
+msgid "..."
+msgstr ""
+
+#: tmainform.openbtn1.hint
+msgctxt "tmainform.openbtn1.hint"
+msgid "Choose an image"
+msgstr ""
+
+#: tmainform.openbtn2.caption
+msgctxt "tmainform.openbtn2.caption"
+msgid "..."
+msgstr ""
+
+#: tmainform.openbtn2.hint
+msgctxt "tmainform.openbtn2.hint"
+msgid "Connect an image"
+msgstr ""
+
 #: tmainform.reloadbtn.hint
 msgid "Update"
 msgstr ""
@@ -66,16 +78,8 @@ msgstr ""
 msgid "Installation"
 msgstr ""
 
-#: unit1.sinstallationefi
-msgid "Installation (EFI)"
-msgstr ""
-
 #: unit1.sloading
 msgid "Loading"
-msgstr ""
-
-#: unit1.sloadingefi
-msgid "Loading (EFI)"
 msgstr ""
 
 #: unit1.snotused

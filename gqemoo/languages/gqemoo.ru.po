@@ -16,17 +16,9 @@ msgstr ""
 msgid "MainForm"
 msgstr ""
 
-#: tmainform.filenameedit1.buttonhint
-msgid "Choose an image"
-msgstr "Выбрать образ"
-
-#: tmainform.filenameedit2.buttonhint
-msgid "Сonnect an image"
-msgstr "Подключить образ"
-
-#: tmainform.label1.caption
-msgid "Loading mode"
-msgstr "Режим загрузки"
+#: tmainform.eficheckbox.caption
+msgid "EFI Mode"
+msgstr "Режим EFI"
 
 #: tmainform.label2.caption
 msgid "Connect devices and images to a VM [F12 - update the list]"
@@ -56,6 +48,26 @@ msgstr ""
 msgid "STD"
 msgstr ""
 
+#: tmainform.openbtn1.caption
+msgctxt "tmainform.openbtn1.caption"
+msgid "..."
+msgstr ""
+
+#: tmainform.openbtn1.hint
+msgctxt "tmainform.openbtn1.hint"
+msgid "Choose an image"
+msgstr "Выбрать образ"
+
+#: tmainform.openbtn2.caption
+msgctxt "tmainform.openbtn2.caption"
+msgid "..."
+msgstr ""
+
+#: tmainform.openbtn2.hint
+msgctxt "tmainform.openbtn2.hint"
+msgid "Connect an image"
+msgstr "Подключить образ"
+
 #: tmainform.reloadbtn.hint
 msgid "Update"
 msgstr "Обновить"
@@ -77,17 +89,9 @@ msgstr "Выбрать дисплей"
 msgid "Installation"
 msgstr "Установка"
 
-#: unit1.sinstallationefi
-msgid "Installation (EFI)"
-msgstr "Установка (EFI)"
-
 #: unit1.sloading
 msgid "Loading"
 msgstr "Загрузка"
-
-#: unit1.sloadingefi
-msgid "Loading (EFI)"
-msgstr "Загрузка (EFI)"
 
 #: unit1.snotused
 msgid "not used"

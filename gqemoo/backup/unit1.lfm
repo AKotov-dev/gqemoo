@@ -1,72 +1,37 @@
 object MainForm: TMainForm
-  Left = 293
-  Height = 642
-  Top = 123
-  Width = 887
+  Left = 297
+  Height = 651
+  Top = 124
+  Width = 884
   Caption = 'MainForm'
-  ClientHeight = 642
-  ClientWidth = 887
+  ClientHeight = 651
+  ClientWidth = 884
   KeyPreview = True
   OnCreate = FormCreate
   OnKeyUp = FormKeyUp
   OnShow = FormShow
-  SessionProperties = 'Height;Left;Top;Width;VGABtn.Down'
+  SessionProperties = 'Height;Left;OpenDialog1.InitialDir;OpenDialog2.InitialDir;Top;Width;EFICheckBox.Checked'
   LCLVersion = '2.2.0.4'
-  object FileNameEdit1: TFileNameEdit
-    AnchorSideLeft.Control = ReloadBtn
-    AnchorSideLeft.Side = asrBottom
-    AnchorSideTop.Control = DevBox
-    AnchorSideRight.Control = VGABtn
-    AnchorSideBottom.Control = DevBox
-    AnchorSideBottom.Side = asrBottom
-    Left = 208
-    Height = 37
-    Top = 26
-    Width = 532
-    OnAcceptFileName = FileNameEdit1AcceptFileName
-    DialogTitle = 'Image selection'
-    Filter = 'Image files (*.img, *.iso, *.qcow2, *.raw, *.vdi, *.vmdk, *.vpc)|*.img;*.iso;*.qcow2;*.raw;*.vdi;*.vmdk;*.vpc|All files (*)|*'
-    FilterIndex = 0
-    HideDirectories = False
-    ButtonHint = 'Choose an image'
-    ButtonWidth = 23
-    NumGlyphs = 1
-    Anchors = [akTop, akLeft, akRight, akBottom]
-    BorderSpacing.Left = 5
-    BorderSpacing.Right = 10
-    MaxLength = 0
-    ParentShowHint = False
-    ShowHint = True
-    TabOrder = 1
-    OnChange = FileNameEdit1Change
-  end
   object ListBox1: TListBox
     AnchorSideLeft.Control = Owner
     AnchorSideBottom.Control = LogMemo
     Left = 5
-    Height = 307
-    Top = 96
+    Height = 320
+    Top = 99
     Width = 235
     Anchors = [akTop, akLeft, akBottom]
     BorderSpacing.Left = 5
     BorderSpacing.Right = 5
     BorderSpacing.Bottom = 5
     ItemHeight = 0
-    TabOrder = 2
+    TabOrder = 3
     TopIndex = -1
-  end
-  object Label1: TLabel
-    Left = 5
-    Height = 17
-    Top = 75
-    Width = 87
-    Caption = 'Loading mode'
   end
   object Label2: TLabel
     AnchorSideLeft.Control = AllDevBox
     Left = 245
     Height = 17
-    Top = 75
+    Top = 77
     Width = 349
     Caption = 'Connect devices and images to a VM [F12 - update the list]'
   end
@@ -75,11 +40,11 @@ object MainForm: TMainForm
     AnchorSideLeft.Side = asrBottom
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
-    AnchorSideBottom.Control = FileNameEdit2
+    AnchorSideBottom.Control = Edit2
     Left = 245
-    Height = 265
-    Top = 96
-    Width = 637
+    Height = 278
+    Top = 99
+    Width = 634
     Anchors = [akTop, akLeft, akRight, akBottom]
     BorderSpacing.Left = 5
     BorderSpacing.Right = 5
@@ -89,7 +54,7 @@ object MainForm: TMainForm
     ItemHeight = 0
     ParentFont = False
     ParentShowHint = False
-    TabOrder = 3
+    TabOrder = 4
     TopIndex = -1
   end
   object DevBox: TComboBox
@@ -210,18 +175,17 @@ object MainForm: TMainForm
     ParentShowHint = False
   end
   object Label4: TLabel
-    AnchorSideLeft.Control = FileNameEdit1
     Left = 208
     Height = 17
     Top = 6
-    Width = 148
-    Caption = '...or from {*.iso, *.qcow2}'
+    Width = 118
+    Caption = '...or from the image'
   end
   object StaticText2: TStaticText
     Left = 0
     Height = 17
-    Top = 625
-    Width = 887
+    Top = 634
+    Width = 884
     Align = alBottom
     Caption = 'License: GPLv3   Author: alex_q_2000 (C) 2022   URL: https://linuxforum.ru'
     Color = clDefault
@@ -230,60 +194,37 @@ object MainForm: TMainForm
     Font.Name = 'Sans'
     ParentFont = False
     ParentColor = False
-    TabOrder = 6
+    TabOrder = 7
   end
   object LogMemo: TMemo
     AnchorSideLeft.Control = Owner
+    AnchorSideTop.Control = Edit2
+    AnchorSideTop.Side = asrBottom
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = StaticText2
     Left = 0
-    Height = 217
-    Top = 408
-    Width = 887
+    Height = 210
+    Top = 424
+    Width = 884
     Anchors = [akLeft, akRight, akBottom]
     Font.Height = -13
     Font.Name = 'Monospace'
     ParentFont = False
     ReadOnly = True
     ScrollBars = ssVertical
-    TabOrder = 5
+    TabOrder = 6
     WantReturns = False
   end
-  object FileNameEdit2: TFileNameEdit
-    AnchorSideLeft.Control = AllDevBox
-    AnchorSideTop.Control = AllDevBox
-    AnchorSideTop.Side = asrBottom
-    AnchorSideRight.Control = ClearBtn
-    AnchorSideBottom.Control = LogMemo
-    Left = 245
-    Height = 37
-    Top = 366
-    Width = 598
-    Filter = 'Image files (*.img, *.iso, *.qcow2, *.raw, *.vdi, *.vmdk, *.vpc)|*.img;*.iso;*.qcow2;*.raw;*.vdi;*.vmdk;*.vpc|All files (*)|*'
-    FilterIndex = 0
-    HideDirectories = False
-    ButtonHint = 'Сonnect an image'
-    ButtonWidth = 23
-    NumGlyphs = 1
-    Anchors = [akLeft, akRight, akBottom]
-    BorderSpacing.Top = 5
-    BorderSpacing.Bottom = 5
-    MaxLength = 0
-    ParentShowHint = False
-    ShowHint = True
-    TabOrder = 4
-    OnChange = FileNameEdit2Change
-  end
   object ClearBtn: TSpeedButton
-    AnchorSideTop.Control = FileNameEdit2
+    AnchorSideTop.Control = OpenBtn2
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
-    AnchorSideBottom.Control = FileNameEdit2
+    AnchorSideBottom.Control = OpenBtn2
     AnchorSideBottom.Side = asrBottom
-    Left = 843
+    Left = 840
     Height = 37
-    Top = 366
+    Top = 382
     Width = 39
     Anchors = [akTop, akRight, akBottom]
     BorderSpacing.Right = 5
@@ -326,11 +267,11 @@ object MainForm: TMainForm
     OnClick = ClearBtnClick
   end
   object VGABtn: TSpeedButton
-    AnchorSideTop.Control = FileNameEdit1
+    AnchorSideTop.Control = OpenBtn1
     AnchorSideRight.Control = StartBtn
-    AnchorSideBottom.Control = FileNameEdit1
+    AnchorSideBottom.Control = OpenBtn1
     AnchorSideBottom.Side = asrBottom
-    Left = 750
+    Left = 747
     Height = 37
     Hint = 'Choose an display'
     Top = 26
@@ -418,12 +359,12 @@ object MainForm: TMainForm
     PopupMenu = PopupMenu1
   end
   object StartBtn: TSpeedButton
-    AnchorSideTop.Control = FileNameEdit1
+    AnchorSideTop.Control = OpenBtn1
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
-    AnchorSideBottom.Control = FileNameEdit1
+    AnchorSideBottom.Control = OpenBtn1
     AnchorSideBottom.Side = asrBottom
-    Left = 787
+    Left = 784
     Height = 37
     Top = 26
     Width = 95
@@ -508,6 +449,84 @@ object MainForm: TMainForm
     }
     OnClick = StartBtnClick
   end
+  object Edit1: TEdit
+    AnchorSideLeft.Control = ReloadBtn
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = ReloadBtn
+    AnchorSideRight.Control = OpenBtn1
+    AnchorSideBottom.Control = ReloadBtn
+    AnchorSideBottom.Side = asrBottom
+    Left = 208
+    Height = 37
+    Top = 26
+    Width = 489
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    BorderSpacing.Left = 5
+    ReadOnly = True
+    TabOrder = 1
+  end
+  object OpenBtn1: TSpeedButton
+    AnchorSideTop.Control = Edit1
+    AnchorSideRight.Control = VGABtn
+    AnchorSideBottom.Control = Edit1
+    AnchorSideBottom.Side = asrBottom
+    Left = 697
+    Height = 37
+    Hint = 'Choose an image'
+    Top = 26
+    Width = 40
+    Anchors = [akTop, akRight, akBottom]
+    BorderSpacing.Right = 10
+    Caption = '...'
+    OnClick = OpenBtn1Click
+    ShowHint = True
+    ParentShowHint = False
+  end
+  object Edit2: TEdit
+    AnchorSideLeft.Control = AllDevBox
+    AnchorSideTop.Control = AllDevBox
+    AnchorSideTop.Side = asrCenter
+    AnchorSideRight.Control = OpenBtn2
+    AnchorSideBottom.Control = LogMemo
+    Left = 245
+    Height = 37
+    Top = 382
+    Width = 558
+    Anchors = [akLeft, akRight, akBottom]
+    BorderSpacing.Bottom = 5
+    ReadOnly = True
+    TabOrder = 5
+  end
+  object OpenBtn2: TSpeedButton
+    AnchorSideLeft.Control = Edit2
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Edit2
+    AnchorSideRight.Control = ClearBtn
+    AnchorSideBottom.Control = Edit2
+    AnchorSideBottom.Side = asrBottom
+    Left = 803
+    Height = 37
+    Hint = 'Connect an image'
+    Top = 382
+    Width = 37
+    Anchors = [akTop, akRight, akBottom]
+    Caption = '...'
+    OnClick = OpenBtn2Click
+    ShowHint = True
+    ParentShowHint = False
+  end
+  object EFICheckBox: TCheckBox
+    AnchorSideTop.Control = Label2
+    AnchorSideTop.Side = asrCenter
+    AnchorSideBottom.Control = Label2
+    AnchorSideBottom.Side = asrBottom
+    Left = 5
+    Height = 32
+    Top = 69
+    Width = 91
+    Caption = 'EFI Mode'
+    TabOrder = 2
+  end
   object IniPropStorage1: TIniPropStorage
     StoredValues = <    
       item
@@ -537,5 +556,15 @@ object MainForm: TMainForm
       Caption = 'VIRTIO'
       OnClick = MenuItem1Click
     end
+  end
+  object OpenDialog1: TOpenDialog
+    Filter = 'Image files|*.img;*.iso;*.qcow2;*.raw;*.vdi;*.vmdk;*.vpc|All files|*'
+    Left = 664
+    Top = 152
+  end
+  object OpenDialog2: TOpenDialog
+    Filter = 'Image files|*.img;*.iso;*.qcow2;*.raw;*.vdi;*.vmdk;*.vpc|All files|*'
+    Left = 752
+    Top = 152
   end
 end

@@ -5,7 +5,7 @@ unit Unit1;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, EditBtn, StdCtrls,
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls,
   Buttons, CheckLst, IniPropStorage, Process, DefaultTranslator, Menus;
 
 type
@@ -13,7 +13,9 @@ type
   { TMainForm }
 
   TMainForm = class(TForm)
-    FileNameEdit2: TFileNameEdit;
+    EFICheckBox: TCheckBox;
+    Edit1: TEdit;
+    Edit2: TEdit;
     IniPropStorage1: TIniPropStorage;
     LogMemo: TMemo;
     ClearBtn: TSpeedButton;
@@ -21,12 +23,14 @@ type
     MenuItem2: TMenuItem;
     MenuItem3: TMenuItem;
     MenuItem4: TMenuItem;
+    OpenDialog1: TOpenDialog;
+    OpenDialog2: TOpenDialog;
     PopupMenu1: TPopupMenu;
+    OpenBtn1: TSpeedButton;
+    OpenBtn2: TSpeedButton;
     VGABtn: TSpeedButton;
     AllDevBox: TCheckListBox;
     DevBox: TComboBox;
-    FileNameEdit1: TFileNameEdit;
-    Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
     Label4: TLabel;
@@ -36,11 +40,10 @@ type
     StaticText2: TStaticText;
     procedure ClearBtnClick(Sender: TObject);
     procedure DevBoxChange(Sender: TObject);
-    procedure FileNameEdit1AcceptFileName(Sender: TObject; var Value: string);
-    procedure FileNameEdit1Change(Sender: TObject);
-    procedure FileNameEdit2Change(Sender: TObject);
     procedure FormKeyUp(Sender: TObject; var Key: word; Shift: TShiftState);
     procedure MenuItem1Click(Sender: TObject);
+    procedure OpenBtn1Click(Sender: TObject);
+    procedure OpenBtn2Click(Sender: TObject);
     procedure StartBtnClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -62,8 +65,8 @@ var
 resourcestring
   SLoading = 'Loading';
   SInstallation = 'Installation';
-  SLoadingEFI = 'Loading (EFI)';
-  SInstallationEFI = 'Installation (EFI)';
+{  SLoadingEFI = 'Loading (EFI)';
+  SInstallationEFI = 'Installation (EFI)';}
   SNotUsed = 'not used';
   SUserNotInGroup = 'User outside Group disk! Run:';
 
@@ -166,9 +169,11 @@ begin
 
   //Размеры для разных тем
   ReloadBtn.Width := DevBox.Height;
-  FileNameEdit1.ButtonWidth := FileNameEdit1.Height;
-  FileNameEdit2.ButtonWidth := FileNameEdit2.Height;
-  ClearBtn.Width := FileNameEdit2.Height;
+  OpenBtn1.Width := Edit1.Height;
+
+  Edit2.Height := Edit1.Height;
+  OpenBtn2.Width := Edit1.Height;
+  ClearBtn.Width := Edit1.Height;
 end;
 
 //Запуск VM
@@ -179,20 +184,25 @@ var
   FStartVM: TThread;
 begin
   //Определяем источник загрузки
-  if FileNameEdit1.Text = '' then
+  if Edit1.Text = '' then
     if DevBox.ItemIndex <> DevBox.Items.Count - 1 then
       dev := Copy(DevBox.Text, 1, Pos(' ', DevBox.Text) - 1)
     else
       exit
   else
-    dev := '"' + FileNameEdit1.Text + '"';
+    dev := '"' + Edit1.Text + '"';
 
-  case ListBox1.ItemIndex of
-    0: command := 'qemoo ' + dev;
-    1: command := 'qemoo -i ' + dev;
-    2: command := 'qemoo -e ' + dev;
-    3: command := 'qemoo -e -i ' + dev;
-  end;
+  //EFI?
+  if not EFICheckBox.Checked then
+    case ListBox1.ItemIndex of
+      0: command := 'qemoo ' + dev;
+      1: command := 'qemoo -i ' + dev;
+    end
+  else
+    case ListBox1.ItemIndex of
+      0: command := 'qemoo -e ' + dev;
+      1: command := 'qemoo -e -i ' + dev;
+    end;
 
   //Счетчик выбранных устройств
   b := 0;
@@ -212,11 +222,11 @@ begin
   end;
 
   //Подключаем образ к VM (если указан)
-  if (FileNameEdit2.Text <> '') and (b <> 0) then
-    command := command + '"' + FileNameEdit2.Text + '",'
+  if (Edit2.Text <> '') and (b <> 0) then
+    command := command + '"' + Edit2.Text + '",'
   else
-  if FileNameEdit2.Text <> '' then
-    command := command + ' -a "' + FileNameEdit2.Text + '",';
+  if Edit2.Text <> '' then
+    command := command + ' -a "' + Edit2.Text + '",';
 
   //Удаляем последнюю запятую
   if command[Length(command)] = ',' then
@@ -234,38 +244,16 @@ begin
   FStartVM.Priority := tpHighest;
 end;
 
-//Если путь к образу получен - убрать из загрузки флешку
-procedure TMainForm.FileNameEdit1AcceptFileName(Sender: TObject; var Value: string);
-begin
-  if DevBox.ItemIndex <> DevBox.Items.Count - 1 then
-  begin
-    DevBox.ItemIndex := DevBox.Items.Count - 1;
-    ReloadAllDevices;
-  end;
-end;
-
-//Если загрузочный образ = образу для подключения = очистить образ для подключения
-procedure TMainForm.FileNameEdit1Change(Sender: TObject);
-begin
-  if FileNameEdit1.FileName = FileNameEdit2.FileName then FileNameEdit2.Clear;
-end;
-
-//Если образ для полключения = загрузочному образу = очистить загрузочный образ
-procedure TMainForm.FileNameEdit2Change(Sender: TObject);
-begin
-  if FileNameEdit2.FileName = FileNameEdit1.FileName then FileNameEdit1.Clear;
-end;
-
 //Очистка пути к образу для подключения
 procedure TMainForm.ClearBtnClick(Sender: TObject);
 begin
-  FileNameEdit2.Clear;
+  Edit2.Clear;
 end;
 
 //Выбор флешки
 procedure TMainForm.DevBoxChange(Sender: TObject);
 begin
-  FileNameEdit1.Clear;
+  Edit1.Clear;
   ReloadAllDevices;
 end;
 
@@ -295,6 +283,37 @@ begin
   end;  //with
 end;
 
+//Выбрать образ загрузки
+procedure TMainForm.OpenBtn1Click(Sender: TObject);
+begin
+  if OpenDialog1.Execute then
+  begin
+    Edit1.Text := OpenDialog1.FileName;
+
+    //Образ выбран, обнулить флешку
+    if DevBox.ItemIndex <> DevBox.Items.Count - 1 then
+    begin
+      DevBox.ItemIndex := DevBox.Items.Count - 1;
+      ReloadAllDevices;
+    end;
+
+    //Если образ загрузки = образу подключения - очистить образ подключения
+    if Edit1.Text = Edit2.Text then Edit2.Clear;
+  end;
+end;
+
+//Выбрать образ подключения
+procedure TMainForm.OpenBtn2Click(Sender: TObject);
+begin
+  if OpenDialog2.Execute then
+  begin
+    Edit2.Text := OpenDialog2.FileName;
+
+    //Если образ подключения = образу загрузки - очистить образ загрузки
+    if Edit2.Text = Edit1.Text then Edit1.Clear;
+  end;
+end;
+
 procedure TMainForm.FormShow(Sender: TObject);
 begin
   IniPropStorage1.Restore;
@@ -307,16 +326,16 @@ begin
   begin
     Add(SLoading);
     Add(SInstallation);
-    Add(SLoadingEFI);
-    Add(SInstallationEFI);
+  {  Add(SLoadingEFI);
+    Add(SInstallationEFI);}
   end;
   //Курсор в 0
   ListBox1.ItemIndex := 0;
 
   //Читаем заголовок диалога выбора образа
-  FileNameEdit1.DialogTitle := FileNameEdit1.ButtonHint;
+ { FileNameEdit1.DialogTitle := FileNameEdit1.ButtonHint;
   FileNameEdit2.DialogTitle := FileNameEdit2.ButtonHint;
-
+  }
   ReloadUSBDevices;
   ReloadAllDevices;
 end;
@@ -327,7 +346,7 @@ begin
   ReloadUSBDevices;
   ReloadAllDevices;
 
-  if DevBox.Items.Count > 1 then FileNameEdit1.Clear;
+  if DevBox.Items.Count > 1 then Edit1.Clear;
 end;
 
 end.
