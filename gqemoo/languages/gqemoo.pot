@@ -5,6 +5,10 @@ msgstr "Content-Type: text/plain; charset=UTF-8"
 msgid "MainForm"
 msgstr ""
 
+#: tmainform.clearbtn.hint
+msgid "Clear"
+msgstr ""
+
 #: tmainform.eficheckbox.caption
 msgid "EFI Mode"
 msgstr ""

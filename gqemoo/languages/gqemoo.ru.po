@@ -16,6 +16,10 @@ msgstr ""
 msgid "MainForm"
 msgstr ""
 
+#: tmainform.clearbtn.hint
+msgid "Clear"
+msgstr "Убрать"
+
 #: tmainform.eficheckbox.caption
 msgid "EFI Mode"
 msgstr "Режим EFI"
@@ -100,4 +104,3 @@ msgstr "нет"
 #: unit1.susernotingroup
 msgid "User outside Group disk! Run:"
 msgstr "Пользователь вне группы disk! Выполните:"
-
