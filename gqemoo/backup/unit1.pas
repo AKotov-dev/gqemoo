@@ -42,6 +42,7 @@ type
     procedure ClearBtnClick(Sender: TObject);
     procedure DevBoxChange(Sender: TObject);
     procedure FormKeyUp(Sender: TObject; var Key: word; Shift: TShiftState);
+    procedure ListBox1DblClick(Sender: TObject);
     procedure ListBox1DrawItem(Control: TWinControl; Index: integer;
       ARect: TRect; State: TOwnerDrawState);
     procedure MenuItem1Click(Sender: TObject);
@@ -264,6 +265,12 @@ end;
 procedure TMainForm.FormKeyUp(Sender: TObject; var Key: word; Shift: TShiftState);
 begin
   if Key = $7B then ReloadAllDevices;
+end;
+
+//Запуск двойным щелчком в меню
+procedure TMainForm.ListBox1DblClick(Sender: TObject);
+begin
+  StartBtn.Click;
 end;
 
 //Вставка иконок в ListBox
