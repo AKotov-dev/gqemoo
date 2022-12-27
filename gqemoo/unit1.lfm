@@ -543,7 +543,7 @@ object MainForm: TMainForm
     Width = 243
     Anchors = [akTop, akLeft, akBottom]
     BorderSpacing.Bottom = 5
-    Directory = '/home/marsik/qemoo_tmp'
+    Directory = '/home/marsik'
     ItemHeight = 28
     Mask = '*.qcow2'
     MultiSelect = True
@@ -551,6 +551,7 @@ object MainForm: TMainForm
     OnDrawItem = FileListBox1DrawItem
     Style = lbOwnerDrawFixed
     TabOrder = 4
+    TopIndex = -1
   end
   object Label1: TLabel
     Left = 5

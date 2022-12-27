@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, Buttons,
-  CheckLst, IniPropStorage, Process, DefaultTranslator, Menus, FileCtrl, Types;
+  CheckLst, IniPropStorage, Process, DefaultTranslator, Menus, FileCtrl;
 
 type
 
@@ -218,7 +218,8 @@ begin
   if FileListBox1.SelCount <> 0 then
   begin
     ListBox1.ItemIndex := 0;
-    dev := '"' + FileListBox1.FileName + '"';
+    Edit1.Text := FileListBox1.FileName;
+    dev := '"' + Edit1.Text + '"';
   end
   else
     Exit;
@@ -302,7 +303,7 @@ begin
     //Переключение режима в Загрузку
     ListBox1.ItemIndex := 0;
     //Имя образа из списка в строку запуска
-    Edit1.Text := FileListBox1.Items[FileListBox1.ItemIndex];
+    Edit1.Text := FileListBox1.FileName;
 
     //Образ выбран, обнулить флешку
     if DevBox.ItemIndex <> DevBox.Items.Count - 1 then
