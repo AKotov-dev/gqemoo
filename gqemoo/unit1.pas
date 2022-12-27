@@ -33,9 +33,9 @@ type
     PopupMenu1: TPopupMenu;
     OpenBtn1: TSpeedButton;
     OpenBtn2: TSpeedButton;
-    SpeedButton1: TSpeedButton;
-    SpeedButton2: TSpeedButton;
-    SpeedButton3: TSpeedButton;
+    RemoveBtn: TSpeedButton;
+    RenameBtn: TSpeedButton;
+    SelectAllBtn: TSpeedButton;
     VGABtn: TSpeedButton;
     AllDevBox: TCheckListBox;
     DevBox: TComboBox;
@@ -59,9 +59,9 @@ type
     procedure MenuItem1Click(Sender: TObject);
     procedure OpenBtn1Click(Sender: TObject);
     procedure OpenBtn2Click(Sender: TObject);
-    procedure SpeedButton1Click(Sender: TObject);
-    procedure SpeedButton2Click(Sender: TObject);
-    procedure SpeedButton3Click(Sender: TObject);
+    procedure RemoveBtnClick(Sender: TObject);
+    procedure RenameBtnClick(Sender: TObject);
+    procedure SelectAllBtnClick(Sender: TObject);
     procedure StartBtnClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -435,48 +435,56 @@ begin
 end;
 
 //Удаление установленных образов
-procedure TMainForm.SpeedButton1Click(Sender: TObject);
+procedure TMainForm.RemoveBtnClick(Sender: TObject);
 var
   i: integer;
 begin
-  if MessageDlg(SDeleteImages, mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+  if FileListBox1.Count <> 0 then
   begin
-    for i := 0 to FileListBox1.Count - 1 do
-      if FileListBox1.Selected[i] then
-        DeleteFile(FileListBox1.Items[i]);
-    FileListBox1.UpdateFileList;
+    if MessageDlg(SDeleteImages, mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+    begin
+      for i := 0 to FileListBox1.Count - 1 do
+        if FileListBox1.Selected[i] then
+          DeleteFile(FileListBox1.Items[i]);
+      FileListBox1.UpdateFileList;
 
-    if FileListBox1.Count <> 0 then
-      FileListBox1.ItemIndex := 0;
+      if FileListBox1.Count <> 0 then
+        FileListBox1.ItemIndex := 0;
+    end;
   end;
 end;
 
-procedure TMainForm.SpeedButton2Click(Sender: TObject);
+//Переименовать образ *.qcow2
+procedure TMainForm.RenameBtnClick(Sender: TObject);
 var
   Value: string;
 begin
-  //Получаем имя без пути и расширения
-  Value := Copy(ExtractFileName(FileListBox1.FileName), 1,
-    Pos('.', ExtractFileName(FileListBox1.FileName)) - 1);
-
-  //Продолжаем спрашивать имя образа, если пусто
-  repeat
-    if not InputQuery(SCaptRenameImage, SInputNewImageName, Value) then exit;
-  until Value <> '';
-
-  //Если файл не существует - переименовать
-  if not FileExists(ExtractFilePath(FileListBox1.FileName) + Value + '.qcow2') then
+  if FileListBox1.Count <> 0 then
   begin
-    //Переименовываем файл
-    RenameFile(FileListBox1.FileName, Value + '.qcow2');
-    FileListBox1.UpdateFileList;
-    FileListBox1.ItemIndex := 0;
-  end
-  else
-    MessageDlg(SFileExists, mtWarning, [mbOK], 0);
+    //Получаем имя без пути и расширения
+    Value := Copy(ExtractFileName(FileListBox1.FileName), 1,
+      Pos('.', ExtractFileName(FileListBox1.FileName)) - 1);
+
+    //Продолжаем спрашивать имя образа, если пусто
+    repeat
+      if not InputQuery(SCaptRenameImage, SInputNewImageName, Value) then exit;
+    until Value <> '';
+
+    //Если файл не существует - переименовать
+    if not FileExists(ExtractFilePath(FileListBox1.FileName) + Value + '.qcow2') then
+    begin
+      //Переименовываем файл
+      RenameFile(FileListBox1.FileName, Value + '.qcow2');
+      FileListBox1.UpdateFileList;
+      FileListBox1.ItemIndex := 0;
+    end
+    else
+      MessageDlg(SFileExists, mtWarning, [mbOK], 0);
+  end;
 end;
 
-procedure TMainForm.SpeedButton3Click(Sender: TObject);
+//Выбрать все образы *.qcow2
+procedure TMainForm.SelectAllBtnClick(Sender: TObject);
 begin
   FileListBox1.SelectAll;
 end;

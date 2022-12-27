@@ -86,15 +86,21 @@ msgstr "Подключить образ"
 msgid "Update"
 msgstr "Обновить"
 
-#: tmainform.speedbutton1.hint
+#: tmainform.removebtn.hint
+#, fuzzy
+msgctxt "tmainform.removebtn.hint"
 msgid "Delete selected"
 msgstr "Удалить выбранное"
 
-#: tmainform.speedbutton2.hint
+#: tmainform.renamebtn.hint
+#, fuzzy
+msgctxt "tmainform.renamebtn.hint"
 msgid "Rename"
 msgstr "Переименовать"
 
-#: tmainform.speedbutton3.hint
+#: tmainform.selectallbtn.hint
+#, fuzzy
+msgctxt "tmainform.selectallbtn.hint"
 msgid "Select all"
 msgstr "Выбрать все"
 
@@ -142,3 +148,4 @@ msgstr "нет"
 #: unit1.susernotingroup
 msgid "User outside Group disk! Run:"
 msgstr "Пользователь вне группы disk! Выполните:"
+

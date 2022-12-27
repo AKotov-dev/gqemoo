@@ -75,15 +75,18 @@ msgstr ""
 msgid "Update"
 msgstr ""
 
-#: tmainform.speedbutton1.hint
+#: tmainform.removebtn.hint
+msgctxt "tmainform.removebtn.hint"
 msgid "Delete selected"
 msgstr ""
 
-#: tmainform.speedbutton2.hint
+#: tmainform.renamebtn.hint
+msgctxt "tmainform.renamebtn.hint"
 msgid "Rename"
 msgstr ""
 
-#: tmainform.speedbutton3.hint
+#: tmainform.selectallbtn.hint
+msgctxt "tmainform.selectallbtn.hint"
 msgid "Select all"
 msgstr ""
 

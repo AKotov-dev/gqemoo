@@ -439,43 +439,51 @@ procedure TMainForm.SpeedButton1Click(Sender: TObject);
 var
   i: integer;
 begin
-  if MessageDlg(SDeleteImages, mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+  if FileListBox1.Count <> 0 then
   begin
-    for i := 0 to FileListBox1.Count - 1 do
-      if FileListBox1.Selected[i] then
-        DeleteFile(FileListBox1.Items[i]);
-    FileListBox1.UpdateFileList;
+    if MessageDlg(SDeleteImages, mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+    begin
+      for i := 0 to FileListBox1.Count - 1 do
+        if FileListBox1.Selected[i] then
+          DeleteFile(FileListBox1.Items[i]);
+      FileListBox1.UpdateFileList;
 
-    if FileListBox1.Count <> 0 then
-      FileListBox1.ItemIndex := 0;
+      if FileListBox1.Count <> 0 then
+        FileListBox1.ItemIndex := 0;
+    end;
   end;
 end;
 
+//Переименовать образ *.qcow2
 procedure TMainForm.SpeedButton2Click(Sender: TObject);
 var
   Value: string;
 begin
-  //Получаем имя без пути и расширения
-  Value := Copy(ExtractFileName(FileListBox1.FileName), 1,
-    Pos('.', ExtractFileName(FileListBox1.FileName)) - 1);
-
-  //Продолжаем спрашивать имя образа, если пусто
-  repeat
-    if not InputQuery(SCaptRenameImage, SInputNewImageName, Value) then exit;
-  until Value <> '';
-
-  //Если файл не существует - переименовать
-  if not FileExists(ExtractFilePath(FileListBox1.FileName) + Value + '.qcow2') then
+  if FileListBox1.Count <> 0 then
   begin
-    //Переименовываем файл
-    RenameFile(FileListBox1.FileName, Value + '.qcow2');
-    FileListBox1.UpdateFileList;
-    FileListBox1.ItemIndex := 0;
-  end
-  else
-    MessageDlg(SFileExists, mtWarning, [mbOK], 0);
+    //Получаем имя без пути и расширения
+    Value := Copy(ExtractFileName(FileListBox1.FileName), 1,
+      Pos('.', ExtractFileName(FileListBox1.FileName)) - 1);
+
+    //Продолжаем спрашивать имя образа, если пусто
+    repeat
+      if not InputQuery(SCaptRenameImage, SInputNewImageName, Value) then exit;
+    until Value <> '';
+
+    //Если файл не существует - переименовать
+    if not FileExists(ExtractFilePath(FileListBox1.FileName) + Value + '.qcow2') then
+    begin
+      //Переименовываем файл
+      RenameFile(FileListBox1.FileName, Value + '.qcow2');
+      FileListBox1.UpdateFileList;
+      FileListBox1.ItemIndex := 0;
+    end
+    else
+      MessageDlg(SFileExists, mtWarning, [mbOK], 0);
+  end;
 end;
 
+//Выбрать все образы *.qcow2
 procedure TMainForm.SpeedButton3Click(Sender: TObject);
 begin
   FileListBox1.SelectAll;
@@ -493,16 +501,11 @@ begin
   begin
     Add(SLoading);
     Add(SInstallation);
-  {  Add(SLoadingEFI);
-    Add(SInstallationEFI);}
   end;
   //Курсор в 0
   ListBox1.ItemIndex := 0;
 
-  //Читаем заголовок диалога выбора образа
- { FileNameEdit1.DialogTitle := FileNameEdit1.ButtonHint;
-  FileNameEdit2.DialogTitle := FileNameEdit2.ButtonHint;
-  }
+  //Читаем флешки и подключаемые устройства
   ReloadUSBDevices;
   ReloadAllDevices;
 end;
