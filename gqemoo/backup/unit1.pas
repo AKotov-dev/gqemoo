@@ -33,9 +33,9 @@ type
     PopupMenu1: TPopupMenu;
     OpenBtn1: TSpeedButton;
     OpenBtn2: TSpeedButton;
-    SpeedButton1: TSpeedButton;
-    SpeedButton2: TSpeedButton;
-    SpeedButton3: TSpeedButton;
+    RemoveBtn: TSpeedButton;
+    RenameBtn: TSpeedButton;
+    SelectAllBtn: TSpeedButton;
     VGABtn: TSpeedButton;
     AllDevBox: TCheckListBox;
     DevBox: TComboBox;
@@ -59,9 +59,9 @@ type
     procedure MenuItem1Click(Sender: TObject);
     procedure OpenBtn1Click(Sender: TObject);
     procedure OpenBtn2Click(Sender: TObject);
-    procedure SpeedButton1Click(Sender: TObject);
-    procedure SpeedButton2Click(Sender: TObject);
-    procedure SpeedButton3Click(Sender: TObject);
+    procedure RemoveBtnClick(Sender: TObject);
+    procedure RenameBtnClick(Sender: TObject);
+    procedure SelectAllBtnClick(Sender: TObject);
     procedure StartBtnClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -435,7 +435,7 @@ begin
 end;
 
 //Удаление установленных образов
-procedure TMainForm.SpeedButton1Click(Sender: TObject);
+procedure TMainForm.RemoveBtnClick(Sender: TObject);
 var
   i: integer;
 begin
@@ -455,7 +455,7 @@ begin
 end;
 
 //Переименовать образ *.qcow2
-procedure TMainForm.SpeedButton2Click(Sender: TObject);
+procedure TMainForm.RenameBtnClick(Sender: TObject);
 var
   Value: string;
 begin
@@ -484,7 +484,7 @@ begin
 end;
 
 //Выбрать все образы *.qcow2
-procedure TMainForm.SpeedButton3Click(Sender: TObject);
+procedure TMainForm.SelectAllBtnClick(Sender: TObject);
 begin
   FileListBox1.SelectAll;
 end;

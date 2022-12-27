@@ -560,7 +560,7 @@ object MainForm: TMainForm
     Width = 53
     Caption = 'Installed'
   end
-  object SpeedButton1: TSpeedButton
+  object RemoveBtn: TSpeedButton
     Cursor = crHandPoint
     Left = 216
     Height = 33
@@ -603,14 +603,14 @@ object MainForm: TMainForm
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000
     }
-    OnClick = SpeedButton1Click
+    OnClick = RemoveBtnClick
     ShowHint = True
     ParentShowHint = False
   end
-  object SpeedButton3: TSpeedButton
-    AnchorSideTop.Control = SpeedButton1
-    AnchorSideRight.Control = SpeedButton1
-    AnchorSideBottom.Control = SpeedButton1
+  object SelectAllBtn: TSpeedButton
+    AnchorSideTop.Control = RemoveBtn
+    AnchorSideRight.Control = RemoveBtn
+    AnchorSideBottom.Control = RemoveBtn
     AnchorSideBottom.Side = asrBottom
     Cursor = crHandPoint
     Left = 183
@@ -655,7 +655,7 @@ object MainForm: TMainForm
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000
     }
-    OnClick = SpeedButton3Click
+    OnClick = SelectAllBtnClick
     ShowHint = True
     ParentShowHint = False
   end
@@ -711,10 +711,10 @@ object MainForm: TMainForm
     ShowHint = True
     ParentShowHint = False
   end
-  object SpeedButton2: TSpeedButton
-    AnchorSideTop.Control = SpeedButton3
-    AnchorSideRight.Control = SpeedButton3
-    AnchorSideBottom.Control = SpeedButton3
+  object RenameBtn: TSpeedButton
+    AnchorSideTop.Control = SelectAllBtn
+    AnchorSideRight.Control = SelectAllBtn
+    AnchorSideBottom.Control = SelectAllBtn
     AnchorSideBottom.Side = asrBottom
     Cursor = crHandPoint
     Left = 150
@@ -759,7 +759,7 @@ object MainForm: TMainForm
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000006E2FE4416E29DC2C000000000000000000000000
     }
-    OnClick = SpeedButton2Click
+    OnClick = RenameBtnClick
     ShowHint = True
     ParentShowHint = False
   end

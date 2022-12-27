@@ -450,6 +450,9 @@ begin
 
       if FileListBox1.Count <> 0 then
         FileListBox1.ItemIndex := 0;
+
+      //Очистка Edit1 в любом случае; установленны образ мог находиться в загрузке
+      Edit1.Clear;
     end;
   end;
 end;
