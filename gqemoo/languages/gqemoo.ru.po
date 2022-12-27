@@ -17,12 +17,22 @@ msgid "MainForm"
 msgstr ""
 
 #: tmainform.clearbtn.hint
+msgctxt "tmainform.clearbtn.hint"
+msgid "Clear"
+msgstr "Убрать"
+
+#: tmainform.clearbtn1.hint
+msgctxt "tmainform.clearbtn1.hint"
 msgid "Clear"
 msgstr "Убрать"
 
 #: tmainform.eficheckbox.caption
 msgid "EFI Mode"
 msgstr "Режим EFI"
+
+#: tmainform.label1.caption
+msgid "Installed Images"
+msgstr "Установленные образы"
 
 #: tmainform.label2.caption
 msgid "Connect devices and images to a VM [F12 - update the list]"
@@ -76,6 +86,14 @@ msgstr "Подключить образ"
 msgid "Update"
 msgstr "Обновить"
 
+#: tmainform.speedbutton1.hint
+msgid "Delete selected"
+msgstr "Удалить выбранное"
+
+#: tmainform.speedbutton3.hint
+msgid "Select all"
+msgstr "Выбрать все"
+
 #: tmainform.startbtn.caption
 msgid "Start"
 msgstr "Старт"
@@ -88,6 +106,10 @@ msgstr "Лицензия: GPLv3   Автор: alex_q_2000 (C) 2022   URL: https:
 msgctxt "tmainform.vgabtn.hint"
 msgid "Choose an display"
 msgstr "Выбрать дисплей"
+
+#: unit1.sdeleteimages
+msgid "Delete selected images?"
+msgstr "Удалить выбранные образы?"
 
 #: unit1.sinstallation
 msgid "Installation"
@@ -104,4 +126,3 @@ msgstr "нет"
 #: unit1.susernotingroup
 msgid "User outside Group disk! Run:"
 msgstr "Пользователь вне группы disk! Выполните:"
-

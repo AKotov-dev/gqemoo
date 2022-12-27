@@ -6,11 +6,21 @@ msgid "MainForm"
 msgstr ""
 
 #: tmainform.clearbtn.hint
+msgctxt "tmainform.clearbtn.hint"
+msgid "Clear"
+msgstr ""
+
+#: tmainform.clearbtn1.hint
+msgctxt "tmainform.clearbtn1.hint"
 msgid "Clear"
 msgstr ""
 
 #: tmainform.eficheckbox.caption
 msgid "EFI Mode"
+msgstr ""
+
+#: tmainform.label1.caption
+msgid "Installed Images"
 msgstr ""
 
 #: tmainform.label2.caption
@@ -65,6 +75,14 @@ msgstr ""
 msgid "Update"
 msgstr ""
 
+#: tmainform.speedbutton1.hint
+msgid "Delete selected"
+msgstr ""
+
+#: tmainform.speedbutton3.hint
+msgid "Select all"
+msgstr ""
+
 #: tmainform.startbtn.caption
 msgid "Start"
 msgstr ""
@@ -76,6 +94,10 @@ msgstr ""
 #: tmainform.vgabtn.hint
 msgctxt "tmainform.vgabtn.hint"
 msgid "Choose an display"
+msgstr ""
+
+#: unit1.sdeleteimages
+msgid "Delete selected images?"
 msgstr ""
 
 #: unit1.sinstallation

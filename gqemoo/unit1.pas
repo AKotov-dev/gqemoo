@@ -5,19 +5,23 @@ unit Unit1;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls,
-  Buttons, CheckLst, IniPropStorage, Process, DefaultTranslator, Menus;
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, Buttons,
+  CheckLst, IniPropStorage, Process, DefaultTranslator, Menus, FileCtrl, Types;
 
 type
 
   { TMainForm }
 
   TMainForm = class(TForm)
+    ClearBtn1: TSpeedButton;
     EFICheckBox: TCheckBox;
     Edit1: TEdit;
     Edit2: TEdit;
+    FileListBox1: TFileListBox;
     ImageList1: TImageList;
+    ImageList2: TImageList;
     IniPropStorage1: TIniPropStorage;
+    Label1: TLabel;
     LogMemo: TMemo;
     ClearBtn: TSpeedButton;
     MenuItem1: TMenuItem;
@@ -29,6 +33,8 @@ type
     PopupMenu1: TPopupMenu;
     OpenBtn1: TSpeedButton;
     OpenBtn2: TSpeedButton;
+    SpeedButton1: TSpeedButton;
+    SpeedButton3: TSpeedButton;
     VGABtn: TSpeedButton;
     AllDevBox: TCheckListBox;
     DevBox: TComboBox;
@@ -39,8 +45,12 @@ type
     ReloadBtn: TSpeedButton;
     StartBtn: TSpeedButton;
     StaticText2: TStaticText;
+    procedure ClearBtn1Click(Sender: TObject);
     procedure ClearBtnClick(Sender: TObject);
     procedure DevBoxChange(Sender: TObject);
+    procedure FileListBox1DblClick(Sender: TObject);
+    procedure FileListBox1DrawItem(Control: TWinControl; Index: Integer;
+      ARect: TRect; State: TOwnerDrawState);
     procedure FormKeyUp(Sender: TObject; var Key: word; Shift: TShiftState);
     procedure ListBox1DblClick(Sender: TObject);
     procedure ListBox1DrawItem(Control: TWinControl; Index: integer;
@@ -48,6 +58,8 @@ type
     procedure MenuItem1Click(Sender: TObject);
     procedure OpenBtn1Click(Sender: TObject);
     procedure OpenBtn2Click(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure SpeedButton3Click(Sender: TObject);
     procedure StartBtnClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -69,8 +81,7 @@ var
 resourcestring
   SLoading = 'Loading';
   SInstallation = 'Installation';
-{  SLoadingEFI = 'Loading (EFI)';
-  SInstallationEFI = 'Installation (EFI)';}
+  SDeleteImages = 'Delete selected images?';
   SNotUsed = 'not used';
   SUserNotInGroup = 'User outside Group disk! Run:';
 
@@ -166,6 +177,11 @@ begin
   if not DirectoryExists(GetUserDir + '.gqemoo') then mkDir(GetUserDir + '.gqemoo');
   if not DirectoryExists(GetUserDir + 'qemoo_tmp') then mkDir(GetUserDir + 'qemoo_tmp');
 
+  //Список установленных ОС
+  FileListBox1.Directory := GetUserDir + 'qemoo_tmp';
+  if FileListBox1.Items.Count <> 0 then
+    FileListBox1.ItemIndex := 0;
+
   IniPropStorage1.IniFileName := GetUserDir + '.gqemoo/gqemoo.ini';
 
   //Рабочая директория
@@ -188,13 +204,19 @@ var
   FStartVM: TThread;
 begin
   //Определяем источник загрузки
-  if Edit1.Text = '' then
-    if DevBox.ItemIndex <> DevBox.Items.Count - 1 then
-      dev := Copy(DevBox.Text, 1, Pos(' ', DevBox.Text) - 1)
-    else
-      exit
+  if DevBox.ItemIndex <> DevBox.Items.Count - 1 then
+    dev := Copy(DevBox.Text, 1, Pos(' ', DevBox.Text) - 1)
   else
-    dev := '"' + Edit1.Text + '"';
+  if Edit1.Text <> '' then
+    dev := '"' + Edit1.Text + '"'
+  else
+  if FileListBox1.SelCount <> 0 then
+  begin
+    ListBox1.ItemIndex := 0;
+    dev := '"' + FileListBox1.FileName + '"';
+  end
+  else
+    Exit;
 
   //EFI?
   if not EFICheckBox.Checked then
@@ -245,7 +267,7 @@ begin
 
   //Запуск VM
   FStartVM := StartVM.Create(False);
-  FStartVM.Priority := tpHighest;
+  FStartVM.Priority := tpNormal;
 end;
 
 //Очистка пути к образу для подключения
@@ -254,11 +276,61 @@ begin
   Edit2.Clear;
 end;
 
+//Очистка пути к образу для загрузки
+procedure TMainForm.ClearBtn1Click(Sender: TObject);
+begin
+  Edit1.Clear;
+end;
+
 //Выбор флешки
 procedure TMainForm.DevBoxChange(Sender: TObject);
 begin
   Edit1.Clear;
   ReloadAllDevices;
+end;
+
+//Старт установленного образа
+procedure TMainForm.FileListBox1DblClick(Sender: TObject);
+begin
+  //Переключение режима в Загрузку
+  ListBox1.ItemIndex := 0;
+  //Имя образа из списка в строку запуска
+  Edit1.Text := FileListBox1.Items[FileListBox1.ItemIndex];
+
+  //Образ выбран, обнулить флешку
+  if DevBox.ItemIndex <> DevBox.Items.Count - 1 then
+  begin
+    DevBox.ItemIndex := DevBox.Items.Count - 1;
+    ReloadAllDevices;
+  end;
+
+  //Запуск
+  StartBtn.Click;
+end;
+
+procedure TMainForm.FileListBox1DrawItem(Control: TWinControl; Index: Integer;
+  ARect: TRect; State: TOwnerDrawState);
+var
+  BitMap: TBitMap;
+begin
+  try
+    BitMap := TBitMap.Create;
+    with FileListBox1 do
+    begin
+      Canvas.FillRect(aRect);
+
+      //Название (текст по центру-вертикали)
+      Canvas.TextOut(aRect.Left + 35, aRect.Top + ItemHeight div 2 -
+        Canvas.TextHeight('A') div 2 + 1, Items[Index]);
+
+      //Иконка
+        ImageList2.GetBitMap(0, BitMap);
+
+      Canvas.Draw(aRect.Left + 2, aRect.Top + (ItemHeight - 24) div 2 + 1, BitMap);
+    end;
+  finally
+    BitMap.Free;
+  end;
 end;
 
 //F12 - обновить список устройств
@@ -351,6 +423,28 @@ begin
     //Если образ подключения = образу загрузки - очистить образ загрузки
     if Edit2.Text = Edit1.Text then Edit1.Clear;
   end;
+end;
+
+//Удаление установленных образов
+procedure TMainForm.SpeedButton1Click(Sender: TObject);
+var
+  i: integer;
+begin
+  if MessageDlg(SDeleteImages, mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+  begin
+    for i := 0 to FileListBox1.Count - 1 do
+      if FileListBox1.Selected[i] then
+        DeleteFile(FileListBox1.Items[i]);
+    FileListBox1.UpdateFileList;
+
+    if FileListBox1.Count <> 0 then
+      FileListBox1.ItemIndex := 0;
+  end;
+end;
+
+procedure TMainForm.SpeedButton3Click(Sender: TObject);
+begin
+  FileListBox1.SelectAll;
 end;
 
 procedure TMainForm.FormShow(Sender: TObject);
