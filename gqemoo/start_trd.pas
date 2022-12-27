@@ -115,9 +115,12 @@ begin
 
     //Если появился новый образ - обновить
     FileListBox1.UpdateFileList;
+
     //И вернуть курсор на прежнюю позицию в списке установленных образов
     FileListBox1.SetFocus;
-    FileListbox1.ItemIndex := findex;
+    if FileListbox1.Count = 1 then FileListbox1.ItemIndex := 0
+    else
+      FileListbox1.ItemIndex := findex;
     FileListBox1.Click;
   end;
 end;

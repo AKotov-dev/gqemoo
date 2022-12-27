@@ -5,7 +5,7 @@ unit start_trd;
 interface
 
 uses
-  Classes, Process, SysUtils, ComCtrls, Forms;
+  Classes, Process, SysUtils, ComCtrls, Forms, Dialogs;
 
 type
   StartVM = class(TThread)
@@ -99,9 +99,7 @@ begin
         GetEnvironmentVariable('USER') + '; reboot"; exit 1';
 
     //Запомнить индекс из списка установленных образов
-   { if FileListBox1.ItemIndex > 0 then findex := 0
-    else}
-      findex := FileListBox1.ItemIndex;
+    findex := FileListBox1.ItemIndex;
 
     LogMemo.Repaint;
   end;
@@ -119,6 +117,9 @@ begin
     FileListBox1.UpdateFileList;
     //И вернуть курсор на прежнюю позицию в списке установленных образов
     FileListBox1.SetFocus;
+
+  //  showmessage(inttostr(FileListbox1.Count));
+    if FileListbox1.Count = 1 then FileListbox1.ItemIndex := 0 else
     FileListbox1.ItemIndex := findex;
     FileListBox1.Click;
   end;

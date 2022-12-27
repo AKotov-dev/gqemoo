@@ -60,8 +60,8 @@
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="84"/>
-        <CursorPos X="38" Y="102"/>
+        <TopLine Value="103"/>
+        <CursorPos X="74" Y="119"/>
         <UsageCount Value="51"/>
         <Loaded Value="True"/>
       </Unit>
@@ -75,14 +75,6 @@
       </Unit>
     </Units>
     <JumpHistory HistoryIndex="29">
-      <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="350" TopLine="273"/>
-      </Position>
-      <Position>
-        <Filename Value="unit1.pas"/>
-        <Caret Line="352" TopLine="322"/>
-      </Position>
       <Position>
         <Filename Value="unit1.pas"/>
         <Caret Line="392" Column="26" TopLine="390"/>
@@ -194,6 +186,14 @@
       <Position>
         <Filename Value="unit1.pas"/>
         <Caret Line="91" Column="60" TopLine="69"/>
+      </Position>
+      <Position>
+        <Filename Value="start_trd.pas"/>
+        <Caret Line="121" Column="35" TopLine="100"/>
+      </Position>
+      <Position>
+        <Filename Value="start_trd.pas"/>
+        <Caret Line="8" Column="55"/>
       </Position>
     </JumpHistory>
     <RunParams>
