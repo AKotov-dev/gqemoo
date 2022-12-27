@@ -473,7 +473,7 @@ begin
   begin
     //Получаем имя без пути и расширения
     Value := Copy(ExtractFileName(FileListBox1.FileName), 1,
-      Pos('.', ExtractFileName(FileListBox1.FileName)) - 1);
+      Length(ExtractFileName(FileListBox1.FileName)) - 6);
 
     //Продолжаем спрашивать имя образа, если пусто
     repeat
