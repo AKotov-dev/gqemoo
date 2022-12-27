@@ -16,7 +16,7 @@ object MainForm: TMainForm
     AnchorSideLeft.Control = Owner
     AnchorSideBottom.Control = LogMemo
     Left = 5
-    Height = 89
+    Height = 90
     Top = 99
     Width = 243
     BorderSpacing.Left = 5

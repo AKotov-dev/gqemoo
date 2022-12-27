@@ -493,16 +493,11 @@ begin
   begin
     Add(SLoading);
     Add(SInstallation);
-  {  Add(SLoadingEFI);
-    Add(SInstallationEFI);}
   end;
   //Курсор в 0
   ListBox1.ItemIndex := 0;
 
-  //Читаем заголовок диалога выбора образа
- { FileNameEdit1.DialogTitle := FileNameEdit1.ButtonHint;
-  FileNameEdit2.DialogTitle := FileNameEdit2.ButtonHint;
-  }
+  //Читаем флешки и подключаемые устройства
   ReloadUSBDevices;
   ReloadAllDevices;
 end;
