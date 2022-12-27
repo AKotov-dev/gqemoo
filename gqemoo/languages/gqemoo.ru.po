@@ -31,8 +31,8 @@ msgid "EFI Mode"
 msgstr "Режим EFI"
 
 #: tmainform.label1.caption
-msgid "Installed Images"
-msgstr "Установленные образы"
+msgid "Installed"
+msgstr "Установленные"
 
 #: tmainform.label2.caption
 msgid "Connect devices and images to a VM [F12 - update the list]"
@@ -90,6 +90,10 @@ msgstr "Обновить"
 msgid "Delete selected"
 msgstr "Удалить выбранное"
 
+#: tmainform.speedbutton2.hint
+msgid "Rename"
+msgstr "Переименовать"
+
 #: tmainform.speedbutton3.hint
 msgid "Select all"
 msgstr "Выбрать все"
@@ -107,9 +111,21 @@ msgctxt "tmainform.vgabtn.hint"
 msgid "Choose an display"
 msgstr "Выбрать дисплей"
 
+#: unit1.scaptrenameimage
+msgid "Rename an image"
+msgstr "Переименовать образ"
+
 #: unit1.sdeleteimages
 msgid "Delete selected images?"
 msgstr "Удалить выбранные образы?"
+
+#: unit1.sfileexists
+msgid "The file exists! Specify a different name!"
+msgstr "Файл существует! Укажите другое имя!"
+
+#: unit1.sinputnewimagename
+msgid "Enter a new image name:"
+msgstr "Введите новое имя образа:"
 
 #: unit1.sinstallation
 msgid "Installation"

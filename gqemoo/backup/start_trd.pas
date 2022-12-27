@@ -99,8 +99,9 @@ begin
         GetEnvironmentVariable('USER') + '; reboot"; exit 1';
 
     //Запомнить индекс из списка установленных образов
-    if FileListBox1.ItemIndex < 0 then findex := 0 else
-    findex := FileListBox1.ItemIndex;
+   { if FileListBox1.ItemIndex > 0 then findex := 0
+    else}
+      findex := FileListBox1.ItemIndex;
 
     LogMemo.Repaint;
   end;

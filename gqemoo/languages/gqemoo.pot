@@ -20,7 +20,7 @@ msgid "EFI Mode"
 msgstr ""
 
 #: tmainform.label1.caption
-msgid "Installed Images"
+msgid "Installed"
 msgstr ""
 
 #: tmainform.label2.caption
@@ -79,6 +79,10 @@ msgstr ""
 msgid "Delete selected"
 msgstr ""
 
+#: tmainform.speedbutton2.hint
+msgid "Rename"
+msgstr ""
+
 #: tmainform.speedbutton3.hint
 msgid "Select all"
 msgstr ""
@@ -96,8 +100,20 @@ msgctxt "tmainform.vgabtn.hint"
 msgid "Choose an display"
 msgstr ""
 
+#: unit1.scaptrenameimage
+msgid "Rename an image"
+msgstr ""
+
 #: unit1.sdeleteimages
 msgid "Delete selected images?"
+msgstr ""
+
+#: unit1.sfileexists
+msgid "The file exists! Specify a different name!"
+msgstr ""
+
+#: unit1.sinputnewimagename
+msgid "Enter a new image name:"
 msgstr ""
 
 #: unit1.sinstallation

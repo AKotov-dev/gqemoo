@@ -34,6 +34,7 @@ type
     OpenBtn1: TSpeedButton;
     OpenBtn2: TSpeedButton;
     SpeedButton1: TSpeedButton;
+    SpeedButton2: TSpeedButton;
     SpeedButton3: TSpeedButton;
     VGABtn: TSpeedButton;
     AllDevBox: TCheckListBox;
@@ -49,7 +50,7 @@ type
     procedure ClearBtnClick(Sender: TObject);
     procedure DevBoxChange(Sender: TObject);
     procedure FileListBox1DblClick(Sender: TObject);
-    procedure FileListBox1DrawItem(Control: TWinControl; Index: Integer;
+    procedure FileListBox1DrawItem(Control: TWinControl; Index: integer;
       ARect: TRect; State: TOwnerDrawState);
     procedure FormKeyUp(Sender: TObject; var Key: word; Shift: TShiftState);
     procedure ListBox1DblClick(Sender: TObject);
@@ -59,6 +60,7 @@ type
     procedure OpenBtn1Click(Sender: TObject);
     procedure OpenBtn2Click(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
+    procedure SpeedButton2Click(Sender: TObject);
     procedure SpeedButton3Click(Sender: TObject);
     procedure StartBtnClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -84,6 +86,9 @@ resourcestring
   SDeleteImages = 'Delete selected images?';
   SNotUsed = 'not used';
   SUserNotInGroup = 'User outside Group disk! Run:';
+  SCaptRenameImage = 'Rename an image';
+  SInputNewImageName = 'Enter a new image name:';
+  SFileExists = 'The file exists! Specify a different name!';
 
 implementation
 
@@ -292,24 +297,27 @@ end;
 //Старт установленного образа
 procedure TMainForm.FileListBox1DblClick(Sender: TObject);
 begin
-  //Переключение режима в Загрузку
-  ListBox1.ItemIndex := 0;
-  //Имя образа из списка в строку запуска
-  Edit1.Text := FileListBox1.Items[FileListBox1.ItemIndex];
-
-  //Образ выбран, обнулить флешку
-  if DevBox.ItemIndex <> DevBox.Items.Count - 1 then
+  if FileListBox1.Count <> 0 then
   begin
-    DevBox.ItemIndex := DevBox.Items.Count - 1;
-    ReloadAllDevices;
-  end;
+    //Переключение режима в Загрузку
+    ListBox1.ItemIndex := 0;
+    //Имя образа из списка в строку запуска
+    Edit1.Text := FileListBox1.Items[FileListBox1.ItemIndex];
 
-  //Запуск
-  StartBtn.Click;
+    //Образ выбран, обнулить флешку
+    if DevBox.ItemIndex <> DevBox.Items.Count - 1 then
+    begin
+      DevBox.ItemIndex := DevBox.Items.Count - 1;
+      ReloadAllDevices;
+    end;
+
+    //Запуск
+    StartBtn.Click;
+  end;
 end;
 
-procedure TMainForm.FileListBox1DrawItem(Control: TWinControl; Index: Integer;
-  ARect: TRect; State: TOwnerDrawState);
+procedure TMainForm.FileListBox1DrawItem(Control: TWinControl;
+  Index: integer; ARect: TRect; State: TOwnerDrawState);
 var
   BitMap: TBitMap;
 begin
@@ -320,11 +328,11 @@ begin
       Canvas.FillRect(aRect);
 
       //Название (текст по центру-вертикали)
-      Canvas.TextOut(aRect.Left + 35, aRect.Top + ItemHeight div 2 -
+      Canvas.TextOut(aRect.Left + 32, aRect.Top + ItemHeight div 2 -
         Canvas.TextHeight('A') div 2 + 1, Items[Index]);
 
       //Иконка
-        ImageList2.GetBitMap(0, BitMap);
+      ImageList2.GetBitMap(0, BitMap);
 
       Canvas.Draw(aRect.Left + 2, aRect.Top + (ItemHeight - 24) div 2 + 1, BitMap);
     end;
@@ -440,6 +448,31 @@ begin
     if FileListBox1.Count <> 0 then
       FileListBox1.ItemIndex := 0;
   end;
+end;
+
+procedure TMainForm.SpeedButton2Click(Sender: TObject);
+var
+  Value: string;
+begin
+  //Получаем имя без пути и расширения
+  Value := Copy(ExtractFileName(FileListBox1.FileName), 1,
+    Pos('.', ExtractFileName(FileListBox1.FileName)) - 1);
+
+  //Продолжаем спрашивать имя образа, если пусто
+  repeat
+    if not InputQuery(SCaptRenameImage, SInputNewImageName, Value) then exit;
+  until Value <> '';
+
+  //Если файл не существует - переименовать
+  if not FileExists(ExtractFilePath(FileListBox1.FileName) + Value + '.qcow2') then
+  begin
+    //Переименовываем файл
+    RenameFile(FileListBox1.FileName, Value + '.qcow2');
+    FileListBox1.UpdateFileList;
+    FileListBox1.ItemIndex := 0;
+  end
+  else
+    MessageDlg(SFileExists, mtWarning, [mbOK], 0);
 end;
 
 procedure TMainForm.SpeedButton3Click(Sender: TObject);
