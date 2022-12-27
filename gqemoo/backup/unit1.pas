@@ -468,19 +468,27 @@ end;
 procedure TMainForm.RenameBtnClick(Sender: TObject);
 var
   Value: string;
+  i: integer;
+const
+  BadSym = '={}$\/:*?"<>|@^.#%&~'''; //Заменять эти символы
 begin
   if FileListBox1.Count <> 0 then
   begin
     //Получаем имя без пути и расширения
-   { Value := Copy(ExtractFileName(FileListBox1.FileName), 1,
-      Pos('.', ExtractFileName(FileListBox1.FileName)) - 1);}
-
-    Value:= Copy(ExtractFileName(FileListBox1.FileName), 1, Length(ExtractFileName(FileListBox1.FileName))-6);
+    Value := Copy(ExtractFileName(FileListBox1.FileName), 1,
+      Length(ExtractFileName(FileListBox1.FileName)) - 6);
 
     //Продолжаем спрашивать имя образа, если пусто
     repeat
       if not InputQuery(SCaptRenameImage, SInputNewImageName, Value) then exit;
-    until Value <> '';
+    until Trim(Value) <> '';
+
+    //Заменяем неразрешенные символы
+    Value := Trim(Value);
+
+    for i := 1 to Length(Value) do
+      if Pos(Value[i], BadSym) > 0 then
+        Value[i] := '_';
 
     //Если файл не существует - переименовать
     if not FileExists(ExtractFilePath(FileListBox1.FileName) + Value + '.qcow2') then
