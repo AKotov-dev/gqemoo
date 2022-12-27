@@ -1,24 +1,27 @@
 object MainForm: TMainForm
-  Left = 295
-  Height = 699
-  Top = 124
-  Width = 884
+  Left = 299
+  Height = 698
+  Top = 126
+  Width = 883
   Caption = 'MainForm'
-  ClientHeight = 699
-  ClientWidth = 884
+  ClientHeight = 698
+  ClientWidth = 883
   KeyPreview = True
   OnCreate = FormCreate
   OnKeyUp = FormKeyUp
+  OnResize = FormResize
   OnShow = FormShow
   SessionProperties = 'Height;Left;OpenDialog1.InitialDir;OpenDialog2.InitialDir;Top;Width;EFICheckBox.Checked'
   LCLVersion = '2.2.0.4'
   object ListBox1: TListBox
     AnchorSideLeft.Control = Owner
+    AnchorSideRight.Control = AllDevBox
     AnchorSideBottom.Control = LogMemo
     Left = 5
     Height = 90
     Top = 99
-    Width = 243
+    Width = 237
+    Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Left = 5
     BorderSpacing.Right = 5
     BorderSpacing.Bottom = 5
@@ -35,7 +38,7 @@ object MainForm: TMainForm
   end
   object Label2: TLabel
     AnchorSideLeft.Control = AllDevBox
-    Left = 253
+    Left = 247
     Height = 17
     Top = 77
     Width = 349
@@ -44,14 +47,13 @@ object MainForm: TMainForm
   object AllDevBox: TCheckListBox
     AnchorSideLeft.Control = ListBox1
     AnchorSideLeft.Side = asrBottom
-    AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = Edit2
-    Left = 253
-    Height = 350
+    Left = 247
+    Height = 349
     Top = 99
-    Width = 626
-    Anchors = [akTop, akLeft, akRight, akBottom]
+    Width = 631
+    Anchors = [akTop, akBottom]
     BorderSpacing.Left = 5
     BorderSpacing.Right = 5
     BorderSpacing.Bottom = 5
@@ -190,8 +192,8 @@ object MainForm: TMainForm
   object StaticText2: TStaticText
     Left = 0
     Height = 17
-    Top = 682
-    Width = 884
+    Top = 681
+    Width = 883
     Align = alBottom
     Caption = 'License: GPLv3   Author: alex_q_2000 (C) 2022   URL: https://linuxforum.ru'
     Color = clDefault
@@ -211,8 +213,8 @@ object MainForm: TMainForm
     AnchorSideBottom.Control = StaticText2
     Left = 0
     Height = 186
-    Top = 496
-    Width = 884
+    Top = 495
+    Width = 883
     Anchors = [akLeft, akRight, akBottom]
     Font.Height = -13
     Font.Name = 'Monospace'
@@ -224,17 +226,16 @@ object MainForm: TMainForm
   end
   object ClearBtn: TSpeedButton
     AnchorSideTop.Control = OpenBtn2
-    AnchorSideRight.Control = Owner
+    AnchorSideRight.Control = AllDevBox
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = OpenBtn2
     AnchorSideBottom.Side = asrBottom
-    Left = 840
+    Left = 839
     Height = 37
     Hint = 'Clear'
-    Top = 454
+    Top = 453
     Width = 39
     Anchors = [akTop, akRight, akBottom]
-    BorderSpacing.Right = 5
     Glyph.Data = {
       36040000424D3604000000000000360000002800000010000000100000000100
       2000000000000004000064000000640000000000000000000000536DE862546E
@@ -280,7 +281,7 @@ object MainForm: TMainForm
     AnchorSideRight.Control = StartBtn
     AnchorSideBottom.Control = OpenBtn1
     AnchorSideBottom.Side = asrBottom
-    Left = 747
+    Left = 746
     Height = 37
     Hint = 'Choose an display'
     Top = 26
@@ -373,7 +374,7 @@ object MainForm: TMainForm
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = OpenBtn1
     AnchorSideBottom.Side = asrBottom
-    Left = 784
+    Left = 783
     Height = 37
     Top = 26
     Width = 95
@@ -468,7 +469,7 @@ object MainForm: TMainForm
     Left = 208
     Height = 37
     Top = 26
-    Width = 450
+    Width = 449
     Anchors = [akTop, akLeft, akRight, akBottom]
     BorderSpacing.Left = 5
     ReadOnly = True
@@ -479,7 +480,7 @@ object MainForm: TMainForm
     AnchorSideRight.Control = ClearBtn1
     AnchorSideBottom.Control = Edit1
     AnchorSideBottom.Side = asrBottom
-    Left = 658
+    Left = 657
     Height = 37
     Hint = 'Choose an image'
     Top = 26
@@ -496,10 +497,10 @@ object MainForm: TMainForm
     AnchorSideTop.Side = asrCenter
     AnchorSideRight.Control = OpenBtn2
     AnchorSideBottom.Control = LogMemo
-    Left = 253
+    Left = 247
     Height = 37
-    Top = 454
-    Width = 550
+    Top = 453
+    Width = 555
     Anchors = [akLeft, akRight, akBottom]
     BorderSpacing.Bottom = 5
     ReadOnly = True
@@ -512,10 +513,10 @@ object MainForm: TMainForm
     AnchorSideRight.Control = ClearBtn
     AnchorSideBottom.Control = Edit2
     AnchorSideBottom.Side = asrBottom
-    Left = 803
+    Left = 802
     Height = 37
     Hint = 'Connect an image'
-    Top = 454
+    Top = 453
     Width = 37
     Anchors = [akTop, akRight, akBottom]
     Caption = '...'
@@ -536,12 +537,14 @@ object MainForm: TMainForm
     TabOrder = 2
   end
   object FileListBox1: TFileListBox
+    AnchorSideRight.Control = AllDevBox
     AnchorSideBottom.Control = LogMemo
     Left = 5
-    Height = 259
+    Height = 258
     Top = 232
-    Width = 243
-    Anchors = [akTop, akLeft, akBottom]
+    Width = 237
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    BorderSpacing.Right = 5
     BorderSpacing.Bottom = 5
     Directory = '/home/marsik'
     ItemHeight = 28
@@ -561,12 +564,15 @@ object MainForm: TMainForm
     Caption = 'Installed'
   end
   object RemoveBtn: TSpeedButton
+    AnchorSideRight.Control = AllDevBox
     Cursor = crHandPoint
-    Left = 216
+    Left = 209
     Height = 33
     Hint = 'Delete selected'
     Top = 195
     Width = 33
+    Anchors = [akTop, akRight]
+    BorderSpacing.Right = 5
     Glyph.Data = {
       36040000424D3604000000000000360000002800000010000000100000000100
       2000000000000004000064000000640000000000000000000000000000000000
@@ -613,7 +619,7 @@ object MainForm: TMainForm
     AnchorSideBottom.Control = RemoveBtn
     AnchorSideBottom.Side = asrBottom
     Cursor = crHandPoint
-    Left = 183
+    Left = 176
     Height = 33
     Hint = 'Select all'
     Top = 195
@@ -664,7 +670,7 @@ object MainForm: TMainForm
     AnchorSideRight.Control = VGABtn
     AnchorSideBottom.Control = OpenBtn1
     AnchorSideBottom.Side = asrBottom
-    Left = 698
+    Left = 697
     Height = 37
     Hint = 'Clear'
     Top = 26
@@ -717,7 +723,7 @@ object MainForm: TMainForm
     AnchorSideBottom.Control = SelectAllBtn
     AnchorSideBottom.Side = asrBottom
     Cursor = crHandPoint
-    Left = 150
+    Left = 143
     Height = 33
     Hint = 'Rename'
     Top = 195

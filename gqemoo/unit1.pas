@@ -53,6 +53,7 @@ type
     procedure FileListBox1DrawItem(Control: TWinControl; Index: integer;
       ARect: TRect; State: TOwnerDrawState);
     procedure FormKeyUp(Sender: TObject; var Key: word; Shift: TShiftState);
+    procedure FormResize(Sender: TObject);
     procedure ListBox1DblClick(Sender: TObject);
     procedure ListBox1DrawItem(Control: TWinControl; Index: integer;
       ARect: TRect; State: TOwnerDrawState);
@@ -346,6 +347,12 @@ end;
 procedure TMainForm.FormKeyUp(Sender: TObject; var Key: word; Shift: TShiftState);
 begin
   if Key = $7B then ReloadAllDevices;
+end;
+
+//Автоширина AllDevBox и ListBox1
+procedure TMainForm.FormResize(Sender: TObject);
+begin
+  AllDevBox.Width := MainForm.Width - 5 - listbox1.Width - 5 - 5;
 end;
 
 //Запуск двойным щелчком в меню
