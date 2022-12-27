@@ -20,7 +20,7 @@ object MainForm: TMainForm
     Left = 5
     Height = 90
     Top = 99
-    Width = 237
+    Width = 246
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Left = 5
     BorderSpacing.Right = 5
@@ -38,7 +38,7 @@ object MainForm: TMainForm
   end
   object Label2: TLabel
     AnchorSideLeft.Control = AllDevBox
-    Left = 247
+    Left = 256
     Height = 17
     Top = 77
     Width = 349
@@ -49,10 +49,10 @@ object MainForm: TMainForm
     AnchorSideLeft.Side = asrBottom
     AnchorSideRight.Side = asrBottom
     AnchorSideBottom.Control = Edit2
-    Left = 247
+    Left = 256
     Height = 349
     Top = 99
-    Width = 631
+    Width = 622
     Anchors = [akTop, akBottom]
     BorderSpacing.Left = 5
     BorderSpacing.Right = 5
@@ -497,10 +497,10 @@ object MainForm: TMainForm
     AnchorSideTop.Side = asrCenter
     AnchorSideRight.Control = OpenBtn2
     AnchorSideBottom.Control = LogMemo
-    Left = 247
+    Left = 256
     Height = 37
     Top = 453
-    Width = 555
+    Width = 546
     Anchors = [akLeft, akRight, akBottom]
     BorderSpacing.Bottom = 5
     ReadOnly = True
@@ -542,7 +542,7 @@ object MainForm: TMainForm
     Left = 5
     Height = 258
     Top = 232
-    Width = 237
+    Width = 246
     Anchors = [akTop, akLeft, akRight, akBottom]
     BorderSpacing.Right = 5
     BorderSpacing.Bottom = 5
@@ -566,7 +566,7 @@ object MainForm: TMainForm
   object RemoveBtn: TSpeedButton
     AnchorSideRight.Control = AllDevBox
     Cursor = crHandPoint
-    Left = 209
+    Left = 218
     Height = 33
     Hint = 'Delete selected'
     Top = 195
@@ -619,7 +619,7 @@ object MainForm: TMainForm
     AnchorSideBottom.Control = RemoveBtn
     AnchorSideBottom.Side = asrBottom
     Cursor = crHandPoint
-    Left = 176
+    Left = 185
     Height = 33
     Hint = 'Select all'
     Top = 195
@@ -723,7 +723,7 @@ object MainForm: TMainForm
     AnchorSideBottom.Control = SelectAllBtn
     AnchorSideBottom.Side = asrBottom
     Cursor = crHandPoint
-    Left = 143
+    Left = 152
     Height = 33
     Hint = 'Rename'
     Top = 195
