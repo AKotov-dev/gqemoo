@@ -54,6 +54,7 @@ type
       ARect: TRect; State: TOwnerDrawState);
     procedure FormKeyUp(Sender: TObject; var Key: word; Shift: TShiftState);
     procedure FormResize(Sender: TObject);
+    procedure ListBox1Click(Sender: TObject);
     procedure ListBox1DblClick(Sender: TObject);
     procedure ListBox1DrawItem(Control: TWinControl; Index: integer;
       ARect: TRect; State: TOwnerDrawState);
@@ -353,6 +354,14 @@ end;
 procedure TMainForm.FormResize(Sender: TObject);
 begin
   AllDevBox.Width := MainForm.Width - 5 - listbox1.Width - 5 - 5;
+end;
+
+//Очистить источник, если попытка установить уже установленный образ из CurrentDirectory
+procedure TMainForm.ListBox1Click(Sender: TObject);
+begin
+  if Edit1.Text <> '' then
+    if (ListBox1.ItemIndex = 1) and (FileExists(ExtractFileName(Edit1.Text))) then
+      Edit1.Text := '';
 end;
 
 //Запуск двойным щелчком в меню

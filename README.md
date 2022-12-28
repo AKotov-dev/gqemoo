@@ -10,6 +10,7 @@ It supports downloading and installing virtual machines from flash drives and im
 When installing `Mageia Linux` from an image or from a USB flash drive in EFI mode, install checkbox `Install in /EFI/BOOT (removable device or workaround for some BIOS's)` at the last step of the installer.
   
 **Dependencies:** qemoo qemu gtk2  
+**Free icons:** https://www.flaticon.com  
   
 Working directory: `~/qemoo_tmp`; The images for loading and connecting are here.  
   
