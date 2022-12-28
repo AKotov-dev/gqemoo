@@ -467,8 +467,8 @@ end;
 //Переименовать образ *.qcow2
 procedure TMainForm.RenameBtnClick(Sender: TObject);
 var
-  Value: string;
   i: integer;
+  Value: string;
 const
   BadSym = '={}$\/:*?"<>|@^.#%&~'''; //Заменять эти символы
 begin
