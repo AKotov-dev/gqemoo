@@ -21,14 +21,13 @@ msgctxt "tmainform.clearbtn.hint"
 msgid "Clear"
 msgstr "Убрать"
 
-#: tmainform.clearbtn1.hint
-msgctxt "tmainform.clearbtn1.hint"
-msgid "Clear"
-msgstr "Убрать"
-
 #: tmainform.eficheckbox.caption
 msgid "EFI Mode"
 msgstr "Режим EFI"
+
+#: tmainform.filelistbox1.hint
+msgid "DblClick - Start"
+msgstr "DblClick - Старт"
 
 #: tmainform.label1.caption
 msgid "Installed"
@@ -145,3 +144,4 @@ msgstr "нет"
 #: unit1.susernotingroup
 msgid "User outside Group disk! Run:"
 msgstr "Пользователь вне группы disk! Выполните:"
+

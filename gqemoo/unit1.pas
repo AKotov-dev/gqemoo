@@ -13,7 +13,6 @@ type
   { TMainForm }
 
   TMainForm = class(TForm)
-    ClearBtn1: TSpeedButton;
     EFICheckBox: TCheckBox;
     Edit1: TEdit;
     Edit2: TEdit;
@@ -46,7 +45,6 @@ type
     ReloadBtn: TSpeedButton;
     StartBtn: TSpeedButton;
     StaticText2: TStaticText;
-    procedure ClearBtn1Click(Sender: TObject);
     procedure ClearBtnClick(Sender: TObject);
     procedure DevBoxChange(Sender: TObject);
     procedure FileListBox1DblClick(Sender: TObject);
@@ -217,13 +215,13 @@ begin
   if Edit1.Text <> '' then
     dev := '"' + Edit1.Text + '"'
   else
-  if FileListBox1.SelCount <> 0 then
+  {if FileListBox1.SelCount <> 0 then
   begin
     ListBox1.ItemIndex := 0;
     Edit1.Text := FileListBox1.FileName;
     dev := '"' + Edit1.Text + '"';
   end
-  else
+  else}
     Exit;
 
   //EFI?
@@ -282,12 +280,6 @@ end;
 procedure TMainForm.ClearBtnClick(Sender: TObject);
 begin
   Edit2.Clear;
-end;
-
-//Очистка пути к образу для загрузки
-procedure TMainForm.ClearBtn1Click(Sender: TObject);
-begin
-  Edit1.Clear;
 end;
 
 //Выбор флешки

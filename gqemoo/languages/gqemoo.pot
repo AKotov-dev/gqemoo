@@ -10,13 +10,12 @@ msgctxt "tmainform.clearbtn.hint"
 msgid "Clear"
 msgstr ""
 
-#: tmainform.clearbtn1.hint
-msgctxt "tmainform.clearbtn1.hint"
-msgid "Clear"
-msgstr ""
-
 #: tmainform.eficheckbox.caption
 msgid "EFI Mode"
+msgstr ""
+
+#: tmainform.filelistbox1.hint
+msgid "DblClick - Start"
 msgstr ""
 
 #: tmainform.label1.caption
