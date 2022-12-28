@@ -16,4 +16,4 @@ Working directory: `~/qemoo_tmp`; The images for loading and connecting are here
   
 **Note:** You need to add the user to group `disk` and reboot: `usermod -aG disk $(logname); reboot`
   
-![](https://github.com/AKotov-dev/gqemoo/blob/main/ScreenShot5.png)
+![](https://github.com/AKotov-dev/gqemoo/blob/main/ScreenShot6.png)
