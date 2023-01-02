@@ -317,8 +317,7 @@ begin
 
   //Ctrl+Q/q
   if (Key = 81) and (Shift = [ssCtrl]) then
-    if MessageDlg(SKillAllQEMU,
-      mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+    if MessageDlg(SKillAllQEMU, mtConfirmation, [mbYes, mbNo], 0) = mrYes then
       RunCommand('/bin/bash', ['-c', 'killall qemu-system-x86_64 &'], s);
 end;
 

@@ -12,21 +12,6 @@ object MainForm: TMainForm
   OnShow = FormShow
   SessionProperties = 'EFICheckBox.Checked;Height;Left;OpenDialog1.InitialDir;OpenDialog2.InitialDir;Panel3.Width;Top;Width;Panel2.Height'
   LCLVersion = '2.2.0.4'
-  object StaticText2: TStaticText
-    Left = 0
-    Height = 17
-    Top = 642
-    Width = 864
-    Align = alBottom
-    Caption = 'License: GPLv3   Author: alex_q_2000 (C) 2022   URL: https://linuxforum.ru'
-    Color = clDefault
-    Font.Color = clGray
-    Font.Height = -11
-    Font.Name = 'Sans'
-    ParentFont = False
-    ParentColor = False
-    TabOrder = 0
-  end
   object Panel1: TPanel
     Left = 0
     Height = 72
@@ -36,7 +21,7 @@ object MainForm: TMainForm
     BevelOuter = bvNone
     ClientHeight = 72
     ClientWidth = 864
-    TabOrder = 1
+    TabOrder = 0
     object Label3: TLabel
       AnchorSideLeft.Control = Panel1
       Left = 5
@@ -295,48 +280,65 @@ object MainForm: TMainForm
   object Panel2: TPanel
     Left = 0
     Height = 162
-    Top = 480
+    Top = 497
     Width = 864
     Align = alBottom
     BevelOuter = bvNone
     ClientHeight = 162
     ClientWidth = 864
-    TabOrder = 2
-    object LogMemo: TMemo
+    TabOrder = 1
+    object StaticText2: TStaticText
       Left = 0
-      Height = 162
-      Top = 0
+      Height = 17
+      Top = 145
       Width = 864
-      Align = alClient
-      Anchors = [akLeft, akRight, akBottom]
-      Font.Height = -13
-      Font.Name = 'Monospace'
+      Align = alBottom
+      Caption = 'License: GPLv3   Author: alex_q_2000 (C) 2022   URL: https://linuxforum.ru'
+      Color = clDefault
+      Font.Color = clGray
+      Font.Height = -11
+      Font.Name = 'Sans'
       ParentFont = False
+      ParentColor = False
+      TabOrder = 0
+    end
+    object LogMemo: TMemo
+      AnchorSideLeft.Control = Panel2
+      AnchorSideTop.Control = Panel2
+      AnchorSideRight.Control = Panel2
+      AnchorSideRight.Side = asrBottom
+      AnchorSideBottom.Control = StaticText2
+      Left = 5
+      Height = 145
+      Top = 0
+      Width = 854
+      Anchors = [akTop, akLeft, akRight, akBottom]
+      BorderSpacing.Left = 5
+      BorderSpacing.Right = 5
       ReadOnly = True
       ScrollBars = ssVertical
-      TabOrder = 0
-      WantReturns = False
+      TabOrder = 1
     end
   end
   object Splitter1: TSplitter
     Cursor = crVSplit
     Left = 0
     Height = 5
-    Top = 475
+    Top = 492
     Width = 864
     Align = alBottom
     ResizeAnchor = akBottom
   end
   object Panel3: TPanel
     Left = 0
-    Height = 403
+    Height = 420
     Top = 72
     Width = 264
     Align = alLeft
     BevelOuter = bvNone
-    ClientHeight = 403
+    ClientHeight = 420
     ClientWidth = 264
-    TabOrder = 4
+    TabOrder = 3
     object EFICheckBox: TCheckBox
       AnchorSideTop.Control = Panel3
       AnchorSideBottom.Side = asrBottom
@@ -543,7 +545,7 @@ object MainForm: TMainForm
       AnchorSideTop.Control = RemoveBtn
       AnchorSideTop.Side = asrBottom
       Left = 5
-      Height = 234
+      Height = 251
       Hint = 'DblClick - Start'
       Top = 169
       Width = 259
@@ -566,21 +568,21 @@ object MainForm: TMainForm
   end
   object Splitter3: TSplitter
     Left = 264
-    Height = 403
+    Height = 420
     Top = 72
     Width = 5
   end
   object Panel4: TPanel
     Left = 269
-    Height = 403
+    Height = 420
     Top = 72
     Width = 595
     Align = alClient
     BevelOuter = bvNone
     Caption = 'Panel4'
-    ClientHeight = 403
+    ClientHeight = 420
     ClientWidth = 595
-    TabOrder = 6
+    TabOrder = 5
     object Label2: TLabel
       AnchorSideLeft.Control = Panel4
       AnchorSideBottom.Control = AllDevBox
@@ -598,7 +600,7 @@ object MainForm: TMainForm
       AnchorSideRight.Side = asrBottom
       AnchorSideBottom.Control = Edit2
       Left = 0
-      Height = 336
+      Height = 353
       Top = 25
       Width = 590
       Anchors = [akTop, akLeft, akRight, akBottom]
@@ -622,7 +624,7 @@ object MainForm: TMainForm
       AnchorSideBottom.Side = asrBottom
       Left = 0
       Height = 37
-      Top = 366
+      Top = 383
       Width = 514
       Anchors = [akLeft, akRight, akBottom]
       ReadOnly = True
@@ -638,7 +640,7 @@ object MainForm: TMainForm
       Left = 514
       Height = 37
       Hint = 'Connect an image'
-      Top = 366
+      Top = 383
       Width = 37
       Anchors = [akTop, akRight, akBottom]
       Caption = '...'
@@ -655,7 +657,7 @@ object MainForm: TMainForm
       Left = 551
       Height = 37
       Hint = 'Clear'
-      Top = 366
+      Top = 383
       Width = 39
       Anchors = [akTop, akRight, akBottom]
       Glyph.Data = {

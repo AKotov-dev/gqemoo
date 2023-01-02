@@ -84,7 +84,7 @@ resourcestring
   SInputNewImageName = 'Enter a new image name:';
   SFileExists = 'The file exists! Specify a different name!';
   SUserNotInGroup = 'User outside Group disk! Run: usermod -aG disk $LOGNAME';
-  SAnotherVMRunning = 'Another VM is already running! Abort!';
+  SAnotherVMRunning = 'Another VM is already running! [Ctrl+Q] - forced VM reset.';
   SRemoteViewerNotFound =
     'remote-viewer not found! Install the virt-viewer package!';
   SKillAllQEMU = 'Forcibly reset all QEMU processes?';
