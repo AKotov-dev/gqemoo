@@ -15,7 +15,7 @@ When installing `Mageia Linux` from an image or from a USB flash drive in EFI mo
   
 Working directory: `~/qemoo_tmp`; The images for loading and connecting are here.  
   
-Note: You need to add the user to group `disk` and reboot: `usermod -aG disk $(logname); reboot`  
-For support Drag and Drop + bidirectional Clipboard on the guest system must be installed `spice-vdagent` (Linux) or `spice-guest-tools` (Windows).  
+**Note:** You need to add the user to group `disk` and reboot: `usermod -aG disk $(logname); reboot`  
+For support Drag and Drop + bidirectional Clipboard on the guest system must be installed `spice-vdagent` (Linux) or [spice-guest-tools](https://www.spice-space.org/download/windows/spice-guest-tools/spice-guest-tools-latest.exe) (Windows).  
   
 ![](https://github.com/AKotov-dev/gqemoo/blob/main/ScreenShot6.png)
