@@ -16,6 +16,6 @@ Free icons: https://www.flaticon.com
 Working directory: `~/qemoo_tmp`; The images for loading and connecting are here.  
   
 **Note:** You need to add the user to group `disk` and reboot: `usermod -aG disk $(logname); reboot`  
-For support Drag and Drop + bidirectional Clipboard on the guest system must be installed `spice-vdagent` (Linux) or [spice-guest-tools](https://www.spice-space.org/download/windows/spice-guest-tools/spice-guest-tools-latest.exe) (Windows).  
+For support Drag and Drop + bidirectional Clipboard on the guest system must be installed `spice-vdagent` (Linux, usually already installed) or [spice-guest-tools](https://www.spice-space.org/download/windows/spice-guest-tools/spice-guest-tools-latest.exe) (Windows).  
   
 ![](https://github.com/AKotov-dev/gqemoo/blob/main/ScreenShot6.png)
