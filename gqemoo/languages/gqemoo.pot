@@ -34,22 +34,6 @@ msgstr ""
 msgid "...or from the image"
 msgstr ""
 
-#: tmainform.menuitem1.caption
-msgid "default"
-msgstr ""
-
-#: tmainform.menuitem2.caption
-msgid "VIRTIO"
-msgstr ""
-
-#: tmainform.menuitem3.caption
-msgid "QXL"
-msgstr ""
-
-#: tmainform.menuitem4.caption
-msgid "STD"
-msgstr ""
-
 #: tmainform.openbtn1.caption
 msgctxt "tmainform.openbtn1.caption"
 msgid "..."
@@ -68,6 +52,10 @@ msgstr ""
 #: tmainform.openbtn2.hint
 msgctxt "tmainform.openbtn2.hint"
 msgid "Connect an image"
+msgstr ""
+
+#: tmainform.panel4.caption
+msgid "Panel4"
 msgstr ""
 
 #: tmainform.reloadbtn.hint
@@ -97,9 +85,8 @@ msgstr ""
 msgid "License: GPLv3   Author: alex_q_2000 (C) 2022   URL: https://linuxforum.ru"
 msgstr ""
 
-#: tmainform.vgabtn.hint
-msgctxt "tmainform.vgabtn.hint"
-msgid "Choose an display"
+#: unit1.sanothervmrunning
+msgid "Another VM is already running! [Ctrl+Q] - forced VM reset."
 msgstr ""
 
 #: unit1.scaptrenameimage
@@ -122,6 +109,10 @@ msgstr ""
 msgid "Installation"
 msgstr ""
 
+#: unit1.skillallqemu
+msgid "Forcibly reset all QEMU processes?"
+msgstr ""
+
 #: unit1.sloading
 msgid "Loading"
 msgstr ""
@@ -130,7 +121,11 @@ msgstr ""
 msgid "not used"
 msgstr ""
 
+#: unit1.sremoteviewernotfound
+msgid "remote-viewer not found! Install the virt-viewer package!"
+msgstr ""
+
 #: unit1.susernotingroup
-msgid "User outside Group disk! Run:"
+msgid "User outside Group disk! Run: usermod -aG disk $LOGNAME"
 msgstr ""
 

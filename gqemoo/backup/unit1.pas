@@ -6,44 +6,43 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, Buttons,
-  CheckLst, IniPropStorage, Process, DefaultTranslator, Menus, FileCtrl;
+  CheckLst, IniPropStorage, Process, DefaultTranslator, FileCtrl, ExtCtrls;
 
 type
 
   { TMainForm }
 
   TMainForm = class(TForm)
-    ClearBtn1: TSpeedButton;
-    EFICheckBox: TCheckBox;
+    AllDevBox: TCheckListBox;
+    ClearBtn: TSpeedButton;
+    DevBox: TComboBox;
     Edit1: TEdit;
     Edit2: TEdit;
+    EFICheckBox: TCheckBox;
     FileListBox1: TFileListBox;
     ImageList1: TImageList;
     ImageList2: TImageList;
     IniPropStorage1: TIniPropStorage;
     Label1: TLabel;
-    LogMemo: TMemo;
-    ClearBtn: TSpeedButton;
-    MenuItem1: TMenuItem;
-    MenuItem2: TMenuItem;
-    MenuItem3: TMenuItem;
-    MenuItem4: TMenuItem;
-    OpenDialog1: TOpenDialog;
-    OpenDialog2: TOpenDialog;
-    PopupMenu1: TPopupMenu;
-    OpenBtn1: TSpeedButton;
-    OpenBtn2: TSpeedButton;
-    RemoveBtn: TSpeedButton;
-    RenameBtn: TSpeedButton;
-    SelectAllBtn: TSpeedButton;
-    VGABtn: TSpeedButton;
-    AllDevBox: TCheckListBox;
-    DevBox: TComboBox;
     Label2: TLabel;
     Label3: TLabel;
     Label4: TLabel;
     ListBox1: TListBox;
+    LogMemo: TMemo;
+    OpenBtn1: TSpeedButton;
+    OpenBtn2: TSpeedButton;
+    OpenDialog1: TOpenDialog;
+    OpenDialog2: TOpenDialog;
+    Panel1: TPanel;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    Panel4: TPanel;
     ReloadBtn: TSpeedButton;
+    RemoveBtn: TSpeedButton;
+    RenameBtn: TSpeedButton;
+    SelectAllBtn: TSpeedButton;
+    Splitter1: TSplitter;
+    Splitter3: TSplitter;
     StartBtn: TSpeedButton;
     StaticText2: TStaticText;
     procedure ClearBtnClick(Sender: TObject);
@@ -52,12 +51,9 @@ type
     procedure FileListBox1DrawItem(Control: TWinControl; Index: integer;
       ARect: TRect; State: TOwnerDrawState);
     procedure FormKeyUp(Sender: TObject; var Key: word; Shift: TShiftState);
-    procedure FormResize(Sender: TObject);
     procedure ListBox1Click(Sender: TObject);
-    procedure ListBox1DblClick(Sender: TObject);
     procedure ListBox1DrawItem(Control: TWinControl; Index: integer;
       ARect: TRect; State: TOwnerDrawState);
-    procedure MenuItem1Click(Sender: TObject);
     procedure OpenBtn1Click(Sender: TObject);
     procedure OpenBtn2Click(Sender: TObject);
     procedure RemoveBtnClick(Sender: TObject);
@@ -69,8 +65,6 @@ type
     procedure ReloadBtnClick(Sender: TObject);
     procedure ReloadUSBDevices;
     procedure ReloadAllDevices;
-    procedure VGABtnMouseDown(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: integer);
   private
 
   public
@@ -86,10 +80,14 @@ resourcestring
   SInstallation = 'Installation';
   SDeleteImages = 'Delete selected images?';
   SNotUsed = 'not used';
-  SUserNotInGroup = 'User outside Group disk! Run:';
   SCaptRenameImage = 'Rename an image';
   SInputNewImageName = 'Enter a new image name:';
   SFileExists = 'The file exists! Specify a different name!';
+  SUserNotInGroup = 'User outside Group disk! Run: usermod -aG disk $LOGNAME';
+  SAnotherVMRunning = 'Another VM is already running! Abort!';
+  SRemoteViewerNotFound =
+    'remote-viewer not found! Install the virt-viewer package!';
+  SKillAllQEMU = 'Forcibly reset all QEMU processes?';
 
 implementation
 
@@ -129,19 +127,6 @@ begin
 
   finally
     ExProcess.Free;
-  end;
-end;
-
-//Список режимов vga
-procedure TMainForm.VGABtnMouseDown(Sender: TObject; Button: TMouseButton;
-  Shift: TShiftState; X, Y: integer);
-var
-  p: TPoint;
-begin
-  if Button = mbLeft then
-  begin
-    p := VGABtn.ClientToScreen(Point(X, Y));
-    PopupMenu1.Popup(p.x, p.Y);
   end;
 end;
 
@@ -192,14 +177,6 @@ begin
 
   //Рабочая директория
   SetCurrentDir(GetUserDir + 'qemoo_tmp');
-
-  //Размеры для разных тем
-  ReloadBtn.Width := DevBox.Height;
-  OpenBtn1.Width := Edit1.Height;
-
-  Edit2.Height := Edit1.Height;
-  OpenBtn2.Width := Edit1.Height;
-  ClearBtn.Width := Edit1.Height;
 end;
 
 //Запуск VM
@@ -216,13 +193,6 @@ begin
   if Edit1.Text <> '' then
     dev := '"' + Edit1.Text + '"'
   else
-  {if FileListBox1.SelCount <> 0 then
-  begin
-    ListBox1.ItemIndex := 0;
-    Edit1.Text := FileListBox1.FileName;
-    dev := '"' + Edit1.Text + '"';
-  end
-  else}
     Exit;
 
   //EFI?
@@ -265,12 +235,11 @@ begin
   if command[Length(command)] = ',' then
     Delete(command, Length(command), 1);
 
-  //Выбор дисплея; 0 - не добавлять команду (default), начинать с индекса 1
-  case IniPropStorage1.StoredValue['vga'] of
-    '1': command := command + ' ' + '-- -vga std -display sdl';
-    '2': command := command + ' ' + '-- -vga qxl -display sdl';
-    '3': command := command + ' ' + '-- -vga virtio -display sdl';
-  end;
+  //virt-viewer package required!
+  //Запуск spice-server на localhost:3001 для spice-vdagent на клиенте (Drag&Drop + Clipboard)
+  command := command + ' ' +
+    '-- -vga qxl -device virtio-serial -chardev spicevmc,id=vdagent,debug=0,name=vdagent '
+    + '-device virtserialport,chardev=vdagent,name=com.redhat.spice.0 -spice port=3001,disable-ticketing=on';
 
   //Запуск VM
   FStartVM := StartVM.Create(False);
@@ -282,7 +251,6 @@ procedure TMainForm.ClearBtnClick(Sender: TObject);
 begin
   Edit2.Clear;
 end;
-
 
 //Выбор флешки
 procedure TMainForm.DevBoxChange(Sender: TObject);
@@ -313,6 +281,7 @@ begin
   end;
 end;
 
+//Иконки Установленных *.qcow2
 procedure TMainForm.FileListBox1DrawItem(Control: TWinControl;
   Index: integer; ARect: TRect; State: TOwnerDrawState);
 var
@@ -338,16 +307,19 @@ begin
   end;
 end;
 
-//F12 - обновить список устройств
+//F12 - обновить список устройств, Ctrl+Q/q - принудительный сброс процессов qemu
 procedure TMainForm.FormKeyUp(Sender: TObject; var Key: word; Shift: TShiftState);
+var
+  s: ansistring;
 begin
-  if Key = $7B then ReloadAllDevices;
-end;
+  //F12
+  if Key = 123 then ReloadAllDevices;
 
-//Автоширина AllDevBox и ListBox1
-procedure TMainForm.FormResize(Sender: TObject);
-begin
-  AllDevBox.Width := MainForm.Width - 5 - listbox1.Width - 5 - 5;
+  //Ctrl+Q/q
+  if (Key = 81) and (Shift = [ssCtrl]) then
+    if MessageDlg(SKillAllQEMU,
+      mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+      RunCommand('/bin/bash', ['-c', 'killall qemu-system-x86_64 &'], s);
 end;
 
 //Очистить источник, если попытка установить уже установленный образ из CurrentDirectory
@@ -356,12 +328,6 @@ begin
   if Edit1.Text <> '' then
     if (ListBox1.ItemIndex = 1) and (FileExists(ExtractFileName(Edit1.Text))) then
       Edit1.Text := '';
-end;
-
-//Запуск двойным щелчком в меню
-procedure TMainForm.ListBox1DblClick(Sender: TObject);
-begin
-  StartBtn.Click;
 end;
 
 //Вставка иконок в ListBox
@@ -391,26 +357,6 @@ begin
   finally
     BitMap.Free;
   end;
-end;
-
-//Установка и запись чекера PopUpMenu; параметр vga
-procedure TMainForm.MenuItem1Click(Sender: TObject);
-var
-  i: integer;
-begin
-  with (Sender as TMenuItem) do
-  begin
-    //go through the list and make sure *only* the clicked item is checked
-    for i := 0 to (GetParentComponent as TPopupMenu).Items.Count - 1 do
-    begin
-      (GetParentComponent as TPopupMenu).Items[i].Checked := (i = MenuIndex);
-      //Сохраняем индекс vga
-
-      if (GetParentComponent as TPopupMenu).Items[i].Checked then
-        INIPropStorage1.StoredValue['vga'] := IntToStr(i);
-
-    end;  //for each item in the popup
-  end;  //with
 end;
 
 //Выбрать образ загрузки
@@ -473,7 +419,7 @@ var
   i: integer;
   Value: string;
 const
-  BadSym = '={}$\/:*?"<>|@^.#%&~'''; //Заменять эти символы
+  BadSym = '={}$\/:*?"<>|@^#%&~'''; //Заменять эти символы
 begin
   if FileListBox1.Count <> 0 then
   begin
@@ -516,8 +462,15 @@ procedure TMainForm.FormShow(Sender: TObject);
 begin
   IniPropStorage1.Restore;
 
-  //Читаем vga - индекс PopUpMenu - выбор дисплея
-  PopUPMenu1.Items[StrToInt(IniPropStorage1.StoredValue['vga'])].Checked := True;
+  //Размеры для разных тем
+  ReloadBtn.Width := DevBox.Height;
+  OpenBtn1.Width := Edit1.Height;
+
+  Edit2.Height := Edit1.Height;
+  OpenBtn2.Width := Edit1.Height;
+  ClearBtn.Width := Edit1.Height;
+  AllDevBox.Top := ListBox1.Top;
+  //Panel1.Height := DevBox.Top + DevBox.Height + 5;
 
   //Наполняем список режимов
   with ListBox1.Items do

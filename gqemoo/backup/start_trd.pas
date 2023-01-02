@@ -5,7 +5,7 @@ unit start_trd;
 interface
 
 uses
-  Classes, Process, SysUtils, ComCtrls, Forms, Dialogs;
+  Classes, Process, SysUtils, ComCtrls, Forms;
 
 type
   StartVM = class(TThread)
@@ -47,7 +47,17 @@ begin
     ExProcess.Executable := 'bash';
     ExProcess.Parameters.Add('-c');
 
-    ExProcess.Parameters.Add(command);
+    //Проверка юзера в группе disk, наличие remote-viewer, запуск > 1 VM
+    //Иначе - ожидание 5 sec localhost:3001 для подключения spice-vdagent/spice-guest-tools извне
+    ExProcess.Parameters.Add(
+      'if [[ -z $(groups | grep disk) ]]; then echo "' + SUserNotInGroup +
+      '"; exit 1; fi; if [[ ! $(type -f remote-viewer 2>/dev/null) ]]; then echo "' +
+      SRemoteViewerNotFound + '"; exit 1; fi; ' +
+      'if [[ $(ss -ltn | grep 3001) ]]; then echo "' + SAnotherVMRunning +
+      '"; exit 1; fi; ' + command +
+      ' & i=0; while [[ -z $(ss -ltn | grep 3001) ]]; do sleep 1; ((i++)); ' +
+      'echo "waiting for spice-server localhost:3001, $i sec..."; if [[ $i == 5 ]]; then break; fi; done '
+      + '&& remote-viewer spice://localhost:3001 && [[ $(pidof qemu-system-x86_64) ]] && killall qemu-system-x86_64');
 
     ExProcess.Options := [poUsePipes, poStderrToOutPut];
     //, poWaitOnExit (синхронный вывод)
@@ -84,6 +94,9 @@ begin
     //Очищаем лог
     LogMemo.Clear;
 
+    //Запомнить индекс из списка установленных образов
+    findex := FileListBox1.ItemIndex;
+
     //Если запуск с флешки - попытка размонтировать /dev/xxx{1..4}
     if DevBox.ItemIndex <> DevBox.Items.Count - 1 then
     begin
@@ -91,15 +104,6 @@ begin
       RunCommand('/bin/bash', ['-c', 'umount -l ' + usb + '1 ' + usb +
         '2 ' + usb + '3 ' + usb + '4'], s);
     end;
-
-    //Пользователь в группе disk? Нет - команда на выход
-    RunCommand('/bin/bash', ['-c', 'groups | grep disk'], s);
-    if Trim(s) = '' then command :=
-        'echo "' + SUserNotInGroup + ' usermod -aG disk ' +
-        GetEnvironmentVariable('USER') + '; reboot"; exit 1';
-
-    //Запомнить индекс из списка установленных образов
-    findex := FileListBox1.ItemIndex;
 
     LogMemo.Repaint;
   end;
@@ -115,12 +119,12 @@ begin
 
     //Если появился новый образ - обновить
     FileListBox1.UpdateFileList;
+
     //И вернуть курсор на прежнюю позицию в списке установленных образов
     FileListBox1.SetFocus;
-
-  //  showmessage(inttostr(FileListbox1.Count));
-    if FileListbox1.Count = 1 then FileListbox1.ItemIndex := 0 else
-    FileListbox1.ItemIndex := findex;
+    if FileListbox1.Count = 1 then FileListbox1.ItemIndex := 0
+    else
+      FileListbox1.ItemIndex := findex;
     FileListBox1.Click;
   end;
 end;

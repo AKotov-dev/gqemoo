@@ -45,22 +45,6 @@ msgstr "Загрузить VM с флешки"
 msgid "...or from the image"
 msgstr "...или из образа"
 
-#: tmainform.menuitem1.caption
-msgid "default"
-msgstr ""
-
-#: tmainform.menuitem2.caption
-msgid "VIRTIO"
-msgstr ""
-
-#: tmainform.menuitem3.caption
-msgid "QXL"
-msgstr ""
-
-#: tmainform.menuitem4.caption
-msgid "STD"
-msgstr ""
-
 #: tmainform.openbtn1.caption
 msgctxt "tmainform.openbtn1.caption"
 msgid "..."
@@ -80,6 +64,10 @@ msgstr ""
 msgctxt "tmainform.openbtn2.hint"
 msgid "Connect an image"
 msgstr "Подключить образ"
+
+#: tmainform.panel4.caption
+msgid "Panel4"
+msgstr ""
 
 #: tmainform.reloadbtn.hint
 msgid "Update"
@@ -108,10 +96,9 @@ msgstr "Старт"
 msgid "License: GPLv3   Author: alex_q_2000 (C) 2022   URL: https://linuxforum.ru"
 msgstr "Лицензия: GPLv3   Автор: alex_q_2000 (C) 2022   URL: https://linuxforum.ru"
 
-#: tmainform.vgabtn.hint
-msgctxt "tmainform.vgabtn.hint"
-msgid "Choose an display"
-msgstr "Выбрать дисплей"
+#: unit1.sanothervmrunning
+msgid "Another VM is already running! [Ctrl+Q] - forced VM reset."
+msgstr "Другая VM уже запущена! [Ctrl+Q] - принудительный сброс VM."
 
 #: unit1.scaptrenameimage
 msgid "Rename an image"
@@ -133,6 +120,10 @@ msgstr "Введите новое имя образа:"
 msgid "Installation"
 msgstr "Установка"
 
+#: unit1.skillallqemu
+msgid "Forcibly reset all QEMU processes?"
+msgstr "Принудительно сбросить все процессы QEMU?"
+
 #: unit1.sloading
 msgid "Loading"
 msgstr "Загрузка"
@@ -141,7 +132,10 @@ msgstr "Загрузка"
 msgid "not used"
 msgstr "нет"
 
-#: unit1.susernotingroup
-msgid "User outside Group disk! Run:"
-msgstr "Пользователь вне группы disk! Выполните:"
+#: unit1.sremoteviewernotfound
+msgid "remote-viewer not found! Install the virt-viewer package!"
+msgstr "remote-viewer не найден! Установите пакет virt-viewer!"
 
+#: unit1.susernotingroup
+msgid "User outside Group disk! Run: usermod -aG disk $LOGNAME"
+msgstr "Пользователь вне группы disk! Выполните: usermod -aG disk $LOGNAME"
