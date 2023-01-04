@@ -56,7 +56,7 @@ begin
       'if [[ $(ss -ltn | grep 3001) ]]; then echo "' + SAnotherVMRunning +
       '"; exit 1; fi; ' + command +
       ' & i=0; while [[ -z $(ss -ltn | grep 3001) ]]; do sleep 1; ((i++)); ' +
-      'echo "waiting for spice-server: $i of 15 sec..."; if [[ $i == 15 ]]; then break; fi; done '
+      'echo "Waiting for SPICE on 127.0.0.1:3001 ($i of 15 sec)"; if [[ $i == 15 ]]; then break; fi; done '
       + '&& remote-viewer -v spice://localhost:3001 && [[ $(pidof qemu-system-x86_64) ]] && killall qemu-system-x86_64');
 
     ExProcess.Options := [poUsePipes, poStderrToOutPut];
