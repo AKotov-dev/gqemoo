@@ -48,7 +48,7 @@ begin
     ExProcess.Parameters.Add('-c');
 
     //Проверка юзера в группе disk, наличие remote-viewer, запуск > 1 VM
-    //Иначе - ожидание 5 sec localhost:3001 для подключения spice-vdagent/spice-guest-tools извне
+    //Иначе - ожидание 15 sec localhost:3001 для подключения spice-vdagent/spice-guest-tools извне
     ExProcess.Parameters.Add(
       'if [[ -z $(groups | grep disk) ]]; then echo "' + SUserNotInGroup +
       '"; exit 1; fi; if [[ ! $(type -f remote-viewer 2>/dev/null) ]]; then echo "' +
@@ -56,7 +56,7 @@ begin
       'if [[ $(ss -ltn | grep 3001) ]]; then echo "' + SAnotherVMRunning +
       '"; exit 1; fi; ' + command +
       ' & i=0; while [[ -z $(ss -ltn | grep 3001) ]]; do sleep 1; ((i++)); ' +
-      'echo "waiting for spice-server localhost:3001, $i sec..."; if [[ $i == 5 ]]; then break; fi; done '
+      'echo "waiting for spice-server: $i of 15 sec..."; if [[ $i == 15 ]]; then break; fi; done '
       + '&& remote-viewer -v spice://localhost:3001 && [[ $(pidof qemu-system-x86_64) ]] && killall qemu-system-x86_64');
 
     ExProcess.Options := [poUsePipes, poStderrToOutPut];
