@@ -7,7 +7,7 @@ qemoo config: /etc/qemoo.cfg
   
 Supported loading and installing virtual machines from flash drives, images and already installed images `*.qcow2`. Before booting a virtual machine, you can connect additional flash drives, images, and block devices. Bidirectional `Clipboard` and `Drag&Drop` are also supported.  
   
-Host share:	`~/qemoo_tmp`
+Host share:	`~/qemoo_tmp`  
 Linux guest mount command example: `mkdir /mnt/hostdir && mount -t 9p -o trans=virtio,msize=100000000 hostdir /mnt/hostdir && chown -R $(logname) /mnt/hostdir`
   
 When installing `Mageia Linux` from an image or from a USB flash drive in EFI mode, install checkbox `Install in /EFI/BOOT (removable device or workaround for some BIOS's)` at the last step of the installer.
