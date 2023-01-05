@@ -84,10 +84,12 @@ resourcestring
   SInputNewImageName = 'Enter a new image name:';
   SFileExists = 'The file exists! Specify a different name!';
   SUserNotInGroup = 'User outside Group disk! Run: usermod -aG disk $LOGNAME';
-  SAnotherVMRunning = 'Another VM is already running! [Ctrl+Q] - forced VM reset.';
+  SStartVM = 'Starting a virtual machine...';
   SRemoteViewerNotFound =
     'remote-viewer not found! Install the virt-viewer package!';
   SKillAllQEMU = 'Forcibly reset all QEMU processes?';
+  SWaitingSPICE = 'waiting for spice-server on 127.0.0.1:';
+  SWaitingSpiceSec = 'of 5 sec)';
 
 implementation
 
@@ -198,13 +200,13 @@ begin
   //EFI?
   if not EFICheckBox.Checked then
     case ListBox1.ItemIndex of
-      0: command := 'qemoo ' + dev;
-      1: command := 'qemoo -i ' + dev;
+      0: command := 'qemoo -d ' + dev;
+      1: command := 'qemoo -d -i ' + dev;
     end
   else
     case ListBox1.ItemIndex of
-      0: command := 'qemoo -e ' + dev;
-      1: command := 'qemoo -e -i ' + dev;
+      0: command := 'qemoo -d -e ' + dev;
+      1: command := 'qemoo -d -e -i ' + dev;
     end;
 
   //Счетчик выбранных устройств
@@ -235,11 +237,8 @@ begin
   if command[Length(command)] = ',' then
     Delete(command, Length(command), 1);
 
-  //virt-viewer package required!
-  //Запуск spice-server на localhost:3001 для spice-vdagent на клиенте (Drag&Drop + Clipboard)
-  command := command + ' ' +
-    '-- -vga qxl -device virtio-serial -chardev spicevmc,id=vdagent,debug=0,name=vdagent '
-    + '-device virtserialport,chardev=vdagent,name=com.redhat.spice.0 -spice port=3001,disable-ticketing=on';
+  //Обходим конфиг, дисплей только QXL + 2 CPU
+  command := command + ' -- -vga qxl -smp 2';
 
   //Запуск VM
   FStartVM := StartVM.Create(False);

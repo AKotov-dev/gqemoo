@@ -5,7 +5,7 @@ unit start_trd;
 interface
 
 uses
-  Classes, Process, SysUtils, ComCtrls, Forms;
+  Classes, Process, SysUtils, ComCtrls, Forms, Dialogs;
 
 type
   StartVM = class(TThread)
@@ -48,16 +48,20 @@ begin
     ExProcess.Parameters.Add('-c');
 
     //Проверка юзера в группе disk, наличие remote-viewer, запуск > 1 VM
-    //Иначе - ожидание 15 sec localhost:3001 для подключения spice-vdagent/spice-guest-tools извне
-    ExProcess.Parameters.Add(
+    //Иначе - ожидание 5 sec localhost:3001 для подключения spice-vdagent/spice-guest-tools извне
+    ExProcess.Parameters.Add('echo "' + SStartVM + '"; ' +
       'if [[ -z $(groups | grep disk) ]]; then echo "' + SUserNotInGroup +
       '"; exit 1; fi; if [[ ! $(type -f remote-viewer 2>/dev/null) ]]; then echo "' +
-      SRemoteViewerNotFound + '"; exit 1; fi; ' +
-      'if [[ $(ss -ltn | grep 3001) ]]; then echo "' + SAnotherVMRunning +
-      '"; exit 1; fi; ' + command +
-      ' & i=0; while [[ -z $(ss -ltn | grep 3001) ]]; do sleep 1; ((i++)); ' +
-      'echo "waiting for spice-server on 127.0.0.1:3001 ($i of 15 sec)..."; if [[ $i == 15 ]]; then break; fi; done '
-      + '&& remote-viewer -v spice://localhost:3001 && [[ $(pidof qemu-system-x86_64) ]] && killall qemu-system-x86_64');
+      SRemoteViewerNotFound + '"; exit 1; fi; ' + 'a=$(' + command +
+      ' > ~/.gqemoo/log && awk ' + '''' + '$1 == "PID" || $1 == "PORT" {print $3}' +
+      '''' + ' ~/.gqemoo/log); port=$(echo "$a" | head -n1); pid=$(echo "$a" | tail -n1) '
+      +
+      //Ожидание 5 sec выданного $port
+      '&& i=0; while [[ -z $(ss -ltn | grep $port) ]]; do sleep 1; ((i++)); ' +
+      'echo "' + SWaitingSPICE +
+      '$port ($i of 5 sec)"; if [[ $i == 5 ]]; then break; fi; done ' +
+      //Запуск вьюера или отбой
+      '&& remote-viewer -v spice://localhost:$port && ps --pid "$pid" >/dev/null; [ "$?" -eq "0" ] && kill $pid');
 
     ExProcess.Options := [poUsePipes, poStderrToOutPut];
     //, poWaitOnExit (синхронный вывод)

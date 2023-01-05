@@ -96,10 +96,6 @@ msgstr "Старт"
 msgid "License: GPLv3   Author: alex_q_2000 (C) 2022   URL: https://linuxforum.ru"
 msgstr "Лицензия: GPLv3   Автор: alex_q_2000 (C) 2022   URL: https://linuxforum.ru"
 
-#: unit1.sanothervmrunning
-msgid "Another VM is already running! [Ctrl+Q] - forced VM reset."
-msgstr "Другая VM уже запущена! [Ctrl+Q] - принудительный сброс VM."
-
 #: unit1.scaptrenameimage
 msgid "Rename an image"
 msgstr "Переименовать образ"
@@ -136,6 +132,18 @@ msgstr "нет"
 msgid "remote-viewer not found! Install the virt-viewer package!"
 msgstr "remote-viewer не найден! Установите пакет virt-viewer!"
 
+#: unit1.sstartvm
+msgid "Starting a virtual machine..."
+msgstr "Старт виртуальной машины..."
+
 #: unit1.susernotingroup
 msgid "User outside Group disk! Run: usermod -aG disk $LOGNAME"
 msgstr "Пользователь вне группы disk! Выполните: usermod -aG disk $LOGNAME"
+
+#: unit1.swaitingspice
+msgid "waiting for spice-server on 127.0.0.1:"
+msgstr "ожидаю spice-server на 127.0.0.1:"
+
+#: unit1.swaitingspicesec
+msgid "of 5 sec)"
+msgstr "из 5 сек)"

@@ -85,10 +85,6 @@ msgstr ""
 msgid "License: GPLv3   Author: alex_q_2000 (C) 2022   URL: https://linuxforum.ru"
 msgstr ""
 
-#: unit1.sanothervmrunning
-msgid "Another VM is already running! [Ctrl+Q] - forced VM reset."
-msgstr ""
-
 #: unit1.scaptrenameimage
 msgid "Rename an image"
 msgstr ""
@@ -125,7 +121,19 @@ msgstr ""
 msgid "remote-viewer not found! Install the virt-viewer package!"
 msgstr ""
 
+#: unit1.sstartvm
+msgid "Starting a virtual machine..."
+msgstr ""
+
 #: unit1.susernotingroup
 msgid "User outside Group disk! Run: usermod -aG disk $LOGNAME"
+msgstr ""
+
+#: unit1.swaitingspice
+msgid "waiting for spice-server on 127.0.0.1:"
+msgstr ""
+
+#: unit1.swaitingspicesec
+msgid "of 5 sec)"
 msgstr ""
 
