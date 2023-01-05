@@ -7,6 +7,7 @@ qemoo config: /etc/qemoo.cfg
   
 Free icons: https://www.flaticon.com  
 Dependencies: `qemoo qemu gtk2 virt-viewer`  
+  
 **Hot Keys:**
 + `F12` - Update the list of connected devices
 + `Ctrl+Q` - Force reset of all QEMU processes  
