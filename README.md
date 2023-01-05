@@ -13,8 +13,9 @@ Supported loading and installing virtual machines from flash drives, images and 
   
 **Host share/Working directory:** `~/qemoo_tmp`  
 **Linux guest mount command example (~/hostdir):**  
-`test -d /home/$(logname)/hostdir || mkdir /home/$(logname)/hostdir && mount -t 9p -o trans=virtio,msize=100000000 hostdir /home/$(logname)/hostdir && chown $(logname) -R /home/$(logname)/hostdir`  
-  
+```
+test -d /home/$(logname)/hostdir || mkdir /home/$(logname)/hostdir && mount -t 9p -o trans=virtio,msize=100000000 hostdir /home/$(logname)/hostdir && chown $(logname) -R /home/$(logname)/hostdir
+```
 **Note-1:** When installing `Mageia Linux` from an image or from a USB flash drive in EFI mode, install checkbox `Install in /EFI/BOOT (removable device or workaround for some BIOS's)` at the last step of the installer.  
   
 **Note-2:** You need to add the user to group `disk` and reboot: `usermod -aG disk $(logname); reboot`  
