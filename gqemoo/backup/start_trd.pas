@@ -58,8 +58,8 @@ begin
       +
       //Ожидание 5 sec выданного $port
       '&& i=0; while [[ -z $(ss -ltn | grep $port) ]]; do sleep 1; ((i++)); ' +
-      'echo "' + SWaitingSPICE +
-      '$port ($i of 5 sec)"; if [[ $i == 5 ]]; then break; fi; done ' +
+      'echo "' + SWaitingSPICE + '$port ($i ' + SWaitingSpiceSec +
+      '"; if [[ $i == 5 ]]; then break; fi; done ' +
       //Запуск вьюера или отбой
       '&& remote-viewer -v spice://localhost:$port && ps --pid "$pid" >/dev/null; [ "$?" -eq "0" ] && kill $pid');
 
