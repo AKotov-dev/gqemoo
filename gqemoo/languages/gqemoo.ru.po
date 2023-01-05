@@ -93,7 +93,7 @@ msgid ""
 "Get a command to the Clipboard to connect the\n"
 "shared folder ~/hostdir in the Linux guest system"
 msgstr ""
-"Получить в буфер обмена команду для подключения\n"
+"Получить в буфер команду для подключения\n"
 "общей папки ~/hostdir в гостевой системе Linux"
 
 #: tmainform.startbtn.caption
