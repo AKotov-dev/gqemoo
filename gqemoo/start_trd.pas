@@ -61,7 +61,7 @@ begin
       'echo "' + SWaitingSPICE + '$port ($i ' + SWaitingSpiceSec +
       '"; if [[ $i == 5 ]]; then break; fi; done ' +
       //Запуск вьюера или отбой
-      '&& remote-viewer -v spice://localhost:$port && ps --pid "$pid" >/dev/null; [ "$?" -eq "0" ] && kill $pid');
+      '&& remote-viewer -v --spice-shared-dir=/home/marsik/tmp spice://localhost:$port && ps --pid "$pid" >/dev/null; [ "$?" -eq "0" ] && kill $pid');
 
     ExProcess.Options := [poUsePipes, poStderrToOutPut];
     //, poWaitOnExit (синхронный вывод)

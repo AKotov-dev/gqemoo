@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, Buttons,
-  CheckLst, IniPropStorage, Process, DefaultTranslator, FileCtrl, ExtCtrls;
+  CheckLst, IniPropStorage, Process, DefaultTranslator, FileCtrl, ExtCtrls, ClipBrd;
 
 type
 
@@ -41,6 +41,7 @@ type
     RemoveBtn: TSpeedButton;
     RenameBtn: TSpeedButton;
     SelectAllBtn: TSpeedButton;
+    ShareBtn: TSpeedButton;
     Splitter1: TSplitter;
     Splitter3: TSplitter;
     StartBtn: TSpeedButton;
@@ -59,6 +60,7 @@ type
     procedure RemoveBtnClick(Sender: TObject);
     procedure RenameBtnClick(Sender: TObject);
     procedure SelectAllBtnClick(Sender: TObject);
+    procedure ShareBtnClick(Sender: TObject);
     procedure StartBtnClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -237,7 +239,7 @@ begin
   if command[Length(command)] = ',' then
     Delete(command, Length(command), 1);
 
-  //Обходим конфиг, дисплей только QXL
+  //Обходим конфиг, дисплей только QXL + 2 CPU
   command := command + ' -- -vga qxl -smp 2';
 
   //Запуск VM
@@ -456,6 +458,13 @@ begin
   FileListBox1.SelectAll;
 end;
 
+//Копировать в буфер команду монтирования ~/qemoo_tmp <-> ~/hostdir (Guest)
+procedure TMainForm.ShareBtnClick(Sender: TObject);
+begin
+  ClipBoard.AsText := 'test -d /home/$(logname)/hostdir || mkdir /home/$(logname)/hostdir && '
+    + 'mount -t 9p -o trans=virtio,msize=100000000 hostdir /home/$(logname)/hostdir && chown $(logname) -R /home/$(logname)/hostdir';
+end;
+
 procedure TMainForm.FormShow(Sender: TObject);
 begin
   IniPropStorage1.Restore;
@@ -466,6 +475,7 @@ begin
 
   Edit2.Height := Edit1.Height;
   OpenBtn2.Width := Edit1.Height;
+  ShareBtn.Width := Edit1.Height;
   ClearBtn.Width := Edit1.Height;
   AllDevBox.Top := ListBox1.Top;
   //Panel1.Height := DevBox.Top + DevBox.Height + 5;
