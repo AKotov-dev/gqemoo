@@ -14,7 +14,7 @@ Dependencies: `qemoo qemu gtk2 virt-viewer`
   
 Supported loading and installing virtual machines from flash drives, images and already installed images `*.qcow2`. Before booting a virtual machine, you can connect additional flash drives, images, and block devices. Bidirectional `Clipboard` and `Drag&Drop` are also supported.  
   
-Host share/Working directory: `~/qemoo_tmp`  
+Host share/working directory: `~/qemoo_tmp`  
 Linux guest mount command example [ ~/hostdir ]:  
 ```
 test -d /home/$(logname)/hostdir || mkdir /home/$(logname)/hostdir && mount -t 9p -o trans=virtio,msize=100000000 hostdir /home/$(logname)/hostdir && chown $(logname) -R /home/$(logname)/hostdir
