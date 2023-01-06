@@ -177,7 +177,7 @@ object MainForm: TMainForm
       Height = 37
       Hint = 'Choose an image'
       Top = 26
-      Width = 40
+      Width = 37
       Anchors = [akTop, akRight, akBottom]
       Caption = '...'
       OnClick = OpenBtn1Click
@@ -280,12 +280,13 @@ object MainForm: TMainForm
       AnchorSideRight.Control = StartBtn
       AnchorSideBottom.Control = OpenBtn1
       AnchorSideBottom.Side = asrBottom
-      Left = 725
+      Left = 722
       Height = 37
       Hint = 'Get a command to the Clipboard to connect the'#10'shared folder ~/hostdir in the Linux guest system'
       Top = 26
-      Width = 39
+      Width = 37
       Anchors = [akTop, akRight, akBottom]
+      BorderSpacing.Right = 5
       Glyph.Data = {
         36090000424D3609000000000000360000002800000018000000180000000100
         2000000000000009000064000000640000000000000000000000000000000000

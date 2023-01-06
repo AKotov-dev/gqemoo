@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, Buttons,
-  CheckLst, IniPropStorage, Process, DefaultTranslator, FileCtrl, ClipBrd;
+  CheckLst, IniPropStorage, Process, DefaultTranslator, FileCtrl, ExtCtrls, ClipBrd;
 
 type
 
@@ -462,8 +462,8 @@ end;
 procedure TMainForm.ShareBtnClick(Sender: TObject);
 begin
   ClipBoard.AsText :=
-    'test -d /home/$(logname)/hostdir || mkdir /home/$(logname)/hostdir && '
-    + 'mount -t 9p -o trans=virtio,msize=100000000 hostdir /home/$(logname)/hostdir && chown $(logname) -R /home/$(logname)/hostdir';
+    'test -d /home/$(logname)/hostdir || mkdir /home/$(logname)/hostdir && ' +
+    'mount -t 9p -o trans=virtio,msize=100000000 hostdir /home/$(logname)/hostdir && chown $(logname) -R /home/$(logname)/hostdir';
 end;
 
 procedure TMainForm.FormShow(Sender: TObject);
