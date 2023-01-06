@@ -24,4 +24,4 @@ test -d /home/$(logname)/hostdir || mkdir /home/$(logname)/hostdir && mount -t 9
 **Note-2:** You need to add the user to group `disk` and reboot: `usermod -aG disk $(logname); reboot`  
 For support Drag and Drop + bidirectional Clipboard on the guest system must be installed `spice-vdagent` (Linux, usually already installed) or [spice-guest-tools](https://www.spice-space.org/download/windows/spice-guest-tools/spice-guest-tools-latest.exe) (Windows).  
   
-![](https://github.com/AKotov-dev/gqemoo/blob/main/ScreenShot6.png)
+![](https://github.com/AKotov-dev/gqemoo/blob/main/ScreenShot7.png)
