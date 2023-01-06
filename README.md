@@ -1,4 +1,4 @@
-# gqemoo
+# GQemoo
 GUI for `qemoo` - wrapper script for qemu to start and install guest systems.  
   
 qemoo project: https://abf.io/import/qemoo  
