@@ -47,8 +47,8 @@ begin
     ExProcess.Executable := 'bash';
     ExProcess.Parameters.Add('-c');
 
-    //Проверка юзера в группе disk, наличие remote-viewer, запуск > 1 VM
-    //Иначе - ожидание 5 sec localhost:3001 для подключения spice-vdagent/spice-guest-tools извне
+    //Проверка юзера в группе disk, наличие remote-viewer
+    //Иначе - ожидание 5 sec localhost:$port для подключения spice-vdagent/spice-guest-tools извне
     ExProcess.Parameters.Add('echo "' + SStartVM + '"; ' +
       'if [[ -z $(groups | grep disk) ]]; then echo "' + SUserNotInGroup +
       '"; exit 1; fi; if [[ ! $(type -f remote-viewer 2>/dev/null) ]]; then echo "' +
@@ -61,7 +61,9 @@ begin
       'echo "' + SWaitingSPICE + '$port ($i ' + SWaitingSpiceSec +
       '"; if [[ $i == 5 ]]; then break; fi; done ' +
       //Запуск вьюера или отбой
-      '&& remote-viewer -v spice://localhost:$port && ps --pid "$pid" >/dev/null; [ "$?" -eq "0" ] && kill $pid');
+      '&& remote-viewer -v --spice-shared-dir=/home/marsik/tmp spice://localhost:$port '
+      +
+      '&& ps --pid "$pid" >/dev/null; [ "$?" -eq "0" ] && kill "$pid"');
 
     ExProcess.Options := [poUsePipes, poStderrToOutPut];
     //, poWaitOnExit (синхронный вывод)

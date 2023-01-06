@@ -162,7 +162,7 @@ object MainForm: TMainForm
       Left = 216
       Height = 37
       Top = 26
-      Width = 465
+      Width = 469
       Anchors = [akTop, akLeft, akRight, akBottom]
       BorderSpacing.Left = 5
       ReadOnly = True
@@ -173,13 +173,12 @@ object MainForm: TMainForm
       AnchorSideRight.Control = ShareBtn
       AnchorSideBottom.Control = Edit1
       AnchorSideBottom.Side = asrBottom
-      Left = 681
+      Left = 685
       Height = 37
       Hint = 'Choose an image'
       Top = 26
       Width = 40
       Anchors = [akTop, akRight, akBottom]
-      BorderSpacing.Right = 2
       Caption = '...'
       OnClick = OpenBtn1Click
       ShowHint = True
@@ -281,13 +280,12 @@ object MainForm: TMainForm
       AnchorSideRight.Control = StartBtn
       AnchorSideBottom.Control = OpenBtn1
       AnchorSideBottom.Side = asrBottom
-      Left = 723
+      Left = 725
       Height = 37
-      Hint = 'Get a command to the clipboard to connect'#10'the shared folder ~/hostdir in the guest system'
+      Hint = 'Get a command to the Clipboard to connect the'#10'shared folder ~/hostdir in the Linux guest system'
       Top = 26
       Width = 39
       Anchors = [akTop, akRight, akBottom]
-      BorderSpacing.Right = 2
       Glyph.Data = {
         36090000424D3609000000000000360000002800000018000000180000000100
         2000000000000009000064000000640000000000000000000000000000000000

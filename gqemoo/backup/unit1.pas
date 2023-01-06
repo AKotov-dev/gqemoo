@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, Buttons,
-  CheckLst, IniPropStorage, Process, DefaultTranslator, FileCtrl, ExtCtrls, ClipBrd;
+  CheckLst, IniPropStorage, Process, DefaultTranslator, FileCtrl, ClipBrd;
 
 type
 
@@ -461,7 +461,8 @@ end;
 //Копировать в буфер команду монтирования ~/qemoo_tmp <-> ~/hostdir (Guest)
 procedure TMainForm.ShareBtnClick(Sender: TObject);
 begin
-  ClipBoard.AsText := 'test -d /home/$(logname)/hostdir || mkdir /home/$(logname)/hostdir && '
+  ClipBoard.AsText :=
+    'test -d /home/$(logname)/hostdir || mkdir /home/$(logname)/hostdir && '
     + 'mount -t 9p -o trans=virtio,msize=100000000 hostdir /home/$(logname)/hostdir && chown $(logname) -R /home/$(logname)/hostdir';
 end;
 
