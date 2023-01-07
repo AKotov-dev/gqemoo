@@ -470,8 +470,8 @@ begin
     ' /etc/fstab; echo "/home/$(logname)/hostdir ' + SUnmounted + '"; ' +
     'else test -d /home/$(logname)/hostdir || mkdir /home/$(logname)/hostdir && mount -t 9p -o '
     + 'trans=virtio,msize=100000000 hostdir /home/$(logname)/hostdir && chown $(logname) -R '
-    + '/home/$(logname)/hostdir; echo "hostdir /home/$(logname)/hostdir 9p trans=virtio,version=9p2000.L 0 0" '
-    + '>> /etc/fstab; echo "/home/$(logname)/hostdir ' + SMountedAs +
+    + '/home/$(logname)/hostdir && echo "hostdir /home/$(logname)/hostdir 9p trans=virtio,version=9p2000.L 0 0" '
+    + '>> /etc/fstab && echo "/home/$(logname)/hostdir ' + SMountedAs +
     ' hostdir"; fi' + '''';
 end;
 

@@ -282,7 +282,7 @@ object MainForm: TMainForm
       AnchorSideBottom.Side = asrBottom
       Left = 722
       Height = 37
-      Hint = 'Get a command to the Clipboard to connect the'#10'shared folder ~/hostdir in the Linux guest system'
+      Hint = 'Get a command to the Clipboard to mount/umount'#10'the shared folder ~/hostdir in the Linux guest system'
       Top = 26
       Width = 37
       Anchors = [akTop, akRight, akBottom]
