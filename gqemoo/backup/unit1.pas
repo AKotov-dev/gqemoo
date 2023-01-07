@@ -464,15 +464,22 @@ end;
 procedure TMainForm.ShareBtnClick(Sender: TObject);
 begin
   ClipBoard.AsText :=
-    'pkexec bash -c ' + '''' +
+  'pkexec bash -c '+''''+'clear; if [[ -f /etc/systemd/system/hostdir.service ]]; then umount -l hostdir; ' +
+  'systemctl disable hostdir; rm -f /etc/systemd/system/hostdir.service; else test -d /home/$(logname)/hostdir ' +
+  '|| mkdir /home/$(logname)/hostdir && echo -e "[Unit]\nDescription=GQemoo shared directory ~/hostdir\n\n[Service]\nType='+
+  'oneshot\nExecStart=mount -t 9p -o trans=virtio,msize=100000000 hostdir /home/$(logname)/hostdir\n\n[Install]\nWantedBy='+
+  'multi-user.target" > /etc/systemd/system/hostdir.service; systemctl daemon-reload && systemctl start hostdir && '+
+  'systemctl enable hostdir; chown $(logname) -R /home/$(logname)/hostdir; fi' + '''';
+
+   { 'pkexec bash -c ' + '''' +
     'clear; if [[ $(grep hostdir /etc/fstab) ]]; then umount -l hostdir; ' +
     'sed -i ' + '''' + '/^hostdir/d' + '''' +
-    ' /etc/fstab; echo "/home/$(logname)/hostdir ' + SUnmounted + '"; ' +
-    'else test -d /home/$(logname)/hostdir || mkdir /home/$(logname)/hostdir && mount -t 9p -o '
+    ' /etc/fstab; echo "/home/$(logname)/hostdir ' + SUnmounted +
+    '"; ' + 'else test -d /home/$(logname)/hostdir || mkdir /home/$(logname)/hostdir && mount -t 9p -o '
     + 'trans=virtio,msize=100000000 hostdir /home/$(logname)/hostdir && chown $(logname) -R '
     + '/home/$(logname)/hostdir && echo "hostdir /home/$(logname)/hostdir 9p trans=virtio,version=9p2000.L 0 0" '
     + '>> /etc/fstab && echo "/home/$(logname)/hostdir ' + SMountedAs +
-    ' hostdir"; fi' + '''';
+    ' hostdir"; fi' + ''''; }
 end;
 
 procedure TMainForm.FormShow(Sender: TObject);
