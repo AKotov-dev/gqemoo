@@ -79,8 +79,8 @@ msgstr ""
 
 #: tmainform.sharebtn.hint
 msgid ""
-"Get a command to the Clipboard to connect the\n"
-"shared folder ~/hostdir in the Linux guest system"
+"Get a command to the Clipboard to mount/umount\n"
+"the shared folder ~/hostdir in the Linux guest system"
 msgstr ""
 
 #: tmainform.startbtn.caption

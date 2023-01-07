@@ -90,10 +90,10 @@ msgstr "Выбрать все"
 
 #: tmainform.sharebtn.hint
 msgid ""
-"Get a command to the Clipboard to connect the\n"
-"shared folder ~/hostdir in the Linux guest system"
+"Get a command to the Clipboard to mount/umount\n"
+"the shared folder ~/hostdir in the Linux guest system"
 msgstr ""
-"Получить в буфер команду для подключения\n"
+"Получить в буфер команду для mount/umount\n"
 "общей папки ~/hostdir в гостевой системе Linux"
 
 #: tmainform.startbtn.caption
@@ -163,4 +163,3 @@ msgstr "ожидаю spice-server на 127.0.0.1:"
 #: unit1.swaitingspicesec
 msgid "of 5 sec)"
 msgstr "из 5 сек)"
-

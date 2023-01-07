@@ -460,7 +460,7 @@ begin
   FileListBox1.SelectAll;
 end;
 
-//Копировать в буфер команду монтирования ~/qemoo_tmp <-> ~/hostdir (Guest)
+//Копировать в буфер команду монтирования ~/qemoo_tmp <-> ~/hostdir (Guest) + /etc/fstab
 procedure TMainForm.ShareBtnClick(Sender: TObject);
 begin
   ClipBoard.AsText :=
