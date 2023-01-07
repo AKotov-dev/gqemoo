@@ -132,6 +132,10 @@ msgstr "Принудительно сбросить все процессы QEMU
 msgid "Loading"
 msgstr "Загрузка"
 
+#: unit1.smountedas
+msgid "смонтирован как"
+msgstr ""
+
 #: unit1.snotused
 msgid "not used"
 msgstr "нет"
@@ -144,6 +148,10 @@ msgstr "remote-viewer не найден! Установите пакет virt-vi
 msgid "Starting a virtual machine..."
 msgstr "Старт виртуальной машины..."
 
+#: unit1.sunmounted
+msgid "размонтирован"
+msgstr ""
+
 #: unit1.susernotingroup
 msgid "User outside Group disk! Run: usermod -aG disk $LOGNAME"
 msgstr "Пользователь вне группы disk! Выполните: usermod -aG disk $LOGNAME"
@@ -155,3 +163,4 @@ msgstr "ожидаю spice-server на 127.0.0.1:"
 #: unit1.swaitingspicesec
 msgid "of 5 sec)"
 msgstr "из 5 сек)"
+

@@ -92,6 +92,8 @@ resourcestring
   SKillAllQEMU = 'Forcibly reset all QEMU processes?';
   SWaitingSPICE = 'waiting for spice-server on 127.0.0.1:';
   SWaitingSpiceSec = 'of 5 sec)';
+  SUnmounted = 'размонтирован';
+  SMountedAs = 'смонтирован как';
 
 implementation
 
@@ -458,12 +460,19 @@ begin
   FileListBox1.SelectAll;
 end;
 
-//Копировать в буфер команду монтирования ~/qemoo_tmp <-> ~/hostdir (Guest)
+//Копировать в буфер команду монтирования ~/qemoo_tmp <-> ~/hostdir (Guest) + /etc/fstab
 procedure TMainForm.ShareBtnClick(Sender: TObject);
 begin
   ClipBoard.AsText :=
-    'test -d /home/$(logname)/hostdir || mkdir /home/$(logname)/hostdir && ' +
-    'mount -t 9p -o trans=virtio,msize=100000000 hostdir /home/$(logname)/hostdir && chown $(logname) -R /home/$(logname)/hostdir';
+    'pkexec bash -c ' + '''' +
+    'clear; if [[ $(grep hostdir /etc/fstab) ]]; then umount -l hostdir; ' +
+    'sed -i ' + '''' + '/^hostdir/d' + '''' +
+    ' /etc/fstab; echo "/home/$(logname)/hostdir ' + SUnmounted + '"; ' +
+    'else test -d /home/$(logname)/hostdir || mkdir /home/$(logname)/hostdir && mount -t 9p -o '
+    + 'trans=virtio,msize=100000000 hostdir /home/$(logname)/hostdir && chown $(logname) -R '
+    + '/home/$(logname)/hostdir; echo "hostdir /home/$(logname)/hostdir 9p trans=virtio,version=9p2000.L 0 0" '
+    + '>> /etc/fstab; echo "/home/$(logname)/hostdir ' + SMountedAs +
+    ' hostdir"; fi' + '''';
 end;
 
 procedure TMainForm.FormShow(Sender: TObject);

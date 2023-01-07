@@ -119,6 +119,10 @@ msgstr ""
 msgid "Loading"
 msgstr ""
 
+#: unit1.smountedas
+msgid "смонтирован как"
+msgstr ""
+
 #: unit1.snotused
 msgid "not used"
 msgstr ""
@@ -129,6 +133,10 @@ msgstr ""
 
 #: unit1.sstartvm
 msgid "Starting a virtual machine..."
+msgstr ""
+
+#: unit1.sunmounted
+msgid "размонтирован"
 msgstr ""
 
 #: unit1.susernotingroup
