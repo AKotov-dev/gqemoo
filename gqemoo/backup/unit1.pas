@@ -463,13 +463,16 @@ end;
 //Копировать в буфер команду монтирования ~/qemoo_tmp <-> ~/hostdir (Guest) + /etc/fstab
 procedure TMainForm.ShareBtnClick(Sender: TObject);
 begin
+  // /etc/systemd/system/hostdir.service
   ClipBoard.AsText :=
-  'pkexec bash -c '+''''+'clear; if [[ -f /etc/systemd/system/hostdir.service ]]; then umount -l hostdir; ' +
-  'systemctl disable hostdir; rm -f /etc/systemd/system/hostdir.service; else test -d /home/$(logname)/hostdir ' +
-  '|| mkdir /home/$(logname)/hostdir && echo -e "[Unit]\nDescription=GQemoo shared directory ~/hostdir\n\n[Service]\nType='+
-  'oneshot\nExecStart=mount -t 9p -o trans=virtio,msize=100000000 hostdir /home/$(logname)/hostdir\n\n[Install]\nWantedBy='+
-  'multi-user.target" > /etc/systemd/system/hostdir.service; systemctl daemon-reload && systemctl start hostdir && '+
-  'systemctl enable hostdir; chown $(logname) -R /home/$(logname)/hostdir; fi' + '''';
+    'pkexec bash -c ' + '''' +
+    'clear; if [[ -f /etc/systemd/system/hostdir.service ]]; then umount -l hostdir; ' +
+    'systemctl disable hostdir; rm -f /etc/systemd/system/hostdir.service; else test -d /home/$(logname)/hostdir '
+    + '|| mkdir /home/$(logname)/hostdir && echo -e "[Unit]\nDescription=GQemoo shared directory ~/hostdir\n\n[Service]\nType='
+    + 'oneshot\nExecStart=mount -t 9p -o trans=virtio,msize=100000000 hostdir /home/$(logname)/hostdir\n\n[Install]\nWantedBy='
+    + 'multi-user.target" > /etc/systemd/system/hostdir.service; systemctl daemon-reload && systemctl start hostdir && '
+    + 'systemctl enable hostdir; chown $(logname) -R /home/$(logname)/hostdir; fi'
+    + '''';
 
    { 'pkexec bash -c ' + '''' +
     'clear; if [[ $(grep hostdir /etc/fstab) ]]; then umount -l hostdir; ' +
