@@ -321,7 +321,7 @@ begin
   //Ctrl+Q/q
   if (Key = 81) and (Shift = [ssCtrl]) then
     if MessageDlg(SKillAllQEMU, mtConfirmation, [mbYes, mbNo], 0) = mrYes then
-      RunCommand('/bin/bash', ['-c', 'killall qemu-system-x86_64 &'], s);
+      RunCommand('/bin/bash', ['-c', 'killall qemu-system-x86_64 remote-viewer &'], s);
 end;
 
 //Очистить источник, если попытка установить уже установленный образ из CurrentDirectory
