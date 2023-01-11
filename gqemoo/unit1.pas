@@ -6,7 +6,8 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, Buttons,
-  CheckLst, IniPropStorage, Process, DefaultTranslator, FileCtrl, ExtCtrls, ClipBrd;
+  CheckLst, IniPropStorage, Process, DefaultTranslator, FileCtrl, ExtCtrls,
+  ClipBrd, Menus;
 
 type
 
@@ -29,6 +30,9 @@ type
     Label4: TLabel;
     ListBox1: TListBox;
     LogMemo: TMemo;
+    MenuItem1: TMenuItem;
+    MenuItem2: TMenuItem;
+    Separator1: TMenuItem;
     OpenBtn1: TSpeedButton;
     OpenBtn2: TSpeedButton;
     OpenDialog1: TOpenDialog;
@@ -37,11 +41,12 @@ type
     Panel2: TPanel;
     Panel3: TPanel;
     Panel4: TPanel;
+    PopupMenu1: TPopupMenu;
     ReloadBtn: TSpeedButton;
     RemoveBtn: TSpeedButton;
     RenameBtn: TSpeedButton;
     SelectAllBtn: TSpeedButton;
-    ShareBtn: TSpeedButton;
+    ScriptBtn: TSpeedButton;
     Splitter1: TSplitter;
     Splitter3: TSplitter;
     StartBtn: TSpeedButton;
@@ -55,12 +60,15 @@ type
     procedure ListBox1Click(Sender: TObject);
     procedure ListBox1DrawItem(Control: TWinControl; Index: integer;
       ARect: TRect; State: TOwnerDrawState);
+    procedure MenuItem1Click(Sender: TObject);
+    procedure MenuItem2Click(Sender: TObject);
     procedure OpenBtn1Click(Sender: TObject);
     procedure OpenBtn2Click(Sender: TObject);
     procedure RemoveBtnClick(Sender: TObject);
     procedure RenameBtnClick(Sender: TObject);
     procedure SelectAllBtnClick(Sender: TObject);
-    procedure ShareBtnClick(Sender: TObject);
+    procedure ScriptBtnMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: integer);
     procedure StartBtnClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -92,8 +100,6 @@ resourcestring
   SKillAllQEMU = 'Forcibly reset all QEMU processes?';
   SWaitingSPICE = 'waiting for spice-server on 127.0.0.1:';
   SWaitingSpiceSec = 'of 5 sec)';
-  SUnmounted = 'размонтирован';
-  SMountedAs = 'смонтирован как';
 
 implementation
 
@@ -361,6 +367,33 @@ begin
   end;
 end;
 
+//Копировать в буфер команду монтирования ~/qemoo_tmp <-> ~/hostdir (Guest) + /etc/fstab
+procedure TMainForm.MenuItem1Click(Sender: TObject);
+begin
+  // /etc/systemd/system/hostdir.service
+  ClipBoard.AsText :=
+    'pkexec bash -c ' + '''' +
+    'clear; if [[ -f /etc/systemd/system/hostdir.service ]]; then umount -l hostdir; ' +
+    'systemctl disable hostdir; rm -f /etc/systemd/system/hostdir.service; else test -d /home/$(logname)/hostdir '
+    + '|| mkdir /home/$(logname)/hostdir && echo -e "[Unit]\nDescription=GQemoo shared directory ~/hostdir\n\n[Service]\nType='
+    + 'oneshot\nExecStart=mount -t 9p -o trans=virtio,msize=100000000 hostdir /home/$(logname)/hostdir\n\n[Install]\nWantedBy='
+    + 'multi-user.target" > /etc/systemd/system/hostdir.service; systemctl daemon-reload && systemctl start hostdir && '
+    + 'systemctl enable hostdir; chown $(logname) -R /home/$(logname)/hostdir; fi'
+    + '''';
+end;
+
+//Авторезайц окна VM (только для тех VM, которые сами не масштабируются)
+procedure TMainForm.MenuItem2Click(Sender: TObject);
+begin
+  ClipBoard.AsText := 'pkexec bash -c ' + '''' +
+    'if [ -f /bin/xresize ]; then killall xresize; ' +
+    'rm -f /bin/xresize /etc/xdg/autostart/xresize.desktop; exit; fi; echo -e "#! /bin/bash\n\nwhile '
+    + 'true\ndo\nxrandr --output \$(xrandr | grep \" connected\" | cut -f1 -d\" \") --auto\nsleep 2\ndone" > '
+    + '/bin/xresize; chmod +x /bin/xresize; echo -e "[Desktop Entry]\nName=XResize\nExec=xresize '
+    + '&\nType=Application\nTerminal=false" > /etc/xdg/autostart/xresize.desktop ' +
+    '''' + '&& [ -f /bin/xresize ] && nohup xresize &';
+end;
+
 //Выбрать образ загрузки
 procedure TMainForm.OpenBtn1Click(Sender: TObject);
 begin
@@ -460,29 +493,16 @@ begin
   FileListBox1.SelectAll;
 end;
 
-//Копировать в буфер команду монтирования ~/qemoo_tmp <-> ~/hostdir (Guest) + /etc/fstab
-procedure TMainForm.ShareBtnClick(Sender: TObject);
+procedure TMainForm.ScriptBtnMouseDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: integer);
+var
+  p: TPoint;
 begin
-  // /etc/systemd/system/hostdir.service
-  ClipBoard.AsText :=
-    'pkexec bash -c ' + '''' +
-    'clear; if [[ -f /etc/systemd/system/hostdir.service ]]; then umount -l hostdir; ' +
-    'systemctl disable hostdir; rm -f /etc/systemd/system/hostdir.service; else test -d /home/$(logname)/hostdir '
-    + '|| mkdir /home/$(logname)/hostdir && echo -e "[Unit]\nDescription=GQemoo shared directory ~/hostdir\n\n[Service]\nType='
-    + 'oneshot\nExecStart=mount -t 9p -o trans=virtio,msize=100000000 hostdir /home/$(logname)/hostdir\n\n[Install]\nWantedBy='
-    + 'multi-user.target" > /etc/systemd/system/hostdir.service; systemctl daemon-reload && systemctl start hostdir && '
-    + 'systemctl enable hostdir; chown $(logname) -R /home/$(logname)/hostdir; fi'
-    + '''';
-
-   { 'pkexec bash -c ' + '''' +
-    'clear; if [[ $(grep hostdir /etc/fstab) ]]; then umount -l hostdir; ' +
-    'sed -i ' + '''' + '/^hostdir/d' + '''' +
-    ' /etc/fstab; echo "/home/$(logname)/hostdir ' + SUnmounted +
-    '"; ' + 'else test -d /home/$(logname)/hostdir || mkdir /home/$(logname)/hostdir && mount -t 9p -o '
-    + 'trans=virtio,msize=100000000 hostdir /home/$(logname)/hostdir && chown $(logname) -R '
-    + '/home/$(logname)/hostdir && echo "hostdir /home/$(logname)/hostdir 9p trans=virtio,version=9p2000.L 0 0" '
-    + '>> /etc/fstab && echo "/home/$(logname)/hostdir ' + SMountedAs +
-    ' hostdir"; fi' + ''''; }
+  if Button = mbLeft then
+  begin
+    p := ScriptBtn.ClientToScreen(Point(X, Y));
+    PopupMenu1.Popup(p.x, p.Y);
+  end;
 end;
 
 procedure TMainForm.FormShow(Sender: TObject);
@@ -495,7 +515,7 @@ begin
 
   Edit2.Height := Edit1.Height;
   OpenBtn2.Width := Edit1.Height;
-  ShareBtn.Width := Edit1.Height;
+  ScriptBtn.Width := Edit1.Height;
   ClearBtn.Width := Edit1.Height;
   AllDevBox.Top := ListBox1.Top;
   //Panel1.Height := DevBox.Top + DevBox.Height + 5;

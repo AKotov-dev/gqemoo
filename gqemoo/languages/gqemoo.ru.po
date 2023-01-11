@@ -45,6 +45,15 @@ msgstr "Загрузить VM с флешки"
 msgid "...or from the image"
 msgstr "...или из образа"
 
+#: tmainform.menuitem1.caption
+msgctxt "tmainform.menuitem1.caption"
+msgid "mount/mount shared folder ~/hostdir in Linux VM"
+msgstr "mount/umount общей папки ~/hostdir в Linux VM"
+
+#: tmainform.menuitem2.caption
+msgid "xresize - automatic scaling of the Linux VM window"
+msgstr "xresize - автоматическое масштабирование окна Linux VM"
+
 #: tmainform.openbtn1.caption
 msgctxt "tmainform.openbtn1.caption"
 msgid "..."
@@ -83,18 +92,15 @@ msgctxt "tmainform.renamebtn.hint"
 msgid "Rename"
 msgstr "Переименовать"
 
+#: tmainform.scriptbtn.hint
+msgctxt "tmainform.scriptbtn.hint"
+msgid "Scripts to insert into the VM terminal via the clipboard"
+msgstr "Скрипты для вставки в терминал VM через буфер обмена"
+
 #: tmainform.selectallbtn.hint
 msgctxt "tmainform.selectallbtn.hint"
 msgid "Select all"
 msgstr "Выбрать все"
-
-#: tmainform.sharebtn.hint
-msgid ""
-"Get a command to the Clipboard to mount/umount\n"
-"the shared folder ~/hostdir in the Linux guest system"
-msgstr ""
-"Получить в буфер команду для mount/umount\n"
-"общей папки ~/hostdir в гостевой системе Linux"
 
 #: tmainform.startbtn.caption
 msgid "Start"
@@ -132,10 +138,6 @@ msgstr "Принудительно сбросить все процессы QEMU
 msgid "Loading"
 msgstr "Загрузка"
 
-#: unit1.smountedas
-msgid "смонтирован как"
-msgstr ""
-
 #: unit1.snotused
 msgid "not used"
 msgstr "нет"
@@ -147,10 +149,6 @@ msgstr "remote-viewer не найден! Установите пакет virt-vi
 #: unit1.sstartvm
 msgid "Starting a virtual machine..."
 msgstr "Старт виртуальной машины..."
-
-#: unit1.sunmounted
-msgid "размонтирован"
-msgstr ""
 
 #: unit1.susernotingroup
 msgid "User outside Group disk! Run: usermod -aG disk $LOGNAME"

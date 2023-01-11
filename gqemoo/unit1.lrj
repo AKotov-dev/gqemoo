@@ -6,7 +6,7 @@
 {"hash":101124165,"name":"tmainform.openbtn1.hint","sourcebytes":[67,104,111,111,115,101,32,97,110,32,105,109,97,103,101],"value":"Choose an image"},
 {"hash":12558,"name":"tmainform.openbtn1.caption","sourcebytes":[46,46,46],"value":"..."},
 {"hash":5941396,"name":"tmainform.startbtn.caption","sourcebytes":[83,116,97,114,116],"value":"Start"},
-{"hash":28731453,"name":"tmainform.sharebtn.hint","sourcebytes":[71,101,116,32,97,32,99,111,109,109,97,110,100,32,116,111,32,116,104,101,32,67,108,105,112,98,111,97,114,100,32,116,111,32,109,111,117,110,116,47,117,109,111,117,110,116,10,116,104,101,32,115,104,97,114,101,100,32,102,111,108,100,101,114,32,126,47,104,111,115,116,100,105,114,32,105,110,32,116,104,101,32,76,105,110,117,120,32,103,117,101,115,116,32,115,121,115,116,101,109],"value":"Get a command to the Clipboard to mount/umount\nthe shared folder ~/hostdir in the Linux guest system"},
+{"hash":235196580,"name":"tmainform.scriptbtn.hint","sourcebytes":[83,99,114,105,112,116,115,32,116,111,32,105,110,115,101,114,116,32,105,110,116,111,32,116,104,101,32,86,77,32,116,101,114,109,105,110,97,108,32,118,105,97,32,116,104,101,32,99,108,105,112,98,111,97,114,100],"value":"Scripts to insert into the VM terminal via the clipboard"},
 {"hash":248956965,"name":"tmainform.statictext2.caption","sourcebytes":[76,105,99,101,110,115,101,58,32,71,80,76,118,51,32,32,32,65,117,116,104,111,114,58,32,97,108,101,120,95,113,95,50,48,48,48,32,40,67,41,32,50,48,50,50,32,32,32,85,82,76,58,32,104,116,116,112,115,58,47,47,108,105,110,117,120,102,111,114,117,109,46,114,117],"value":"License: GPLv3   Author: alex_q_2000 (C) 2022   URL: https://linuxforum.ru"},
 {"hash":179650869,"name":"tmainform.eficheckbox.caption","sourcebytes":[69,70,73,32,77,111,100,101],"value":"EFI Mode"},
 {"hash":178815716,"name":"tmainform.label1.caption","sourcebytes":[73,110,115,116,97,108,108,101,100],"value":"Installed"},
@@ -18,5 +18,7 @@
 {"hash":170190893,"name":"tmainform.label2.caption","sourcebytes":[67,111,110,110,101,99,116,32,100,101,118,105,99,101,115,32,97,110,100,32,105,109,97,103,101,115,32,116,111,32,97,32,86,77,32,91,70,49,50,32,45,32,117,112,100,97,116,101,32,116,104,101,32,108,105,115,116,93],"value":"Connect devices and images to a VM [F12 - update the list]"},
 {"hash":80934885,"name":"tmainform.openbtn2.hint","sourcebytes":[67,111,110,110,101,99,116,32,97,110,32,105,109,97,103,101],"value":"Connect an image"},
 {"hash":12558,"name":"tmainform.openbtn2.caption","sourcebytes":[46,46,46],"value":"..."},
-{"hash":4860802,"name":"tmainform.clearbtn.hint","sourcebytes":[67,108,101,97,114],"value":"Clear"}
+{"hash":4860802,"name":"tmainform.clearbtn.hint","sourcebytes":[67,108,101,97,114],"value":"Clear"},
+{"hash":96165501,"name":"tmainform.menuitem1.caption","sourcebytes":[109,111,117,110,116,47,109,111,117,110,116,32,115,104,97,114,101,100,32,102,111,108,100,101,114,32,126,47,104,111,115,116,100,105,114,32,105,110,32,76,105,110,117,120,32,86,77],"value":"mount/mount shared folder ~/hostdir in Linux VM"},
+{"hash":201280791,"name":"tmainform.menuitem2.caption","sourcebytes":[120,114,101,115,105,122,101,32,45,32,97,117,116,111,109,97,116,105,99,32,115,99,97,108,105,110,103,32,111,102,32,116,104,101,32,76,105,110,117,120,32,86,77,32,119,105,110,100,111,119],"value":"xresize - automatic scaling of the Linux VM window"}
 ]}

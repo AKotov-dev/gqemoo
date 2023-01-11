@@ -34,6 +34,15 @@ msgstr ""
 msgid "...or from the image"
 msgstr ""
 
+#: tmainform.menuitem1.caption
+msgctxt "tmainform.menuitem1.caption"
+msgid "mount/mount shared folder ~/hostdir in Linux VM"
+msgstr ""
+
+#: tmainform.menuitem2.caption
+msgid "xresize - automatic scaling of the Linux VM window"
+msgstr ""
+
 #: tmainform.openbtn1.caption
 msgctxt "tmainform.openbtn1.caption"
 msgid "..."
@@ -72,15 +81,14 @@ msgctxt "tmainform.renamebtn.hint"
 msgid "Rename"
 msgstr ""
 
+#: tmainform.scriptbtn.hint
+msgctxt "tmainform.scriptbtn.hint"
+msgid "Scripts to insert into the VM terminal via the clipboard"
+msgstr ""
+
 #: tmainform.selectallbtn.hint
 msgctxt "tmainform.selectallbtn.hint"
 msgid "Select all"
-msgstr ""
-
-#: tmainform.sharebtn.hint
-msgid ""
-"Get a command to the Clipboard to mount/umount\n"
-"the shared folder ~/hostdir in the Linux guest system"
 msgstr ""
 
 #: tmainform.startbtn.caption
@@ -119,10 +127,6 @@ msgstr ""
 msgid "Loading"
 msgstr ""
 
-#: unit1.smountedas
-msgid "смонтирован как"
-msgstr ""
-
 #: unit1.snotused
 msgid "not used"
 msgstr ""
@@ -133,10 +137,6 @@ msgstr ""
 
 #: unit1.sstartvm
 msgid "Starting a virtual machine..."
-msgstr ""
-
-#: unit1.sunmounted
-msgid "размонтирован"
 msgstr ""
 
 #: unit1.susernotingroup
