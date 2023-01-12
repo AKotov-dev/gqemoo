@@ -884,14 +884,18 @@ object MainForm: TMainForm
     Left = 696
     Top = 128
     object MenuItem1: TMenuItem
+      AutoCheck = True
       Caption = 'mount/mount shared folder ~/hostdir in Linux VM'
+      RadioItem = True
       OnClick = MenuItem1Click
     end
     object Separator1: TMenuItem
       Caption = '-'
     end
     object MenuItem2: TMenuItem
+      AutoCheck = True
       Caption = 'xresize - automatic scaling of the Linux VM window'
+      RadioItem = True
       OnClick = MenuItem2Click
     end
   end
