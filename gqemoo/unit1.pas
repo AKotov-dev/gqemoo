@@ -493,6 +493,7 @@ begin
   FileListBox1.SelectAll;
 end;
 
+//PopUpMenu на выбор скриптов
 procedure TMainForm.ScriptBtnMouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: integer);
 var
