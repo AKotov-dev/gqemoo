@@ -537,8 +537,19 @@ begin
     //Если файл не существует - переименовать
     if not FileExists(ExtractFilePath(FileListBox1.FileName) + Value + '.qcow2') then
     begin
+      //Если у файла из списка есть флаг EFI
+      if FileExists(GetUserDir + '.gqemoo/' +
+        FileListBox1.Items[FileListBox1.ItemIndex]) then
+      begin
+        //Удаляем флаг EFI выбранного в списке
+        DeleteFile(GetUserDir + '.gqemoo/' + FileListBox1.Items[FileListBox1.ItemIndex]);
+        //Создаём флаг EFI для нового имени
+        FileListBox1.Items.SaveToFile(GetUserDir + '.gqemoo/' + Value + '.qcow2');
+      end;
+
       //Переименовываем файл
       RenameFile(FileListBox1.FileName, Value + '.qcow2');
+
       FileListBox1.UpdateFileList;
       FileListBox1.ItemIndex := 0;
     end

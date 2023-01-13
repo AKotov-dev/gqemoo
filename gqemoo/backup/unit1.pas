@@ -250,9 +250,10 @@ begin
     CFG.Add('QCOW2=' + '''' + Value + '.qcow2' + '''');
     CFG.SaveToFile(GetUserDir + '.gqemoo/qemoo.cfg');
 
-    //EFI? //Формируем команду + работа с конфигом
+    //Формируем команду: работаем с конфигом
     command := 'qemoo --qemoocfg ' + GetUserDir + '/.gqemoo/qemoo.cfg';
 
+    //EFI?
     if not EFICheckBox.Checked then
       case ListBox1.ItemIndex of
         0: command := command + ' -d ' + dev;
@@ -536,8 +537,20 @@ begin
     //Если файл не существует - переименовать
     if not FileExists(ExtractFilePath(FileListBox1.FileName) + Value + '.qcow2') then
     begin
+      //Если у файла из списка есть флаг EFI
+      if FileExists(GetUserDir + '.gqemoo/' +
+        FileListBox1.Items[FileListBox1.ItemIndex]) then
+      begin
+        //Удаляем флаг EFI выбранного в списке
+        showmessage('delete');
+        DeleteFile(GetUserDir + '.gqemoo/' + FileListBox1.Items[FileListBox1.ItemIndex]);
+        //Создаём флаг EFI для нового имени
+        FileListBox1.Items.SaveToFile(GetUserDir + '.gqemoo/' + Value + '.qcow2');
+      end;
+
       //Переименовываем файл
       RenameFile(FileListBox1.FileName, Value + '.qcow2');
+
       FileListBox1.UpdateFileList;
       FileListBox1.ItemIndex := 0;
     end
