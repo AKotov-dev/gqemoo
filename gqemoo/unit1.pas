@@ -551,7 +551,12 @@ begin
       RenameFile(FileListBox1.FileName, Value + '.qcow2');
 
       FileListBox1.UpdateFileList;
-      FileListBox1.ItemIndex := 0;
+
+      //Установка курсора на переименованный файл
+      if FileListBox1.Items.IndexOf(Value + '.qcow2') <> -1 then
+        FileListBox1.ItemIndex := (FileListBox1.Items.IndexOf(Value + '.qcow2'))
+      else
+        FileListBox1.ItemIndex := 0;
     end
     else
       MessageDlg(SFileExists, mtWarning, [mbOK], 0);

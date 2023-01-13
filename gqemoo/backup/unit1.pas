@@ -542,7 +542,6 @@ begin
         FileListBox1.Items[FileListBox1.ItemIndex]) then
       begin
         //Удаляем флаг EFI выбранного в списке
-        showmessage('delete');
         DeleteFile(GetUserDir + '.gqemoo/' + FileListBox1.Items[FileListBox1.ItemIndex]);
         //Создаём флаг EFI для нового имени
         FileListBox1.Items.SaveToFile(GetUserDir + '.gqemoo/' + Value + '.qcow2');
@@ -552,7 +551,11 @@ begin
       RenameFile(FileListBox1.FileName, Value + '.qcow2');
 
       FileListBox1.UpdateFileList;
-      FileListBox1.ItemIndex := 0;
+      //Установка курсора на переименованный файл
+      if FileListBox1.Items.IndexOf(Value + '.qcow2') <> -1 then
+        FileListBox1.ItemIndex := (FileListBox1.Items.IndexOf(Value + '.qcow2'))
+      else
+        FileListBox1.ItemIndex := 0;
     end
     else
       MessageDlg(SFileExists, mtWarning, [mbOK], 0);
