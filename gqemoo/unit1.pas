@@ -197,103 +197,109 @@ procedure TMainForm.StartBtnClick(Sender: TObject);
 const   //Заменять эти символы в имени
   BadSym = ' ={}$\/:*?"<>|@^#%&~''';
 var
-  dev, Value, Capt: string;
-  CFG: TStringList;
   i, b: integer;
+  CFG: TStringList;
+  dev, Value, Capt: string;
   FStartVM: TThread;
 begin
-  Value := '';
-  CFG := TStringList.Create;
+  try
+    Value := '';
+    CFG := TStringList.Create;
 
-  //Определяем источник загрузки
-  if DevBox.ItemIndex <> DevBox.Items.Count - 1 then
-    dev := Copy(DevBox.Text, 1, Pos(' ', DevBox.Text) - 1)
-  else
-  if Edit1.Text <> '' then
-    dev := '"' + Edit1.Text + '"'
-  else
-    Exit;
-
-  //Если Режим = Установка
-  if ListBox1.ItemIndex = 1 then
-  begin
-    //Продолжаем спрашивать имя образа, если пусто
-    repeat
-      if EfiCheckBox.Checked then Capt := SInstallationWithUEFI
-      else
-        Capt := SInstallation;
-
-      if not InputQuery(Capt, SInputNewImageName, Value) then exit;
-    until Trim(Value) <> '';
-
-    //Заменяем неразрешенные символы
-    Value := Trim(Value);
-    for i := 1 to Length(Value) do
-      if Pos(Value[i], BadSym) > 0 then
-        Value[i] := '_';
-
-    //Если файл существует - выход
-    if FileExists(Value + '.qcow2') then
-    begin
-      MessageDlg(SFileExists, mtWarning, [mbOK], 0);
-      exit;
-    end
+    //Определяем источник загрузки
+    if DevBox.ItemIndex <> DevBox.Items.Count - 1 then
+      dev := Copy(DevBox.Text, 1, Pos(' ', DevBox.Text) - 1)
     else
-    //Иначе - если установка НЕ EFI - создать флаг ~/.gqemoo/value.qcow2
-    if not EFICheckBox.Checked then
-      CFG.SaveToFile(GetUserDir + '.gqemoo/' + Value + '.qcow2');
-  end;
+    if Edit1.Text <> '' then
+      dev := '"' + Edit1.Text + '"'
+    else
+      Exit;
 
-  //Пишем конфиг ~/.gqemoo/qemoo.cfg: имя нового образа и дисплей qxl + кол-во CPU
-  CFG.Add('QEMUADD="-vga qxl -smp 2"');
-  CFG.Add('QCOW2=' + '''' + Value + '.qcow2' + '''');
-  CFG.SaveToFile(GetUserDir + '.gqemoo/qemoo.cfg');
+    //Если Режим = Установка
+    if ListBox1.ItemIndex = 1 then
+    begin
+      //Продолжаем спрашивать имя образа, если пусто
+      repeat
+        if EfiCheckBox.Checked then Capt := SInstallationWithUEFI
+        else
+          Capt := SInstallation;
 
-  //EFI? //Формируем команду + работа с конфигом
-  command := 'qemoo --qemoocfg ' + GetUserDir + '/.gqemoo/qemoo.cfg';
+        if not InputQuery(Capt, SInputNewImageName, Value) then exit;
+      until Trim(Value) <> '';
 
-  if not EFICheckBox.Checked then
-    case ListBox1.ItemIndex of
-      0: command := command + ' -d ' + dev;
-      1: command := command + ' -d -i ' + dev;
-    end
-  else
-    case ListBox1.ItemIndex of
-      0: command := command + ' -d -e ' + dev;
-      1: command := command + ' -d -e -i ' + dev;
+      //Заменяем неразрешенные символы
+      Value := Trim(Value);
+      for i := 1 to Length(Value) do
+        if Pos(Value[i], BadSym) > 0 then
+          Value[i] := '_';
+
+      //Если файл существует - выход
+      if FileExists(Value + '.qcow2') then
+      begin
+        MessageDlg(SFileExists, mtWarning, [mbOK], 0);
+        exit;
+      end
+      else
+      //Иначе - если установка НЕ EFI - создать флаг ~/.gqemoo/value.qcow2
+      if not EFICheckBox.Checked then
+        CFG.SaveToFile(GetUserDir + '.gqemoo/' + Value + '.qcow2');
     end;
 
-  //Счетчик выбранных устройств
-  b := 0;
-  //Узнаём количество выбранных
-  for i := 0 to AllDevBox.Items.Count - 1 do
-    if AllDevBox.Checked[i] then Inc(b);
+    //Пишем конфиг ~/.gqemoo/qemoo.cfg: имя нового образа и дисплей qxl + кол-во CPU
+    CFG.Add('QEMUADD="-vga qxl -smp 2"');
+    CFG.Add('QCOW2=' + '''' + Value + '.qcow2' + '''');
+    CFG.SaveToFile(GetUserDir + '.gqemoo/qemoo.cfg');
 
-  //Подключаем блочные устройства (если выбраны)
-  if b <> 0 then
-  begin
-    command := command + ' -a ';
+    //Формируем команду: работаем с конфигом
+    command := 'qemoo --qemoocfg ' + GetUserDir + '/.gqemoo/qemoo.cfg';
 
+    //EFI?
+    if not EFICheckBox.Checked then
+      case ListBox1.ItemIndex of
+        0: command := command + ' -d ' + dev;
+        1: command := command + ' -d -i ' + dev;
+      end
+    else
+      case ListBox1.ItemIndex of
+        0: command := command + ' -d -e ' + dev;
+        1: command := command + ' -d -e -i ' + dev;
+      end;
+
+    //Счетчик выбранных устройств
+    b := 0;
+    //Узнаём количество выбранных
     for i := 0 to AllDevBox.Items.Count - 1 do
-      if AllDevBox.Checked[i] then
-        command := command + Copy(AllDevBox.Items[i], 1,
-          Pos(' ', AllDevBox.Items[i]) - 1) + ',';
+      if AllDevBox.Checked[i] then Inc(b);
+
+    //Подключаем блочные устройства (если выбраны)
+    if b <> 0 then
+    begin
+      command := command + ' -a ';
+
+      for i := 0 to AllDevBox.Items.Count - 1 do
+        if AllDevBox.Checked[i] then
+          command := command + Copy(AllDevBox.Items[i], 1,
+            Pos(' ', AllDevBox.Items[i]) - 1) + ',';
+    end;
+
+    //Подключаем образ к VM (если указан)
+    if (Edit2.Text <> '') and (b <> 0) then
+      command := command + '"' + Edit2.Text + '",'
+    else
+    if Edit2.Text <> '' then
+      command := command + ' -a "' + Edit2.Text + '",';
+
+    //Удаляем последнюю запятую
+    if command[Length(command)] = ',' then
+      Delete(command, Length(command), 1);
+
+    //Запуск VM
+    FStartVM := StartVM.Create(False);
+    FStartVM.Priority := tpNormal;
+
+  finally
+    CFG.Free;
   end;
-
-  //Подключаем образ к VM (если указан)
-  if (Edit2.Text <> '') and (b <> 0) then
-    command := command + '"' + Edit2.Text + '",'
-  else
-  if Edit2.Text <> '' then
-    command := command + ' -a "' + Edit2.Text + '",';
-
-  //Удаляем последнюю запятую
-  if command[Length(command)] = ',' then
-    Delete(command, Length(command), 1);
-
-  //Запуск VM
-  FStartVM := StartVM.Create(False);
-  FStartVM.Priority := tpNormal;
 end;
 
 //Очистка пути к образу для подключения
