@@ -253,7 +253,7 @@ begin
     end;
   end;
 
-  //EFI? //Формируем команду
+  //EFI? //Формируем команду (работа с конфигом)
   command := 'qemoo --qemoocfg ' + GetUserDir + '/.gqemoo/qemoo.cfg';
 
   if not EFICheckBox.Checked then

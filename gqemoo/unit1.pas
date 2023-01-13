@@ -202,6 +202,9 @@ var
   i, b: integer;
   FStartVM: TThread;
 begin
+  Value := '';
+  CFG := TStringList.Create;
+
   //Определяем источник загрузки
   if DevBox.ItemIndex <> DevBox.Items.Count - 1 then
     dev := Copy(DevBox.Text, 1, Pos(' ', DevBox.Text) - 1)
@@ -214,46 +217,39 @@ begin
   //Если Режим = Установка
   if ListBox1.ItemIndex = 1 then
   begin
-    try
-      Value := '';
-      CFG := TStringList.Create;
-
-      //Продолжаем спрашивать имя образа, если пусто
-      repeat
-        if EfiCheckBox.Checked then Capt := SInstallationWithUEFI
-        else
-          Capt := SInstallation;
-
-        if not InputQuery(Capt, SInputNewImageName, Value) then exit;
-      until Trim(Value) <> '';
-
-      //Заменяем неразрешенные символы
-      Value := Trim(Value);
-      for i := 1 to Length(Value) do
-        if Pos(Value[i], BadSym) > 0 then
-          Value[i] := '_';
-
-      //Если файл существует - выход
-      if FileExists(Value + '.qcow2') then
-      begin
-        MessageDlg(SFileExists, mtWarning, [mbOK], 0);
-        exit;
-      end
+    //Продолжаем спрашивать имя образа, если пусто
+    repeat
+      if EfiCheckBox.Checked then Capt := SInstallationWithUEFI
       else
-      //Иначе - если установка НЕ EFI - создать флаг ~/.gqemoo/value.qcow2
-      if not EFICheckBox.Checked then
-        CFG.SaveToFile(GetUserDir + '.gqemoo/' + Value + '.qcow2');
+        Capt := SInstallation;
 
-      //Пишем имя нового образа и дисплей qxl + кол-во CPU в конфиг ~/.gqemoo/qemoo.cfg
-      CFG.Add('QEMUADD="-vga qxl -smp 2"');
-      CFG.Add('QCOW2=' + '''' + Value + '.qcow2' + '''');
-      CFG.SaveToFile(GetUserDir + '.gqemoo/qemoo.cfg');
-    finally
-      CFG.Free;
-    end;
+      if not InputQuery(Capt, SInputNewImageName, Value) then exit;
+    until Trim(Value) <> '';
+
+    //Заменяем неразрешенные символы
+    Value := Trim(Value);
+    for i := 1 to Length(Value) do
+      if Pos(Value[i], BadSym) > 0 then
+        Value[i] := '_';
+
+    //Если файл существует - выход
+    if FileExists(Value + '.qcow2') then
+    begin
+      MessageDlg(SFileExists, mtWarning, [mbOK], 0);
+      exit;
+    end
+    else
+    //Иначе - если установка НЕ EFI - создать флаг ~/.gqemoo/value.qcow2
+    if not EFICheckBox.Checked then
+      CFG.SaveToFile(GetUserDir + '.gqemoo/' + Value + '.qcow2');
   end;
 
-  //EFI? //Формируем команду (работа с конфигом)
+  //Пишем конфиг ~/.gqemoo/qemoo.cfg: имя нового образа и дисплей qxl + кол-во CPU
+  CFG.Add('QEMUADD="-vga qxl -smp 2"');
+  CFG.Add('QCOW2=' + '''' + Value + '.qcow2' + '''');
+  CFG.SaveToFile(GetUserDir + '.gqemoo/qemoo.cfg');
+
+  //EFI? //Формируем команду + работа с конфигом
   command := 'qemoo --qemoocfg ' + GetUserDir + '/.gqemoo/qemoo.cfg';
 
   if not EFICheckBox.Checked then
