@@ -11,5 +11,6 @@
 {"hash":90833649,"name":"unit1.sremoteviewernotfound","sourcebytes":[114,101,109,111,116,101,45,118,105,101,119,101,114,32,110,111,116,32,102,111,117,110,100,33,32,73,110,115,116,97,108,108,32,116,104,101,32,118,105,114,116,45,118,105,101,119,101,114,32,112,97,99,107,97,103,101,33],"value":"remote-viewer not found! Install the virt-viewer package!"},
 {"hash":212310831,"name":"unit1.skillallqemu","sourcebytes":[70,111,114,99,105,98,108,121,32,114,101,115,101,116,32,97,108,108,32,81,69,77,85,32,112,114,111,99,101,115,115,101,115,63],"value":"Forcibly reset all QEMU processes?"},
 {"hash":61534346,"name":"unit1.swaitingspice","sourcebytes":[119,97,105,116,105,110,103,32,102,111,114,32,115,112,105,99,101,45,115,101,114,118,101,114,32,111,110,32,49,50,55,46,48,46,48,46,49,58],"value":"waiting for spice-server on 127.0.0.1:"},
-{"hash":58191577,"name":"unit1.swaitingspicesec","sourcebytes":[111,102,32,53,32,115,101,99,41],"value":"of 5 sec)"}
+{"hash":58191577,"name":"unit1.swaitingspicesec","sourcebytes":[111,102,32,53,32,115,101,99,41],"value":"of 5 sec)"},
+{"hash":206424233,"name":"unit1.sinstallationwithuefi","sourcebytes":[73,110,115,116,97,108,108,97,116,105,111,110,32,119,105,116,104,32,85,69,70,73],"value":"Installation with UEFI"}
 ]}

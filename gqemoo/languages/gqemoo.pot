@@ -119,6 +119,10 @@ msgstr ""
 msgid "Installation"
 msgstr ""
 
+#: unit1.sinstallationwithuefi
+msgid "Installation with UEFI"
+msgstr ""
+
 #: unit1.skillallqemu
 msgid "Forcibly reset all QEMU processes?"
 msgstr ""

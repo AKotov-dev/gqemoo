@@ -130,6 +130,10 @@ msgstr "Введите новое имя образа:"
 msgid "Installation"
 msgstr "Установка"
 
+#: unit1.sinstallationwithuefi
+msgid "Installation with UEFI"
+msgstr "Установка с UEFI"
+
 #: unit1.skillallqemu
 msgid "Forcibly reset all QEMU processes?"
 msgstr "Принудительно сбросить все процессы QEMU?"

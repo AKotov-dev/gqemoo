@@ -100,6 +100,7 @@ resourcestring
   SKillAllQEMU = 'Forcibly reset all QEMU processes?';
   SWaitingSPICE = 'waiting for spice-server on 127.0.0.1:';
   SWaitingSpiceSec = 'of 5 sec)';
+  SInstallationWithUEFI = 'Installation with UEFI';
 
 implementation
 
@@ -193,8 +194,11 @@ end;
 
 //Запуск VM
 procedure TMainForm.StartBtnClick(Sender: TObject);
+const   //Заменять эти символы в имени
+  BadSym = ' ={}$\/:*?"<>|@^#%&~''';
 var
-  dev: string;
+  dev, Value, Capt: string;
+  CFG: TStringList;
   i, b: integer;
   FStartVM: TThread;
 begin
@@ -207,16 +211,60 @@ begin
   else
     Exit;
 
-  //EFI?
+  //Если Режим = Установка
+  if ListBox1.ItemIndex = 1 then
+  begin
+    try
+      Value := '';
+      CFG := TStringList.Create;
+
+      //Продолжаем спрашивать имя образа, если пусто
+      repeat
+        if EfiCheckBox.Checked then Capt := SInstallationWithUEFI
+        else
+          Capt := SInstallation;
+
+        if not InputQuery(Capt, SInputNewImageName, Value) then exit;
+      until Trim(Value) <> '';
+
+      //Заменяем неразрешенные символы
+      Value := Trim(Value);
+      for i := 1 to Length(Value) do
+        if Pos(Value[i], BadSym) > 0 then
+          Value[i] := '_';
+
+      //Если файл существует - выход
+      if FileExists(Value + '.qcow2') then
+      begin
+        MessageDlg(SFileExists, mtWarning, [mbOK], 0);
+        exit;
+      end
+      else
+      //Иначе - если установка НЕ EFI - создать флаг ~/.gqemoo/value.qcow2
+      if not EFICheckBox.Checked then
+        CFG.SaveToFile(GetUserDir + '.gqemoo/' + Value + '.qcow2');
+
+      //Пишем имя нового образа и дисплей qxl + кол-во CPU в конфиг ~/.gqemoo/qemoo.cfg
+      CFG.Add('QEMUADD="-vga qxl -smp 2"');
+      CFG.Add('QCOW2=' + '''' + Value + '.qcow2' + '''');
+      CFG.SaveToFile(GetUserDir + '.gqemoo/qemoo.cfg');
+    finally
+      CFG.Free;
+    end;
+  end;
+
+  //EFI? //Формируем команду
+  command := 'qemoo --qemoocfg ' + GetUserDir + '/.gqemoo/qemoo.cfg';
+
   if not EFICheckBox.Checked then
     case ListBox1.ItemIndex of
-      0: command := 'qemoo -d ' + dev;
-      1: command := 'qemoo -d -i ' + dev;
+      0: command := command + ' -d ' + dev;
+      1: command := command + ' -d -i ' + dev;
     end
   else
     case ListBox1.ItemIndex of
-      0: command := 'qemoo -d -e ' + dev;
-      1: command := 'qemoo -d -e -i ' + dev;
+      0: command := command + ' -d -e ' + dev;
+      1: command := command + ' -d -e -i ' + dev;
     end;
 
   //Счетчик выбранных устройств
@@ -247,9 +295,6 @@ begin
   if command[Length(command)] = ',' then
     Delete(command, Length(command), 1);
 
-  //Обходим конфиг, дисплей только QXL + 2 CPU
-  command := command + ' -- -vga qxl -smp 2';
-
   //Запуск VM
   FStartVM := StartVM.Create(False);
   FStartVM.Priority := tpNormal;
@@ -275,6 +320,13 @@ begin
   begin
     //Переключение режима в Загрузку
     ListBox1.ItemIndex := 0;
+
+    //Выключение EFI, если есть флаг: ~/.gqemoo/image_name.qcow2
+    if FileExists(GetUserDir + '/.gqemoo/' +
+      FileListBox1.Items[FileListBox1.ItemIndex]) then EFICheckBox.Checked := False
+    else
+      EFICheckBox.Checked := True;
+
     //Имя образа из списка в строку запуска
     Edit1.Text := FileListBox1.FileName;
 
@@ -306,8 +358,11 @@ begin
       Canvas.TextOut(aRect.Left + 32, aRect.Top + ItemHeight div 2 -
         Canvas.TextHeight('A') div 2 + 1, Items[Index]);
 
-      //Иконка
-      ImageList2.GetBitMap(0, BitMap);
+      //Иконки EFI/NO
+      if FileExists(GetUserDir + '.gqemoo/' + Items[Index]) then
+        ImageList2.GetBitMap(0, BitMap)
+      else
+        ImageList2.GetBitMap(1, BitMap);
 
       Canvas.Draw(aRect.Left + 2, aRect.Top + (ItemHeight - 24) div 2 + 1, BitMap);
     end;
@@ -436,7 +491,10 @@ begin
     begin
       for i := 0 to FileListBox1.Count - 1 do
         if FileListBox1.Selected[i] then
+        begin
           DeleteFile(FileListBox1.Items[i]);
+          DeleteFile(GetUserDir + '.gqemoo/' + FileListBox1.Items[i]);
+        end;
       FileListBox1.UpdateFileList;
 
       if FileListBox1.Count <> 0 then
@@ -493,6 +551,7 @@ begin
   FileListBox1.SelectAll;
 end;
 
+//PopUpMenu на выбор скриптов
 procedure TMainForm.ScriptBtnMouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: integer);
 var
