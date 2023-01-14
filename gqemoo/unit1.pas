@@ -449,7 +449,7 @@ begin
     + 'true\ndo\nxrandr --output \$(xrandr | grep \" connected\" | cut -f1 -d\" \") --auto\nsleep 2\ndone" > '
     + '/bin/xresize; chmod +x /bin/xresize; echo -e "[Desktop Entry]\nName=XResize\nExec=xresize '
     + '&\nType=Application\nTerminal=false" > /etc/xdg/autostart/xresize.desktop ' +
-    '''' + '&& [ -f /bin/xresize ] && nohup xresize &';
+    '''' + '&& [ -f /bin/xresize ] && nohup xresize >/dev/null 2>&1 &';
 end;
 
 //Выбрать образ загрузки

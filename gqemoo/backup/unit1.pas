@@ -245,8 +245,9 @@ begin
         CFG.SaveToFile(GetUserDir + '.gqemoo/' + Value + '.qcow2');
     end;
 
-    //Пишем конфиг ~/.gqemoo/qemoo.cfg: имя нового образа и дисплей qxl + кол-во CPU
+    //Пишем конфиг ~/.gqemoo/qemoo.cfg: дисплей qxl + кол-во CPU, имя нового образа и размер 20GB
     CFG.Add('QEMUADD="-vga qxl -smp 2"');
+    CFG.Add('SIZE=' + '''' + '20' + '''');
     CFG.Add('QCOW2=' + '''' + Value + '.qcow2' + '''');
     CFG.SaveToFile(GetUserDir + '.gqemoo/qemoo.cfg');
 
