@@ -437,8 +437,8 @@ object MainForm: TMainForm
       Left = 5
       Height = 32
       Top = 0
-      Width = 91
-      Caption = 'EFI Mode'
+      Width = 100
+      Caption = 'UEFI Mode'
       Checked = True
       State = cbChecked
       TabOrder = 0
