@@ -551,6 +551,7 @@ begin
       RenameFile(FileListBox1.FileName, Value + '.qcow2');
 
       FileListBox1.UpdateFileList;
+
       //Установка курсора на переименованный файл
       if FileListBox1.Items.IndexOf(Value + '.qcow2') <> -1 then
         FileListBox1.ItemIndex := (FileListBox1.Items.IndexOf(Value + '.qcow2'))
