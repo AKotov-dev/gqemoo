@@ -131,8 +131,8 @@ msgid "Installation"
 msgstr "Установка"
 
 #: unit1.sinstallationwithuefi
-msgid "Installation with EFI"
-msgstr "Установка с EFI"
+msgid "Installation (EFI)"
+msgstr "Установка (EFI)"
 
 #: unit1.skillallqemu
 msgid "Forcibly reset all QEMU processes?"

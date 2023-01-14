@@ -120,7 +120,7 @@ msgid "Installation"
 msgstr ""
 
 #: unit1.sinstallationwithuefi
-msgid "Installation with EFI"
+msgid "Installation (EFI)"
 msgstr ""
 
 #: unit1.skillallqemu
