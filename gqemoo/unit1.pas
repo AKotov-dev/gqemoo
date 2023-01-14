@@ -396,7 +396,7 @@ begin
       Edit1.Text := '';
 end;
 
-//Вставка иконок в ListBox
+//Вставка иконок в ListBox (Загрузка/Установка)
 procedure TMainForm.ListBox1DrawItem(Control: TWinControl; Index: integer;
   ARect: TRect; State: TOwnerDrawState);
 var

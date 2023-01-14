@@ -100,7 +100,7 @@ resourcestring
   SKillAllQEMU = 'Forcibly reset all QEMU processes?';
   SWaitingSPICE = 'waiting for spice-server on 127.0.0.1:';
   SWaitingSpiceSec = 'of 5 sec)';
-  SInstallationWithUEFI = 'Installation with EFI';
+  SInstallationWithUEFI = 'Installation (EFI)';
 
 implementation
 
