@@ -22,7 +22,6 @@ msgid "Clear"
 msgstr "Убрать"
 
 #: tmainform.clonebtn.hint
-#, fuzzy
 msgctxt "tmainform.clonebtn.hint"
 msgid "Clone (Esc-Cancel)"
 msgstr "Клон (Esc-Отмена)"
@@ -187,4 +186,3 @@ msgstr "ожидаю spice-server на 127.0.0.1:"
 #: unit1.swaitingspicesec
 msgid "of 5 sec)"
 msgstr "из 5 сек)"
-
