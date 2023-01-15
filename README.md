@@ -6,12 +6,13 @@ qemoo rpm: [qemoo-x.x-x-rosa2021.1.noarch.rpm](https://mirror.yandex.ru/rosa/ros
 qemoo config: /etc/qemoo.cfg  
   
 Free icons: https://www.flaticon.com  
-Dependencies: `qemoo qemu gtk2 virt-viewer`  
+Dependencies: `qemoo qemu gtk2 virt-viewer rsync`  
 Dependencies for VMs: `xrandr spice-vdagent`  
   
 **Hot Keys:**
 + `F12` - Update the list of connected devices
-+ `Ctrl+Q` - Force reset of all QEMU processes  
++ `Ctrl+Q` - Force reset of all QEMU processes
++ `Esc` - Canceling image cloning *.qcow2  
   
 Supported loading and installing virtual machines from flash drives, images and already installed images `*.qcow2`. Before booting a virtual machine, you can connect additional flash drives, images, and block devices. Bidirectional `Clipboard` and `Drag&Drop` are also supported.  
   
