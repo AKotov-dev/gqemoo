@@ -1,4 +1,4 @@
-unit start_trd;
+unit clone_progress_trd;
 
 {$mode objfpc}{$H+}
 
@@ -8,7 +8,7 @@ uses
   Classes, Process, SysUtils, ComCtrls, Forms;
 
 type
-  StartVM = class(TThread)
+  StartClone = class(TThread)
   private
 
     { Private declarations }
@@ -31,7 +31,7 @@ uses Unit1;
 
 { TRD }
 
-procedure StartVM.Execute;
+procedure StartClone.Execute;
 var
   ExProcess: TProcess;
 begin
@@ -47,22 +47,7 @@ begin
     ExProcess.Executable := 'bash';
     ExProcess.Parameters.Add('-c');
 
-    //Проверка юзера в группе disk, наличие remote-viewer
-    //Иначе - ожидание 5 sec localhost:$port для подключения spice-vdagent/spice-guest-tools извне
-    ExProcess.Parameters.Add('echo "' + SStartVM + '"; ' +
-      'if [[ -z $(groups | grep disk) ]]; then echo "' + SUserNotInGroup +
-      '"; exit 1; fi; if [[ ! $(type -f remote-viewer 2>/dev/null) ]]; then echo "' +
-      SRemoteViewerNotFound + '"; exit 1; fi; ' + 'a=$(' + command +
-      ' > ~/.gqemoo/log && awk ' + '''' + '$1 == "PID" || $1 == "PORT" {print $3}' +
-      '''' + ' ~/.gqemoo/log); port=$(echo "$a" | head -n1); pid=$(echo "$a" | tail -n1) '
-      +
-      //Ожидание 5 sec выданного $port
-      '&& i=0; while [[ -z $(ss -ltn | grep $port) ]]; do sleep 1; ((i++)); ' +
-      'echo "' + SWaitingSPICE + '$port ($i ' + SWaitingSpiceSec +
-      '"; if [[ $i == 5 ]]; then break; fi; done ' +
-      //Запуск вьюера или отбой
-      '&& remote-viewer -v spice://localhost:$port ' +
-      '&& ps --pid "$pid" >/dev/null; [ "$?" -eq "0" ] && kill "$pid"');
+    ExProcess.Parameters.Add(clone_cmd);
 
     ExProcess.Options := [poUsePipes, poStderrToOutPut];
     //, poWaitOnExit (синхронный вывод)
@@ -89,10 +74,7 @@ end;
 { БЛОК ОТОБРАЖЕНИЯ ЛОГА }
 
 //Запуск VM
-procedure StartVM.StartProcess;
-var
-  usb: string;
-  s: ansistring;
+procedure StartClone.StartProcess;
 begin
   with MainForm do
   begin
@@ -102,28 +84,28 @@ begin
     //Запомнить индекс из списка установленных образов
     findex := FileListBox1.ItemIndex;
 
-    //Если запуск с флешки - попытка размонтировать /dev/xxx{1..4}
-    if DevBox.ItemIndex <> DevBox.Items.Count - 1 then
-    begin
-      usb := Copy(DevBox.Text, 1, Pos(' ', DevBox.Text) - 1);
-      RunCommand('/bin/bash', ['-c', 'umount -l ' + usb + '1 ' + usb +
-        '2 ' + usb + '3 ' + usb + '4'], s);
-    end;
+    //Если есть флаг (NO)EFI ~/.gqemoo/image.qcow2 - создать такой же для клона
+    if FileExists(GetUserDir + '.gqemoo/' +
+      FileListBox1.Items[FileListBox1.ItemIndex]) then
+      ListBox1.Items.SaveToFile(GetUserDir + '.gqemoo/' +
+        Copy(clone_cmd, Pos('" ', clone_cmd) + 2, Length(clone_cmd)));
 
     LogMemo.Repaint;
   end;
 end;
 
 //Запуск VM завершен
-procedure StartVM.StopProcess;
+procedure StartClone.StopProcess;
 begin
   with MainForm do
   begin
     Application.ProcessMessages;
+
+    LogMemo.Append(SCloningComplete);
     LogMemo.Repaint;
 
     //Если появился новый образ - обновить
-    FileListBox1.UpdateFileList;
+    MainForm.FileListBox1.UpdateFileList;
 
     //И вернуть курсор на прежнюю позицию в списке установленных образов
     FileListBox1.SetFocus;
@@ -135,17 +117,21 @@ begin
 end;
 
 //Вывод лога
-procedure StartVM.ShowLog;
+procedure StartClone.ShowLog;
 var
   i: integer;
 begin
-  //Вывод построчно
-  for i := 0 to Result.Count - 1 do
-    MainForm.LogMemo.Lines.Append(Result[i]);
+  with MainForm do
+  begin
+    LogMemo.Clear;
 
-  //Промотать список вниз
-  MainForm.LogMemo.SelStart := Length(MainForm.LogMemo.Text);
-  MainForm.LogMemo.SelLength := 0;
+    //Вывод построчно
+    LogMemo.Append(SCloningMsg + ' ' + FileListBox1.Items[FileListBox1.ItemIndex] +
+      ' -> ' + Copy(clone_cmd, Pos('" ', clone_cmd) + 2, Length(clone_cmd)));
+
+    for i := 0 to Result.Count - 1 do
+      MainForm.LogMemo.Lines.Append(Trim(Result[i]));
+  end;
 end;
 
 end.

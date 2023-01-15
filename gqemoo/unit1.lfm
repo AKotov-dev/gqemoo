@@ -371,18 +371,18 @@ object MainForm: TMainForm
   end
   object Panel2: TPanel
     Left = 0
-    Height = 162
-    Top = 497
+    Height = 142
+    Top = 517
     Width = 864
     Align = alBottom
     BevelOuter = bvNone
-    ClientHeight = 162
+    ClientHeight = 142
     ClientWidth = 864
     TabOrder = 1
     object StaticText2: TStaticText
       Left = 0
       Height = 17
-      Top = 145
+      Top = 125
       Width = 864
       Align = alBottom
       Caption = 'License: GPLv3   Author: alex_q_2000 (C) 2022   URL: https://linuxforum.ru'
@@ -401,7 +401,7 @@ object MainForm: TMainForm
       AnchorSideRight.Side = asrBottom
       AnchorSideBottom.Control = StaticText2
       Left = 5
-      Height = 145
+      Height = 125
       Top = 0
       Width = 854
       Anchors = [akTop, akLeft, akRight, akBottom]
@@ -416,20 +416,20 @@ object MainForm: TMainForm
     Cursor = crVSplit
     Left = 0
     Height = 5
-    Top = 492
+    Top = 512
     Width = 864
     Align = alBottom
     ResizeAnchor = akBottom
   end
   object Panel3: TPanel
     Left = 0
-    Height = 420
+    Height = 440
     Top = 72
-    Width = 264
+    Width = 277
     Align = alLeft
     BevelOuter = bvNone
-    ClientHeight = 420
-    ClientWidth = 264
+    ClientHeight = 440
+    ClientWidth = 277
     TabOrder = 3
     object EFICheckBox: TCheckBox
       AnchorSideTop.Control = Panel3
@@ -452,7 +452,7 @@ object MainForm: TMainForm
       Left = 5
       Height = 92
       Top = 34
-      Width = 259
+      Width = 272
       Anchors = [akTop, akLeft, akRight]
       BorderSpacing.Left = 5
       BorderSpacing.Top = 2
@@ -484,7 +484,7 @@ object MainForm: TMainForm
       AnchorSideBottom.Control = SelectAllBtn
       AnchorSideBottom.Side = asrBottom
       Cursor = crHandPoint
-      Left = 165
+      Left = 178
       Height = 33
       Hint = 'Rename'
       Top = 133
@@ -536,7 +536,7 @@ object MainForm: TMainForm
       AnchorSideBottom.Control = RemoveBtn
       AnchorSideBottom.Side = asrBottom
       Cursor = crHandPoint
-      Left = 198
+      Left = 211
       Height = 33
       Hint = 'Select all'
       Top = 133
@@ -588,7 +588,7 @@ object MainForm: TMainForm
       AnchorSideRight.Control = Panel3
       AnchorSideRight.Side = asrBottom
       Cursor = crHandPoint
-      Left = 231
+      Left = 244
       Height = 33
       Hint = 'Delete selected'
       Top = 133
@@ -639,10 +639,10 @@ object MainForm: TMainForm
       AnchorSideTop.Control = RemoveBtn
       AnchorSideTop.Side = asrBottom
       Left = 5
-      Height = 251
+      Height = 271
       Hint = 'DblClick - Start'
       Top = 169
-      Width = 259
+      Width = 272
       Align = alBottom
       Anchors = [akTop, akLeft, akRight, akBottom]
       BorderSpacing.Left = 5
@@ -659,23 +659,75 @@ object MainForm: TMainForm
       TabOrder = 2
       TopIndex = -1
     end
+    object CloneBtn: TSpeedButton
+      AnchorSideTop.Control = RenameBtn
+      AnchorSideRight.Control = RenameBtn
+      AnchorSideBottom.Control = RenameBtn
+      AnchorSideBottom.Side = asrBottom
+      Cursor = crHandPoint
+      Left = 145
+      Height = 33
+      Hint = 'Clone (Esc-Cancel)'
+      Top = 133
+      Width = 33
+      Anchors = [akTop, akRight, akBottom]
+      Glyph.Data = {
+        36040000424D3604000000000000360000002800000010000000100000000100
+        2000000000000004000064000000640000000000000000000000000000000000
+        00000000000000000000F26B0026F06E0087F06D0088F06D0088F06D0088F06D
+        0088F06D0088F06D0088F06D0088F06D0088F06D0088EE6C002D000000000000
+        00000000000000000000EF6C0071F16D00C3F06D0077F06D0077F06D0077F06D
+        0077F06D0077F06D0077F06D0077F06D0077F06D00BBEF6E0080000000000000
+        00000000000000000000EF6C0071F16E008E0000000000000000000000000000
+        000000000000000000000000000000000000EF6E0080EF6E0080000000000000
+        00000000000000000000EF6C0071F16E008E0000000000000000000000000000
+        000000000000000000000000000000000000EF6E0080EF6E0080F26B0026F06D
+        0077F06D0077F06D0077EF6E00B3F16D00C3F06D0077F06D0077F06D0077F06D
+        0077F06C0076EF6B001F0000000000000000EF6E0080EF6E0080F08526BAEE7E
+        1AFBED8F36F6ED8F36F6ED8F36F6ED8F36F6ED8F36F6ED8F36F6ED8F36F6ED8F
+        36F6EF7C17FBEF6F02730000000000000000EF6E0080EF6E0080EE8628C0ED93
+        3CFFEBB978FFEBB978FFEBB978FFEBB978FFEBB978FFEBB978FFEBB978FFEBB9
+        78FFEE8F35FFF06E04740000000000000000EF6E0080EF6E0080EE8628C0ED93
+        3CFFEBB978FFEBB978FFEBB978FFEBB978FFEBB978FFEBB978FFEBB978FFEBB9
+        78FFEE8F35FFF06E04740000000000000000EF6E0080EF6E0080EE8628C0ED93
+        3CFFEBB978FFEBB978FFEBB978FFEBB978FFEBB978FFEBB978FFEBB978FFEBB9
+        78FFEE8F35FFF06E04740000000000000000EF6E0080EF6E0080EE8628C0ED93
+        3CFFEBB978FFEBB978FFEBB978FFEBB978FFEBB978FFEBB978FFEBB978FFEBB9
+        78FFEE8F35FFF06E04740000000000000000EF6E0080EF6E0080EE8628C0ED93
+        3CFFEBB978FFEBB978FFEBB978FFEBB978FFEBB978FFEBB978FFEBB978FFEBB9
+        78FFEE8F35FFF06D01BFF06D0088F06D0088EF6D00C4F16C007FEE8628C0ED93
+        3CFFEBB978FFEBB978FFEBB978FFEBB978FFEBB978FFEBB978FFEBB978FFEBB9
+        78FFEE8F35FFF06E01B5F06D0077F06D0077F06D0077F26B0026EE8628C0ED93
+        3CFFEBB978FFEBB978FFEBB978FFEBB978FFEBB978FFEBB978FFEBB978FFEBB9
+        78FFEE8F35FFF06E047400000000000000000000000000000000EE8628C0ED93
+        3CFFEBB978FFEBB978FFEBB978FFEBB978FFEBB978FFEBB978FFEBB978FFEBB9
+        78FFEE8F35FFF06E047400000000000000000000000000000000EE8628C0EE7F
+        1CFFEE9038FFEE9038FFEE9038FFEE9038FFEE9038FFEE9038FFEE9038FFEE90
+        38FFEF7C19FFF06E047400000000000000000000000000000000EE6C002DF06D
+        0077F06D0077F06D0077F06D0077F06D0077F06D0077F06D0077F06D0077F06D
+        0077F06D0077F26B002600000000000000000000000000000000
+      }
+      OnClick = CloneBtnClick
+      ShowHint = True
+      ParentShowHint = False
+    end
   end
   object Splitter3: TSplitter
-    Left = 264
-    Height = 420
+    Left = 277
+    Height = 440
     Top = 72
     Width = 5
   end
   object Panel4: TPanel
-    Left = 269
-    Height = 420
+    Left = 282
+    Height = 440
     Top = 72
-    Width = 595
+    Width = 582
     Align = alClient
     BevelOuter = bvNone
     Caption = 'Panel4'
-    ClientHeight = 420
-    ClientWidth = 595
+    ClientHeight = 440
+    ClientWidth = 582
     TabOrder = 5
     object Label2: TLabel
       AnchorSideLeft.Control = Panel4
@@ -694,9 +746,9 @@ object MainForm: TMainForm
       AnchorSideRight.Side = asrBottom
       AnchorSideBottom.Control = Edit2
       Left = 0
-      Height = 353
+      Height = 373
       Top = 25
-      Width = 590
+      Width = 577
       Anchors = [akTop, akLeft, akRight, akBottom]
       BorderSpacing.Top = 5
       BorderSpacing.Right = 5
@@ -718,8 +770,8 @@ object MainForm: TMainForm
       AnchorSideBottom.Side = asrBottom
       Left = 0
       Height = 37
-      Top = 383
-      Width = 514
+      Top = 403
+      Width = 501
       Anchors = [akLeft, akRight, akBottom]
       ReadOnly = True
       TabOrder = 1
@@ -731,10 +783,10 @@ object MainForm: TMainForm
       AnchorSideRight.Control = ClearBtn
       AnchorSideBottom.Control = Edit2
       AnchorSideBottom.Side = asrBottom
-      Left = 514
+      Left = 501
       Height = 37
       Hint = 'Connect an image'
-      Top = 383
+      Top = 403
       Width = 37
       Anchors = [akTop, akRight, akBottom]
       Caption = '...'
@@ -748,10 +800,10 @@ object MainForm: TMainForm
       AnchorSideRight.Side = asrBottom
       AnchorSideBottom.Control = OpenBtn2
       AnchorSideBottom.Side = asrBottom
-      Left = 551
+      Left = 538
       Height = 37
       Hint = 'Clear'
-      Top = 383
+      Top = 403
       Width = 39
       Anchors = [akTop, akRight, akBottom]
       Glyph.Data = {

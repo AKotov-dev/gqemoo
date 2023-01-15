@@ -10,6 +10,11 @@ msgctxt "tmainform.clearbtn.hint"
 msgid "Clear"
 msgstr ""
 
+#: tmainform.clonebtn.hint
+msgctxt "tmainform.clonebtn.hint"
+msgid "Clone (Esc-Cancel)"
+msgstr ""
+
 #: tmainform.eficheckbox.caption
 msgid "EFI Mode"
 msgstr ""
@@ -99,8 +104,20 @@ msgstr ""
 msgid "License: GPLv3   Author: alex_q_2000 (C) 2022   URL: https://linuxforum.ru"
 msgstr ""
 
+#: unit1.scaptcloneimage
+msgid "Сloning an image"
+msgstr ""
+
 #: unit1.scaptrenameimage
 msgid "Rename an image"
+msgstr ""
+
+#: unit1.scloningcomplete
+msgid "Cloning is complete"
+msgstr ""
+
+#: unit1.scloningmsg
+msgid "Cloning is in progress:"
 msgstr ""
 
 #: unit1.sdeleteimages
@@ -109,6 +126,10 @@ msgstr ""
 
 #: unit1.sfileexists
 msgid "The file exists! Specify a different name!"
+msgstr ""
+
+#: unit1.sinputcloneimagename
+msgid "Enter the clone name:"
 msgstr ""
 
 #: unit1.sinputnewimagename

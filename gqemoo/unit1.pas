@@ -47,6 +47,7 @@ type
     RenameBtn: TSpeedButton;
     SelectAllBtn: TSpeedButton;
     ScriptBtn: TSpeedButton;
+    CloneBtn: TSpeedButton;
     Splitter1: TSplitter;
     Splitter3: TSplitter;
     StartBtn: TSpeedButton;
@@ -69,6 +70,7 @@ type
     procedure SelectAllBtnClick(Sender: TObject);
     procedure ScriptBtnMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: integer);
+    procedure CloneBtnClick(Sender: TObject);
     procedure StartBtnClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -83,7 +85,7 @@ type
 
 var
   MainForm: TMainForm;
-  command: string;
+  command, clone_cmd: string;
 
 resourcestring
   SLoading = 'Loading';
@@ -101,10 +103,14 @@ resourcestring
   SWaitingSPICE = 'waiting for spice-server on 127.0.0.1:';
   SWaitingSpiceSec = 'of 5 sec)';
   SInstallationWithUEFI = 'Installation (EFI)';
+  SCaptCloneImage = 'Сloning an image';
+  SInputCloneImageName = 'Enter the clone name:';
+  SCloningMsg = 'Cloning is in progress:';
+  SCloningComplete = 'Cloning is complete';
 
 implementation
 
-uses start_trd;
+uses start_trd, clone_progress_trd;
 
 {$R *.lfm}
 
@@ -240,7 +246,7 @@ begin
         exit;
       end
       else
-      //Иначе - если установка НЕ EFI - создать флаг ~/.gqemoo/value.qcow2
+      //Иначе - если установка (NO)EFI - создать флаг ~/.gqemoo/value.qcow2
       if not EFICheckBox.Checked then
         CFG.SaveToFile(GetUserDir + '.gqemoo/' + Value + '.qcow2');
     end;
@@ -386,6 +392,12 @@ begin
   if (Key = 81) and (Shift = [ssCtrl]) then
     if MessageDlg(SKillAllQEMU, mtConfirmation, [mbYes, mbNo], 0) = mrYes then
       RunCommand('/bin/bash', ['-c', 'killall remote-viewer qemu-system-x86_64 &'], s);
+
+  //Esc - отмена клонирования и удаление флага (NO)EFI
+  if Key = 27 then
+    if RunCommand('/bin/bash', ['-c', 'killall rsync &'], s) then
+      DeleteFile(GetUserDir + '.gqemoo/' + Copy(clone_cmd,
+        Pos('" ', clone_cmd) + 2, Length(clone_cmd)));
 end;
 
 //Очистить источник, если попытка установить уже установленный образ из CurrentDirectory
@@ -488,7 +500,7 @@ procedure TMainForm.RemoveBtnClick(Sender: TObject);
 var
   i: integer;
 begin
-  if FileListBox1.Count <> 0 then
+  if FileListBox1.SelCount <> 0 then
   begin
     if MessageDlg(SDeleteImages, mtConfirmation, [mbYes, mbNo], 0) = mrYes then
     begin
@@ -517,7 +529,7 @@ var
 const
   BadSym = '={}$\/:*?"<>|@^#%&~'''; //Заменять эти символы
 begin
-  if FileListBox1.Count <> 0 then
+  if FileListBox1.SelCount <> 0 then
   begin
     //Получаем имя без пути и расширения
     Value := Copy(ExtractFileName(FileListBox1.FileName), 1,
@@ -538,13 +550,13 @@ begin
     //Если файл не существует - переименовать
     if not FileExists(ExtractFilePath(FileListBox1.FileName) + Value + '.qcow2') then
     begin
-      //Если у файла из списка есть флаг EFI
+      //Если у файла из списка есть флаг (NO)EFI
       if FileExists(GetUserDir + '.gqemoo/' +
         FileListBox1.Items[FileListBox1.ItemIndex]) then
       begin
-        //Удаляем флаг EFI выбранного в списке
+        //Удаляем флаг (NO)EFI выбранного в списке
         DeleteFile(GetUserDir + '.gqemoo/' + FileListBox1.Items[FileListBox1.ItemIndex]);
-        //Создаём флаг EFI для нового имени
+        //Создаём флаг (NO)EFI для нового имени
         FileListBox1.Items.SaveToFile(GetUserDir + '.gqemoo/' + Value + '.qcow2');
       end;
 
@@ -580,6 +592,50 @@ begin
   begin
     p := ScriptBtn.ClientToScreen(Point(X, Y));
     PopupMenu1.Popup(p.x, p.Y);
+  end;
+end;
+
+//Клонирование образа *.qcow2
+procedure TMainForm.CloneBtnClick(Sender: TObject);
+var
+  i: integer;
+  Value: string;
+  FStartClone: TThread;
+const
+  BadSym = ' ={}$\/:*?"<>|@^#%&~'''; //Заменять эти символы
+begin
+  if FileListBox1.SelCount <> 0 then
+  begin
+    //Получаем имя без пути и расширения
+    Value := Copy(ExtractFileName(FileListBox1.FileName), 1,
+      Length(ExtractFileName(FileListBox1.FileName)) - 6) + '_clone';
+
+    //Продолжаем спрашивать имя образа, если пусто
+    repeat
+      if not InputQuery(SCaptCloneImage, SInputCloneImageName, Value) then exit;
+    until Trim(Value) <> '';
+
+    //Заменяем неразрешенные символы
+    Value := Trim(Value);
+
+    for i := 1 to Length(Value) do
+      if Pos(Value[i], BadSym) > 0 then
+        Value[i] := '_';
+
+    //Файл существует - выход
+    if FileExists(ExtractFilePath(FileListBox1.FileName) + Value + '.qcow2') then
+    begin
+      MessageDlg(SFileExists, mtWarning, [mbOK], 0);
+      Exit;
+    end;
+
+    //Формируем команду клонирования
+    clone_cmd := 'nice -n 19 rsync --progress "' + MainForm.FileListBox1.FileName +
+      '" ' + Value + '.qcow2';
+
+    //Запуск клонирования VM
+    FStartClone := StartClone.Create(False);
+    FStartClone.Priority := tpLower;
   end;
 end;
 

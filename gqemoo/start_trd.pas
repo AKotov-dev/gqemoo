@@ -122,7 +122,7 @@ begin
     Application.ProcessMessages;
     LogMemo.Repaint;
 
-    //Если появился новый образ - обновить
+    //Обновить список установленных образов
     FileListBox1.UpdateFileList;
 
     //И вернуть курсор на прежнюю позицию в списке установленных образов

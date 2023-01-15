@@ -21,6 +21,12 @@ msgctxt "tmainform.clearbtn.hint"
 msgid "Clear"
 msgstr "Убрать"
 
+#: tmainform.clonebtn.hint
+#, fuzzy
+msgctxt "tmainform.clonebtn.hint"
+msgid "Clone (Esc-Cancel)"
+msgstr "Клон (Esc-Отмена)"
+
 #: tmainform.eficheckbox.caption
 msgid "EFI Mode"
 msgstr "Режим EFI"
@@ -110,9 +116,21 @@ msgstr "Старт"
 msgid "License: GPLv3   Author: alex_q_2000 (C) 2022   URL: https://linuxforum.ru"
 msgstr "Лицензия: GPLv3   Автор: alex_q_2000 (C) 2022   URL: https://linuxforum.ru"
 
+#: unit1.scaptcloneimage
+msgid "Сloning an image"
+msgstr "Клонирование образа"
+
 #: unit1.scaptrenameimage
 msgid "Rename an image"
 msgstr "Переименовать образ"
+
+#: unit1.scloningcomplete
+msgid "Cloning is complete"
+msgstr "Клонирование завершено"
+
+#: unit1.scloningmsg
+msgid "Cloning is in progress:"
+msgstr "Идёт клонирование:"
 
 #: unit1.sdeleteimages
 msgid "Delete selected images?"
@@ -121,6 +139,10 @@ msgstr "Удалить выбранные образы?"
 #: unit1.sfileexists
 msgid "The file exists! Specify a different name!"
 msgstr "Файл существует! Укажите другое имя!"
+
+#: unit1.sinputcloneimagename
+msgid "Enter the clone name:"
+msgstr "Введите имя клона:"
 
 #: unit1.sinputnewimagename
 msgid "Enter a new image name:"
@@ -165,3 +187,4 @@ msgstr "ожидаю spice-server на 127.0.0.1:"
 #: unit1.swaitingspicesec
 msgid "of 5 sec)"
 msgstr "из 5 сек)"
+
