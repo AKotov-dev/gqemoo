@@ -65,7 +65,7 @@ programname=GQemoo
 devtool=Lazarus
 
 [TOOLVERSION]
-toolversion=2.2.0
+toolversion=2.2.4
 
 [INFO]
 0=qemoo: https://abf.io/betcher_/qemoo
