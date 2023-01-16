@@ -124,7 +124,7 @@ procedure TMainForm.KillAllRsync;
 var
   s: ansistring;
 begin
-  RunCommand('/bin/bash', ['-c', 'if [[ $(pidof rsync) ]]; then killall rsync; rm -rf ' +
+  RunCommand('/bin/bash', ['-c', 'if [[ $(pidof rsync) ]]; then killall rsync; rm -f ' +
     GetUserDir + '.gqemoo/' + Copy(clone_cmd, Pos('" ', clone_cmd) +
     2, Length(clone_cmd)) + '; fi; exit 0'], s);
 end;

@@ -402,8 +402,7 @@ begin
 
   if Trim(s) = 'yes' then
   begin
-    if MessageDlg('Запущено клонирование. Отменить?',
-      mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+    if MessageDlg(SCancelCloning, mtConfirmation, [mbYes, mbNo], 0) = mrYes then
       KillAllRsync
     else
       CanClose := False;
