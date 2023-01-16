@@ -57,6 +57,7 @@ type
     procedure FileListBox1DblClick(Sender: TObject);
     procedure FileListBox1DrawItem(Control: TWinControl; Index: integer;
       ARect: TRect; State: TOwnerDrawState);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: boolean);
     procedure FormKeyUp(Sender: TObject; var Key: word; Shift: TShiftState);
     procedure ListBox1Click(Sender: TObject);
     procedure ListBox1DrawItem(Control: TWinControl; Index: integer;
@@ -77,6 +78,7 @@ type
     procedure ReloadBtnClick(Sender: TObject);
     procedure ReloadUSBDevices;
     procedure ReloadAllDevices;
+    procedure KillAllRsync;
   private
 
   public
@@ -107,6 +109,7 @@ resourcestring
   SInputCloneImageName = 'Enter the clone name:';
   SCloningMsg = 'Cloning is in progress:';
   SCloningComplete = 'Cloning is complete';
+  SCancelCloning = 'Cloning started. Terminate?';
 
 implementation
 
@@ -115,6 +118,16 @@ uses start_trd, clone_progress_trd;
 {$R *.lfm}
 
 { TMainForm }
+
+//Отмена клонирования и удаление флага (NO)EFI
+procedure TMainForm.KillAllRsync;
+var
+  s: ansistring;
+begin
+  RunCommand('/bin/bash', ['-c', 'if [[ $(pidof rsync) ]]; then killall rsync; rm -rf ' +
+    GetUserDir + '.gqemoo/' + Copy(clone_cmd, Pos('" ', clone_cmd) +
+    2, Length(clone_cmd)) + '; fi; exit 0'], s);
+end;
 
 //Начитываем все устройства
 procedure TMainForm.ReloadAllDevices;
@@ -380,6 +393,22 @@ begin
   end;
 end;
 
+//Если клонирование в процессе - Запрос на продолжение или отмена с закрытием формы
+procedure TMainForm.FormCloseQuery(Sender: TObject; var CanClose: boolean);
+var
+  s: ansistring;
+begin
+  RunCommand('/bin/bash', ['-c', '[[ $(pidof rsync) ]] && echo "yes"'], s);
+
+  if Trim(s) = 'yes' then
+  begin
+    if MessageDlg(SCancelCloning, mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+      KillAllRsync
+    else
+      CanClose := False;
+  end;
+end;
+
 //F12 - обновить список устройств, Ctrl+Q/q - принудительный сброс процессов remote-viewer и qemu
 procedure TMainForm.FormKeyUp(Sender: TObject; var Key: word; Shift: TShiftState);
 var
@@ -394,10 +423,7 @@ begin
       RunCommand('/bin/bash', ['-c', 'killall remote-viewer qemu-system-x86_64 &'], s);
 
   //Esc - отмена клонирования и удаление флага (NO)EFI
-  if Key = 27 then
-    if RunCommand('/bin/bash', ['-c', 'killall rsync &'], s) then
-      DeleteFile(GetUserDir + '.gqemoo/' +
-        Copy(clone_cmd, Pos('" ', clone_cmd) + 2, Length(clone_cmd)));
+  if Key = 27 then KillAllRsync;
 end;
 
 //Очистить источник, если попытка установить уже установленный образ из CurrentDirectory
@@ -461,8 +487,7 @@ begin
     + 'true\ndo\nxrandr --output \$(xrandr | grep \" connected\" | cut -f1 -d\" \") --auto\nsleep 2\ndone" > '
     + '/bin/xresize; chmod +x /bin/xresize; echo -e "[Desktop Entry]\nName=XResize\nExec=xresize '
     + '&\nType=Application\nTerminal=false" > /etc/xdg/autostart/xresize.desktop; fi ' +
-    '''' + '; if [ -f /bin/xresize ]; then [ $UID == 0 ] && echo "UID=0; XResize will be enabled after reboot..."; '
-    + '[ -f /bin/xresize ] && nohup xresize >/dev/null 2>&1 & fi';
+    '''' + '; if [ -f /bin/xresize ]; then [ $UID == 0 ] && echo "UID=0; XResize will be enabled after reboot..."; ' + '[ -f /bin/xresize ] && nohup xresize >/dev/null 2>&1 & fi';
 end;
 
 //Выбрать образ загрузки

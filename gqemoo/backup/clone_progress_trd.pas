@@ -73,7 +73,7 @@ end;
 
 { БЛОК ОТОБРАЖЕНИЯ ЛОГА }
 
-//Запуск VM
+//Запуск клонирования VM
 procedure StartClone.StartProcess;
 begin
   with MainForm do
@@ -94,17 +94,18 @@ begin
   end;
 end;
 
-//Запуск VM завершен
+//Клонирование VM завершено
 procedure StartClone.StopProcess;
 begin
   with MainForm do
   begin
     Application.ProcessMessages;
 
+    //Известить об окончании клонирования
     LogMemo.Append(SCloningComplete);
     LogMemo.Repaint;
 
-    //Если появился новый образ - обновить
+    //Обновить список установленных образов
     MainForm.FileListBox1.UpdateFileList;
 
     //И вернуть курсор на прежнюю позицию в списке установленных образов
@@ -113,6 +114,10 @@ begin
     else
       FileListbox1.ItemIndex := findex;
     FileListBox1.Click;
+
+    //Подчистить флаг (NO)EFI в случае отмены/ошибки
+    DeleteFile(GetUserDir + '.gqemoo/' +
+        Copy(clone_cmd, Pos('" ', clone_cmd) + 2, Length(clone_cmd)));
   end;
 end;
 

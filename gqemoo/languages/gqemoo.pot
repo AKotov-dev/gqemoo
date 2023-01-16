@@ -104,6 +104,10 @@ msgstr ""
 msgid "License: GPLv3   Author: alex_q_2000 (C) 2022   URL: https://linuxforum.ru"
 msgstr ""
 
+#: unit1.scancelcloning
+msgid "Cloning started. Terminate?"
+msgstr ""
+
 #: unit1.scaptcloneimage
 msgid "Сloning an image"
 msgstr ""

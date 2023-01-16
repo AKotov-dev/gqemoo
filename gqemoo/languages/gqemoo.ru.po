@@ -115,6 +115,10 @@ msgstr "Старт"
 msgid "License: GPLv3   Author: alex_q_2000 (C) 2022   URL: https://linuxforum.ru"
 msgstr "Лицензия: GPLv3   Автор: alex_q_2000 (C) 2022   URL: https://linuxforum.ru"
 
+#: unit1.scancelcloning
+msgid "Cloning started. Terminate?"
+msgstr ""
+
 #: unit1.scaptcloneimage
 msgid "Сloning an image"
 msgstr "Клонирование образа"
@@ -186,3 +190,4 @@ msgstr "ожидаю spice-server на 127.0.0.1:"
 #: unit1.swaitingspicesec
 msgid "of 5 sec)"
 msgstr "из 5 сек)"
+
