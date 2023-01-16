@@ -11,7 +11,7 @@ object MainForm: TMainForm
   OnKeyUp = FormKeyUp
   OnShow = FormShow
   SessionProperties = 'Height;Left;OpenDialog1.InitialDir;OpenDialog2.InitialDir;Panel2.Height;Panel3.Width;Top;Width'
-  LCLVersion = '2.2.0.4'
+  LCLVersion = '2.2.4.0'
   object Panel1: TPanel
     Left = 0
     Height = 72
@@ -30,6 +30,7 @@ object MainForm: TMainForm
       Width = 154
       BorderSpacing.Left = 5
       Caption = 'Load VM from Flash Drive'
+      ParentColor = False
     end
     object DevBox: TComboBox
       AnchorSideLeft.Control = Owner
@@ -151,6 +152,7 @@ object MainForm: TMainForm
       Width = 118
       Anchors = [akTop, akLeft, akBottom]
       Caption = '...or from the image'
+      ParentColor = False
     end
     object Edit1: TEdit
       AnchorSideLeft.Control = ReloadBtn
@@ -477,6 +479,7 @@ object MainForm: TMainForm
       Width = 53
       Anchors = [akLeft, akBottom]
       Caption = 'Installed'
+      ParentColor = False
     end
     object RenameBtn: TSpeedButton
       AnchorSideTop.Control = SelectAllBtn
@@ -738,6 +741,7 @@ object MainForm: TMainForm
       Width = 349
       Anchors = [akLeft, akBottom]
       Caption = 'Connect devices and images to a VM [F12 - update the list]'
+      ParentColor = False
     end
     object AllDevBox: TCheckListBox
       AnchorSideLeft.Control = Panel4

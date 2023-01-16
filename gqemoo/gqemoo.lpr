@@ -18,8 +18,8 @@ uses
 
 begin
   RequireDerivedFormResource := True;
-  Application.Title := 'GQemoo v1.7';
-  Application.Scaled := True;
+  Application.Title:='GQemoo v1.8';
+  Application.Scaled:=True;
   Application.Initialize;
   Application.CreateForm(TMainForm, MainForm);
   Application.Run;

@@ -456,12 +456,13 @@ end;
 procedure TMainForm.MenuItem2Click(Sender: TObject);
 begin
   ClipBoard.AsText := 'pkexec bash -c ' + '''' +
-    'if [ -f /bin/xresize ]; then killall xresize; ' +
-    'rm -f /bin/xresize /etc/xdg/autostart/xresize.desktop; exit; fi; echo -e "#! /bin/bash\n\nwhile '
+    'clear; if [ -f /bin/xresize ]; then killall xresize; ' +
+    'rm -f /bin/xresize /etc/xdg/autostart/xresize.desktop; else echo -e "#! /bin/bash\n\nwhile '
     + 'true\ndo\nxrandr --output \$(xrandr | grep \" connected\" | cut -f1 -d\" \") --auto\nsleep 2\ndone" > '
     + '/bin/xresize; chmod +x /bin/xresize; echo -e "[Desktop Entry]\nName=XResize\nExec=xresize '
-    + '&\nType=Application\nTerminal=false" > /etc/xdg/autostart/xresize.desktop ' +
-    '''' + '&& [ -f /bin/xresize ] && nohup xresize >/dev/null 2>&1 &';
+    + '&\nType=Application\nTerminal=false" > /etc/xdg/autostart/xresize.desktop; fi ' +
+    '''' + '; if [ -f /bin/xresize ]; then [ $UID == 0 ] && echo "UID=0; XResize enabled after reboot..."; '
+    + '[ -f /bin/xresize ] && nohup xresize >/dev/null 2>&1 & fi';
 end;
 
 //Выбрать образ загрузки

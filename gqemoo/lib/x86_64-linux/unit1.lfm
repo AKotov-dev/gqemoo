@@ -11,7 +11,7 @@ object MainForm: TMainForm
   OnKeyUp = FormKeyUp
   OnShow = FormShow
   SessionProperties = 'Height;Left;OpenDialog1.InitialDir;OpenDialog2.InitialDir;Panel2.Height;Panel3.Width;Top;Width'
-  LCLVersion = '2.2.0.4'
+  LCLVersion = '2.2.4.0'
   object Panel1: TPanel
     Left = 0
     Height = 72
@@ -30,6 +30,7 @@ object MainForm: TMainForm
       Width = 154
       BorderSpacing.Left = 5
       Caption = 'Load VM from Flash Drive'
+      ParentColor = False
     end
     object DevBox: TComboBox
       AnchorSideLeft.Control = Owner
@@ -151,6 +152,7 @@ object MainForm: TMainForm
       Width = 118
       Anchors = [akTop, akLeft, akBottom]
       Caption = '...or from the image'
+      ParentColor = False
     end
     object Edit1: TEdit
       AnchorSideLeft.Control = ReloadBtn
@@ -425,11 +427,11 @@ object MainForm: TMainForm
     Left = 0
     Height = 440
     Top = 72
-    Width = 277
+    Width = 272
     Align = alLeft
     BevelOuter = bvNone
     ClientHeight = 440
-    ClientWidth = 277
+    ClientWidth = 272
     TabOrder = 3
     object EFICheckBox: TCheckBox
       AnchorSideTop.Control = Panel3
@@ -452,7 +454,7 @@ object MainForm: TMainForm
       Left = 5
       Height = 92
       Top = 34
-      Width = 272
+      Width = 267
       Anchors = [akTop, akLeft, akRight]
       BorderSpacing.Left = 5
       BorderSpacing.Top = 2
@@ -477,6 +479,7 @@ object MainForm: TMainForm
       Width = 53
       Anchors = [akLeft, akBottom]
       Caption = 'Installed'
+      ParentColor = False
     end
     object RenameBtn: TSpeedButton
       AnchorSideTop.Control = SelectAllBtn
@@ -484,7 +487,7 @@ object MainForm: TMainForm
       AnchorSideBottom.Control = SelectAllBtn
       AnchorSideBottom.Side = asrBottom
       Cursor = crHandPoint
-      Left = 178
+      Left = 173
       Height = 33
       Hint = 'Rename'
       Top = 133
@@ -536,7 +539,7 @@ object MainForm: TMainForm
       AnchorSideBottom.Control = RemoveBtn
       AnchorSideBottom.Side = asrBottom
       Cursor = crHandPoint
-      Left = 211
+      Left = 206
       Height = 33
       Hint = 'Select all'
       Top = 133
@@ -588,7 +591,7 @@ object MainForm: TMainForm
       AnchorSideRight.Control = Panel3
       AnchorSideRight.Side = asrBottom
       Cursor = crHandPoint
-      Left = 244
+      Left = 239
       Height = 33
       Hint = 'Delete selected'
       Top = 133
@@ -642,7 +645,7 @@ object MainForm: TMainForm
       Height = 271
       Hint = 'DblClick - Start'
       Top = 169
-      Width = 272
+      Width = 267
       Align = alBottom
       Anchors = [akTop, akLeft, akRight, akBottom]
       BorderSpacing.Left = 5
@@ -665,7 +668,7 @@ object MainForm: TMainForm
       AnchorSideBottom.Control = RenameBtn
       AnchorSideBottom.Side = asrBottom
       Cursor = crHandPoint
-      Left = 145
+      Left = 140
       Height = 33
       Hint = 'Clone (Esc-Cancel)'
       Top = 133
@@ -713,21 +716,21 @@ object MainForm: TMainForm
     end
   end
   object Splitter3: TSplitter
-    Left = 277
+    Left = 272
     Height = 440
     Top = 72
     Width = 5
   end
   object Panel4: TPanel
-    Left = 282
+    Left = 277
     Height = 440
     Top = 72
-    Width = 582
+    Width = 587
     Align = alClient
     BevelOuter = bvNone
     Caption = 'Panel4'
     ClientHeight = 440
-    ClientWidth = 582
+    ClientWidth = 587
     TabOrder = 5
     object Label2: TLabel
       AnchorSideLeft.Control = Panel4
@@ -738,6 +741,7 @@ object MainForm: TMainForm
       Width = 349
       Anchors = [akLeft, akBottom]
       Caption = 'Connect devices and images to a VM [F12 - update the list]'
+      ParentColor = False
     end
     object AllDevBox: TCheckListBox
       AnchorSideLeft.Control = Panel4
@@ -748,7 +752,7 @@ object MainForm: TMainForm
       Left = 0
       Height = 373
       Top = 25
-      Width = 577
+      Width = 582
       Anchors = [akTop, akLeft, akRight, akBottom]
       BorderSpacing.Top = 5
       BorderSpacing.Right = 5
@@ -771,7 +775,7 @@ object MainForm: TMainForm
       Left = 0
       Height = 37
       Top = 403
-      Width = 501
+      Width = 506
       Anchors = [akLeft, akRight, akBottom]
       ReadOnly = True
       TabOrder = 1
@@ -783,7 +787,7 @@ object MainForm: TMainForm
       AnchorSideRight.Control = ClearBtn
       AnchorSideBottom.Control = Edit2
       AnchorSideBottom.Side = asrBottom
-      Left = 501
+      Left = 506
       Height = 37
       Hint = 'Connect an image'
       Top = 403
@@ -800,7 +804,7 @@ object MainForm: TMainForm
       AnchorSideRight.Side = asrBottom
       AnchorSideBottom.Control = OpenBtn2
       AnchorSideBottom.Side = asrBottom
-      Left = 538
+      Left = 543
       Height = 37
       Hint = 'Clear'
       Top = 403
