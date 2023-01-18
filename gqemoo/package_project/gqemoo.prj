@@ -71,7 +71,7 @@ toolversion=2.2.4
 0=qemoo: https://abf.io/betcher_/qemoo
 1=
 2=v1.9
-3=+ Adaptation to qemoo >= v1.3.13 with systemd support
+3=+ Adaptation to qemoo >= v1.3-13 with systemd support
 4=+ VM configurations are taken into account to run via systemd
 5=+ Image attribute/flag "(NO)EFI" changed to *.qcow2.noefi
 6=+ Improved VM renaming, deletion, and cloning functions
