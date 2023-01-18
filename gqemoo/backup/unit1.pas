@@ -7,7 +7,7 @@ interface
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, Buttons,
   CheckLst, IniPropStorage, Process, DefaultTranslator, FileCtrl, ExtCtrls,
-  ClipBrd, Menus;
+  ClipBrd, Menus, FileUtil;
 
 type
 
@@ -119,14 +119,16 @@ uses start_trd, clone_progress_trd;
 
 { TMainForm }
 
-//Отмена клонирования и удаление флага (NO)EFI
+//Отмена клонирования и удаление флага (NO)EFI и образ.qcow.conf
 procedure TMainForm.KillAllRsync;
 var
   s: ansistring;
 begin
-  RunCommand('/bin/bash', ['-c', 'if [[ $(pidof rsync) ]]; then killall rsync; rm -rf ' +
+  RunCommand('/bin/bash', ['-c', 'if [[ $(pidof rsync) ]]; then killall rsync; rm -f ' +
     GetUserDir + '.gqemoo/' + Copy(clone_cmd, Pos('" ', clone_cmd) +
-    2, Length(clone_cmd)) + '; fi; exit 0'], s);
+    2, Length(clone_cmd)) + '.noefi ' + GetUserDir + 'qemoo_tmp/' +
+    Copy(clone_cmd, Pos('" ', clone_cmd) + 2, Length(clone_cmd)) +
+    '.conf ' + '; fi; exit 0'], s);
 end;
 
 //Начитываем все устройства
@@ -261,7 +263,7 @@ begin
       else
       //Иначе - если установка (NO)EFI - создать флаг ~/.gqemoo/value.qcow2
       if not EFICheckBox.Checked then
-        CFG.SaveToFile(GetUserDir + '.gqemoo/' + Value + '.qcow2');
+        CFG.SaveToFile(GetUserDir + '.gqemoo/' + Value + '.qcow2.noefi');
     end;
 
     //Пишем конфиг ~/.gqemoo/qemoo.cfg: дисплей qxl + кол-во CPU, имя нового образа и размер 20GB
@@ -381,7 +383,7 @@ begin
         Canvas.TextHeight('A') div 2 + 1, Items[Index]);
 
       //Иконки EFI/NO
-      if FileExists(GetUserDir + '.gqemoo/' + Items[Index]) then
+      if FileExists(GetUserDir + '.gqemoo/' + Items[Index] + '.noefi') then
         ImageList2.GetBitMap(0, BitMap)
       else
         ImageList2.GetBitMap(1, BitMap);
@@ -533,8 +535,12 @@ begin
       for i := 0 to FileListBox1.Count - 1 do
         if FileListBox1.Selected[i] then
         begin
+          //Удаление образа
           DeleteFile(FileListBox1.Items[i]);
-          DeleteFile(GetUserDir + '.gqemoo/' + FileListBox1.Items[i]);
+          //Удаление конфига образа
+          DeleteFile(FileListBox1.Items[i] + '.conf');
+          //Удаление флага (NO)EFI
+          DeleteFile(GetUserDir + '.gqemoo/' + FileListBox1.Items[i] + '.noefi');
         end;
       FileListBox1.UpdateFileList;
 
@@ -553,7 +559,7 @@ var
   i: integer;
   Value: string;
 const
-  BadSym = '={}$\/:*?"<>|@^#%&~'''; //Заменять эти символы
+  BadSym = ' ={}$\/:*?"<>|@^#%&~'''; //Заменять эти символы
 begin
   if FileListBox1.SelCount <> 0 then
   begin
@@ -573,21 +579,20 @@ begin
       if Pos(Value[i], BadSym) > 0 then
         Value[i] := '_';
 
-    //Если файл не существует - переименовать
+    //Если файл не существует - переименовать образ и конфиг образ.conf
     if not FileExists(ExtractFilePath(FileListBox1.FileName) + Value + '.qcow2') then
     begin
-      //Если у файла из списка есть флаг (NO)EFI
-      if FileExists(GetUserDir + '.gqemoo/' +
-        FileListBox1.Items[FileListBox1.ItemIndex]) then
-      begin
-        //Удаляем флаг (NO)EFI выбранного в списке
-        DeleteFile(GetUserDir + '.gqemoo/' + FileListBox1.Items[FileListBox1.ItemIndex]);
-        //Создаём флаг (NO)EFI для нового имени
-        FileListBox1.Items.SaveToFile(GetUserDir + '.gqemoo/' + Value + '.qcow2');
-      end;
-
-      //Переименовываем файл
+      //Переименовываем образ
       RenameFile(FileListBox1.FileName, Value + '.qcow2');
+
+      //Переименовываем флаг (NO)EFI
+      RenameFile(GetUserDir + '.gqemoo/' +
+        FileListBox1.Items[FileListBox1.ItemIndex] + '.noefi',
+        GetUserDir + '.gqemoo/' + Value + '.qcow2.noefi');
+
+      //Переименовываем конфигурацию образ.qcow2.conf
+      RenameFile(FileListBox1.Items[FileListBox1.ItemIndex] + '.conf',
+        Value + '.qcow2.conf');
 
       FileListBox1.UpdateFileList;
 
@@ -654,6 +659,14 @@ begin
       MessageDlg(SFileExists, mtWarning, [mbOK], 0);
       Exit;
     end;
+
+    //Конфиг клона образ.conf
+    CopyFile(FileListBox1.FileName + '.conf', Value + '.qcow2.conf');
+
+    //Флаг (NO)EFI
+    if FileExists(GetUserDir + '.gqemoo/' + FileListBox1.Items[FileListBox1.ItemIndex] +
+      '.noefi') then
+      ListBox1.Items.SaveToFile(GetUserDir + '.gqemoo/' + Value + '.qcow2.noefi');
 
     //Формируем команду клонирования
     clone_cmd := 'nice -n 19 rsync --progress "' + MainForm.FileListBox1.FileName +
