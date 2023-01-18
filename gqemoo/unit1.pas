@@ -119,6 +119,20 @@ uses start_trd, clone_progress_trd;
 
 { TMainForm }
 
+//Детоксикация имени qcow2 (замена пробелов и т.д.)
+function Detox(Value: string): string;
+var
+  i: integer;
+const //Заменять эти символы в имени
+  BadSym = ' ={}$\/:*?"<>|@^#%&~''';
+begin
+  //Заменяем неразрешенные символы
+  Result := Trim(Value);
+  for i := 1 to Length(Result) do
+    if Pos(Result[i], BadSym) > 0 then
+      Result[i] := '_';
+end;
+
 //Отмена клонирования и удаление флага (NO)EFI и образ.qcow.conf
 procedure TMainForm.KillAllRsync;
 var
@@ -215,8 +229,6 @@ end;
 
 //Запуск VM
 procedure TMainForm.StartBtnClick(Sender: TObject);
-const   //Заменять эти символы в имени
-  BadSym = ' ={}$\/:*?"<>|@^#%&~''';
 var
   i, b: integer;
   CFG: TStringList;
@@ -249,10 +261,7 @@ begin
       until Trim(Value) <> '';
 
       //Заменяем неразрешенные символы
-      Value := Trim(Value);
-      for i := 1 to Length(Value) do
-        if Pos(Value[i], BadSym) > 0 then
-          Value[i] := '_';
+      Value := Detox(Value);
 
       //Если файл существует - выход
       if FileExists(Value + '.qcow2') then
@@ -556,10 +565,7 @@ end;
 //Переименовать образ *.qcow2
 procedure TMainForm.RenameBtnClick(Sender: TObject);
 var
-  i: integer;
   Value: string;
-const
-  BadSym = ' ={}$\/:*?"<>|@^#%&~'''; //Заменять эти символы
 begin
   if FileListBox1.SelCount <> 0 then
   begin
@@ -573,11 +579,7 @@ begin
     until Trim(Value) <> '';
 
     //Заменяем неразрешенные символы
-    Value := Trim(Value);
-
-    for i := 1 to Length(Value) do
-      if Pos(Value[i], BadSym) > 0 then
-        Value[i] := '_';
+    Value := Detox(Value);
 
     //Если файл не существует - переименовать образ и конфиг образ.conf
     if not FileExists(ExtractFilePath(FileListBox1.FileName) + Value + '.qcow2') then
@@ -629,11 +631,8 @@ end;
 //Клонирование образа *.qcow2
 procedure TMainForm.CloneBtnClick(Sender: TObject);
 var
-  i: integer;
   Value: string;
   FStartClone: TThread;
-const
-  BadSym = ' ={}$\/:*?"<>|@^#%&~'''; //Заменять эти символы
 begin
   if FileListBox1.SelCount <> 0 then
   begin
@@ -647,11 +646,7 @@ begin
     until Trim(Value) <> '';
 
     //Заменяем неразрешенные символы
-    Value := Trim(Value);
-
-    for i := 1 to Length(Value) do
-      if Pos(Value[i], BadSym) > 0 then
-        Value[i] := '_';
+    Value := Detox(Value);
 
     //Файл существует - выход
     if FileExists(ExtractFilePath(FileListBox1.FileName) + Value + '.qcow2') then
