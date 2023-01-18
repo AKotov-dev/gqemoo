@@ -116,8 +116,8 @@ msgid "License: GPLv3   Author: alex_q_2000 (C) 2022   URL: https://linuxforum.r
 msgstr "Лицензия: GPLv3   Автор: alex_q_2000 (C) 2022   URL: https://linuxforum.ru"
 
 #: unit1.scancelcloning
-msgid "Cloning started. Terminate?"
-msgstr "Запущено клонирование. Завершить?"
+msgid "Cloning started! Terminate?"
+msgstr "Выполняется клонирование! Завершить?"
 
 #: unit1.scaptcloneimage
 msgid "Сloning an image"
@@ -132,8 +132,8 @@ msgid "Cloning is complete"
 msgstr "Клонирование завершено"
 
 #: unit1.scloningmsg
-msgid "Cloning is in progress:"
-msgstr "Идёт клонирование:"
+msgid "Cloning:"
+msgstr "Клонирование:"
 
 #: unit1.sdeleteimages
 msgid "Delete selected images?"

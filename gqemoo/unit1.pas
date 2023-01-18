@@ -107,9 +107,9 @@ resourcestring
   SInstallationWithUEFI = 'Installation (EFI)';
   SCaptCloneImage = 'Сloning an image';
   SInputCloneImageName = 'Enter the clone name:';
-  SCloningMsg = 'Cloning is in progress:';
+  SCloningMsg = 'Cloning:';
   SCloningComplete = 'Cloning is complete';
-  SCancelCloning = 'Cloning started. Terminate?';
+  SCancelCloning = 'Cloning started! Terminate?';
 
 implementation
 
@@ -124,7 +124,7 @@ function Detox(Value: string): string;
 var
   i: integer;
 const //Заменять эти символы в имени
-  BadSym = ' ={}$\/:*?"<>|@^#%&~''';
+  BadSym = ' =,{}$\/:*?"<>|@^#%&~''';
 begin
   //Заменяем неразрешенные символы
   Result := Trim(Value);
@@ -413,7 +413,7 @@ begin
 
   if Trim(s) = 'yes' then
   begin
-    if MessageDlg(SCancelCloning, mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+    if MessageDlg(SCancelCloning, mtWarning, [mbYes, mbNo], 0) = mrYes then
       KillAllRsync
     else
       CanClose := False;

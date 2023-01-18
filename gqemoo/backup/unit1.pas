@@ -109,7 +109,7 @@ resourcestring
   SInputCloneImageName = 'Enter the clone name:';
   SCloningMsg = 'Cloning is in progress:';
   SCloningComplete = 'Cloning is complete';
-  SCancelCloning = 'Cloning started. Terminate?';
+  SCancelCloning = 'Cloning started! Terminate?';
 
 implementation
 
@@ -119,20 +119,18 @@ uses start_trd, clone_progress_trd;
 
 { TMainForm }
 
-//Детоксикация имени (замена пробелов и т.д.)
+//Детоксикация имени qcow2 (замена пробелов и т.д.)
 function Detox(Value: string): string;
 var
   i: integer;
 const //Заменять эти символы в имени
-  BadSym = ' ={}$\/:*?"<>|@^#%&~''';
+  BadSym = ' =,{}$\/:*?"<>|@^#%&~''';
 begin
   //Заменяем неразрешенные символы
   Result := Trim(Value);
   for i := 1 to Length(Result) do
     if Pos(Result[i], BadSym) > 0 then
       Result[i] := '_';
-
-  //  Result := Value;
 end;
 
 //Отмена клонирования и удаление флага (NO)EFI и образ.qcow.conf
@@ -415,7 +413,7 @@ begin
 
   if Trim(s) = 'yes' then
   begin
-    if MessageDlg(SCancelCloning, mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+    if MessageDlg(SCancelCloning, mtWarning, [mbYes, mbNo], 0) = mrYes then
       KillAllRsync
     else
       CanClose := False;

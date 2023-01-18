@@ -15,7 +15,7 @@
 {"hash":134323289,"name":"unit1.sinstallationwithuefi","sourcebytes":[73,110,115,116,97,108,108,97,116,105,111,110,32,40,69,70,73,41],"value":"Installation (EFI)"},
 {"hash":72491765,"name":"unit1.scaptcloneimage","sourcebytes":[208,161,108,111,110,105,110,103,32,97,110,32,105,109,97,103,101],"value":"\u00D0\u00A1loning an image"},
 {"hash":182085498,"name":"unit1.sinputcloneimagename","sourcebytes":[69,110,116,101,114,32,116,104,101,32,99,108,111,110,101,32,110,97,109,101,58],"value":"Enter the clone name:"},
-{"hash":49011706,"name":"unit1.scloningmsg","sourcebytes":[67,108,111,110,105,110,103,32,105,115,32,105,110,32,112,114,111,103,114,101,115,115,58],"value":"Cloning is in progress:"},
+{"hash":56950794,"name":"unit1.scloningmsg","sourcebytes":[67,108,111,110,105,110,103,58],"value":"Cloning:"},
 {"hash":119613957,"name":"unit1.scloningcomplete","sourcebytes":[67,108,111,110,105,110,103,32,105,115,32,99,111,109,112,108,101,116,101],"value":"Cloning is complete"},
-{"hash":135905039,"name":"unit1.scancelcloning","sourcebytes":[67,108,111,110,105,110,103,32,115,116,97,114,116,101,100,46,32,84,101,114,109,105,110,97,116,101,63],"value":"Cloning started. Terminate?"}
+{"hash":155827983,"name":"unit1.scancelcloning","sourcebytes":[67,108,111,110,105,110,103,32,115,116,97,114,116,101,100,33,32,84,101,114,109,105,110,97,116,101,63],"value":"Cloning started! Terminate?"}
 ]}
