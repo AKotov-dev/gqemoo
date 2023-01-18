@@ -356,7 +356,8 @@ begin
 
     //Выключение EFI, если есть флаг: ~/.gqemoo/image_name.qcow2
     if FileExists(GetUserDir + '/.gqemoo/' +
-      FileListBox1.Items[FileListBox1.ItemIndex]) then EFICheckBox.Checked := False
+      FileListBox1.Items[FileListBox1.ItemIndex] + '.noefi') then
+      EFICheckBox.Checked := False
     else
       EFICheckBox.Checked := True;
 
