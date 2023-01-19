@@ -282,7 +282,7 @@ begin
     CFG.SaveToFile(GetUserDir + '.gqemoo/qemoo.cfg');
 
     //Формируем команду: режим демона + персональный конфиг
-    command := 'qemoo --daemon --config ' + GetUserDir + '/.gqemoo/qemoo.cfg';
+    command := 'qemoo --daemon --config ' + GetUserDir + '.gqemoo/qemoo.cfg';
 
     //EFI?
     if not EFICheckBox.Checked then
@@ -355,7 +355,7 @@ begin
     ListBox1.ItemIndex := 0;
 
     //Выключение EFI, если есть флаг: ~/.gqemoo/image_name.qcow2
-    if FileExists(GetUserDir + '/.gqemoo/' +
+    if FileExists(GetUserDir + '.gqemoo/' +
       FileListBox1.Items[FileListBox1.ItemIndex] + '.noefi') then
       EFICheckBox.Checked := False
     else

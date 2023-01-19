@@ -281,8 +281,10 @@ begin
     CFG.Add('QCOW2=' + '''' + Value + '.qcow2' + '''');
     CFG.SaveToFile(GetUserDir + '.gqemoo/qemoo.cfg');
 
-    //Формируем команду: работаем с конфигом
-    command := 'qemoo --daemon --config ' + GetUserDir + '/.gqemoo/qemoo.cfg';
+    //Формируем команду: режим демона + персональный конфиг
+    command := 'qemoo --daemon --config ' + GetUserDir + '.gqemoo/qemoo.cfg';
+
+    showmessage(command);
 
     //EFI?
     if not EFICheckBox.Checked then
