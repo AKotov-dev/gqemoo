@@ -281,19 +281,19 @@ begin
     CFG.Add('QCOW2=' + '''' + Value + '.qcow2' + '''');
     CFG.SaveToFile(GetUserDir + '.gqemoo/qemoo.cfg');
 
-    //Формируем команду: работаем с конфигом
-    command := 'qemoo --qemoocfg ' + GetUserDir + '/.gqemoo/qemoo.cfg';
+    //Формируем команду: режим демона + персональный конфиг
+    command := 'qemoo --daemon --config ' + GetUserDir + '/.gqemoo/qemoo.cfg';
 
     //EFI?
     if not EFICheckBox.Checked then
       case ListBox1.ItemIndex of
-        0: command := command + ' -d ' + dev;
-        1: command := command + ' -d -i ' + dev;
+        0: command := command + ' ' + dev;
+        1: command := command + ' -i ' + dev;
       end
     else
       case ListBox1.ItemIndex of
-        0: command := command + ' -d -e ' + dev;
-        1: command := command + ' -d -e -i ' + dev;
+        0: command := command + ' -e ' + dev;
+        1: command := command + ' -e -i ' + dev;
       end;
 
     //Счетчик выбранных устройств
