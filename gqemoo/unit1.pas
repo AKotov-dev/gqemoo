@@ -97,7 +97,7 @@ resourcestring
   SCaptRenameImage = 'Rename an image';
   SInputNewImageName = 'Enter a new image name:';
   SFileExists = 'The file exists! Specify a different name!';
-  SUserNotInGroup = 'User outside Group disk! Run: usermod -aG disk $LOGNAME';
+  SUserNotInGroup = 'User outside Group kvm! Run: usermod -aG kvm $LOGNAME';
   SStartVM = 'Starting a virtual machine...';
   SRemoteViewerNotFound =
     'remote-viewer not found! Install the virt-viewer package!';

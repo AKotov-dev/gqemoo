@@ -169,7 +169,7 @@ msgid "Starting a virtual machine..."
 msgstr ""
 
 #: unit1.susernotingroup
-msgid "User outside Group disk! Run: usermod -aG disk $LOGNAME"
+msgid "User outside Group kvm! Run: usermod -aG kvm $LOGNAME"
 msgstr ""
 
 #: unit1.swaitingspice
