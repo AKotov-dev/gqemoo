@@ -71,7 +71,7 @@ toolversion=2.2.4
 0=qemoo: https://abf.io/betcher_/qemoo
 1=
 2=v2.0
-3=+ Using NVRAM when Installing/Starting a VM with EFI
+3=+ Adaptation to qemoo >= v1.4-14 with EFI+NVRAM support
 4=+ Replacing configuration option --qemoocfg with --config
 5=+ Requirement to include the user in the kvm group
 6=+ RPM Packages for Mageia-8 (ROSA-2021.1) and Mageia-9
