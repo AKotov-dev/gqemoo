@@ -97,7 +97,8 @@ resourcestring
   SCaptRenameImage = 'Rename an image';
   SInputNewImageName = 'Enter a new image name:';
   SFileExists = 'The file exists! Specify a different name!';
-  SUserNotInGroup = 'User outside Groups disk and kvm! Run: usermod -aG disk,kvm $LOGNAME';
+  SUserNotInGroup =
+    'User outside Groups disk and kvm! Run: usermod -aG disk,kvm $LOGNAME and reboot...';
   SStartVM = 'Starting a virtual machine...';
   SRemoteViewerNotFound =
     'remote-viewer not found! Install the virt-viewer package!';
@@ -583,7 +584,7 @@ begin
           DeleteFile(FileListBox1.Items[i]);
           //Удаление конфига образа
           DeleteFile(FileListBox1.Items[i] + '.conf');
-          //Удаление флага (NO)EFI
+          //Удаление nvram
           DeleteFile(GetUserDir + 'qemoo_tmp/' + FileListBox1.Items[i] + '.nvram');
         end;
       FileListBox1.UpdateFileList;
@@ -608,7 +609,7 @@ begin
     Value := Copy(ExtractFileName(FileListBox1.FileName), 1,
       Length(ExtractFileName(FileListBox1.FileName)) - 6);
 
-    //Продолжаем спрашивать имя образа, если пусто
+    //Вводим имя образа
     repeat
       if not InputQuery(SCaptRenameImage, SInputNewImageName, Value) then exit;
     until Trim(Value) <> '';
@@ -616,19 +617,19 @@ begin
     //Заменяем неразрешенные символы
     Value := Detox(Value);
 
-    //Если файл не существует - переименовать образ и конфиг образ.conf
+    //Если файл не существует - переименовать образ, конфиг образ.conf и образ.qcow2.nvram
     if not FileExists(ExtractFilePath(FileListBox1.FileName) + Value + '.qcow2') then
     begin
       //Переименовываем образ
-      RenameFile(FileListBox1.FileName, Value + '.qcow2');
+      RenameFile(FileListBox1.FileName, GetUserDir + 'qemoo_tmp/' + Value + '.qcow2');
 
       //Переименовываем nvram
       RenameFile(FileListBox1.Items[FileListBox1.ItemIndex] + '.nvram',
-        Value + '.qcow2.nvram');
+        GetUserDir + 'qemoo_tmp/' + Value + '.qcow2.nvram');
 
       //Переименовываем конфигурацию образ.qcow2.conf
       RenameFile(FileListBox1.Items[FileListBox1.ItemIndex] + '.conf',
-        Value + '.qcow2.conf');
+        GetUserDir + 'qemoo_tmp/' + Value + '.qcow2.conf');
 
       FileListBox1.UpdateFileList;
 
@@ -639,6 +640,7 @@ begin
         FileListBox1.ItemIndex := 0;
     end
     else
+      //Иначе - файл существует - Выход
       MessageDlg(SFileExists, mtWarning, [mbOK], 0);
   end;
 end;
@@ -670,11 +672,11 @@ var
 begin
   if FileListBox1.SelCount <> 0 then
   begin
-    //Получаем имя без пути и расширения
+    //Получаем имя без пути и расширения, добавляем _clone
     Value := Copy(ExtractFileName(FileListBox1.FileName), 1,
       Length(ExtractFileName(FileListBox1.FileName)) - 6) + '_clone';
 
-    //Продолжаем спрашивать имя образа, если пусто
+    //Вводим имя образа
     repeat
       if not InputQuery(SCaptCloneImage, SInputCloneImageName, Value) then exit;
     until Trim(Value) <> '';
@@ -682,22 +684,22 @@ begin
     //Заменяем неразрешенные символы
     Value := Detox(Value);
 
-    //Файл существует - выход
+    //Файл существует - Выход
     if FileExists(ExtractFilePath(FileListBox1.FileName) + Value + '.qcow2') then
     begin
       MessageDlg(SFileExists, mtWarning, [mbOK], 0);
       Exit;
     end;
 
-    //Конфиг клона образ.conf
+    //Копируем конфиг клона в образ.qcow2.conf
     CopyFile(FileListBox1.FileName + '.conf', Value + '.qcow2.conf', False);
 
-    //Флаг (NO)EFI
-    if FileExists(FileListBox1.FileName + '.nvram') then
-      ListBox1.Items.SaveToFile(GetUserDir + 'qemoo_tmp/' + Value + '.qcow2.nvram');
+    //Копируем образ.qcow2.nvram
+    CopyFile(FileListBox1.FileName + '.nvram', GetUserDir + 'qemoo_tmp/' +
+      Value + '.qcow2.nvram', False);
 
     //Формируем команду клонирования
-    clone_cmd := 'nice -n 19 rsync --progress "' + MainForm.FileListBox1.FileName +
+    clone_cmd := 'nice -n 19 rsync --progress "' + FileListBox1.FileName +
       '" ' + Value + '.qcow2';
 
     //Запуск клонирования VM
@@ -719,7 +721,6 @@ begin
   ScriptBtn.Width := Edit1.Height;
   ClearBtn.Width := Edit1.Height;
   AllDevBox.Top := ListBox1.Top;
-  //Panel1.Height := DevBox.Top + DevBox.Height + 5;
 
   //Наполняем список режимов
   with ListBox1.Items do

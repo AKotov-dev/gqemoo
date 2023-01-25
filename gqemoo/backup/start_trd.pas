@@ -47,10 +47,10 @@ begin
     ExProcess.Executable := 'bash';
     ExProcess.Parameters.Add('-c');
 
-    //Проверка юзера в группе disk, наличие remote-viewer
+    //Проверка юзера в группаз disk,kvm наличие remote-viewer
     //Иначе - ожидание 5 sec localhost:$port для подключения spice-vdagent/spice-guest-tools извне
     ExProcess.Parameters.Add('echo "' + SStartVM + '"; ' +
-      'if [[ -z $(groups | grep disk) ]]; then echo "' + SUserNotInGroup +
+      'if [[ -z $(groups | grep disk | grep kvm) ]]; then echo "' + SUserNotInGroup +
       '"; exit 1; fi; if [[ ! $(type -f remote-viewer 2>/dev/null) ]]; then echo "' +
       SRemoteViewerNotFound + '"; exit 1; fi; ' + 'a=$(' + command +
       ' > ~/.gqemoo/log && awk ' + '''' + '$1 == "PID" || $1 == "PORT" {print $3}' +
