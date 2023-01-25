@@ -291,6 +291,9 @@ begin
         exit;
       end;
 
+      //Отключаем подключаемые дополнительные устройства, если выбраны
+      AllDevBox.CheckAll(cbUnchecked);
+
       //Если Устанавка с EFI - добавляем указание на имя_образа.qcow2.nvram
       if EFICheckBox.Checked then
         CFG.Add(
@@ -359,8 +362,6 @@ begin
     //Удаляем последнюю запятую
     if command[Length(command)] = ',' then
       Delete(command, Length(command), 1);
-
-    showmessage(command);
 
     //Запуск VM
     FStartVM := StartVM.Create(False);

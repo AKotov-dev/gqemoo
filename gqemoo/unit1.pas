@@ -291,6 +291,10 @@ begin
         exit;
       end;
 
+      //Отключаем дополнительные устройства, если выбраны; нужна чистая установка без подключений
+      AllDevBox.CheckAll(cbUnchecked);
+      ClearBtn.Click;
+
       //Если Устанавка с EFI - добавляем указание на имя_образа.qcow2.nvram
       if EFICheckBox.Checked then
         CFG.Add(
