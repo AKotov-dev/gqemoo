@@ -317,7 +317,7 @@ begin
     CFG.Add('QEMUADD="-vga qxl -smp 2"');
     CFG.Add('SIZE=' + '''' + '20' + '''');
     CFG.Add('QCOW2=' + '''' + GetUserDir + 'qemoo_tmp/' + Value + '.qcow2' + '''');
-    // CFG.Add('ACTION=' + '''' + 'run' + '''');  //не создаёт *.qcow2.nvram?
+    //CFG.Add('ACTION=' + '''' + 'run' + '''');  //не создаёт *.qcow2.nvram?
     CFG.Add('RAM="auto"');
     //CFG.Add('ADD=""');
     CFG.Add('PORT=""');
