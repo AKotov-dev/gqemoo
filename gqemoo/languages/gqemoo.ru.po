@@ -180,8 +180,8 @@ msgid "Starting a virtual machine..."
 msgstr "Старт виртуальной машины..."
 
 #: unit1.susernotingroup
-msgid "User outside Group kvm! Run: usermod -aG kvm $LOGNAME"
-msgstr "Пользователь вне группы kvm! Выполните: usermod -aG kvm $LOGNAME"
+msgid "User outside Groups disk and kvm! Run: usermod -aG disk,kvm $LOGNAME and reboot..."
+msgstr "Пользователь вне групп disk и kvm! Выполните: usermod -aG disk,kvm $LOGNAME и перезагрузитесь..."
 
 #: unit1.swaitingspice
 msgid "waiting for spice-server on 127.0.0.1:"

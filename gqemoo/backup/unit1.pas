@@ -97,7 +97,7 @@ resourcestring
   SCaptRenameImage = 'Rename an image';
   SInputNewImageName = 'Enter a new image name:';
   SFileExists = 'The file exists! Specify a different name!';
-  SUserNotInGroup = 'User outside Group disk! Run: usermod -aG disk $LOGNAME';
+  SUserNotInGroup = 'User outside Groups disk and kvm! Run: usermod -aG disk,kvm $LOGNAME';
   SStartVM = 'Starting a virtual machine...';
   SRemoteViewerNotFound =
     'remote-viewer not found! Install the virt-viewer package!';
@@ -139,8 +139,8 @@ var
   s: ansistring;
 begin
   RunCommand('/bin/bash', ['-c', 'if [[ $(pidof rsync) ]]; then killall rsync; rm -f ' +
-    GetUserDir + '.gqemoo/' + Copy(clone_cmd, Pos('" ', clone_cmd) +
-    2, Length(clone_cmd)) + '.noefi ' + GetUserDir + 'qemoo_tmp/' +
+    GetUserDir + 'qemoo_tmp/' + Copy(clone_cmd, Pos('" ', clone_cmd) +
+    2, Length(clone_cmd)) + '.nvram ' + GetUserDir + 'qemoo_tmp/' +
     Copy(clone_cmd, Pos('" ', clone_cmd) + 2, Length(clone_cmd)) +
     '.conf ' + '; fi; exit 0'], s);
 end;
@@ -248,10 +248,30 @@ begin
     else
       Exit;
 
-    //Если Режим = Установка
-    if ListBox1.ItemIndex = 1 then
+    //-- Создаём ~/.gqemoo/qemoo.cfg для перекрытия /etc/qemoo.cfg
+
+    //Stage_1 = Запуск: Разбираемся с EFI
+    if ListBox1.ItemIndex = 0 then
     begin
-      //Продолжаем спрашивать имя образа, если пусто
+      //EFI?
+      if EFICheckBox.Checked then
+      begin
+        //Если запуск установленных образов qcow2 + NVRAM
+        if Edit1.Text = FileListBox1.FileName then
+          CFG.Add(
+            'EFI="-drive if=pflash,format=raw,readonly=on,file=/usr/share/OVMF/OVMF_CODE.fd -drive if=pflash,format=raw,file='
+            + FileListBox1.FileName + '.nvram"')
+        else
+          //Иначе - запуск EFI-образов/флешек извне без NVRAM
+          CFG.Add('EFI="-bios /usr/share/OVMF/OVMF_CODE.fd"');
+      end
+      else
+        //Иначе - EFI не используется (BIOS)
+        CFG.Add('EFI=""');
+    end
+    else
+    begin  //Stage_2: Установка
+      //Вводим имя образа qcow2 для установки
       repeat
         if EfiCheckBox.Checked then Capt := SInstallationWithUEFI
         else
@@ -260,25 +280,40 @@ begin
         if not InputQuery(Capt, SInputNewImageName, Value) then exit;
       until Trim(Value) <> '';
 
-      //Заменяем неразрешенные символы
+      //Заменяем неразрешенные символы в имени образа
       Value := Detox(Value);
 
-      //Если файл существует - выход
+      //Если файл образа *.qcow2 существует - Выход
       if FileExists(Value + '.qcow2') then
       begin
         MessageDlg(SFileExists, mtWarning, [mbOK], 0);
         exit;
-      end
+      end;
+
+      //Если Устанавка с EFI - добавляем указание на имя_образа.qcow2.nvram
+      if EFICheckBox.Checked then
+        CFG.Add(
+          'EFI="-drive if=pflash,format=raw,readonly=on,file=/usr/share/OVMF/OVMF_CODE.fd -drive if=pflash,format=raw,file='
+          + GetUserDir + 'qemoo_tmp/' + Value + '.qcow2.nvram"')
       else
-      //Иначе - если установка (NO)EFI - создать флаг ~/.gqemoo/value.qcow2
-      if not EFICheckBox.Checked then
-        CFG.SaveToFile(GetUserDir + '.gqemoo/' + Value + '.qcow2.noefi');
+        //Иначе - Установка без EFI (BIOS)
+        CFG.Add('EFI=""');
     end;
 
-    //Пишем конфиг ~/.gqemoo/qemoo.cfg: дисплей qxl + кол-во CPU, имя нового образа и размер 20GB
+    //Пишем конфиг ~/.gqemoo/qemoo.cfg: дисплей qxl + кол-во CPU, имя нового образа, размер qcow2=20GB и т.д.
     CFG.Add('QEMUADD="-vga qxl -smp 2"');
     CFG.Add('SIZE=' + '''' + '20' + '''');
-    CFG.Add('QCOW2=' + '''' + Value + '.qcow2' + '''');
+    CFG.Add('QCOW2=' + '''' + GetUserDir + 'qemoo_tmp/' + Value + '.qcow2' + '''');
+    // CFG.Add('ACTION=' + '''' + 'run' + '''');  //не создаёт *.qcow2.nvram?
+    CFG.Add('RAM="auto"');
+    CFG.Add('ADD=""');
+    CFG.Add('PORT=""');
+    CFG.Add('REDIRUSB=""');
+    CFG.Add('LOSETUP=""');
+    CFG.Add('SPICE="yes"');
+    CFG.Add('SHARE="' + GetUserDir + 'qemoo_tmp"');
+
+    //Сохраняем конфиг
     CFG.SaveToFile(GetUserDir + '.gqemoo/qemoo.cfg');
 
     //Формируем команду: режим демона + персональный конфиг
@@ -355,11 +390,10 @@ begin
     ListBox1.ItemIndex := 0;
 
     //Выключение EFI, если есть флаг: ~/.gqemoo/image_name.qcow2
-    if FileExists(GetUserDir + '.gqemoo/' +
-      FileListBox1.Items[FileListBox1.ItemIndex] + '.noefi') then
-      EFICheckBox.Checked := False
+    if FileExists(FileListBox1.FileName + '.nvram') then
+      EFICheckBox.Checked := True
     else
-      EFICheckBox.Checked := True;
+      EFICheckBox.Checked := False;
 
     //Имя образа из списка в строку запуска
     Edit1.Text := FileListBox1.FileName;
@@ -393,10 +427,10 @@ begin
         Canvas.TextHeight('A') div 2 + 1, Items[Index]);
 
       //Иконки EFI/NO
-      if FileExists(GetUserDir + '.gqemoo/' + Items[Index] + '.noefi') then
-        ImageList2.GetBitMap(0, BitMap)
+      if FileExists(GetUserDir + 'qemoo_tmp/' + Items[Index] + '.nvram') then
+        ImageList2.GetBitMap(1, BitMap)
       else
-        ImageList2.GetBitMap(1, BitMap);
+        ImageList2.GetBitMap(0, BitMap);
 
       Canvas.Draw(aRect.Left + 2, aRect.Top + (ItemHeight - 24) div 2 + 1, BitMap);
     end;
@@ -550,7 +584,7 @@ begin
           //Удаление конфига образа
           DeleteFile(FileListBox1.Items[i] + '.conf');
           //Удаление флага (NO)EFI
-          DeleteFile(GetUserDir + '.gqemoo/' + FileListBox1.Items[i] + '.noefi');
+          DeleteFile(GetUserDir + 'qemoo_tmp/' + FileListBox1.Items[i] + '.nvram');
         end;
       FileListBox1.UpdateFileList;
 
@@ -588,10 +622,9 @@ begin
       //Переименовываем образ
       RenameFile(FileListBox1.FileName, Value + '.qcow2');
 
-      //Переименовываем флаг (NO)EFI
-      RenameFile(GetUserDir + '.gqemoo/' +
-        FileListBox1.Items[FileListBox1.ItemIndex] + '.noefi',
-        GetUserDir + '.gqemoo/' + Value + '.qcow2.noefi');
+      //Переименовываем nvram
+      RenameFile(FileListBox1.Items[FileListBox1.ItemIndex] + '.nvram',
+        Value + '.qcow2.nvram');
 
       //Переименовываем конфигурацию образ.qcow2.conf
       RenameFile(FileListBox1.Items[FileListBox1.ItemIndex] + '.conf',
@@ -660,9 +693,8 @@ begin
     CopyFile(FileListBox1.FileName + '.conf', Value + '.qcow2.conf', False);
 
     //Флаг (NO)EFI
-    if FileExists(GetUserDir + '.gqemoo/' + FileListBox1.Items[FileListBox1.ItemIndex] +
-      '.noefi') then
-      ListBox1.Items.SaveToFile(GetUserDir + '.gqemoo/' + Value + '.qcow2.noefi');
+    if FileExists(FileListBox1.FileName + '.nvram') then
+      ListBox1.Items.SaveToFile(GetUserDir + 'qemoo_tmp/' + Value + '.qcow2.nvram');
 
     //Формируем команду клонирования
     clone_cmd := 'nice -n 19 rsync --progress "' + MainForm.FileListBox1.FileName +
