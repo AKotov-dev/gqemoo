@@ -307,12 +307,12 @@ begin
     CFG.Add('QCOW2=' + '''' + GetUserDir + 'qemoo_tmp/' + Value + '.qcow2' + '''');
     // CFG.Add('ACTION=' + '''' + 'run' + '''');  //не создаёт *.qcow2.nvram?
     CFG.Add('RAM="auto"');
-    CFG.Add('ADD=""');
+    //CFG.Add('ADD=""');
     CFG.Add('PORT=""');
-    CFG.Add('REDIRUSB=""');
-    CFG.Add('LOSETUP=""');
+    //CFG.Add('REDIRUSB=""');
+    //CFG.Add('LOSETUP=""');
     CFG.Add('SPICE="yes"');
-    CFG.Add('SHARE="' + GetUserDir + 'qemoo_tmp"');
+    //CFG.Add('SHARE="' + GetUserDir + 'qemoo_tmp"');
 
     //Сохраняем конфиг
     CFG.SaveToFile(GetUserDir + '.gqemoo/qemoo.cfg');

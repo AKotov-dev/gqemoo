@@ -134,7 +134,7 @@ begin
       Result[i] := '_';
 end;
 
-//Отмена клонирования и удаление флага (NO)EFI и образ.qcow.conf
+//Отмена клонирования и удаление {образ.qcow.conf,образ.qcow2.nvram}
 procedure TMainForm.KillAllRsync;
 var
   s: ansistring;
@@ -307,12 +307,12 @@ begin
     CFG.Add('QCOW2=' + '''' + GetUserDir + 'qemoo_tmp/' + Value + '.qcow2' + '''');
     // CFG.Add('ACTION=' + '''' + 'run' + '''');  //не создаёт *.qcow2.nvram?
     CFG.Add('RAM="auto"');
-    CFG.Add('ADD=""');
+    //CFG.Add('ADD=""');
     CFG.Add('PORT=""');
-    CFG.Add('REDIRUSB=""');
-    CFG.Add('LOSETUP=""');
+    //CFG.Add('REDIRUSB=""');
+    //CFG.Add('LOSETUP=""');
     CFG.Add('SPICE="yes"');
-    CFG.Add('SHARE="' + GetUserDir + 'qemoo_tmp"');
+    //CFG.Add('SHARE="' + GetUserDir + 'qemoo_tmp"');
 
     //Сохраняем конфиг
     CFG.SaveToFile(GetUserDir + '.gqemoo/qemoo.cfg');
@@ -359,6 +359,8 @@ begin
     //Удаляем последнюю запятую
     if command[Length(command)] = ',' then
       Delete(command, Length(command), 1);
+
+    showmessage(command);
 
     //Запуск VM
     FStartVM := StartVM.Create(False);
@@ -461,15 +463,15 @@ procedure TMainForm.FormKeyUp(Sender: TObject; var Key: word; Shift: TShiftState
 var
   s: ansistring;
 begin
-  //F12
+  //F12 - перечитать список устройств для подключения
   if Key = 123 then ReloadAllDevices;
 
-  //Ctrl+Q/q
+  //Ctrl+Q/q - Принудительный сброс всех процессов remote-viewer и qemu-system-x86_64
   if (Key = 81) and (Shift = [ssCtrl]) then
     if MessageDlg(SKillAllQEMU, mtConfirmation, [mbYes, mbNo], 0) = mrYes then
       RunCommand('/bin/bash', ['-c', 'killall remote-viewer qemu-system-x86_64 &'], s);
 
-  //Esc - отмена клонирования и удаление флага (NO)EFI
+  //Esc - отмена клонирования и удаление *.conf,*.nvram
   if Key = 27 then KillAllRsync;
 end;
 
