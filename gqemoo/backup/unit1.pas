@@ -254,6 +254,15 @@ begin
     //Stage_1 = Запуск: Разбираемся с EFI
     if ListBox1.ItemIndex = 0 then
     begin
+      if Edit1.Text = FilelistBox1.FileName then
+              //Включение EFI, если есть: ~/qemoo_tmp/image_name.qcow2.nvram
+        if FileExists(FileListBox1.FileName + '.nvram') then
+          EFICheckBox.Checked := True
+        else
+          EFICheckBox.Checked := False;
+
+
+
       //EFI?
       if EFICheckBox.Checked then
       begin
@@ -261,7 +270,7 @@ begin
         if Edit1.Text = FileListBox1.FileName then
           CFG.Add(
             'EFI="-drive if=pflash,format=raw,readonly=on,file=/usr/share/OVMF/OVMF_CODE.fd -drive if=pflash,format=raw,file='
-            + FileListBox1.FileName + '.nvram"')
+            + FileListBox1.FileName + '.nvram"');
         else
           //Иначе - запуск EFI-образов/флешек извне без NVRAM
           CFG.Add('EFI="-bios /usr/share/OVMF/OVMF_CODE.fd"');
@@ -291,8 +300,9 @@ begin
         exit;
       end;
 
-      //Отключаем подключаемые дополнительные устройства, если выбраны
+      //Отключаем дополнительные устройства, если выбраны; нужна чистая установка без подключений
       AllDevBox.CheckAll(cbUnchecked);
+      ClearBtn.Click;
 
       //Если Устанавка с EFI - добавляем указание на имя_образа.qcow2.nvram
       if EFICheckBox.Checked then
@@ -392,12 +402,6 @@ begin
   begin
     //Переключение режима в Загрузку
     ListBox1.ItemIndex := 0;
-
-    //Выключение EFI, если есть флаг: ~/.gqemoo/image_name.qcow2
-    if FileExists(FileListBox1.FileName + '.nvram') then
-      EFICheckBox.Checked := True
-    else
-      EFICheckBox.Checked := False;
 
     //Имя образа из списка в строку запуска
     Edit1.Text := FileListBox1.FileName;

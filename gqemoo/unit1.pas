@@ -254,6 +254,14 @@ begin
     //Stage_1 = Запуск: Разбираемся с EFI
     if ListBox1.ItemIndex = 0 then
     begin
+      //Если запускается установленный образ *.qcow2 - проверить чекбокса EFI (могли снять или наоборот)
+      if Edit1.Text = FilelistBox1.FileName then
+        //Включение EFI если есть: ~/qemoo_tmp/image_name.qcow2.nvram
+        if FileExists(FileListBox1.FileName + '.nvram') then
+          EFICheckBox.Checked := True
+        else
+          EFICheckBox.Checked := False;
+
       //EFI?
       if EFICheckBox.Checked then
       begin
@@ -393,12 +401,6 @@ begin
   begin
     //Переключение режима в Загрузку
     ListBox1.ItemIndex := 0;
-
-    //Выключение EFI, если есть флаг: ~/.gqemoo/image_name.qcow2
-    if FileExists(FileListBox1.FileName + '.nvram') then
-      EFICheckBox.Checked := True
-    else
-      EFICheckBox.Checked := False;
 
     //Имя образа из списка в строку запуска
     Edit1.Text := FileListBox1.FileName;
