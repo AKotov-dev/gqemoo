@@ -15,9 +15,9 @@ Dependencies for VMs: `xrandr spice-vdagent`
 + `Ctrl+Q` - Force reset of all QEMU processes
 + `Esc` - Canceling image cloning *.qcow2  
   
-Supported loading and installing virtual machines from flash drives, images and already installed images `*.qcow2`. Before booting a virtual machine, you can connect additional flash drives, images, and block devices. Bidirectional `Clipboard` and `Drag&Drop` are also supported.  
+Supported loading and installing virtual machines from flash drives, images (.img, .iso, .qcow2, .raw, .vdi, .vmdk, .vpc) and already installed images `*.qcow2`. Before booting a virtual machine, you can connect additional flash drives, images, and block devices. Bidirectional `Clipboard` and `Drag&Drop` are also supported.  
   
-Host share/working directory: `~/qemoo_tmp`  
+The shared directory `~/qemoo_tmp` (Host) <> `~/hostdir` (Guest), as well as the automatic scaling of the VM window `XResize` are enabled by inserting embedded scripts from the Clipboard.
   
 **Note:** You need to add the user to groups `disk,kvm` and reboot: `usermod -aG disk,kvm $(logname); reboot`  
 For support Drag and Drop + bidirectional Clipboard on the guest system must be installed `spice-vdagent` (Linux, usually already installed) or [spice-guest-tools](https://www.spice-space.org/download/windows/spice-guest-tools/spice-guest-tools-latest.exe) (Windows).  
