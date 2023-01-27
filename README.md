@@ -1,5 +1,6 @@
 # GQemoo
 GUI for `qemoo` - wrapper script for qemu to start and install guest systems.  
+  
 Perhaps the easiest and most understandable tandem for working with virtual machines in QEMU. Any parameters and settings are missing. Perfect for testing/installing any Linux distributions.  
   
 qemoo project: https://abf.io/import/qemoo  
