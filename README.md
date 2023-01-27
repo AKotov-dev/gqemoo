@@ -11,9 +11,9 @@ Dependencies for VMs: `xrandr spice-vdagent`
 GQemoo dependencies: `qemoo qemu gtk2 virt-viewer rsync`  
   
 **GQemoo Hot Keys:**
++ `Esc` - Canceling image cloning .qcow2  
 + `F12` - Update the list of connected devices
 + `Ctrl+Q` - Force reset of all QEMU processes
-+ `Esc` - Canceling image cloning *.qcow2  
   
 Supported loading and installing virtual machines from flash drives, images (.img, .iso, .qcow2, .raw, .vdi, .vmdk, .vpc) and already installed images `*.qcow2`. Before booting a virtual machine, you can connect additional flash drives, images, and block devices. Bidirectional `Clipboard` and `Drag&Drop` are also supported.  
   
