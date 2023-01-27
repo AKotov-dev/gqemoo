@@ -9,7 +9,7 @@ qemoo config: /etc/qemoo.cfg
 [qemoo and systemd integration](https://abf.io/import/qemoo/blob/rosa2023.1/%D1%81%D0%BF%D1%80%D0%B0%D0%B2%D0%BA%D0%B0.%D0%BA%D0%BE%D0%BC%D0%B0%D0%BD%D0%B4%D0%B0.qemoo)  
   
 Free icons: https://www.flaticon.com  
-Dependencies: `qemoo qemu gtk2 virt-viewer rsync`  
+GQemoo dependencies: `qemoo qemu gtk2 virt-viewer rsync`  
 Dependencies for VMs: `xrandr spice-vdagent`  
   
 **GQemoo Hot Keys:**
