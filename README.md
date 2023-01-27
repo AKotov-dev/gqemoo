@@ -7,8 +7,8 @@ qemoo project: https://abf.io/import/qemoo
 qemoo rpm: [qemoo-x.x-x-rosa2021.1.noarch.rpm](https://mirror.yandex.ru/rosa/rosa2021.1/repository/x86_64/contrib/release) (Ctrl+F)  
   
 Free icons: https://www.flaticon.com  
-GQemoo dependencies: `qemoo qemu gtk2 virt-viewer rsync`  
 Dependencies for VMs: `xrandr spice-vdagent`  
+GQemoo dependencies: `qemoo qemu gtk2 virt-viewer rsync`  
   
 **GQemoo Hot Keys:**
 + `F12` - Update the list of connected devices
