@@ -19,7 +19,7 @@ Supported loading and installing virtual machines from flash drives, images and 
   
 Host share/working directory: `~/qemoo_tmp`  
   
-**Note** You need to add the user to groups `disk,kvm` and reboot: `usermod -aG disk,kvm $(logname); reboot`  
+**Note:** You need to add the user to groups `disk,kvm` and reboot: `usermod -aG disk,kvm $(logname); reboot`  
 For support Drag and Drop + bidirectional Clipboard on the guest system must be installed `spice-vdagent` (Linux, usually already installed) or [spice-guest-tools](https://www.spice-space.org/download/windows/spice-guest-tools/spice-guest-tools-latest.exe) (Windows).  
   
 ![](https://github.com/AKotov-dev/gqemoo/blob/main/ScreenShot8.png)
