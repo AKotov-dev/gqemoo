@@ -92,6 +92,7 @@ end;
 //Запуск VM
 procedure StartVM.StartProcess;
 var
+  i: integer;
   usb: string;
   s: ansistring;
 begin
@@ -110,6 +111,19 @@ begin
       RunCommand('/bin/bash', ['-c', 'umount -l ' + usb + '1 ' + usb +
         '2 ' + usb + '3 ' + usb + '4'], s);
     end;
+
+    //Размонтировать флешки из списка блочных устройств, если выбраны
+    for i := 0 to AllDevBox.Items.Count - 1 do
+      if AllDevBox.Checked[i] then
+      begin
+        usb := AllDevBox.Items[i];
+        //Смотрим флаг Removable=1, отбрасываем картридеры=0B
+        RunCommand('/bin/bash',
+          ['-c', 'if [[ $(echo "' + usb + '" | awk ' + '''' +
+          '$3 == "1" && $4 != "0B" {print $1}' + '''' +
+          ') ]]; then dev="$(echo "' + usb + '" | cut -f1 -d" ")"; umount -l ' +
+          '${dev}1 ${dev}2 ${dev}3 ${dev}4; fi'], s);
+      end;
 
     LogMemo.Repaint;
   end;
