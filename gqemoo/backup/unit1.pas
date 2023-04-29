@@ -255,8 +255,8 @@ begin
     if ListBox1.ItemIndex = 0 then
     begin
       //Если запускается установленный образ *.qcow2 - проверить чекбокса EFI (могли снять или наоборот)
-     if LoadImageEdit.Text <> '' then
-      //Включение EFI если есть: ~/qemoo_tmp/image_name.qcow2.nvram
+      if (LoadImageEdit.Text = FileListBox1.FileName) and (LoadImageEdit.Text <> '') then
+        //Включение EFI если есть: ~/qemoo_tmp/image_name.qcow2.nvram
         if FileExists(FileListBox1.FileName + '.nvram') then
           EFICheckBox.Checked := True
         else
@@ -266,7 +266,7 @@ begin
       if EFICheckBox.Checked then
       begin
         //Если запуск установленных образов qcow2 + NVRAM
-        if LoadImageEdit.Text <> '' then
+        if (LoadImageEdit.Text = FileListBox1.FileName) and (LoadImageEdit.Text <> '') then
           CFG.Add(
             'EFI="-drive if=pflash,format=raw,readonly=on,file=/usr/share/OVMF/OVMF_CODE.fd -drive if=pflash,format=raw,file='
             + FileListBox1.FileName + '.nvram"')
@@ -483,7 +483,8 @@ end;
 procedure TMainForm.ListBox1Click(Sender: TObject);
 begin
   if LoadImageEdit.Text <> '' then
-    if (ListBox1.ItemIndex = 1) and (FileExists(ExtractFileName(LoadImageEdit.Text))) then
+    if (ListBox1.ItemIndex = 1) and
+      (FileExists(ExtractFileName(LoadImageEdit.Text))) then
       LoadImageEdit.Text := '';
 end;
 
