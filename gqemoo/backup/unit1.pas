@@ -17,7 +17,7 @@ type
     AllDevBox: TCheckListBox;
     ClearBtn: TSpeedButton;
     DevBox: TComboBox;
-    Edit1: TEdit;
+    LoadImageEdit: TEdit;
     Edit2: TEdit;
     EFICheckBox: TCheckBox;
     FileListBox1: TFileListBox;
@@ -244,8 +244,8 @@ begin
     if DevBox.ItemIndex <> DevBox.Items.Count - 1 then
       dev := Copy(DevBox.Text, 1, Pos(' ', DevBox.Text) - 1)
     else
-    if Edit1.Text <> '' then
-      dev := '"' + Edit1.Text + '"'
+    if LoadImageEdit.Text <> '' then
+      dev := '"' + LoadImageEdit.Text + '"'
     else
       Exit;
 
@@ -255,8 +255,8 @@ begin
     if ListBox1.ItemIndex = 0 then
     begin
       //Если запускается установленный образ *.qcow2 - проверить чекбокса EFI (могли снять или наоборот)
-      if Edit1.Text = FilelistBox1.FileName then
-        //Включение EFI если есть: ~/qemoo_tmp/image_name.qcow2.nvram
+     if LoadImageEdit.Text <> '' then
+      //Включение EFI если есть: ~/qemoo_tmp/image_name.qcow2.nvram
         if FileExists(FileListBox1.FileName + '.nvram') then
           EFICheckBox.Checked := True
         else
@@ -266,7 +266,7 @@ begin
       if EFICheckBox.Checked then
       begin
         //Если запуск установленных образов qcow2 + NVRAM
-        if Edit1.Text = FileListBox1.FileName then
+        if LoadImageEdit.Text <> '' then
           CFG.Add(
             'EFI="-drive if=pflash,format=raw,readonly=on,file=/usr/share/OVMF/OVMF_CODE.fd -drive if=pflash,format=raw,file='
             + FileListBox1.FileName + '.nvram"')
@@ -317,7 +317,7 @@ begin
     CFG.Add('QEMUADD="-vga qxl -smp 2"');
     CFG.Add('SIZE=' + '''' + '20' + '''');
     CFG.Add('QCOW2=' + '''' + GetUserDir + 'qemoo_tmp/' + Value + '.qcow2' + '''');
-    // CFG.Add('ACTION=' + '''' + 'run' + '''');  //не создаёт *.qcow2.nvram?
+    //CFG.Add('ACTION=' + '''' + 'run' + '''');  //не создаёт *.qcow2.nvram?
     CFG.Add('RAM="auto"');
     //CFG.Add('ADD=""');
     CFG.Add('PORT=""');
@@ -390,7 +390,7 @@ end;
 //Выбор флешки
 procedure TMainForm.DevBoxChange(Sender: TObject);
 begin
-  Edit1.Clear;
+  LoadImageEdit.Clear;
   ReloadAllDevices;
 end;
 
@@ -403,7 +403,7 @@ begin
     ListBox1.ItemIndex := 0;
 
     //Имя образа из списка в строку запуска
-    Edit1.Text := FileListBox1.FileName;
+    LoadImageEdit.Text := FileListBox1.FileName;
 
     //Образ выбран, обнулить флешку
     if DevBox.ItemIndex <> DevBox.Items.Count - 1 then
@@ -482,9 +482,9 @@ end;
 //Очистить источник, если попытка установить уже установленный образ из CurrentDirectory
 procedure TMainForm.ListBox1Click(Sender: TObject);
 begin
-  if Edit1.Text <> '' then
-    if (ListBox1.ItemIndex = 1) and (FileExists(ExtractFileName(Edit1.Text))) then
-      Edit1.Text := '';
+  if LoadImageEdit.Text <> '' then
+    if (ListBox1.ItemIndex = 1) and (FileExists(ExtractFileName(LoadImageEdit.Text))) then
+      LoadImageEdit.Text := '';
 end;
 
 //Вставка иконок в ListBox (Загрузка/Установка)
@@ -548,7 +548,7 @@ procedure TMainForm.OpenBtn1Click(Sender: TObject);
 begin
   if OpenDialog1.Execute then
   begin
-    Edit1.Text := OpenDialog1.FileName;
+    LoadImageEdit.Text := OpenDialog1.FileName;
 
     //Образ выбран, обнулить флешку
     if DevBox.ItemIndex <> DevBox.Items.Count - 1 then
@@ -558,7 +558,7 @@ begin
     end;
 
     //Если образ загрузки = образу подключения - очистить образ подключения
-    if Edit1.Text = Edit2.Text then Edit2.Clear;
+    if LoadImageEdit.Text = Edit2.Text then Edit2.Clear;
   end;
 end;
 
@@ -570,7 +570,7 @@ begin
     Edit2.Text := OpenDialog2.FileName;
 
     //Если образ подключения = образу загрузки - очистить образ загрузки
-    if Edit2.Text = Edit1.Text then Edit1.Clear;
+    if Edit2.Text = LoadImageEdit.Text then LoadImageEdit.Clear;
   end;
 end;
 
@@ -598,8 +598,8 @@ begin
       if FileListBox1.Count <> 0 then
         FileListBox1.ItemIndex := 0;
 
-      //Очистка Edit1 в любом случае; установленны образ мог находиться в загрузке
-      Edit1.Clear;
+      //Очистка LoadImageEdit в любом случае; установленны образ мог находиться в загрузке
+      LoadImageEdit.Clear;
     end;
   end;
 end;
@@ -720,12 +720,12 @@ begin
 
   //Размеры для разных тем
   ReloadBtn.Width := DevBox.Height;
-  OpenBtn1.Width := Edit1.Height;
+  OpenBtn1.Width := LoadImageEdit.Height;
 
-  Edit2.Height := Edit1.Height;
-  OpenBtn2.Width := Edit1.Height;
-  ScriptBtn.Width := Edit1.Height;
-  ClearBtn.Width := Edit1.Height;
+  Edit2.Height := LoadImageEdit.Height;
+  OpenBtn2.Width := LoadImageEdit.Height;
+  ScriptBtn.Width := LoadImageEdit.Height;
+  ClearBtn.Width := LoadImageEdit.Height;
   AllDevBox.Top := ListBox1.Top;
 
   //Наполняем список режимов
@@ -748,7 +748,7 @@ begin
   ReloadUSBDevices;
   ReloadAllDevices;
 
-  if DevBox.Items.Count > 1 then Edit1.Clear;
+  if DevBox.Items.Count > 1 then LoadImageEdit.Clear;
 end;
 
 end.

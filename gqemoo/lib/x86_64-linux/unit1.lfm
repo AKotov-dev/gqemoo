@@ -1,10 +1,10 @@
 object MainForm: TMainForm
-  Left = 294
-  Height = 659
-  Top = 123
+  Left = 280
+  Height = 641
+  Top = 125
   Width = 864
   Caption = 'MainForm'
-  ClientHeight = 659
+  ClientHeight = 641
   ClientWidth = 864
   KeyPreview = True
   OnCloseQuery = FormCloseQuery
@@ -144,7 +144,7 @@ object MainForm: TMainForm
       ParentShowHint = False
     end
     object Label4: TLabel
-      AnchorSideLeft.Control = Edit1
+      AnchorSideLeft.Control = LoadImageEdit
       AnchorSideBottom.Control = Label3
       AnchorSideBottom.Side = asrBottom
       Left = 216
@@ -155,7 +155,7 @@ object MainForm: TMainForm
       Caption = '...or from the image'
       ParentColor = False
     end
-    object Edit1: TEdit
+    object LoadImageEdit: TEdit
       AnchorSideLeft.Control = ReloadBtn
       AnchorSideLeft.Side = asrBottom
       AnchorSideTop.Control = ReloadBtn
@@ -172,9 +172,9 @@ object MainForm: TMainForm
       TabOrder = 1
     end
     object OpenBtn1: TSpeedButton
-      AnchorSideTop.Control = Edit1
+      AnchorSideTop.Control = LoadImageEdit
       AnchorSideRight.Control = ScriptBtn
-      AnchorSideBottom.Control = Edit1
+      AnchorSideBottom.Control = LoadImageEdit
       AnchorSideBottom.Side = asrBottom
       Left = 685
       Height = 37
@@ -375,7 +375,7 @@ object MainForm: TMainForm
   object Panel2: TPanel
     Left = 0
     Height = 142
-    Top = 517
+    Top = 499
     Width = 864
     Align = alBottom
     BevelOuter = bvNone
@@ -419,19 +419,19 @@ object MainForm: TMainForm
     Cursor = crVSplit
     Left = 0
     Height = 5
-    Top = 512
+    Top = 494
     Width = 864
     Align = alBottom
     ResizeAnchor = akBottom
   end
   object Panel3: TPanel
     Left = 0
-    Height = 440
+    Height = 422
     Top = 72
     Width = 272
     Align = alLeft
     BevelOuter = bvNone
-    ClientHeight = 440
+    ClientHeight = 422
     ClientWidth = 272
     TabOrder = 3
     object EFICheckBox: TCheckBox
@@ -643,7 +643,7 @@ object MainForm: TMainForm
       AnchorSideTop.Control = RemoveBtn
       AnchorSideTop.Side = asrBottom
       Left = 5
-      Height = 271
+      Height = 253
       Hint = 'DblClick - Start'
       Top = 169
       Width = 267
@@ -718,19 +718,19 @@ object MainForm: TMainForm
   end
   object Splitter3: TSplitter
     Left = 272
-    Height = 440
+    Height = 422
     Top = 72
     Width = 5
   end
   object Panel4: TPanel
     Left = 277
-    Height = 440
+    Height = 422
     Top = 72
     Width = 587
     Align = alClient
     BevelOuter = bvNone
     Caption = 'Panel4'
-    ClientHeight = 440
+    ClientHeight = 422
     ClientWidth = 587
     TabOrder = 5
     object Label2: TLabel
@@ -751,7 +751,7 @@ object MainForm: TMainForm
       AnchorSideRight.Side = asrBottom
       AnchorSideBottom.Control = Edit2
       Left = 0
-      Height = 373
+      Height = 355
       Top = 25
       Width = 582
       Anchors = [akTop, akLeft, akRight, akBottom]
@@ -775,7 +775,7 @@ object MainForm: TMainForm
       AnchorSideBottom.Side = asrBottom
       Left = 0
       Height = 37
-      Top = 403
+      Top = 385
       Width = 506
       Anchors = [akLeft, akRight, akBottom]
       ReadOnly = True
@@ -791,7 +791,7 @@ object MainForm: TMainForm
       Left = 506
       Height = 37
       Hint = 'Connect an image'
-      Top = 403
+      Top = 385
       Width = 37
       Anchors = [akTop, akRight, akBottom]
       Caption = '...'
@@ -808,7 +808,7 @@ object MainForm: TMainForm
       Left = 543
       Height = 37
       Hint = 'Clear'
-      Top = 403
+      Top = 385
       Width = 39
       Anchors = [akTop, akRight, akBottom]
       Glyph.Data = {
