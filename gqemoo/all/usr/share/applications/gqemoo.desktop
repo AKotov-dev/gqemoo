@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=GQemoo
+Comment=Launching and installing VM images
+Comment[ru]=Запуск и установка образов VM
+Icon=gqemoo
+Exec=gqemoo
+Type=Application
+Categories=Utility
+Terminal=false

@@ -1,0 +1,149 @@
+This repack.txt file was created automatically by RPMCreator v2.4
+It contains the necessary information to recreation the program from the source code
+
+Information about the program:
+---
+Name of program: GQemoo
+Version of program: 2.2
+Program development tool: Lazarus
+Version of program development tool: 2.2.4
+URL the sources + binaries of the author: https://github.com/AKotov-dev/gqemoo
+
+Information about the rpm-package:
+---
+Build method: Portable RPM
+Time stamp: 30-4-23 11:11:38
+
+Name: gqemoo
+Version: 2.2
+Release: 1.mrx9
+Group: Accessibility
+License: GPLv3
+Maintainer: Alex Kotov
+Vendor: alex_q_2000 (C) 2022
+URL of the copy source codes: https://github.com/AKotov-dev/gqemoo
+
+Summary: GUI for qemoo
+
+Description:
+---
+GUI for the VM qemu startup script from images and flash drives
+---
+More information: /usr/share/doc/package_name/repack.txt
+
+Package dependencies:
+---
+qemoo gtk2 virt-viewer rsync
+
+Additionally information:
+---
+qemoo: https://abf.io/betcher_/qemoo
+
+v2.2
++ Fixed EFI mode when booting from a USB stick
++ RPM Packages for Mageia-8 (ROSA-2021.1) and Mageia-9
+
+v2.1
++ Unmount flash drives from the list of block devices, if selected
++ RPM Packages for Mageia-8 (ROSA-2021.1) and Mageia-9
+
+v2.0
++ Adaptation to qemoo >= v1.4-14 with EFI+NVRAM support
++ Replacing configuration option --qemoocfg with --config
++ Requirement to include the user in the kvm group
++ Disabling devices if specified to be added before installation
++ RPM Packages for Mageia-8 (ROSA-2021.1) and Mageia-9
+
+v1.9
++ Adaptation to qemoo >= v1.3-13 with systemd support
++ VM configurations are taken into account to run via systemd
++ Image attribute/flag "(NO)EFI" changed to *.qcow2.noefi
++ Improved VM renaming, deletion, and cloning functions
+
+v1.8
++ Request to cancel cloning when exiting the GUI
++ Improved the XResize script for scaling the VM window
++ RPM Packages for Mageia-8 (ROSA-2021.1) and Mageia-9
+
+v1.7
++ Added rpm dependency: rsync
++ Added *.qcow2 image cloning feature
++ RPM Packages for Mageia-8 (ROSA-2021.1) and Mageia-9
+
+v1.6
++ Saving settings if the OS was installed with UEFI
++ User configuration --qemoocfg ~/.gqemoo/qemoo.cfg
++ RPM Packages for Mageia-8 (ROSA-2021.1) and Mageia-9
+
+v1.5
++ Universal script for automatic scaling of a Linux virtual machine window
++ RPM Packages for Mageia-8 (ROSA-2021.1) and Mageia-9
+
+v1.4
++ Universal script for mount/umount a shared directory ~/hostdir (systemd)
++ [ Ctrl+Q ] - Resetting all processes remote-viewer & qemu-system-x86_64
++ RPM Packages for Mageia-8 (ROSA-2021.1) and Mageia-9
+
+v1.3
++ The command to share ~/hostdir in the guest system via the Сlipboard
++ RPM Packages for Mageia-8 (ROSA-2021.1) and Mageia-9
+
+v1.2
++ Using qemoo in --daemon (-d) mode
++ Independent launch of several different VMs
++ RPM Packages for Mageia-8 (ROSA-2021.1) and Mageia-9
+
+v1.1
++ Dependencies: added virt-viewer package
++ Drag and Drop support + bidirectional Clipboard
++ Force reset of all QEMU processes - [Ctrl+Q]
++ Resizable control panels (splitters for convenience)
+
+v1.0
++ DblClick - separate Start of already installed VMs
++ RPM Packages for Mageia-8 (ROSA-2021.1) and Mageia-9
+
+v0.9
++ Stretch interface; LCL Scaling (Hi-DPI)
++ Improved renaming of images (replacement of characters)
++ Clearing the loading source when deleting an installed image
++ Clearing the source if an attempt is made to install an installed image
++ RPM Packages for Mageia-8 (ROSA-2021.1) and Mageia-9
+
+v0.8
++ Added a list of installed images
++ RPM Packages for Mageia-8 (ROSA-2021.1) and Mageia-9
+
+v0.7
++ Icons in the action selection menu
++ Double-click in the menu - start the action
++ Support: *.img;*.iso;*.qcow2;*.raw;*.vdi;*.vmdk;*.vpc
++ RPM Packages for Mageia-8 (ROSA-2021.1) and Mageia-9
+
+v0.6
++ Selecting vga from the list: default, std, qxl, virtio
++ RPM Packages for Mageia-8 (ROSA-2021.1) and Mageia-9
+
+v0.5
++ Added "-vga std/-vga qxl" switch
++ RPM Packages for Mageia-8 (ROSA-2021.1) and Mageia-9
+
+v0.4
++ Added "-- -vga qxl" option for EFI mode
++ Added MAJ 259 and output of device models
++ RPM Packages for Mageia-8 (ROSA-2021.1) and Mageia-9
+
+v0.3
++ Connecting *.iso and *.img images to VM
++ Support for spaces in names and paths to images
++ F12 - Updating the list of devices to connect to the VM
++ Improved output of lists of flash drives and block devices
++ RPM Packages for Mageia-8 (ROSA-2021.1) and Mageia-9
+
+v0.2
++ Checking the user's presence in group "disk"
++ Forced unmounting of the selected flash drive
++ RPM Packages for Mageia-8 (ROSA-2021.1) and Mageia-9
+
+v0.1
+- Initial release
