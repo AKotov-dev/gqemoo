@@ -22,6 +22,5 @@ begin
   Application.Scaled:=True;
   Application.Initialize;
   Application.CreateForm(TMainForm, MainForm);
-  Application.CreateForm(TSetForm, SetForm);
   Application.Run;
 end.

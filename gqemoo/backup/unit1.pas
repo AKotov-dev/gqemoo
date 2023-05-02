@@ -718,9 +718,13 @@ begin
   end;
 end;
 
+//Показать диалог настроек модально
 procedure TMainForm.SetBtnClick(Sender: TObject);
 begin
+  SetForm := TSetForm.Create(nil);
   SetForm.ShowModal;
+
+  FreeAndNil(SetForm);
 end;
 
 procedure TMainForm.FormShow(Sender: TObject);

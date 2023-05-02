@@ -8,6 +8,7 @@ object SetForm: TSetForm
   ClientHeight = 130
   ClientWidth = 379
   KeyPreview = True
+  OnClose = FormClose
   OnKeyPress = FormKeyPress
   OnShow = FormShow
   Position = poMainFormCenter
