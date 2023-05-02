@@ -266,7 +266,8 @@ begin
       if EFICheckBox.Checked then
       begin
         //Если запуск установленных образов qcow2 + NVRAM
-        if (LoadImageEdit.Text = FileListBox1.FileName) and (LoadImageEdit.Text <> '') then
+        if (LoadImageEdit.Text = FileListBox1.FileName) and
+          (LoadImageEdit.Text <> '') then
           CFG.Add(
             'EFI="-drive if=pflash,format=raw,readonly=on,file=/usr/share/OVMF/OVMF_CODE.fd -drive if=pflash,format=raw,file='
             + FileListBox1.FileName + '.nvram"')
@@ -314,13 +315,13 @@ begin
     end;
 
     //Пишем конфиг ~/.gqemoo/qemoo.cfg: дисплей qxl + кол-во CPU, имя нового образа, размер qcow2=20GB и т.д.
-    CFG.Add('QEMUADD="-vga qxl -smp 2"');
-    CFG.Add('SIZE=' + '''' + '20' + '''');
+    //CFG.Add('QEMUADD="-vga qxl -smp 2"');
+    //CFG.Add('SIZE=' + '''' + '20' + '''');
     CFG.Add('QCOW2=' + '''' + GetUserDir + 'qemoo_tmp/' + Value + '.qcow2' + '''');
     //CFG.Add('ACTION=' + '''' + 'run' + '''');  //не создаёт *.qcow2.nvram?
-    CFG.Add('RAM="auto"');
+    //CFG.Add('RAM="auto"');
     //CFG.Add('ADD=""');
-    CFG.Add('PORT=""');
+    //CFG.Add('PORT=""');
     //CFG.Add('REDIRUSB=""');
     //CFG.Add('LOSETUP=""');
     CFG.Add('SPICE="yes"');

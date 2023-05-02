@@ -315,11 +315,11 @@ begin
     end;
 
     //Пишем конфиг ~/.gqemoo/qemoo.cfg: дисплей qxl + кол-во CPU, имя нового образа, размер qcow2=20GB и т.д.
-    CFG.Add('QEMUADD="-vga qxl -smp 2"');
-    CFG.Add('SIZE=' + '''' + '20' + '''');
+    //CFG.Add('QEMUADD="-vga qxl -smp 2"');
+    //CFG.Add('SIZE=' + '''' + '20' + '''');
     CFG.Add('QCOW2=' + '''' + GetUserDir + 'qemoo_tmp/' + Value + '.qcow2' + '''');
     //CFG.Add('ACTION=' + '''' + 'run' + '''');  //не создаёт *.qcow2.nvram?
-    CFG.Add('RAM="auto"');
+    //CFG.Add('RAM="auto"');
     //CFG.Add('ADD=""');
     CFG.Add('PORT=""');
     //CFG.Add('REDIRUSB=""');
