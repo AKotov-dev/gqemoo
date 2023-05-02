@@ -19,6 +19,7 @@ object SetForm: TSetForm
     Height = 37
     Top = 6
     Width = 80
+    ParentShowHint = False
     TabOrder = 0
   end
   object Edit2: TEdit
