@@ -21,7 +21,6 @@ type
     SetBtn: TSpeedButton;
     DefaultBtn: TSpeedButton;
     procedure DefaultBtnClick(Sender: TObject);
-    procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormKeyPress(Sender: TObject; var Key: char);
     procedure FormShow(Sender: TObject);
     procedure SetBtnClick(Sender: TObject);
@@ -49,19 +48,17 @@ begin
   Edit1.SetFocus;
 
   //RAM
-  if RunCommand('/bin/bash', ['-c',
-    'grep "^RAM=" /etc/qemoo.cfg | grep -o [[:digit:]]*'], S) then
-    Edit1.Text := Trim(S);
+  RunCommand('/bin/bash', ['-c', 'grep "^RAM=" /etc/qemoo.cfg | sed s/[^0-9]//g'], S);
+  Edit1.Text := Trim(S);
 
   //SIZE
-  if RunCommand('/bin/bash', ['-c',
-    'grep "^SIZE=" /etc/qemoo.cfg | grep -o [[:digit:]]*'], S) then
-    Edit2.Text := Trim(S);
+  RunCommand('/bin/bash', ['-c', 'grep "^SIZE=" /etc/qemoo.cfg | sed s/[^0-9]//g'], S);
+  Edit2.Text := Trim(S);
 
   //QEMUADD
-  if RunCommand('/bin/bash', ['-c',
-    'grep "^QEMUADD=" /etc/qemoo.cfg | sed "s/QEMUADD=//" | tr -d \"\' + ''''], S) then
-    Edit3.Text := Trim(S);
+  RunCommand('/bin/bash', ['-c',
+    'grep "^QEMUADD=" /etc/qemoo.cfg | sed "s/QEMUADD=//" | tr -d \"\' + ''''], S);
+  Edit3.Text := Trim(S);
 end;
 
 //Default
@@ -72,11 +69,6 @@ begin
   Edit3.Clear;
 
   SetBtn.Click;
-end;
-
-procedure TSetForm.FormClose(Sender: TObject; var CloseAction: TCloseAction);
-begin
-  Action:=caFree;
 end;
 
 //Нажатие Enter = Apply
