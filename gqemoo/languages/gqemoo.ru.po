@@ -121,8 +121,8 @@ msgid "License: GPLv3   Author: alex_q_2000 (C) 2022   URL: https://linuxforum.r
 msgstr "Лицензия: GPLv3   Автор: alex_q_2000 (C) 2022   URL: https://linuxforum.ru"
 
 #: tsetform.caption
-msgid "Common parameters"
-msgstr "Общие параметры"
+msgid "General VM Parameters"
+msgstr "Общие параметры VM"
 
 #: tsetform.defaultbtn.hint
 msgid "Default"
@@ -227,4 +227,3 @@ msgstr "ожидаю spice-server на 127.0.0.1:"
 #: unit1.swaitingspicesec
 msgid "of 5 sec)"
 msgstr "из 5 сек)"
-

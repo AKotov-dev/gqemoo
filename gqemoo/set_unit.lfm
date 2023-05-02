@@ -4,7 +4,7 @@ object SetForm: TSetForm
   Top = 125
   Width = 379
   ActiveControl = Edit1
-  Caption = 'Common parameters'
+  Caption = 'General VM Parameters'
   ClientHeight = 130
   ClientWidth = 379
   KeyPreview = True

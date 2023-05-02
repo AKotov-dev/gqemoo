@@ -110,7 +110,7 @@ msgid "License: GPLv3   Author: alex_q_2000 (C) 2022   URL: https://linuxforum.r
 msgstr ""
 
 #: tsetform.caption
-msgid "Common parameters"
+msgid "General VM Parameters"
 msgstr ""
 
 #: tsetform.defaultbtn.hint
