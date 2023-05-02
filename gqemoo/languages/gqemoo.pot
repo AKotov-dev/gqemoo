@@ -126,11 +126,11 @@ msgid "-smp X - number of CPU cores"
 msgstr ""
 
 #: tsetform.label1.caption
-msgid "RAM (GB)"
+msgid "RAM (MB)"
 msgstr ""
 
 #: tsetform.label2.caption
-msgid "SIZE (MB)"
+msgid "SIZE (GB)"
 msgstr ""
 
 #: tsetform.label3.caption

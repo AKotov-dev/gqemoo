@@ -38,16 +38,16 @@ object SetForm: TSetForm
     Left = 8
     Height = 17
     Top = 16
-    Width = 56
-    Caption = 'RAM (GB)'
+    Width = 57
+    Caption = 'RAM (MB)'
     ParentColor = False
   end
   object Label2: TLabel
     Left = 8
     Height = 17
     Top = 56
-    Width = 57
-    Caption = 'SIZE (MB)'
+    Width = 56
+    Caption = 'SIZE (GB)'
     ParentColor = False
   end
   object Edit3: TEdit
