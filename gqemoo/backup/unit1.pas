@@ -321,7 +321,7 @@ begin
     //CFG.Add('ACTION=' + '''' + 'run' + '''');  //не создаёт *.qcow2.nvram?
     //CFG.Add('RAM="auto"');
     //CFG.Add('ADD=""');
-    //CFG.Add('PORT=""');
+    CFG.Add('PORT=""');
     //CFG.Add('REDIRUSB=""');
     //CFG.Add('LOSETUP=""');
     CFG.Add('SPICE="yes"');

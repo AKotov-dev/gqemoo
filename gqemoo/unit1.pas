@@ -315,7 +315,7 @@ begin
     end;
 
     //Пишем конфиг ~/.gqemoo/qemoo.cfg: дисплей qxl + кол-во CPU, имя нового образа, размер qcow2=20GB и т.д.
-    //CFG.Add('QEMUADD="-vga qxl -smp 2"');
+    //CFG.Add('QEMUADD="-vga qxl -smp 2"'); //qemoo-v1.5, spice-agent работает с -vga virtio
     //CFG.Add('SIZE=' + '''' + '20' + '''');
     CFG.Add('QCOW2=' + '''' + GetUserDir + 'qemoo_tmp/' + Value + '.qcow2' + '''');
     //CFG.Add('ACTION=' + '''' + 'run' + '''');  //не создаёт *.qcow2.nvram?
