@@ -8,7 +8,7 @@ qemoo rpm: [qemoo-x.x-x-rosa2021.1.noarch.rpm](https://mirror.yandex.ru/rosa/ros
   
 Free icons: https://www.flaticon.com  
 Dependencies for VMs: `xrandr spice-vdagent`  
-GQemoo dependencies: `qemoo qemu gtk2 virt-viewer rsync`  
+GQemoo dependencies: `qemoo qemu gtk2 virt-viewer rsync polkit`  
   
 **GQemoo Hot Keys:**
 + `Esc` - Canceling image cloning .qcow2  
