@@ -107,6 +107,11 @@ msgctxt "tmainform.selectallbtn.hint"
 msgid "Select all"
 msgstr "Выбрать все"
 
+#: tmainform.setbtn.hint
+msgctxt "tmainform.setbtn.hint"
+msgid "Scripts to insert into the VM terminal via the clipboard"
+msgstr "Скрипты для вставки в терминал VM через буфер обмена"
+
 #: tmainform.startbtn.caption
 msgid "Start"
 msgstr "Старт"
@@ -114,6 +119,30 @@ msgstr "Старт"
 #: tmainform.statictext2.caption
 msgid "License: GPLv3   Author: alex_q_2000 (C) 2022   URL: https://linuxforum.ru"
 msgstr "Лицензия: GPLv3   Автор: alex_q_2000 (C) 2022   URL: https://linuxforum.ru"
+
+#: tsetform.caption
+msgid "Common parameters"
+msgstr "Общие параметры"
+
+#: tsetform.defaultbtn.hint
+msgid "Default"
+msgstr "По умолчанию"
+
+#: tsetform.label1.caption
+msgid "RAM (GB)"
+msgstr ""
+
+#: tsetform.label2.caption
+msgid "SIZE (GB)"
+msgstr ""
+
+#: tsetform.label3.caption
+msgid "QEMUADD"
+msgstr ""
+
+#: tsetform.setbtn.hint
+msgid "Apply"
+msgstr "Применить"
 
 #: unit1.scancelcloning
 msgid "Cloning started! Terminate?"

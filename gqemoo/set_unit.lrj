@@ -1,0 +1,8 @@
+{"version":1,"strings":[
+{"hash":41001043,"name":"tsetform.caption","sourcebytes":[67,111,109,109,111,110,32,112,97,114,97,109,101,116,101,114,115],"value":"Common parameters"},
+{"hash":99798569,"name":"tsetform.label1.caption","sourcebytes":[82,65,77,32,40,71,66,41],"value":"RAM (GB)"},
+{"hash":242392233,"name":"tsetform.label2.caption","sourcebytes":[83,73,90,69,32,40,71,66,41],"value":"SIZE (GB)"},
+{"hash":94541268,"name":"tsetform.label3.caption","sourcebytes":[81,69,77,85,65,68,68],"value":"QEMUADD"},
+{"hash":4749113,"name":"tsetform.setbtn.hint","sourcebytes":[65,112,112,108,121],"value":"Apply"},
+{"hash":180128884,"name":"tsetform.defaultbtn.hint","sourcebytes":[68,101,102,97,117,108,116],"value":"Default"}
+]}

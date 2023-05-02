@@ -32,6 +32,7 @@ type
     LogMemo: TMemo;
     MenuItem1: TMenuItem;
     MenuItem2: TMenuItem;
+    SetBtn: TSpeedButton;
     Separator1: TMenuItem;
     OpenBtn1: TSpeedButton;
     OpenBtn2: TSpeedButton;
@@ -72,6 +73,7 @@ type
     procedure ScriptBtnMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: integer);
     procedure CloneBtnClick(Sender: TObject);
+    procedure SetBtnClick(Sender: TObject);
     procedure StartBtnClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -114,7 +116,7 @@ resourcestring
 
 implementation
 
-uses start_trd, clone_progress_trd;
+uses start_trd, clone_progress_trd, set_unit;
 
 {$R *.lfm}
 
@@ -315,7 +317,7 @@ begin
     end;
 
     //Пишем конфиг ~/.gqemoo/qemoo.cfg: дисплей qxl + кол-во CPU, имя нового образа, размер qcow2=20GB и т.д.
-    //CFG.Add('QEMUADD="-vga qxl -smp 2"');
+    //CFG.Add('QEMUADD="-vga qxl -smp 2"'); //qemoo-v1.5, spice-agent работает с -vga virtio
     //CFG.Add('SIZE=' + '''' + '20' + '''');
     CFG.Add('QCOW2=' + '''' + GetUserDir + 'qemoo_tmp/' + Value + '.qcow2' + '''');
     //CFG.Add('ACTION=' + '''' + 'run' + '''');  //не создаёт *.qcow2.nvram?
@@ -714,6 +716,11 @@ begin
     FStartClone := StartClone.Create(False);
     FStartClone.Priority := tpLower;
   end;
+end;
+
+procedure TMainForm.SetBtnClick(Sender: TObject);
+begin
+  SetForm.ShowModal;
 end;
 
 procedure TMainForm.FormShow(Sender: TObject);

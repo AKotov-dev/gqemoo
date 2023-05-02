@@ -96,12 +96,41 @@ msgctxt "tmainform.selectallbtn.hint"
 msgid "Select all"
 msgstr ""
 
+#: tmainform.setbtn.hint
+msgctxt "tmainform.setbtn.hint"
+msgid "Scripts to insert into the VM terminal via the clipboard"
+msgstr ""
+
 #: tmainform.startbtn.caption
 msgid "Start"
 msgstr ""
 
 #: tmainform.statictext2.caption
 msgid "License: GPLv3   Author: alex_q_2000 (C) 2022   URL: https://linuxforum.ru"
+msgstr ""
+
+#: tsetform.caption
+msgid "Common parameters"
+msgstr ""
+
+#: tsetform.defaultbtn.hint
+msgid "Default"
+msgstr ""
+
+#: tsetform.label1.caption
+msgid "RAM (GB)"
+msgstr ""
+
+#: tsetform.label2.caption
+msgid "SIZE (GB)"
+msgstr ""
+
+#: tsetform.label3.caption
+msgid "QEMUADD"
+msgstr ""
+
+#: tsetform.setbtn.hint
+msgid "Apply"
 msgstr ""
 
 #: unit1.scancelcloning

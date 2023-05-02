@@ -92,6 +92,13 @@
         <Filename Value="clone_progress_trd.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit>
+      <Unit>
+        <Filename Value="set_unit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="SetForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

@@ -12,7 +12,7 @@ uses
   Forms,
   Unit1,
   start_trd,
-  clone_progress_trd;
+  clone_progress_trd, set_unit;
 
 {$R *.res}
 
@@ -22,5 +22,6 @@ begin
   Application.Scaled:=True;
   Application.Initialize;
   Application.CreateForm(TMainForm, MainForm);
+  Application.CreateForm(TSetForm, SetForm);
   Application.Run;
 end.
