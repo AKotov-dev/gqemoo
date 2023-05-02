@@ -126,7 +126,7 @@ msgstr "Общие параметры VM"
 
 #: tsetform.defaultbtn.hint
 msgid "Default"
-msgstr ""
+msgstr "По умолчанию"
 
 #: tsetform.edit2.hint
 msgid "The size of the disk to install"
@@ -150,7 +150,7 @@ msgstr ""
 
 #: tsetform.setbtn.hint
 msgid "Apply"
-msgstr ""
+msgstr "Применить"
 
 #: unit1.scancelcloning
 msgid "Cloning started! Terminate?"
