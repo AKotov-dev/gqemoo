@@ -130,7 +130,7 @@ msgid "RAM (GB)"
 msgstr ""
 
 #: tsetform.label2.caption
-msgid "SIZE (GB)"
+msgid "SIZE (MB)"
 msgstr ""
 
 #: tsetform.label3.caption

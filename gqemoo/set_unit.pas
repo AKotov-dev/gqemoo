@@ -118,11 +118,11 @@ begin
       S.Add('#SIZE=' + '''' + '10' + '''');
     S.Add('');
 
-    S.Add('# size of ram (Gb) for guest machine (default: RAM / 2, but not greater than 4)');
+    S.Add('# size of ram (MB) for guest machine (default: RAM / 2, but not greater than 4 GB)');
     if Edit1.Text <> '' then
       S.Add('RAM=' + '''' + Trim(Edit1.Text) + '''')
     else
-      S.Add('#RAM=' + '''' + '4' + '''');
+      S.Add('#RAM=' + '''' + '2000' + '''');
 
     S.Add('');
     S.Add('# efi firmware emulator for current architicture');

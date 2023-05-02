@@ -2,7 +2,7 @@
 {"hash":167901059,"name":"tsetform.caption","sourcebytes":[71,101,110,101,114,97,108,32,86,77,32,80,97,114,97,109,101,116,101,114,115],"value":"General VM Parameters"},
 {"hash":133718108,"name":"tsetform.edit2.hint","sourcebytes":[84,104,101,32,115,105,122,101,32,111,102,32,116,104,101,32,100,105,115,107,32,116,111,32,105,110,115,116,97,108,108],"value":"The size of the disk to install"},
 {"hash":99798569,"name":"tsetform.label1.caption","sourcebytes":[82,65,77,32,40,71,66,41],"value":"RAM (GB)"},
-{"hash":242392233,"name":"tsetform.label2.caption","sourcebytes":[83,73,90,69,32,40,71,66,41],"value":"SIZE (GB)"},
+{"hash":242394793,"name":"tsetform.label2.caption","sourcebytes":[83,73,90,69,32,40,77,66,41],"value":"SIZE (MB)"},
 {"hash":97307107,"name":"tsetform.edit3.hint","sourcebytes":[45,115,109,112,32,88,32,45,32,110,117,109,98,101,114,32,111,102,32,67,80,85,32,99,111,114,101,115],"value":"-smp X - number of CPU cores"},
 {"hash":94541268,"name":"tsetform.label3.caption","sourcebytes":[81,69,77,85,65,68,68],"value":"QEMUADD"},
 {"hash":4749113,"name":"tsetform.setbtn.hint","sourcebytes":[65,112,112,108,121],"value":"Apply"},

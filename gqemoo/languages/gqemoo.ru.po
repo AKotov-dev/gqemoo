@@ -141,7 +141,7 @@ msgid "RAM (GB)"
 msgstr ""
 
 #: tsetform.label2.caption
-msgid "SIZE (GB)"
+msgid "SIZE (MB)"
 msgstr ""
 
 #: tsetform.label3.caption
@@ -227,3 +227,4 @@ msgstr "ожидаю spice-server на 127.0.0.1:"
 #: unit1.swaitingspicesec
 msgid "of 5 sec)"
 msgstr "из 5 сек)"
+
