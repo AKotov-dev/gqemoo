@@ -117,6 +117,14 @@ msgstr ""
 msgid "Default"
 msgstr ""
 
+#: tsetform.edit2.hint
+msgid "The size of the disk to install"
+msgstr ""
+
+#: tsetform.edit3.hint
+msgid "-smp X - number of CPU cores"
+msgstr ""
+
 #: tsetform.label1.caption
 msgid "RAM (GB)"
 msgstr ""

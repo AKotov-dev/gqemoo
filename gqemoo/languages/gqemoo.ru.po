@@ -128,6 +128,14 @@ msgstr "Общие параметры"
 msgid "Default"
 msgstr "По умолчанию"
 
+#: tsetform.edit2.hint
+msgid "The size of the disk to install"
+msgstr "Размер диска для установки"
+
+#: tsetform.edit3.hint
+msgid "-smp X - number of CPU cores"
+msgstr "-smp X - количество ядер CPU"
+
 #: tsetform.label1.caption
 msgid "RAM (GB)"
 msgstr ""
