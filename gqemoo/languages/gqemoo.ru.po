@@ -126,7 +126,7 @@ msgstr "Общие параметры"
 
 #: tsetform.defaultbtn.hint
 msgid "Default"
-msgstr "По умолчанию"
+msgstr ""
 
 #: tsetform.edit2.hint
 msgid "The size of the disk to install"
@@ -150,7 +150,7 @@ msgstr ""
 
 #: tsetform.setbtn.hint
 msgid "Apply"
-msgstr "Применить"
+msgstr ""
 
 #: unit1.scancelcloning
 msgid "Cloning started! Terminate?"
@@ -227,3 +227,4 @@ msgstr "ожидаю spice-server на 127.0.0.1:"
 #: unit1.swaitingspicesec
 msgid "of 5 sec)"
 msgstr "из 5 сек)"
+

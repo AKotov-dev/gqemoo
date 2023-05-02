@@ -12,15 +12,16 @@ type
   { TSetForm }
 
   TSetForm = class(TForm)
-    SetBtn: TBitBtn;
     Edit1: TEdit;
     Edit2: TEdit;
     Edit3: TEdit;
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
-    DefaultBtn: TBitBtn;
+    SetBtn: TSpeedButton;
+    DefaultBtn: TSpeedButton;
     procedure DefaultBtnClick(Sender: TObject);
+    procedure FormKeyPress(Sender: TObject; var Key: char);
     procedure FormShow(Sender: TObject);
     procedure SetBtnClick(Sender: TObject);
   private
@@ -43,6 +44,7 @@ procedure TSetForm.FormShow(Sender: TObject);
 var
   S: ansistring;
 begin
+  SetForm.Height:=Edit3.Top + Edit3.Height + 8;
   Edit1.SetFocus;
 
   //RAM
@@ -69,6 +71,12 @@ begin
   Edit3.Clear;
 
   SetBtn.Click;
+end;
+
+//Нажатие Enter = Apply
+procedure TSetForm.FormKeyPress(Sender: TObject; var Key: char);
+begin
+  if Key = #13 then SetBtn.Click;
 end;
 
 //Сохранение конфига
@@ -132,7 +140,7 @@ begin
 
     //Замена ~/.gqemoo/qemoo_dist.cfg > /etc/qemoo.cfg через pkexec
     RunCommand('/bin/bash',
-      ['-c', 'pkexec /bin/bash -c "mv -f ' + UserDir +
+      ['-c', 'pkexec /bin/bash -c "cp -f ' + UserDir +
       '.gqemoo/qemoo_dist.cfg /etc/qemoo.cfg"; echo $?'],
       Output);
 
