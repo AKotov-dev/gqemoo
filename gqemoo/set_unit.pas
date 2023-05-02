@@ -44,23 +44,23 @@ procedure TSetForm.FormShow(Sender: TObject);
 var
   S: ansistring;
 begin
-  SetForm.Height:=Edit3.Top + Edit3.Height + 8;
+  SetForm.Height := Edit3.Top + Edit3.Height + 8;
   Edit1.SetFocus;
 
   //RAM
-  RunCommand('/bin/bash', ['-c',
-    'grep "^RAM=" /etc/qemoo.cfg | grep -o [[:digit:]]*'], S);
-  Edit1.Text := Trim(S);
+  if RunCommand('/bin/bash', ['-c',
+    'grep "^RAM=" /etc/qemoo.cfg | grep -o [[:digit:]]*'], S) then
+    Edit1.Text := Trim(S);
 
   //SIZE
-  RunCommand('/bin/bash', ['-c',
-    'grep "^SIZE=" /etc/qemoo.cfg | grep -o [[:digit:]]*'], S);
-  Edit2.Text := Trim(S);
+  if RunCommand('/bin/bash', ['-c',
+    'grep "^SIZE=" /etc/qemoo.cfg | grep -o [[:digit:]]*'], S) then
+    Edit2.Text := Trim(S);
 
   //QEMUADD
-  RunCommand('/bin/bash', ['-c',
-    'grep "^QEMUADD=" /etc/qemoo.cfg | sed "s/QEMUADD=//" | tr -d \"\' + ''''], S);
-  Edit3.Text := Trim(S);
+  if RunCommand('/bin/bash', ['-c',
+    'grep "^QEMUADD=" /etc/qemoo.cfg | sed "s/QEMUADD=//" | tr -d \"\' + ''''], S) then
+    Edit3.Text := Trim(S);
 end;
 
 //Default

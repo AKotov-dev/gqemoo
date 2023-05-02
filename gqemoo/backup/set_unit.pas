@@ -48,8 +48,8 @@ begin
   Edit1.SetFocus;
 
   //RAM
-  RunCommand('/bin/bash', ['-c',
-    'grep "^RAM=" /etc/qemoo.cfg | grep -o [[:digit:]]*'], S);
+  if RunCommand('/bin/bash', ['-c',
+    'grep "^RAM=" /etc/qemoo.cfg | grep -o [[:digit:]]*'], S) then
   Edit1.Text := Trim(S);
 
   //SIZE
