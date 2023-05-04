@@ -335,7 +335,6 @@ object SetForm: TSetForm
     Width = 131
     ItemHeight = 0
     Items.Strings = (
-      '512'
       '1000'
       '2000'
       '3000'
@@ -359,6 +358,7 @@ object SetForm: TSetForm
       '20'
       '30'
       '40'
+      '50'
     )
     ParentShowHint = False
     ShowHint = True
@@ -385,6 +385,7 @@ object SetForm: TSetForm
       '-smp 2'
       '-smp 3'
       '-smp 4'
+      '-smp 5'
     )
     ParentShowHint = False
     ShowHint = True

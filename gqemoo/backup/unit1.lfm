@@ -1,11 +1,11 @@
 object MainForm: TMainForm
-  Left = 279
+  Left = 332
   Height = 641
-  Top = 125
-  Width = 892
+  Top = 191
+  Width = 879
   Caption = 'MainForm'
   ClientHeight = 641
-  ClientWidth = 892
+  ClientWidth = 879
   KeyPreview = True
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
@@ -17,11 +17,11 @@ object MainForm: TMainForm
     Left = 0
     Height = 72
     Top = 0
-    Width = 892
+    Width = 879
     Align = alTop
     BevelOuter = bvNone
     ClientHeight = 72
-    ClientWidth = 892
+    ClientWidth = 879
     TabOrder = 0
     object Label3: TLabel
       AnchorSideLeft.Control = Panel1
@@ -165,7 +165,7 @@ object MainForm: TMainForm
       Left = 216
       Height = 37
       Top = 26
-      Width = 460
+      Width = 447
       Anchors = [akTop, akLeft, akRight, akBottom]
       BorderSpacing.Left = 5
       ReadOnly = True
@@ -176,7 +176,7 @@ object MainForm: TMainForm
       AnchorSideRight.Control = ScriptBtn
       AnchorSideBottom.Control = LoadImageEdit
       AnchorSideBottom.Side = asrBottom
-      Left = 676
+      Left = 663
       Height = 37
       Hint = 'Choose an image'
       Top = 26
@@ -193,7 +193,7 @@ object MainForm: TMainForm
       AnchorSideRight.Side = asrBottom
       AnchorSideBottom.Control = OpenBtn1
       AnchorSideBottom.Side = asrBottom
-      Left = 792
+      Left = 779
       Height = 37
       Top = 26
       Width = 95
@@ -283,7 +283,7 @@ object MainForm: TMainForm
       AnchorSideRight.Control = SetBtn
       AnchorSideBottom.Control = OpenBtn1
       AnchorSideBottom.Side = asrBottom
-      Left = 713
+      Left = 700
       Height = 37
       Hint = 'Scripts to insert into the VM terminal via the clipboard'
       Top = 26
@@ -375,9 +375,9 @@ object MainForm: TMainForm
       AnchorSideRight.Control = StartBtn
       AnchorSideBottom.Control = OpenBtn1
       AnchorSideBottom.Side = asrBottom
-      Left = 750
+      Left = 737
       Height = 37
-      Hint = 'Scripts to insert into the VM terminal via the clipboard'
+      Hint = 'Settings'
       Top = 26
       Width = 37
       Anchors = [akTop, akRight, akBottom]
@@ -468,17 +468,17 @@ object MainForm: TMainForm
     Left = 0
     Height = 142
     Top = 499
-    Width = 892
+    Width = 879
     Align = alBottom
     BevelOuter = bvNone
     ClientHeight = 142
-    ClientWidth = 892
+    ClientWidth = 879
     TabOrder = 1
     object StaticText2: TStaticText
       Left = 0
       Height = 17
       Top = 125
-      Width = 892
+      Width = 879
       Align = alBottom
       Caption = 'License: GPLv3   Author: alex_q_2000 (C) 2022   URL: https://linuxforum.ru'
       Color = clDefault
@@ -498,7 +498,7 @@ object MainForm: TMainForm
       Left = 5
       Height = 125
       Top = 0
-      Width = 882
+      Width = 869
       Anchors = [akTop, akLeft, akRight, akBottom]
       BorderSpacing.Left = 5
       BorderSpacing.Right = 5
@@ -512,7 +512,7 @@ object MainForm: TMainForm
     Left = 0
     Height = 5
     Top = 494
-    Width = 892
+    Width = 879
     Align = alBottom
     ResizeAnchor = akBottom
   end
@@ -818,12 +818,12 @@ object MainForm: TMainForm
     Left = 277
     Height = 422
     Top = 72
-    Width = 615
+    Width = 602
     Align = alClient
     BevelOuter = bvNone
     Caption = 'Panel4'
     ClientHeight = 422
-    ClientWidth = 615
+    ClientWidth = 602
     TabOrder = 5
     object Label2: TLabel
       AnchorSideLeft.Control = Panel4
@@ -845,7 +845,7 @@ object MainForm: TMainForm
       Left = 0
       Height = 355
       Top = 25
-      Width = 610
+      Width = 597
       Anchors = [akTop, akLeft, akRight, akBottom]
       BorderSpacing.Top = 5
       BorderSpacing.Right = 5
@@ -868,7 +868,7 @@ object MainForm: TMainForm
       Left = 0
       Height = 37
       Top = 385
-      Width = 534
+      Width = 521
       Anchors = [akLeft, akRight, akBottom]
       ReadOnly = True
       TabOrder = 1
@@ -880,7 +880,7 @@ object MainForm: TMainForm
       AnchorSideRight.Control = ClearBtn
       AnchorSideBottom.Control = Edit2
       AnchorSideBottom.Side = asrBottom
-      Left = 534
+      Left = 521
       Height = 37
       Hint = 'Connect an image'
       Top = 385
@@ -897,7 +897,7 @@ object MainForm: TMainForm
       AnchorSideRight.Side = asrBottom
       AnchorSideBottom.Control = OpenBtn2
       AnchorSideBottom.Side = asrBottom
-      Left = 571
+      Left = 558
       Height = 37
       Hint = 'Clear'
       Top = 385
