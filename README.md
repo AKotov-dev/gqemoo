@@ -1,7 +1,7 @@
 # GQemoo
 GUI for `qemoo` - wrapper script for qemu to start and install guest systems.  
   
-Perhaps the easiest and most understandable tandem for working with virtual machines in QEMU. Minimum settings for running and installing VMs: `RAM`(MB), `SIZE`(GB) - the size of the disk to install and the number of CPU cores (-smp X and other parameters) in the `QEMUADD` field. Perfect for testing/installing any Linux/Windows distributions.  
+Perhaps the easiest and most understandable tandem for working with virtual machines in QEMU. Minimum settings for running and installing VMs: `RAM`, `SIZE` (the size of the disk to install) and the number of CPU cores (-smp X and other parameters) in the `QEMUADD` field. Perfect for testing/installing any Linux/Windows distributions.  
   
 qemoo project: https://abf.io/import/qemoo  
 qemoo rpm: [qemoo-x.x-x-rosa2021.1.noarch.rpm](https://mirror.yandex.ru/rosa/rosa2021.1/repository/x86_64/contrib/release) (Ctrl+F)  
