@@ -98,7 +98,7 @@ msgstr ""
 
 #: tmainform.setbtn.hint
 msgctxt "tmainform.setbtn.hint"
-msgid "Scripts to insert into the VM terminal via the clipboard"
+msgid "Settings"
 msgstr ""
 
 #: tmainform.startbtn.caption

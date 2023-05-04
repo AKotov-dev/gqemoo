@@ -377,7 +377,7 @@ object MainForm: TMainForm
       AnchorSideBottom.Side = asrBottom
       Left = 750
       Height = 37
-      Hint = 'Scripts to insert into the VM terminal via the clipboard'
+      Hint = 'Settings'
       Top = 26
       Width = 37
       Anchors = [akTop, akRight, akBottom]

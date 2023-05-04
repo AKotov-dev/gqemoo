@@ -109,8 +109,8 @@ msgstr "Выбрать все"
 
 #: tmainform.setbtn.hint
 msgctxt "tmainform.setbtn.hint"
-msgid "Scripts to insert into the VM terminal via the clipboard"
-msgstr "Скрипты для вставки в терминал VM через буфер обмена"
+msgid "Settings"
+msgstr "Настройки"
 
 #: tmainform.startbtn.caption
 msgid "Start"
@@ -227,4 +227,3 @@ msgstr "ожидаю spice-server на 127.0.0.1:"
 #: unit1.swaitingspicesec
 msgid "of 5 sec)"
 msgstr "из 5 сек)"
-
