@@ -109,20 +109,17 @@ msgstr ""
 msgid "License: GPLv3   Author: alex_q_2000 (C) 2022   URL: https://linuxforum.ru"
 msgstr ""
 
+#: tsetform.addbox.hint
+msgctxt "tsetform.addbox.hint"
+msgid "-smp X - number of CPU cores"
+msgstr ""
+
 #: tsetform.caption
 msgid "General VM Parameters"
 msgstr ""
 
 #: tsetform.defaultbtn.hint
 msgid "Default"
-msgstr ""
-
-#: tsetform.edit2.hint
-msgid "The size of the disk to install"
-msgstr ""
-
-#: tsetform.edit3.hint
-msgid "-smp X - number of CPU cores"
 msgstr ""
 
 #: tsetform.label1.caption
@@ -139,6 +136,11 @@ msgstr ""
 
 #: tsetform.setbtn.hint
 msgid "Apply"
+msgstr ""
+
+#: tsetform.sizebox.hint
+msgctxt "tsetform.sizebox.hint"
+msgid "The size of the disk to install"
 msgstr ""
 
 #: unit1.scancelcloning

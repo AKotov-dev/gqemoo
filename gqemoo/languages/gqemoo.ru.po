@@ -120,6 +120,11 @@ msgstr "Старт"
 msgid "License: GPLv3   Author: alex_q_2000 (C) 2022   URL: https://linuxforum.ru"
 msgstr "Лицензия: GPLv3   Автор: alex_q_2000 (C) 2022   URL: https://linuxforum.ru"
 
+#: tsetform.addbox.hint
+msgctxt "tsetform.addbox.hint"
+msgid "-smp X - number of CPU cores"
+msgstr "-smp X - количество ядер CPU"
+
 #: tsetform.caption
 msgid "General VM Parameters"
 msgstr "Общие параметры VM"
@@ -127,14 +132,6 @@ msgstr "Общие параметры VM"
 #: tsetform.defaultbtn.hint
 msgid "Default"
 msgstr "По умолчанию"
-
-#: tsetform.edit2.hint
-msgid "The size of the disk to install"
-msgstr "Размер диска для установки"
-
-#: tsetform.edit3.hint
-msgid "-smp X - number of CPU cores"
-msgstr "-smp X - количество ядер CPU"
 
 #: tsetform.label1.caption
 msgid "RAM (MB)"
@@ -151,6 +148,11 @@ msgstr ""
 #: tsetform.setbtn.hint
 msgid "Apply"
 msgstr "Применить"
+
+#: tsetform.sizebox.hint
+msgctxt "tsetform.sizebox.hint"
+msgid "The size of the disk to install"
+msgstr "Размер диска для установки"
 
 #: unit1.scancelcloning
 msgid "Cloning started! Terminate?"

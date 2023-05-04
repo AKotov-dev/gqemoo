@@ -12,9 +12,9 @@ type
   { TSetForm }
 
   TSetForm = class(TForm)
-    Edit1: TEdit;
-    Edit2: TEdit;
-    Edit3: TEdit;
+    ADDBox: TComboBox;
+    SIZEBox: TComboBox;
+    RAMBox: TComboBox;
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
@@ -44,29 +44,29 @@ procedure TSetForm.FormShow(Sender: TObject);
 var
   S: ansistring;
 begin
-  SetForm.Height := Edit3.Top + Edit3.Height + 8;
-  Edit1.SetFocus;
+  SetForm.Height := ADDBox.Top + ADDBox.Height + 8;
+  RAMBox.SetFocus;
 
   //RAM
   RunCommand('/bin/bash', ['-c', 'grep "^RAM=" /etc/qemoo.cfg | sed s/[^0-9]//g'], S);
-  Edit1.Text := Trim(S);
+  RAMBox.Text := Trim(S);
 
   //SIZE
   RunCommand('/bin/bash', ['-c', 'grep "^SIZE=" /etc/qemoo.cfg | sed s/[^0-9]//g'], S);
-  Edit2.Text := Trim(S);
+  SIZEBox.Text := Trim(S);
 
   //QEMUADD
   RunCommand('/bin/bash', ['-c',
     'grep "^QEMUADD=" /etc/qemoo.cfg | sed "s/QEMUADD=//" | tr -d \"\' + ''''], S);
-  Edit3.Text := Trim(S);
+  ADDBox.Text := Trim(S);
 end;
 
 //Default
 procedure TSetForm.DefaultBtnClick(Sender: TObject);
 begin
-  Edit1.Clear;
-  Edit2.Clear;
-  Edit3.Clear;
+  RAMBox.Clear;
+  SIZEBox.Clear;
+  ADDBox.Clear;
 
   SetBtn.Click;
 end;
@@ -85,9 +85,9 @@ var
   Output: ansistring;
 begin
   //Убираем крайние пробелы
-  Edit1.Text := Trim(Edit1.Text);
-  Edit2.Text := Trim(Edit2.Text);
-  Edit3.Text := Trim(Edit3.Text);
+  RAMBox.Text := Trim(RAMBox.Text);
+  SIZEBox.Text := Trim(SIZEBox.Text);
+  ADDBox.Text := Trim(ADDBox.Text);
 
   try
     S := TStringList.Create;
@@ -96,8 +96,8 @@ begin
     S.Add('');
 
     S.Add('# additional parameters for qemu');
-    if Edit3.Text <> '' then
-      S.Add('QEMUADD="' + Trim(Edit3.Text) + '"')
+    if ADDBox.Text <> '' then
+      S.Add('QEMUADD="' + Trim(ADDBox.Text) + '"')
     else
       S.Add('#QEMUADD="-vga qxl -smp 2"');
     S.Add('');
@@ -110,15 +110,15 @@ begin
     S.Add('');
 
     S.Add('# size (Gb) for qcow2 image to install (default: 20)');
-    if Edit2.Text <> '' then
-      S.Add('SIZE=' + '''' + Trim(Edit2.Text) + '''')
+    if SIZEBox.Text <> '' then
+      S.Add('SIZE=' + '''' + Trim(SIZEBox.Text) + '''')
     else
       S.Add('#SIZE=' + '''' + '10' + '''');
     S.Add('');
 
     S.Add('# size of ram (MB) for guest machine (default: RAM / 2, but not greater than 4 GB)');
-    if Edit1.Text <> '' then
-      S.Add('RAM=' + '''' + Trim(Edit1.Text) + '''')
+    if RAMBox.Text <> '' then
+      S.Add('RAM=' + '''' + Trim(RAMBox.Text) + '''')
     else
       S.Add('#RAM=' + '''' + '2000' + '''');
 

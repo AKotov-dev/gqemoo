@@ -1,39 +1,16 @@
 object SetForm: TSetForm
-  Left = 279
+  Left = 294
   Height = 130
-  Top = 125
-  Width = 379
-  ActiveControl = Edit1
+  Top = 126
+  Width = 412
   Caption = 'General VM Parameters'
   ClientHeight = 130
-  ClientWidth = 379
+  ClientWidth = 412
   KeyPreview = True
   OnKeyPress = FormKeyPress
   OnShow = FormShow
   Position = poMainFormCenter
   LCLVersion = '2.2.4.0'
-  object Edit1: TEdit
-    AnchorSideTop.Control = Label1
-    AnchorSideTop.Side = asrCenter
-    Left = 80
-    Height = 37
-    Top = 6
-    Width = 80
-    ParentShowHint = False
-    TabOrder = 0
-  end
-  object Edit2: TEdit
-    AnchorSideTop.Control = Label2
-    AnchorSideTop.Side = asrCenter
-    Left = 80
-    Height = 37
-    Hint = 'The size of the disk to install'
-    Top = 46
-    Width = 80
-    ParentShowHint = False
-    ShowHint = True
-    TabOrder = 1
-  end
   object Label1: TLabel
     Left = 8
     Height = 17
@@ -50,22 +27,6 @@ object SetForm: TSetForm
     Caption = 'SIZE (GB)'
     ParentColor = False
   end
-  object Edit3: TEdit
-    AnchorSideTop.Control = Label3
-    AnchorSideTop.Side = asrCenter
-    AnchorSideRight.Control = Owner
-    AnchorSideRight.Side = asrBottom
-    Left = 80
-    Height = 37
-    Hint = '-smp X - number of CPU cores'
-    Top = 86
-    Width = 291
-    Anchors = [akTop, akLeft, akRight]
-    BorderSpacing.Right = 8
-    ParentShowHint = False
-    ShowHint = True
-    TabOrder = 2
-  end
   object Label3: TLabel
     Left = 8
     Height = 17
@@ -75,10 +36,9 @@ object SetForm: TSetForm
     ParentColor = False
   end
   object SetBtn: TSpeedButton
-    AnchorSideTop.Control = Edit1
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
-    Left = 311
+    Left = 344
     Height = 55
     Hint = 'Apply'
     Top = 6
@@ -222,9 +182,8 @@ object SetForm: TSetForm
     ParentShowHint = False
   end
   object DefaultBtn: TSpeedButton
-    AnchorSideTop.Control = Edit1
     AnchorSideRight.Control = SetBtn
-    Left = 251
+    Left = 284
     Height = 55
     Hint = 'Default'
     Top = 6
@@ -365,5 +324,69 @@ object SetForm: TSetForm
     OnClick = DefaultBtnClick
     ShowHint = True
     ParentShowHint = False
+  end
+  object RAMBox: TComboBox
+    AnchorSideLeft.Control = ADDBox
+    AnchorSideTop.Control = Label1
+    AnchorSideTop.Side = asrCenter
+    Left = 80
+    Height = 37
+    Top = 6
+    Width = 131
+    ItemHeight = 0
+    Items.Strings = (
+      '512'
+      '1024'
+      '2048'
+      '3072'
+      '4096'
+      '5120'
+      '6144'
+    )
+    TabOrder = 0
+  end
+  object SIZEBox: TComboBox
+    AnchorSideLeft.Control = ADDBox
+    AnchorSideTop.Control = Label2
+    AnchorSideTop.Side = asrCenter
+    Left = 80
+    Height = 37
+    Hint = 'The size of the disk to install'
+    Top = 46
+    Width = 131
+    ItemHeight = 0
+    Items.Strings = (
+      '10'
+      '20'
+      '30'
+      '40'
+    )
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 1
+  end
+  object ADDBox: TComboBox
+    AnchorSideLeft.Control = Label3
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 80
+    Height = 37
+    Hint = '-smp X - number of CPU cores'
+    Top = 88
+    Width = 324
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Left = 8
+    BorderSpacing.Right = 8
+    ItemHeight = 0
+    Items.Strings = (
+      '-smp 1'
+      '-smp 2'
+      '-smp 3'
+      '-smp 4'
+    )
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 2
   end
 end

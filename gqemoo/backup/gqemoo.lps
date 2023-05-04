@@ -49,7 +49,6 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="Unit1"/>
-        <IsVisibleTab Value="True"/>
         <CursorPos X="13"/>
         <UsageCount Value="99"/>
         <Loaded Value="True"/>
@@ -76,8 +75,10 @@
         <ComponentName Value="SetForm"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <CursorPos X="16"/>
+        <TopLine Value="73"/>
+        <CursorPos X="3" Y="73"/>
         <UsageCount Value="22"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -91,11 +92,7 @@
         <UsageCount Value="20"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="27">
-      <Position>
-        <Filename Value="set_unit.pas"/>
-        <Caret Line="110" Column="69" TopLine="92"/>
-      </Position>
+    <JumpHistory HistoryIndex="29">
       <Position>
         <Filename Value="set_unit.pas"/>
         <Caret Line="116" TopLine="92"/>
@@ -202,7 +199,19 @@
       </Position>
       <Position>
         <Filename Value="set_unit.pas"/>
-        <Caret Column="17"/>
+        <Caret Column="16"/>
+      </Position>
+      <Position>
+        <Filename Value="set_unit.pas"/>
+        <Caret Line="77" Column="3" TopLine="75"/>
+      </Position>
+      <Position>
+        <Filename Value="set_unit.pas"/>
+        <Caret Line="78" Column="3" TopLine="76"/>
+      </Position>
+      <Position>
+        <Filename Value="set_unit.pas"/>
+        <Caret Line="77" Column="3" TopLine="75"/>
       </Position>
     </JumpHistory>
     <RunParams>
