@@ -380,7 +380,9 @@ object SetForm: TSetForm
     BorderSpacing.Right = 8
     ItemHeight = 0
     Items.Strings = (
+      '-smp 1'
       '-smp 2'
+      '-smp 3'
       '-smp 4'
     )
     ParentShowHint = False
