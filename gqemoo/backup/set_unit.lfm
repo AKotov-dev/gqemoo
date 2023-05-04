@@ -1,7 +1,7 @@
 object SetForm: TSetForm
-  Left = 294
+  Left = 281
   Height = 130
-  Top = 126
+  Top = 129
   Width = 412
   Caption = 'General VM Parameters'
   ClientHeight = 130
@@ -368,12 +368,14 @@ object SetForm: TSetForm
   object ADDBox: TComboBox
     AnchorSideLeft.Control = Label3
     AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = Label3
+    AnchorSideTop.Side = asrCenter
     AnchorSideRight.Control = Owner
     AnchorSideRight.Side = asrBottom
     Left = 80
     Height = 37
     Hint = '-smp X - number of CPU cores'
-    Top = 88
+    Top = 86
     Width = 324
     Anchors = [akTop, akLeft, akRight]
     BorderSpacing.Left = 8
