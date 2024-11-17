@@ -1,7 +1,7 @@
 object MainForm: TMainForm
-  Left = 279
+  Left = 284
   Height = 641
-  Top = 124
+  Top = 125
   Width = 879
   Caption = 'MainForm'
   ClientHeight = 641
@@ -12,7 +12,7 @@ object MainForm: TMainForm
   OnKeyUp = FormKeyUp
   OnShow = FormShow
   SessionProperties = 'Height;Left;OpenDialog1.InitialDir;OpenDialog2.InitialDir;Panel2.Height;Panel3.Width;Top;Width'
-  LCLVersion = '2.2.4.0'
+  LCLVersion = '3.6.0.0'
   object Panel1: TPanel
     Left = 0
     Height = 72
@@ -47,9 +47,9 @@ object MainForm: TMainForm
         '/dev/sdc'
         '/dev/sdd'
       )
-      OnChange = DevBoxChange
       ReadOnly = True
       TabOrder = 0
+      OnChange = DevBoxChange
     end
     object ReloadBtn: TSpeedButton
       AnchorSideLeft.Control = DevBox
@@ -556,12 +556,12 @@ object MainForm: TMainForm
       Font.Name = 'Sans'
       Font.Style = [fsBold]
       ItemHeight = 38
-      OnClick = ListBox1Click
-      OnDrawItem = ListBox1DrawItem
       ParentFont = False
       Style = lbOwnerDrawFixed
       TabOrder = 1
       TopIndex = -1
+      OnClick = ListBox1Click
+      OnDrawItem = ListBox1DrawItem
     end
     object Label1: TLabel
       AnchorSideBottom.Control = RemoveBtn

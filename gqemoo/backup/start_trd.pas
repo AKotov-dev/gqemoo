@@ -54,7 +54,7 @@ begin
       SUserNotInGroup +
       '"; exit 1; fi; if [[ ! $(type -f remote-viewer 2>/dev/null) ]]; then echo "' +
       SRemoteViewerNotFound + '"; exit 1; fi; ' + 'a=$(' + command +
-      ' > ~/.gqemoo/log && awk ' + '''' + '$1 == "PID" || $1 == "PORT" {print $3}' +
+      ' > ~/.gqemoo/log; awk ' + '''' + '$1 == "PID" || $1 == "PORT" {print $3}' +
       '''' + ' ~/.gqemoo/log); port=$(echo "$a" | head -n1); pid=$(echo "$a" | tail -n1) '
       +
       //Ожидание 5 sec выданного $port
@@ -92,6 +92,7 @@ end;
 //Запуск VM
 procedure StartVM.StartProcess;
 var
+  i: integer;
   usb: string;
   s: ansistring;
 begin

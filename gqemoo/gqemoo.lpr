@@ -19,8 +19,8 @@ uses
 
 begin
   RequireDerivedFormResource := True;
-  Application.Title := 'GQemoo v2.4';
-  Application.Scaled := True;
+  Application.Title:='GQemoo v2.5';
+  Application.Scaled:=True;
   Application.Initialize;
   Application.CreateForm(TMainForm, MainForm);
   Application.Run;
